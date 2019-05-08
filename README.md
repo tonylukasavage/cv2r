@@ -1,6 +1,6 @@
 # cv2-rando
 
-Castlevania II: Simon's Quest Randomizer by BloodSweatAndCode. 
+Castlevania II: Simon's Quest Randomizer by **BloodSweatAndCode**. Come find me running this and other retro games on [Twitch](https://www.twitch.tv/bloodsweatandcode)!
 
 ## usage
 
