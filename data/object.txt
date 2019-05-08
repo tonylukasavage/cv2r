@@ -1,0 +1,81 @@
+00 - None
+01 - Town Bat
+02 - Leech (orange)
+03 - Skeleton / Skeleton Warrior
+04 - Fishman
+05 - Spearman
+06 - Gator Men
+07 - Water Splash
+08 - Floating Eye
+09 - Bat (Flying)
+0A - Medusa
+0B - CRASH!!!
+0C - Bouncing Skeleton Bone Fire
+0D - Bouncing Skeleton
+0E - Spider
+0F - Winged Devil
+10 - Floating Skull
+11 - Bat (Swooping)
+12 - 
+13 - 
+14 - 
+15 - 
+16 - 
+17 - Town Zombie
+18 - Marsh Spitter
+19 -
+1A - Spider Silk
+1B - 
+1C - 
+1D - Burning Man
+1E - Old Man In Cemetery
+1F - Slime
+20 - Flying Spike
+21 - Horizontally moving platform (Tall)
+22 - Horizontally moving platform (Wide) / Vertically Moving Platform (Wide)
+23 - 
+24 - Sign
+25 - Crystal Orb / Bag
+26 - 
+27 - Clue Book
+28 - 
+29 - Red Woman
+2A - Man
+2B - 
+2C - Old Woman
+2D - Priest
+2E - Cloaked Man (Town)
+2F - Cloaked Man (Outside)
+30 - Enemy Fireball
+31 - 
+32 - Seeking Fireball
+33 - Spider Web
+34 - Vertically moving platform (Narrow)
+35 - Old Man
+36 - Enemy Explosion
+37 - Heart / Half Heart / Big Heart
+38 - Cemetery Hand
+39 - 
+3A - Mummy
+3B - Harpy
+3C - Ferryman
+3D - Ferryboat
+3E - 
+3F - Giant Plant
+40 - Leech
+41 - Blob
+42 - Camilla
+43 - Marsh?
+44 - Grim Reaper
+45 - Camilla Tear
+46 - Reaper Scythe
+47 - Dracula
+48 - Dracula Scythe
+49 - 
+4A - 
+4B - Organ Bag
+4C - Dracula Summoning Fire
+4D - Dracula Explosion Fire
+A9 - Level 1 Man
+AD - Level 1 Man
+D8 - CRASH!!!
