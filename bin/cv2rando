@@ -1,0 +1,48 @@
+#!/usr/bin/env node --no-warnings
+
+const { green, red } = require('chalk');
+const cv2rando = require('../lib/cv2rando');
+const fs = require('fs').promises;
+const path = require('path');
+const program = require('commander');
+
+program
+	.version(require('../package.json').version)
+	.description('Castlevania II: Simon\'s Quest Randomizer by BloodSweatAndCode')
+	.usage('[options] <rom_input>')
+	.option('-o, --output <output>', 'filepath for randomized rom output')
+	.option('-s, --seed <seed>', 'seed to use for randomization')
+	.option('-v, --verbose', 'show all error logs');
+
+async function main(rom, opts = {}) {
+	try {
+		// load patches as command line options
+		const patches = await fs.readdir(path.join(__dirname, '..', 'patch'));
+		patches.forEach(p => {
+			const patch = require(`../patch/${p}`);
+			program.option(patch.flags, `[PATCH] ${patch.description}`);
+		});
+
+		// process command line arguments
+		program.parse(process.argv);
+		const rom = program.args[0];
+		if (!rom) {
+			throw new Error('must specify a ROM file');
+		}
+
+		// create the rando based on command line options and config.json
+		const newRom = await cv2rando(program.args[0], program);
+		console.log(`CV2 Randomizer successfully written to ${green(newRom)}`);
+		process.exit(0);
+	} catch (err) {
+		console.error(red('### CV2 Randomizer creation failed ###'));
+		console.error(red(err.message));
+		if (program.verbose) {
+			console.log(red(err.stack));
+		}
+
+		process.exit(1);
+	}
+}
+
+main();

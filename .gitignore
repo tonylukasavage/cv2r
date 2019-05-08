@@ -1,0 +1,4 @@
+cv2.nes
+cv2*.nes
+tmp
+node_modules
