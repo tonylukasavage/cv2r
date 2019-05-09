@@ -16,17 +16,17 @@
 0F - Winged Devil
 10 - Floating Skull
 11 - Bat (Swooping)
-12 - 
-13 - 
-14 - 
-15 - 
-16 - 
+12 - panther (purple)
+13 - werewolf (purple)
+14 - high bouncing werewolf (looked like fishman)
+15 - mudman (purple)
+16 - grabby guy
 17 - Town Zombie
 18 - Marsh Spitter
-19 -
+19 - ???? some sprite that won't move and doesn't hurt
 1A - Spider Silk
-1B - 
-1C - 
+1B - hawk
+1C - INVISIBLE MAN THAT CLIPS YOU TO DEATH INTO THE FLOOR!
 1D - Burning Man
 1E - Old Man In Cemetery
 1F - Slime
