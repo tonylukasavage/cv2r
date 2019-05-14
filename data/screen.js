@@ -30,7 +30,7 @@ module.exports = [
     {
         name: 'Veros',
         objset: 0,
-        area: 1,
+        area: 0x01,
         submap: 0,
         actors: [
             npc.man(0x04, 0x0C, 0x40, 0x522A),
@@ -51,7 +51,7 @@ module.exports = [
     {
         name: 'Aljiba',
         objset: 0,
-        area: 2,
+        area: 0x02,
         submap: 0,
         actors: [
             npc.crystalDude(0x08, 0x0C, 0x03, 0x517C),
@@ -72,7 +72,7 @@ module.exports = [
     {
         name: 'Alba',
         objset: 0,
-        area: 3,
+        area: 0x03,
         submap: 0,
         actors: [
             npc.woman(0x08, 0x0C, 0x5F, 0x5105),
@@ -98,7 +98,7 @@ module.exports = [
     {
         name: 'Ondol',
         objset: 0,
-        area: 4,
+        area: 0x04,
         submap: 0,
         actors: [
             npc.shepherd(0x08, 0x0C, 0x3F, 0x525F),
@@ -123,7 +123,7 @@ module.exports = [
     {
         name: 'Doina',
         objset: 0,
-        area: 5,
+        area: 0x05,
         submap: 0,
         actors: [
             npc.shepherd(0x04, 0x0C, 0x5E, 0x51B1),
@@ -140,7 +140,7 @@ module.exports = [
     {
         name: 'Yomi',
         objset: 0,
-        area: 6,
+        area: 0x06,
         submap: 0,
         actors: [
             sign(0x0C, 0x0C, 0x54, 0x51D6),
@@ -154,10 +154,125 @@ module.exports = [
     {
         name: 'Church',
         objset: 0,
-        area: 7,
+        area: 0x07,
         submap: 0,
         actors: [
             npc.priest(0x08, 0x08, 0x31, 0x4EED)
         ]
-    }
+    },
+    {
+        name: 'Jovah - Thorn Whip Room',
+        objset: 0,
+        area: 0x08,
+        submap: 0,
+        actors: [
+            npc.merchant(0x0C, 0x0C, 0x08, 0x514E)
+        ]
+    },
+    {
+        name: 'Jovah - Holy Water Room',
+        objset: 0,
+        area: 0x09,
+        submap: 0,
+        actors: [
+            npc.merchant(0x0C, 0x0C, 0x03, 0x5153)
+        ]
+    },
+    {
+        name: 'Veros - Empty Room Before Dagger',
+        objset: 0,
+        area: 0x0A,
+        submap: 0
+    },
+    {
+        name: 'Veros - Dagger Room',
+        objset: 0,
+        area: 0x0A,
+        submap: 0x01,
+        actors: [
+            npc.merchant(0x0C, 0x0C, 0x04, 0x52A5)
+        ]
+    },
+    {
+        name: 'Veros - Chain Whip Room',
+        objset: 0,
+        area: 0x0B,
+        submap: 0,
+        actors: [
+            npc.merchant(0x0A, 0x1A, 0x09, 0x52AA),
+            book(0x0D, 0x17, 0x42, 0x52AE)
+        ]
+    },
+    {
+        name: 'Aljiba - Garlic Room',
+        objset: 0,
+        area: 0x0C,
+        submap: 0,
+        actors: [
+            npc.merchant(0x0C, 0x1A, 0x02, 0x51EF)
+        ]
+    },
+    {
+        name: 'Aljiba - Book Room Before Old Lady',
+        objset: 0,
+        area: 0x0D,
+        submap: 0,
+        actors: [
+            book(0x03, 0x15, 0x5C, 0x51F4)
+        ]
+    },
+    {
+        name: 'Aljiba - Old Lady Room',
+        objset: 0,
+        area: 0x0D,
+        submap: 0x01,
+        actors: [
+            npc.oldLady(0x0C, 0x1A, 0x59, 0x51F9)
+        ]
+    },
+    {
+        name: 'Aljiba - Empty Room Before Laurels',
+        objset: 0,
+        area: 0x0E,
+        submap: 0
+    },
+    {
+        name: 'Aljiba - Laurels Room',
+        objset: 0,
+        area: 0x0E,
+        submap: 0x01,
+        actors: [
+            npc.merchant(0x0C, 0x1A, 0x00, 0x51FF)
+        ]
+    },
+    {
+        name: 'Alba - Empty Room Before Garlic',
+        objset: 0,
+        area: 0x0F,
+        submap: 0
+    },
+    {
+        name: 'Alba - Garlic Room',
+        objset: 0,
+        area: 0x0F,
+        submap: 0x01,
+        actors: [
+            npc.merchant(0x0C, 0x1A, 0x02, 0x5159)
+        ]
+    },
+    {
+        name: 'Alba - Empty Room Before Laurels',
+        objset: 0,
+        area: 0x10,
+        submap: 0
+    },
+    {
+        name: 'Alba - Laurels Room',
+        objset: 0,
+        area: 0x10,
+        submap: 0x01,
+        actors: [
+            npc.merchant(0x0C, 0x0C, 0x00, 0x515F)
+        ]
+    },
 ];

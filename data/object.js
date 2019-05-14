@@ -10,6 +10,7 @@ const BAT = 0x01;
 const SKELETON = 0x03;
 const ZOMBIE = 0x17;
 
+const BOOK = 0x27;
 const SIGN = 0xA4;
 
 // core object functions
@@ -33,6 +34,12 @@ const enemy = exports.enemy = function() {
 const sign = exports.sign = function() {
   const o = obj.call(null, ...arguments, SIGN, 'sign');
   o.sign = true;
+  return o;
+};
+
+const book = exports.book = function() {
+  const o = obj.call(null, ...arguments, BOOK, 'book');
+  o.book = true;
   return o;
 };
 
