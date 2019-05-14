@@ -316,7 +316,7 @@ module.exports = [
         area: 0x14,
         submap: 0,
         actors: [
-            npc.merchant(0x0C, 0x0C, 0x64, 0x5204)
+            npc.oldLady(0x0C, 0x0C, 0x64, 0x5204)
         ]
     },
     {
@@ -340,7 +340,7 @@ module.exports = [
         area: 0x17,
         submap: 0,
         actors: [
-            npc.merchant(0x0C, 0x0C, 0x5A, 0x520F)
+            npc.oldLady(0x0C, 0x0C, 0x5A, 0x520F)
         ]
     },
 ];
