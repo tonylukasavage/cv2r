@@ -280,4 +280,67 @@ module.exports = [
             npc.merchant(0x0C, 0x0C, 0x00, 0x515F)
         ]
     },
+    {
+        name: 'Ondol - Empty Room Before Morning Star',
+        objset: 0,
+        area: 0x11,
+        submap: 0
+    },
+    {
+        name: 'Ondol - Morning Star Room',
+        objset: 0,
+        area: 0x11,
+        submap: 0x01,
+        actors: [
+            npc.merchant(0x0C, 0x1A, 0x0A, 0x52B4)
+        ]
+    },
+    {
+        name: 'Ondol - Death Star Lady Room',
+        objset: 0,
+        area: 0x12,
+        submap: 0,
+        actors: [
+            npc.oldLady(0x0C, 0x0C, 0x49, 0x52B9)
+        ]
+    },
+    {
+        name: 'Ondol - Empty Room',
+        objset: 0,
+        area: 0x13,
+        submap: 0
+    },
+    {
+        name: 'Doina - Get Back Lady Room',
+        objset: 0,
+        area: 0x14,
+        submap: 0,
+        actors: [
+            npc.merchant(0x0C, 0x0C, 0x64, 0x5204)
+        ]
+    },
+    {
+        name: 'Doina - Laurels Room',
+        objset: 0,
+        area: 0x15,
+        submap: 0,
+        actors: [
+            npc.merchant(0x0C, 0x1A, 0x00, 0x5209)
+        ]
+    },
+    {
+        name: 'Yomi - Empty Room',
+        objset: 0,
+        area: 0x16,
+        submap: 0
+    },
+    {
+        name: 'Yomi - Old Lady Room',
+        objset: 0,
+        area: 0x17,
+        submap: 0,
+        actors: [
+            npc.merchant(0x0C, 0x0C, 0x5A, 0x520F)
+        ]
+    },
 ];
