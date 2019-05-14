@@ -15,7 +15,9 @@ const SKELETON = 0x03;
 const SPEAR_KNIGHT = 0x05;
 const BONE_THROWER = 0x0D;
 const SPIDER = 0x0E;
+const GARGOYLE = 0x0F;
 const ZOMBIE = 0x17;
+const BLOB = 0x1F;
 
 const CAMILLA = 0x42;
 const DEATH = 0x42;
@@ -92,8 +94,16 @@ enemy.bat = function() {
   return enemy.call(null, ...arguments, BAT, 'bat');
 };
 
+enemy.blob = function() {
+  return enemy.call(null, ...arguments, BLOB, 'blob');
+};
+
 enemy.camilla = function() {
   return enemy.call(null, ...arguments, CAMILLA, 'camilla');
+};
+
+enemy.gargoyle = function() {
+  return enemy.call(null, ...arguments, GARGOYLE, 'gargoyle');
 };
 
 enemy.skeleton = function() {
