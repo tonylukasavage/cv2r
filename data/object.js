@@ -1,3 +1,7 @@
+const ORB = 0x25;
+const BOOK = 0x27;
+const SIGN = 0xA4;
+
 const WOMAN = 0xA9;
 const MAN = 0xAA;
 const OLD_LADY = 0xAC;
@@ -8,10 +12,14 @@ const SHEPHERD = 0xB5;
 
 const BAT = 0x01;
 const SKELETON = 0x03;
+const SPEAR_KNIGHT = 0x05;
+const BONE_THROWER = 0x0D;
+const SPIDER = 0x0E;
 const ZOMBIE = 0x17;
 
-const BOOK = 0x27;
-const SIGN = 0xA4;
+const CAMILLA = 0x42;
+const DEATH = 0x42;
+const DRACULA = 0x42;
 
 // core object functions
 function obj(x, y, data, pointer, typeId, name) {
@@ -43,6 +51,12 @@ const book = exports.book = function() {
   return o;
 };
 
+const orb = exports.orb = function() {
+  const o = obj.call(null, ...arguments, ORB, 'orb');
+  o.orb = true;
+  return o;
+};
+
 // define shorthand functions for all NPCs
 npc.woman = function() {
   return npc.call(null, ...arguments, WOMAN, 'woman');
@@ -64,6 +78,7 @@ npc.priest = function() {
   return npc.call(null, ...arguments, PRIEST, 'priest');
 }
 
+// crystal dude is a merchant in mansions
 npc.crystalDude = function() {
   return npc.call(null, ...arguments, CRYSTAL_DUDE, 'crystal dude');
 }
@@ -75,6 +90,26 @@ npc.shepherd = function() {
 // define shorthand functions for all enemies
 enemy.bat = function() {
   return enemy.call(null, ...arguments, BAT, 'bat');
+};
+
+enemy.camilla = function() {
+  return enemy.call(null, ...arguments, CAMILLA, 'camilla');
+};
+
+enemy.skeleton = function() {
+  return enemy.call(null, ...arguments, SKELETON, 'skeleton');
+};
+
+enemy.boneThrower = function() {
+  return enemy.call(null, ...arguments, BONE_THROWER, 'bone thrower');
+};
+
+enemy.spearKnight = function() {
+  return enemy.call(null, ...arguments, SPEAR_KNIGHT, 'spear knight');
+};
+
+enemy.spider = function() {
+  return enemy.call(null, ...arguments, SPIDER, 'spider');
 };
 
 enemy.zombie = function() {

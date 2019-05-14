@@ -1,4 +1,4 @@
-const { book, enemy, npc, sign } = require('./object');
+const { book, enemy, npc, orb, sign } = require('./object');
 
 module.exports = [
     {
@@ -341,6 +341,113 @@ module.exports = [
         submap: 0,
         actors: [
             npc.oldLady(0x0C, 0x0C, 0x5A, 0x520F)
+        ]
+    },
+    {
+        name: 'Laruba Mansion - Door',
+        objset: 0x01,
+        area: 0,
+        submap: 0
+    },
+    {
+        name: 'Berkeley Mansion - Door',
+        objset: 0x01,
+        area: 0x01,
+        submap: 0
+    },
+    {
+        name: 'Rover Mansion - Door',
+        objset: 0x01,
+        area: 0x02,
+        submap: 0
+    },
+    {
+        name: 'Brahm Mansion - Door',
+        objset: 0x01,
+        area: 0x03,
+        submap: 0
+    },
+    {
+        name: 'Bodley Mansion - Door',
+        objset: 0x01,
+        area: 0x04,
+        submap: 0
+    },
+    {
+        name: 'Laruba Mansion - Part 1',
+        objset: 0x01,
+        area: 0x06,
+        submap: 0,
+        actors: [
+            enemy.skeleton(0x04, 0x04, 0x1E, 0x5A18),
+            enemy.skeleton(0x04, 0x0E, 0x1E, 0x5A1C),
+            enemy.skeleton(0x08, 0x1A, 0x1E, 0x5A20),
+            enemy.skeleton(0x0C, 0x0C, 0x1E, 0x5A24),
+            enemy.skeleton(0x0C, 0x1A, 0x1E, 0x5A28),
+            enemy.skeleton(0x14, 0x04, 0x1E, 0x5A2C),
+            enemy.skeleton(0x14, 0x0C, 0x1E, 0x5A30),
+            enemy.spearKnight(0x18, 0x12, 0x1E, 0x5A34),
+            enemy.spearKnight(0x18, 0x1A, 0x1E, 0x5A38),
+            enemy.skeleton(0x1C, 0x0C, 0x1E, 0x5A3C),
+            enemy.boneThrower(0x1C, 0x1A, 0x1E, 0x5A40),
+            enemy.skeleton(0x24, 0x08, 0x1E, 0x5A44),
+            enemy.spearKnight(0x24, 0x12, 0x1E, 0x5A48),
+            enemy.skeleton(0x28, 0x18, 0x1E, 0x5A4C),
+            enemy.skeleton(0x2C, 0x08, 0x1E, 0x5A50),
+            enemy.boneThrower(0x34, 0x04, 0x1E, 0x5A54),
+            enemy.skeleton(0x34, 0x14, 0x1E, 0x5A58),
+            enemy.boneThrower(0x38, 0x0E, 0x1E, 0x5A5C),
+            enemy.spearKnight(0x3C, 0x14, 0x1E, 0x5A60)
+        ]
+    },
+    {
+        name: 'Laruba Mansion - Part 2',
+        objset: 0x01,
+        area: 0x06,
+        submap: 0x01,
+        actors: [
+            enemy.crystalDude(0x02, 0x34, 0x01, 0x5A65),
+            enemy.skeleton(0x03, 0x12, 0x1E, 0x5A69),
+            enemy.skeleton(0x03, 0x1A, 0x1E, 0x5A6D),
+            enemy.skeleton(0x03, 0x22, 0x1E, 0x5A71),
+            enemy.skeleton(0x08, 0x0E, 0x1E, 0x5A75),
+            enemy.boneThrower(0x08, 0x1E, 0x1E, 0x5A79),
+            enemy.skeleton(0x08, 0x28, 0x1E, 0x5A7D),
+            // block
+            // arrow
+            // arrow
+            // arrow
+            enemy.skeleton(0x14, 0x0C, 0x1E, 0x5A91),
+            enemy.spider(0x14, 0x2B, 0x1E, 0x5A95),
+            // block
+            enemy.spider(0x1C, 0x2B, 0x1E, 0x5A9D),
+            npc.merchant(0x1D, 0x0C, 0x06, 0x5AA1),
+            enemy.skeleton(0x24, 0x12, 0x1E, 0x5AA5),
+            enemy.boneThrower(0x24, 0x26, 0x1E, 0x5AA9),
+            enemy.boneThrower(0x28, 0x0C, 0x1E, 0x5AAD),
+            enemy.boneThrower(0x28, 0x16, 0x1E, 0x5AB1),
+            enemy.spearKnight(0x28, 0x20, 0x1E, 0x5AB5),
+            enemy.spearKnight(0x2A, 0x30, 0x1E, 0x5AB9),
+            enemy.skeleton(0x2C, 0x12, 0x1E, 0x5ABD),
+            enemy.skeleton(0x2C, 0x20, 0x1E, 0x5AC1)
+        ]
+    },
+    {
+        name: 'Laruba Mansion - Camilla Fight',
+        objset: 0x01,
+        area: 0x06,
+        submap: 0x02,
+        actors: [
+            enemy.camilla(0x08, 0x0A, 0xF0, 0x5AC6)
+        ]
+    },
+    {
+        name: 'Laruba Mansion - Orb Room',
+        objset: 0x01,
+        area: 0x06,
+        submap: 0x03,
+        actors: [
+            orb(0x0D, 0x07, 0x1C, 0x5ACB)
         ]
     },
 ];
