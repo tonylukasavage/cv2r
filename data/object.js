@@ -16,6 +16,7 @@ const SPEAR_KNIGHT = 0x05;
 const BONE_THROWER = 0x0D;
 const SPIDER = 0x0E;
 const GARGOYLE = 0x0F;
+const MANSION_BAT = 0x11;
 const ZOMBIE = 0x17;
 const BLOB = 0x1F;
 
@@ -92,6 +93,10 @@ npc.shepherd = function() {
 // define shorthand functions for all enemies
 enemy.bat = function() {
   return enemy.call(null, ...arguments, BAT, 'bat');
+};
+
+enemy.mansionBat = function() {
+  return enemy.call(null, ...arguments, MANSION_BAT, 'mansion bat');
 };
 
 enemy.blob = function() {
