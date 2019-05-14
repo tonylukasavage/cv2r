@@ -4,6 +4,7 @@ const { cyan, green, red } = require('chalk');
 const { exec } = require('child_process');
 const cv2rando = require('../lib/cv2rando');
 const fs = require('fs').promises;
+const os = require('os');
 const path = require('path');
 const program = require('commander');
 
@@ -13,15 +14,14 @@ program
 	.usage('[options] <rom_input>')
 	.option('-o, --output <output>', 'filepath for randomized rom output')
 	.option('--run', 'immediately run with fceux after randomizing (fceux must be in PATH)')
-	.option('-s, --seed <seed>', 'seed to use for randomization')
-	.option('-v, --verbose', 'show all error logs');
+	.option('-s, --seed <seed>', 'seed to use for randomization');
 
 async function main(rom, opts = {}) {
 	try {
 		// load patches as command line options
-		const patches = await fs.readdir(path.join(__dirname, '..', 'patch'));
+		const patches = await fs.readdir(path.join(__dirname, '..', 'patch', 'post'));
 		patches.forEach(p => {
-			const patch = require(`../patch/${p}`);
+			const patch = require(`../patch/post/${p}`);
 			program.option(patch.flags, `[PATCH] ${patch.description}`);
 		});
 
@@ -38,7 +38,9 @@ async function main(rom, opts = {}) {
 
 		// run the rom, if necessary
 		if (program.run) {
-			const cmd = `fceux ${newRom}`;
+			const cmd = os.platform() === 'darwin' ? 
+				`open -a OpenEmu ${newRom}` : 
+				`fceux ${newRom}`;
 			console.log(`Launching randomized rom with ${cyan(cmd)}`);
 			exec(cmd);
 		}
@@ -46,11 +48,7 @@ async function main(rom, opts = {}) {
 		// process.exit(0);
 	} catch (err) {
 		console.error(red('### CV2 Randomizer creation failed ###'));
-		console.error(red(err.message));
-		if (program.verbose) {
-			console.log(red(err.stack));
-		}
-
+		console.log(red(err.stack));
 		process.exit(1);
 	}
 }

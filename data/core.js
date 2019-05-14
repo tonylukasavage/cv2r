@@ -1,4 +1,4 @@
-const { enemy, npc, sign } = require('./object');
+const { book, enemy, npc, sign } = require('./object');
 
 module.exports = [
     {
@@ -6,6 +6,11 @@ module.exports = [
         objset: 0,
         area: 0,
         submap: 0,
+        pattern: {
+            bg: 0,
+            sprite: 0x01,
+            pointer: 0x1CCF9
+        },
         actors: [
             npc.shepherd(0x04, 0x0C, 0x38, 0x50BC),
             npc.shepherd(0x04, 0x1A, 0x3D, 0x50C0),
