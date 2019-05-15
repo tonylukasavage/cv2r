@@ -107,6 +107,10 @@ enemy.camilla = function() {
   return enemy.call(null, ...arguments, CAMILLA, 'camilla');
 };
 
+enemy.death = function() {
+  return enemy.call(null, ...arguments, DEATH, 'death');
+};
+
 enemy.gargoyle = function() {
   return enemy.call(null, ...arguments, GARGOYLE, 'gargoyle');
 };
