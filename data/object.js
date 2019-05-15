@@ -3,6 +3,7 @@ const SACRED_FLAME = 0x26;
 const BOOK = 0x27;
 const SIGN = 0xA4;
 
+const SECRET_MERCHANT = 0x9E;
 const WOMAN = 0xA9;
 const MAN = 0xAA;
 const OLD_LADY = 0xAC;
@@ -23,13 +24,21 @@ const ZIGZAG_BAT = 0x09;
 const BONE_THROWER = 0x0D;
 const SPIDER = 0x0E;
 const GARGOYLE = 0x0F;
+const FLOATING_SKULL = 0x10;
 const MANSION_BAT = 0x11;
 const WOLF = 0x12;
 const WEREWOLF = 0x13;
 const MUDMAN = 0x15;
+const GRABBER = 0x16;
 const ZOMBIE = 0x17;
-const BLOB = 0x1F;
+const SWAMP_GHOUL = 0x18;
+const FIRE_GHOUL = 0x1D;
+const MANSION_BLOB = 0x1F;
+const DEAD_HAND= 0x38;
 const ROCK = 0x3E;
+const HIGH_JUMP_LEECH = 0x40;
+const BLOB = 0x41;
+const BONE_DRAGON = 0x4A;
 
 const CAMILLA = 0x42;
 const DEATH = 0x42;
@@ -76,6 +85,10 @@ fixture.sign = function() {
 }
 
 // define shorthand functions for all NPCs
+npc.crystalDude = function() {
+  return npc.call(null, ...arguments, CRYSTAL_DUDE, 'crystal dude');
+}
+
 npc.ferryMan = function() {
   return npc.call(null, ...arguments, FERRY_MAN, 'ferry man');
 }
@@ -100,9 +113,9 @@ npc.woman = function() {
   return npc.call(null, ...arguments, WOMAN, 'woman');
 }
 
-npc.crystalDude = function() {
-  return npc.call(null, ...arguments, CRYSTAL_DUDE, 'crystal dude');
-}
+npc.secretMerchant = function() {
+  return npc.call(null, ...arguments, SECRET_MERCHANT, 'secret merchant');
+};
 
 npc.shepherd = function() {
   return npc.call(null, ...arguments, SHEPHERD, 'shepherd');
@@ -121,12 +134,24 @@ enemy.blob = function() {
   return enemy.call(null, ...arguments, BLOB, 'blob');
 };
 
+enemy.mansionBlob = function() {
+  return enemy.call(null, ...arguments, MANSION_BLOB, 'mansion blob');
+};
+
+enemy.boneDragon = function() {
+  return enemy.call(null, ...arguments, BONE_DRAGON, 'bone dragon');
+};
+
 enemy.boneThrower = function() {
   return enemy.call(null, ...arguments, BONE_THROWER, 'bone thrower');
 };
 
 enemy.camilla = function() {
   return enemy.call(null, ...arguments, CAMILLA, 'camilla');
+};
+
+enemy.deadHand = function() {
+  return enemy.call(null, ...arguments, DEAD_HAND, 'dead hand');
 };
 
 enemy.death = function() {
@@ -137,12 +162,28 @@ enemy.eyeball = function() {
   return enemy.call(null, ...arguments, EYEBALL, 'eyeball');
 };
 
+enemy.fireGhoul = function() {
+  return enemy.call(null, ...arguments, FIRE_GHOUL, 'fire ghoul');
+};
+
 enemy.fishman = function() {
   return enemy.call(null, ...arguments, FISHMAN, 'fishman');
 };
 
+enemy.floatingSkull = function() {
+  return enemy.call(null, ...arguments, FLOATING_SKULL, 'floating skull');
+};
+
 enemy.gargoyle = function() {
   return enemy.call(null, ...arguments, GARGOYLE, 'gargoyle');
+};
+
+enemy.grabber = function() {
+  return enemy.call(null, ...arguments, GRABBER, 'grabber');
+};
+
+enemy.highJumpLeech = function() {
+  return enemy.call(null, ...arguments, HIGH_JUMP_LEECH, 'high jump leech');
 };
 
 enemy.leech = function() {
@@ -171,6 +212,10 @@ enemy.spearKnight = function() {
 
 enemy.spider = function() {
   return enemy.call(null, ...arguments, SPIDER, 'spider');
+};
+
+enemy.swampGhoul = function() {
+  return enemy.call(null, ...arguments, SWAMP_GHOUL, 'swamp ghoul');
 };
 
 enemy.werewolf = function() {
