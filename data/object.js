@@ -1,4 +1,5 @@
 const ORB = 0x25;
+const SACRED_FLAME = 0x26;
 const BOOK = 0x27;
 const SIGN = 0xA4;
 
@@ -9,16 +10,26 @@ const MERCHANT = 0xAE;
 const PRIEST = 0xAD;
 const CRYSTAL_DUDE = 0xAF;
 const SHEPHERD = 0xB5;
+const FERRY_MAN = 0xBC;
 
 const BAT = 0x01;
+const LEECH = 0x02;
 const SKELETON = 0x03;
+const FISHMAN = 0x04;
 const SPEAR_KNIGHT = 0x05;
+const LIZARDMAN = 0x06;
+const EYEBALL = 0x08;
+const ZIGZAG_BAT = 0x09;
 const BONE_THROWER = 0x0D;
 const SPIDER = 0x0E;
 const GARGOYLE = 0x0F;
 const MANSION_BAT = 0x11;
+const WOLF = 0x12;
+const WEREWOLF = 0x13;
+const MUDMAN = 0x15;
 const ZOMBIE = 0x17;
 const BLOB = 0x1F;
+const ROCK = 0x3E;
 
 const CAMILLA = 0x42;
 const DEATH = 0x42;
@@ -38,31 +49,35 @@ const npc = exports.npc = function() {
 const enemy = exports.enemy = function() {
   const o = obj.apply(null, arguments);
   o.enemy = true;
-  o.hp = arguments[2];
   return o;
 };
 
-const sign = exports.sign = function() {
-  const o = obj.call(null, ...arguments, SIGN, 'sign');
-  o.sign = true;
+const fixture = exports.fixture = function() {
+  const o = obj.apply(null, arguments);
+  o.fixture = true;
   return o;
-};
+}
 
-const book = exports.book = function() {
-  const o = obj.call(null, ...arguments, BOOK, 'book');
-  o.book = true;
-  return o;
-};
+// define shorthand function for all fixtures (immobile actors)
+fixture.book = function() {
+  return fixture.call(null, ...arguments, BOOK, 'book');
+}
 
-const orb = exports.orb = function() {
-  const o = obj.call(null, ...arguments, ORB, 'orb');
-  o.orb = true;
-  return o;
-};
+fixture.orb = function() {
+  return fixture.call(null, ...arguments, ORB, 'orb');
+}
+
+fixture.sacredFlame = function() {
+  return fixture.call(null, ...arguments, SACRED_FLAME, 'sacred flame');
+}
+
+fixture.sign = function() {
+  return fixture.call(null, ...arguments, SIGN, 'sign');
+}
 
 // define shorthand functions for all NPCs
-npc.woman = function() {
-  return npc.call(null, ...arguments, WOMAN, 'woman');
+npc.ferryMan = function() {
+  return npc.call(null, ...arguments, FERRY_MAN, 'ferry man');
 }
 
 npc.man = function() {
@@ -81,7 +96,10 @@ npc.priest = function() {
   return npc.call(null, ...arguments, PRIEST, 'priest');
 }
 
-// crystal dude is a merchant in mansions
+npc.woman = function() {
+  return npc.call(null, ...arguments, WOMAN, 'woman');
+}
+
 npc.crystalDude = function() {
   return npc.call(null, ...arguments, CRYSTAL_DUDE, 'crystal dude');
 }
@@ -103,6 +121,10 @@ enemy.blob = function() {
   return enemy.call(null, ...arguments, BLOB, 'blob');
 };
 
+enemy.boneThrower = function() {
+  return enemy.call(null, ...arguments, BONE_THROWER, 'bone thrower');
+};
+
 enemy.camilla = function() {
   return enemy.call(null, ...arguments, CAMILLA, 'camilla');
 };
@@ -111,16 +133,36 @@ enemy.death = function() {
   return enemy.call(null, ...arguments, DEATH, 'death');
 };
 
+enemy.eyeball = function() {
+  return enemy.call(null, ...arguments, EYEBALL, 'eyeball');
+};
+
+enemy.fishman = function() {
+  return enemy.call(null, ...arguments, FISHMAN, 'fishman');
+};
+
 enemy.gargoyle = function() {
   return enemy.call(null, ...arguments, GARGOYLE, 'gargoyle');
 };
 
-enemy.skeleton = function() {
-  return enemy.call(null, ...arguments, SKELETON, 'skeleton');
+enemy.leech = function() {
+  return enemy.call(null, ...arguments, LEECH, 'leech');
 };
 
-enemy.boneThrower = function() {
-  return enemy.call(null, ...arguments, BONE_THROWER, 'bone thrower');
+enemy.lizardman = function() {
+  return enemy.call(null, ...arguments, LIZARDMAN, 'lizardman');
+};
+
+enemy.mudman = function() {
+  return enemy.call(null, ...arguments, MUDMAN, 'mudman');
+};
+
+enemy.rock = function() {
+  return enemy.call(null, ...arguments, ROCK, 'rock');
+};
+
+enemy.skeleton = function() {
+  return enemy.call(null, ...arguments, SKELETON, 'skeleton');
 };
 
 enemy.spearKnight = function() {
@@ -129,6 +171,18 @@ enemy.spearKnight = function() {
 
 enemy.spider = function() {
   return enemy.call(null, ...arguments, SPIDER, 'spider');
+};
+
+enemy.werewolf = function() {
+  return enemy.call(null, ...arguments, WEREWOLF, 'werewolf');
+};
+
+enemy.wolf = function() {
+  return enemy.call(null, ...arguments, WOLF, 'wolf');
+};
+
+enemy.zigzagBat = function() {
+  return enemy.call(null, ...arguments, ZIGZAG_BAT, 'zigzag bat');
 };
 
 enemy.zombie = function() {
