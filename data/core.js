@@ -1244,4 +1244,116 @@ module.exports = [
             enemy.blob(0x1A, 0x0A, 0x02, 0x6FFF)
         ]
     },
+    {
+        name: 'Vrad Mountain - Part 2 (Diamond Dude)',
+        objset: 0x04,
+        area: 0,
+        submap: 0,
+        actors: [
+            npc.crystalDude(0x04, 0x0A, 0x00, 0x684F),
+            enemy.medusa(0x14, 0x0C, 0x04, 0x6853),
+            enemy.medusa(0x18, 0x0A, 0x04, 0x6857),
+            enemy.flower(0x1C, 0x0A, 0x04, 0x685B),
+            enemy.ghost(0x24, 0x0A, 0x04, 0x685F),
+            enemy.ghost(0x2C, 0x0A, 0x04, 0x6863),
+            enemy.eagle(0x34, 0x0B, 0x04, 0x6867),
+            enemy.mummy(0x38, 0x0C, 0x04, 0x686B),
+            enemy.eagle(0x3C, 0x0B, 0x04, 0x686F)
+        ]
+    },
+    {
+        name: 'Vrad Mountain - Part 1',
+        objset: 0x04,
+        area: 0,
+        submap: 0x01,
+        actors: [
+            // block
+            // block
+            // block
+            // block
+            // block
+            // block
+            // block
+            // block
+        ]
+    },
+    {
+        name: 'Deborah Cliff (In Tornado)',
+        objset: 0x04,
+        area: 0x01,
+        submap: 0
+    },
+    {
+        name: 'Jam Wasteland (Deborah Cliff)',
+        objset: 0x04,
+        area: 0x01,
+        submap: 0x01,
+        actors: [
+            fixture.book(0x06, 0x0B, 0x14, 0x6895),
+            // block
+            // block
+            // block
+            enemy.mummy(0x24, 0x0C, 0x08, 0x68A5),
+            enemy.mummy(0x28, 0x0B, 0x08, 0x68A9),
+            enemy.mummy(0x2C, 0x0C, 0x08, 0x68AD),
+            enemy.ghost(0x34, 0x0A, 0x08, 0x68B1),
+            enemy.ghost(0x38, 0x0A, 0x08, 0x68B5)
+        ]
+    },
+    {
+        name: 'Wicked Ditch',
+        objset: 0x04,
+        area: 0x02,
+        submap: 0,
+        actors: [
+            enemy.mummy(0x08, 0x0C, 0x08, 0x68BA),
+            enemy.mummy(0x0C, 0x0B, 0x08, 0x68BE),
+            enemy.mummy(0x14, 0x0C, 0x08, 0x68C2),
+            enemy.mummy(0x18, 0x0A, 0x08, 0x68C6),
+            enemy.flower(0x1C, 0x0A, 0x08, 0x68CA),
+            enemy.harpy(0x24, 0x0C, 0x08, 0x68CE),
+            enemy.harpy(0x28, 0x0C, 0x08, 0x68D2),
+            enemy.harpy(0x2C, 0x0C, 0x08, 0x68D6),
+            enemy.medusa(0x34, 0x0C, 0x08, 0x68DA),
+            enemy.medusa(0x38, 0x0B, 0x08, 0x68DE)
+        ]
+    },
+    {
+        name: 'Vrad Graveyard',
+        objset: 0x04,
+        area: 0x03,
+        submap: 0,
+        actors: [
+            enemy.mummy(0x08, 0x0C, 0x0F, 0x68E3),
+            enemy.mummy(0x0C, 0x0C, 0x0F, 0x68E7),
+            enemy.eagle(0x14, 0x0C, 0x0F, 0x68EB),
+            enemy.mummy(0x18, 0x0C, 0x0F, 0x68EF),
+            enemy.eagle(0x1C, 0x0C, 0x0F, 0x68F3),
+            enemy.ghost(0x24, 0x0A, 0x0F, 0x68F7),
+            enemy.ghost(0x28, 0x0A, 0x0F, 0x68FB),
+            enemy.ghost(0x2C, 0x0A, 0x0F, 0x68FF),
+            enemy.ghost(0x34, 0x0A, 0x0F, 0x6903)
+        ]
+    },
+    {
+        name: 'Castlevania Bridge',
+        objset: 0x04,
+        area: 0x03,
+        submap: 0x01
+    },
+    {
+        name: 'Castlevania',
+        objset: 0x05,
+        area: 0,
+        submap: 0
+    },
+    {
+        name: 'Castlevania - Dracula Fight',
+        objset: 0x05,
+        area: 0,
+        submap: 0x01,
+        actors: [
+            // no dracula???
+        ]
+    }
 ];

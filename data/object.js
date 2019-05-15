@@ -21,6 +21,7 @@ const SPEAR_KNIGHT = 0x05;
 const LIZARDMAN = 0x06;
 const EYEBALL = 0x08;
 const ZIGZAG_BAT = 0x09;
+const MEDUSA = 0x0A;
 const BONE_THROWER = 0x0D;
 const SPIDER = 0x0E;
 const GARGOYLE = 0x0F;
@@ -32,10 +33,15 @@ const MUDMAN = 0x15;
 const GRABBER = 0x16;
 const ZOMBIE = 0x17;
 const SWAMP_GHOUL = 0x18;
+const EAGLE = 0x1B;
 const FIRE_GHOUL = 0x1D;
 const MANSION_BLOB = 0x1F;
 const DEAD_HAND= 0x38;
+const GHOST = 0x39;
+const MUMMY = 0x3A;
+const HARPY = 0x3B;
 const ROCK = 0x3E;
+const FLOWER = 0x3F;
 const HIGH_JUMP_LEECH = 0x40;
 const BLOB = 0x41;
 const BONE_DRAGON = 0x4A;
@@ -124,6 +130,30 @@ npc.shepherd = function() {
 // define shorthand functions for all enemies
 enemy.bat = function() {
   return enemy.call(null, ...arguments, BAT, 'bat');
+};
+
+enemy.harpy = function() {
+  return enemy.call(null, ...arguments, HARPY, 'harpy');
+};
+
+enemy.medusa = function() {
+  return enemy.call(null, ...arguments, MEDUSA, 'medusa');
+};
+
+enemy.flower = function() {
+  return enemy.call(null, ...arguments, FLOWER, 'flower');
+};
+
+enemy.ghost = function() {
+  return enemy.call(null, ...arguments, GHOST, 'ghost');
+};
+
+enemy.eagle = function() {
+  return enemy.call(null, ...arguments, EAGLE, 'eagle');
+};
+
+enemy.mummy = function() {
+  return enemy.call(null, ...arguments, MUMMY, 'mummy');
 };
 
 enemy.mansionBat = function() {
