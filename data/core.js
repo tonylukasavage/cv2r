@@ -1,16 +1,21 @@
 const { enemy, fixture, npc } = require('./object');
 
-module.exports = [
+// pattern tables
+//
+// To allow for maximum variability, each location will get its own pattern
+// table pointer and values. The pointer is simply a pointer to the accompanying 
+// value. The value is a single byte, the high 4 bits are the bg pattern table
+// value, the lower 4 bits are the sprite pattern table value.
+function ptv(bg, sprite) {
+    return (bg << 4) | sprite;
+}
+
+const core = [
     {
         name: 'Jova',
         objset: 0,
         area: 0,
         submap: 0,
-        pattern: {
-            bg: 0,
-            sprite: 0x01,
-            pointer: 0x1CCF9
-        },
         actors: [
             npc.shepherd(0x04, 0x0C, 0x38, 0x50BC),
             npc.shepherd(0x04, 0x1A, 0x3D, 0x50C0),
@@ -437,6 +442,7 @@ module.exports = [
         objset: 0x01,
         area: 0x06,
         submap: 0x02,
+        boss: true,
         actors: [
             enemy.camilla(0x08, 0x0A, 0xF0, 0x5AC6)
         ]
@@ -629,6 +635,7 @@ module.exports = [
         objset: 0x01,
         area: 0x09,
         submap: 0x02,
+        boss: true,
         actors: [
             enemy.death(0x08, 0x08, 0x80, 0x5CDE)
         ]
@@ -1352,8 +1359,27 @@ module.exports = [
         objset: 0x05,
         area: 0,
         submap: 0x01,
+        boss: true,
         actors: [
             // no dracula???
         ]
     }
 ];
+
+const BASE_LOC_PTR = 0x7730;
+const patternArray = [
+    ptv(0x00, 0x01), 
+    ptv(0x08, 0x09),
+    ptv(0x02, 0x03),
+    ptv(0x04, 0x05),
+    ptv(0x06, 0x07),
+    ptv(0x0B, 0x0C) 
+];
+core.forEach((c, index) => {
+    c.pattern = { 
+        value: patternArray[c.objset],
+        pointer: BASE_LOC_PTR + index 
+    };
+});
+
+module.exports = core;

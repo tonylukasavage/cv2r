@@ -19,9 +19,9 @@ program
 async function main(rom, opts = {}) {
 	try {
 		// load patches as command line options
-		const patches = await fs.readdir(path.join(__dirname, '..', 'patch', 'post'));
-		patches.forEach(p => {
-			const patch = require(`../patch/post/${p}`);
+		const patches = await fs.readdir(path.join(__dirname, '..', 'patch'));
+		patches.filter(p => /\.js$/.test(p)).forEach(p => {
+			const patch = require(`../patch/${p}`);
 			program.option(patch.flags, `[PATCH] ${patch.description}`);
 		});
 
