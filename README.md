@@ -2,6 +2,8 @@
 
 Castlevania II: Simon's Quest Randomizer by **BloodSweatAndCode**. Come find me running this and other retro games on [Twitch](https://www.twitch.tv/bloodsweatandcode)!
 
+**WARNING** This is still in very early stages and not really usable yet. Updates are coming fast and furious.
+
 ## usage
 
 ```
