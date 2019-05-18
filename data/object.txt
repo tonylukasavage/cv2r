@@ -1,3 +1,5 @@
+0x52 toggles in swamp
+
 00 - None
 01 - Town Bat
 02 - Leech (orange)
@@ -81,25 +83,21 @@ AD - Level 1 Man
 D8 - CRASH!!!
 
 
+0x00: 24 areas, 2 submaps (48 for mapping, 30 total)
+0x01: 11 areas, 4 submaps (44 for mapping, 19 total)
+0x02: 10 areas, 4 submaps (40 for mapping, 24 total)
+0x03: 5 areas,  5 submaps (25 for mapping, 11 total)
+0x04: 4 areas,  2 submaps ( 8 for mapping,  7 total)
+0x05: 1 areas,  2 submaps ( 2 for mapping,  2 total)
+
+mapping 167, total 93, wasted 74
+
+(c.objset * OBJ_OFFSET) + (c.area * mapSize[c.objset]) + c.submap
+
 pattern table hack
 ------------------
 * replace rom code 0x1CCE2 (0xCCCF ram, currently stores $102 for sprite pattern table pointer offset) with a JMP to 0x7860 (rom) or 0xB850 (ram) which is currently unused.
 JSR $B850: 20 50 B8
-
-PHP: 08
-PHA: 48
-LDA $50: A5 50
-
-LDA $CCEA,Y: B9 EA CC
-
-PLA: 68
-PLP: 28
-RTS: 60
-
-
-objset: 0-5
-area: 0-23
-submap: 0-4
 
 objsets
 -------
