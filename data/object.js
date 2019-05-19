@@ -50,6 +50,27 @@ const CAMILLA = 0x42;
 const DEATH = 0x42;
 const DRACULA = 0x42;
 
+// Map object ids to their sprite pattern table index. The pattern table index is the 
+// value used to get from this array. For example, if you wanted an array of all the 
+// objects ids that use the mansion sprite pattern table (0x09), you'd access the array 
+// as `exports.enemiesBySprite[0x09]`. Empty arrays represent unused indices or indices 
+// used by background pattern tables, which we are not manipulating... yet. 
+exports.enemiesBySprite = [
+  [],
+  [ BAT, ZOMBIE ], // town
+  [],
+  [ LEECH, SKELETON, FISHMAN, LIZARDMAN, EYEBALL, ZIGZAG_BAT, SPIDER, WOLF, WEREWOLF, MUDMAN ], // woods 1
+  [],
+  [ SKELETON, FLOATING_SKULL, GRABBER, SWAMP_GHOUL, FIRE_GHOUL, DEAD_HAND, HIGH_JUMP_LEECH, BLOB, BONE_DRAGON ], // woods 2
+  [],
+  [ MEDUSA, EAGLE, GHOST, MUMMY, HARPY, FLOWER ], // graveyard
+  [],
+  [ SKELETON, SPEAR_KNIGHT, BONE_THROWER, SPIDER, GARGOYLE, MANSION_BAT, MANSION_BLOB, ROCK ], // mansion
+  [],
+  [],
+  [ DRACULA ], // castlevania
+];
+
 // core object functions
 function obj(x, y, data, pointer, typeId, name) {
   return { x, y, data, pointer, typeId, name };

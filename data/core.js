@@ -1356,35 +1356,4 @@ const core = [
     }
 ];
 
-// pattern tables
-//
-// To allow for maximum variability, each location will get its own pattern
-// table pointer and values. The pointer is simply a pointer to the accompanying 
-// value. The value is a single byte, the high 4 bits are the bg pattern table
-// value, the lower 4 bits are the sprite pattern table value.
-function ptv(bg, sprite) {
-    return (bg << 4) | sprite;
-}
-
-const BASE_LOC_PTR = 0x7730;
-const OBJ_OFFSET = 0x30;
-const mapSize = [ 2, 4, 4, 5, 2, 2 ];
-const patternArray = [
-    ptv(0x00, 0x01), 
-    ptv(0x08, 0x09),
-    ptv(0x02, 0x03),
-    ptv(0x04, 0x05),
-    ptv(0x06, 0x07),
-    ptv(0x0B, 0x0C) 
-];
-
-// write individual bg/sprite pattern table id for every single screen in the gane
-core.forEach((c, index) => {
-    let offset = (c.objset * OBJ_OFFSET) + (c.area * mapSize[c.objset]) + c.submap; 
-    c.pattern = { 
-        value: patternArray[c.objset],
-        pointer: BASE_LOC_PTR + offset 
-    };
-});
-
 module.exports = core;

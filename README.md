@@ -65,7 +65,7 @@ objset | pattern pointers | bg   | sprite | name
 1      | 0x1CCFB          | 0x08 | 0x09   | mansion
 2      | 0x1CCFD          | 0x02 | 0x03   | woods 1
 3      | 0x1CCFF          | 0x04 | 0x05   | woods 2
-4      | 0x1CD01          | 0x06 | 0x07   | gaveyard
+4      | 0x1CD01          | 0x06 | 0x07   | graveyard
 5      | 0x1CD03          | 0x0B | 0x0C   | castlevania
 
 

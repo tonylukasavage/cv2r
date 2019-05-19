@@ -12,6 +12,7 @@ program
 	.version(require('../package.json').version)
 	.description('Castlevania II: Simon\'s Quest Randomizer by BloodSweatAndCode')
 	.usage('[options] <rom_input>')
+	.option('-e, --enemizer', 'Randomize enemies')
 	.option('-o, --output <output>', 'filepath for randomized rom output')
 	.option('--run', 'immediately run with fceux after randomizing (fceux must be in PATH)')
 	.option('-s, --seed <seed>', 'seed to use for randomization');
