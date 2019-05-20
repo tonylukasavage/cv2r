@@ -22,6 +22,22 @@ Options:
   -h, --help             output usage information
 ```
 
+## TODO
+
+* itemizer
+  * merchants, including secret ones
+  * drac parts
+* enemizer
+  * positioning corrections
+  * HP randomizer
+  * enemy behavior manipulations
+* door randomizer
+  * mansion shuffle
+  * ALL doors shuffle
+* death/camilla shuffle
+* sequential whip upgrades
+* useful, randomizer-seed-specific hints in books
+
 ## developer notes
 
 ### in lib/core.js
