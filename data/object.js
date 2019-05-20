@@ -55,7 +55,7 @@ const DRACULA = 0x42;
 // objects ids that use the mansion sprite pattern table (0x09), you'd access the array 
 // as `exports.enemiesBySprite[0x09]`. Empty arrays represent unused indices or indices 
 // used by background pattern tables, which we are not manipulating... yet. 
-exports.enemiesBySprite = [
+exports.enemiesBySpritePattern = [
   [],
   [ BAT, ZOMBIE ], // town
   [],
