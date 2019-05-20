@@ -65,7 +65,8 @@ exports.enemiesBySpritePattern = [
   [],
   [ MEDUSA, EAGLE, GHOST, MUMMY, HARPY, FLOWER ], // graveyard
   [],
-  [ SKELETON, SPEAR_KNIGHT, BONE_THROWER, SPIDER, GARGOYLE, MANSION_BAT, MANSION_BLOB, ROCK ], // mansion
+  // I'm excluding ROCK here since rocks are stupid
+  [ SKELETON, SPEAR_KNIGHT, BONE_THROWER, SPIDER, GARGOYLE, MANSION_BAT, MANSION_BLOB ], //, ROCK ], // mansion
   [],
   [],
   [ DRACULA ], // castlevania
