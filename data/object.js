@@ -57,44 +57,14 @@ const POS_GROUND = exports.POS_GROUND = 2;
 const POS_BELOW = exports.POS_BELOW = 3;
 const POS_DEADHAND = exports.POS_DEADHAND = 4;
 
-// Map object ids to their sprite pattern table index. The pattern table index is the 
-// value used to get from this array. For example, if you wanted an array of all the 
-// objects ids that use the mansion sprite pattern table (0x09), you'd access the array 
-// as `exports.enemiesBySprite[0x09]`. Empty arrays represent unused indices or indices 
-// used by background pattern tables, which we are not manipulating... yet. 
-exports.enemiesBySpritePattern = [
-  [],
-  [ BAT, ZOMBIE ], // town
-  [],
-  [ LEECH, SKELETON, FISHMAN, LIZARDMAN, EYEBALL, ZIGZAG_BAT, SPIDER, WOLF, WEREWOLF, MUDMAN ], // woods 1
-  [],
-  [ SKELETON, FLOATING_SKULL, GRABBER, SWAMP_GHOUL, FIRE_GHOUL, DEAD_HAND, HIGH_JUMP_LEECH, BLOB, BONE_DRAGON ], // woods 2
-  [],
-  [ MEDUSA, EAGLE, GHOST, MUMMY, HARPY, FLOWER ], // graveyard
-  [],
-  // I'm excluding ROCK here since rocks are stupid
-  [ SKELETON, SPEAR_KNIGHT, BONE_THROWER, SPIDER, GARGOYLE, MANSION_BAT, MANSION_BLOB ], //, ROCK ], // mansion
-  [],
-  [],
-  [ DRACULA ], // castlevania
-];
-
 // core object functions
-function obj(x, y, data, pointer, typeId, name) {
-  return { x, y, data, pointer, typeId, name };
+function obj(x, y, data, pointer, id, name) {
+  return { x, y, data, pointer, id, name };
 }
 
 const npc = exports.npc = function() {
   const o = obj.apply(null, arguments);
   o.npc = true;
-  return o;
-};
-
-const enemy = exports.enemy = function() {
-  const opts = arguments[arguments.length - 1];
-  const o = obj.apply(null, arguments);
-  o.enemy = true;
-  if (opts.pos) { o.pos = opts.pos; }
   return o;
 };
 
@@ -159,12 +129,17 @@ npc.shepherd = function() {
 }
 
 // define shorthand functions for all enemies
+const enemy = exports.enemy = {};
+
 const enemies = [
   { name: 'bat', id: BAT, pos: POS_AIR, sprite: 0x01 },
   { name: 'blob', id: BLOB, pos: POS_GROUND, sprite: 0x05 },
   { name: 'bone dragon', id: BONE_DRAGON, pos: POS_GROUND, sprite: 0x05 },
   { name: 'bone thrower', id: BONE_THROWER, pos: POS_GROUND, sprite: 0x09 },
+  { name: 'Camilla', id: CAMILLA, pos: POS_AIR, sprite: 0x09, boss: true },
   { name: 'dead hand', id: DEAD_HAND, pos: POS_DEADHAND, sprite: 0x05 },
+  { name: 'Death', id: DEATH, pos: POS_AIR, sprite: 0x09, boss: true },
+  { name: 'Dracula', id: DRACULA, pos: POS_AIR, sprite: 0x0C, boss: true },
   { name: 'eagle', id: EAGLE, pos: POS_AIR, sprite: 0x07 },
   { name: 'eyeball', id: EYEBALL, pos: POS_AIR, sprite: 0x03 },
   { name: 'fire ghoul', id: FIRE_GHOUL, pos: POS_GROUND, sprite: 0x05 },
@@ -204,138 +179,20 @@ enemies.forEach(({ name, id, pos }) => {
   enemy[id].name = enemy[key].name = name;
 });
 
-// enemy.bat = function() {
-//   return enemy.call(null, ...arguments, BAT, 'bat', { pos: POS_AIR });
-// };
+function asArray(o) {
+  if (Array.isArray(o)) {
+    return o
+  } else if (o == null) {
+    return [];
+  } else {
+    return [ o ];
+  }
+}
 
-// enemy.harpy = function() {
-//   return enemy.call(null, ...arguments, HARPY, 'harpy', { pos: POS_AIR });
-// };
-
-// enemy.medusa = function() {
-//   return enemy.call(null, ...arguments, MEDUSA, 'medusa', { pos: POS_AIR });
-// };
-
-// enemy.flower = function() {
-//   return enemy.call(null, ...arguments, FLOWER, 'flower', { pos: POS_GROUND });
-// };
-
-// enemy.ghost = function() {
-//   return enemy.call(null, ...arguments, GHOST, 'ghost', { pos: POS_AIR });
-// };
-
-// enemy.eagle = function() {
-//   return enemy.call(null, ...arguments, EAGLE, 'eagle', { pos: POS_AIR });
-// };
-
-// enemy.mummy = function() {
-//   return enemy.call(null, ...arguments, MUMMY, 'mummy', { pos: POS_GROUND });
-// };
-
-// enemy.mansionBat = function() {
-//   return enemy.call(null, ...arguments, MANSION_BAT, 'mansion bat', { pos: POS_AIR });
-// };
-
-// enemy.blob = function() {
-//   return enemy.call(null, ...arguments, BLOB, 'blob', { pos: POS_GROUND });
-// };
-
-// enemy.mansionBlob = function() {
-//   return enemy.call(null, ...arguments, MANSION_BLOB, 'mansion blob', { pos: POS_GROUND });
-// };
-
-// enemy.boneDragon = function() {
-//   return enemy.call(null, ...arguments, BONE_DRAGON, 'bone dragon', { pos: POS_GROUND });
-// };
-
-// enemy.boneThrower = function() {
-//   return enemy.call(null, ...arguments, BONE_THROWER, 'bone thrower', { pos: POS_GROUND });
-// };
-
-enemy.camilla = function() {
-  return enemy.call(null, ...arguments, CAMILLA, 'camilla', { pos: POS_AIR });
+exports.enemiesBySpritePattern = function(patternId, opts = {}) {
+  return enemies.filter(e => {
+    return asArray(e.sprite).includes(patternId)   // enemy belongs to the given pattern table
+      && (!e.boss || (e.boss && opts.boss))        // bosses are only included if explicitly defined
+      && !asArray(opts.exclude).includes(e.name);  // enemy has not been explicitly excluded
+  });
 };
-
-// enemy.deadHand = function() {
-//   return enemy.call(null, ...arguments, DEAD_HAND, 'dead hand', { pos: POS_DEADHAND });
-// };
-
-enemy.death = function() {
-  return enemy.call(null, ...arguments, DEATH, 'death', { pos: POS_AIR });
-};
-
-// enemy.eyeball = function() {
-//   return enemy.call(null, ...arguments, EYEBALL, 'eyeball', { pos: POS_AIR });
-// };
-
-// enemy.fireGhoul = function() {
-//   return enemy.call(null, ...arguments, FIRE_GHOUL, 'fire ghoul', { pos: POS_GROUND });
-// };
-
-// enemy.fishman = function() {
-//   return enemy.call(null, ...arguments, FISHMAN, 'fishman', { pos: POS_BELOW });
-// };
-
-// enemy.floatingSkull = function() {
-//   return enemy.call(null, ...arguments, FLOATING_SKULL, 'floating skull', { pos: POS_AIR });
-// };
-
-// enemy.gargoyle = function() {
-//   return enemy.call(null, ...arguments, GARGOYLE, 'gargoyle', { pos: POS_GROUND });
-// };
-
-// enemy.grabber = function() {
-//   return enemy.call(null, ...arguments, GRABBER, 'grabber', { pos: POS_GROUND });
-// };
-
-// enemy.highJumpLeech = function() {
-//   return enemy.call(null, ...arguments, HIGH_JUMP_LEECH, 'high jump leech', { pos: POS_BELOW });
-// };
-
-// enemy.leech = function() {
-//   return enemy.call(null, ...arguments, LEECH, 'leech', { pos: POS_BELOW });
-// };
-
-// enemy.lizardman = function() {
-//   return enemy.call(null, ...arguments, LIZARDMAN, 'lizardman', { pos: POS_GROUND });
-// };
-
-// enemy.mudman = function() {
-//   return enemy.call(null, ...arguments, MUDMAN, 'mudman', { pos: POS_GROUND });
-// };
-
-// enemy.rock = function() {
-//   return enemy.call(null, ...arguments, ROCK, 'rock', { pos: POS_AIR });
-// };
-
-// enemy.skeleton = function() {
-//   return enemy.call(null, ...arguments, SKELETON, 'skeleton', { pos: POS_GROUND });
-// };
-
-// enemy.spearKnight = function() {
-//   return enemy.call(null, ...arguments, SPEAR_KNIGHT, 'spear knight', { pos: POS_GROUND });
-// };
-
-// enemy.spider = function() {
-//   return enemy.call(null, ...arguments, SPIDER, 'spider', { pos: POS_AIR });
-// };
-
-// enemy.swampGhoul = function() {
-//   return enemy.call(null, ...arguments, SWAMP_GHOUL, 'swamp ghoul', { pos: POS_GROUND });
-// };
-
-// enemy.werewolf = function() {
-//   return enemy.call(null, ...arguments, WEREWOLF, 'werewolf', { pos: POS_GROUND });
-// };
-
-// enemy.wolf = function() {
-//   return enemy.call(null, ...arguments, WOLF, 'wolf', { pos: POS_GROUND });
-// };
-
-// enemy.zigzagBat = function() {
-//   return enemy.call(null, ...arguments, ZIGZAG_BAT, 'zigzag bat', { pos: POS_AIR });
-// };
-
-// enemy.zombie = function() {
-//   return enemy.call(null, ...arguments, ZOMBIE, 'zombie', { pos: POS_GROUND });
-// };
