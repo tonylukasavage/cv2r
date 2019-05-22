@@ -28,7 +28,6 @@ Options:
   * merchants, including secret ones
   * drac parts
 * enemizer
-  * positioning corrections
   * HP randomizer
   * enemy behavior manipulations
 * door randomizer
@@ -37,6 +36,7 @@ Options:
 * death/camilla shuffle
 * sequential whip upgrades
 * useful, randomizer-seed-specific hints in books
+* replace mansion blobs with regular blobs when not in mansion
 
 ## developer notes
 
