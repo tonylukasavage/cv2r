@@ -57,76 +57,49 @@ const POS_GROUND = exports.POS_GROUND = 2;
 const POS_BELOW = exports.POS_BELOW = 3;
 const POS_DEADHAND = exports.POS_DEADHAND = 4;
 
-// core object functions
-function obj(x, y, data, pointer, id, name) {
-  return { x, y, data, pointer, id, name };
-}
-
-const npc = exports.npc = function() {
-  const o = obj.apply(null, arguments);
-  o.npc = true;
-  return o;
-};
-
-const fixture = exports.fixture = function() {
-  const o = obj.apply(null, arguments);
-  o.fixture = true;
-  return o;
-}
-
 // define shorthand function for all fixtures (immobile actors)
-fixture.book = function() {
-  return fixture.call(null, ...arguments, BOOK, 'book');
-}
+const fixture = exports.fixture = {};
 
-fixture.orb = function() {
-  return fixture.call(null, ...arguments, ORB, 'orb');
-}
+const fixtures = [
+  { name: 'book', id: BOOK },
+  { name: 'orb', id: ORB },
+  { name: 'sacred flame', id: SACRED_FLAME },
+  { name: 'sign', id: SIGN }
+];
 
-fixture.sacredFlame = function() {
-  return fixture.call(null, ...arguments, SACRED_FLAME, 'sacred flame');
-}
+fixtures.forEach(({ name, id }) => {
+  const key = camelcase(name);
+  fixture[id] = fixture[key] = function(x, y, data, pointer, opts = {}) {
+    return Object.assign({ name, id, x, y, data, pointer, fixture: true }, opts);
+  };
+  fixture[id].id = fixture[key].id = id;
+  fixture[id].name = fixture[key].name = name;
+});
 
-fixture.sign = function() {
-  return fixture.call(null, ...arguments, SIGN, 'sign');
-}
 
 // define shorthand functions for all NPCs
-npc.crystalDude = function() {
-  return npc.call(null, ...arguments, CRYSTAL_DUDE, 'crystal dude');
-}
+const npc = exports.npc = {};
 
-npc.ferryMan = function() {
-  return npc.call(null, ...arguments, FERRY_MAN, 'ferry man');
-}
+const npcs = [
+  { name: 'crystal dude', id: CRYSTAL_DUDE },
+  { name: 'ferry man', id: FERRY_MAN },
+  { name: 'man', id: MAN },
+  { name: 'merchant', id: MERCHANT },
+  { name: 'old lady', id: OLD_LADY },
+  { name: 'priest', id: PRIEST },
+  { name: 'woman', id: WOMAN },
+  { name: 'secret merchant', id: SECRET_MERCHANT },
+  { name: 'shepherd', id: SHEPHERD }
+];
 
-npc.man = function() {
-  return npc.call(null, ...arguments, MAN, 'man');
-}
-
-npc.merchant = function() {
-  return npc.call(null, ...arguments, MERCHANT, 'merchant');
-}
-
-npc.oldLady = function() {
-  return npc.call(null, ...arguments, OLD_LADY, 'old lady');
-}
-
-npc.priest = function() {
-  return npc.call(null, ...arguments, PRIEST, 'priest');
-}
-
-npc.woman = function() {
-  return npc.call(null, ...arguments, WOMAN, 'woman');
-}
-
-npc.secretMerchant = function() {
-  return npc.call(null, ...arguments, SECRET_MERCHANT, 'secret merchant');
-};
-
-npc.shepherd = function() {
-  return npc.call(null, ...arguments, SHEPHERD, 'shepherd');
-}
+npcs.forEach(({ name, id }) => {
+  const key = camelcase(name);
+  npc[id] = npc[key] = function(x, y, data, pointer, opts = {}) {
+    return Object.assign({ name, id, x, y, data, pointer, npc: true }, opts);
+  };
+  npc[id].id = npc[key].id = id;
+  npc[id].name = npc[key].name = name;
+});
 
 // define shorthand functions for all enemies
 const enemy = exports.enemy = {};

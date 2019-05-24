@@ -1,5 +1,7 @@
 const { enemy, fixture, npc } = require('./object');
 
+const HOLY_WATER = 'holy water';
+
 const core = [
     {
         name: 'Jova',
@@ -7,14 +9,33 @@ const core = [
         area: 0,
         submap: 0,
         actors: [
-            npc.shepherd(0x04, 0x0C, 0x38, 0x50BC),
-            npc.shepherd(0x04, 0x1A, 0x3D, 0x50C0),
-            npc.shepherd(0x08, 0x12, 0x3E, 0x50C4),
-            fixture.sign(0x0C, 0x1A, 0x3A, 0x50C8),
+            npc.shepherd(0x04, 0x0C, 0x38, 0x50BC, { 
+                text: 'first thing\nto do in\nthis town is\nbuy a white\ncrystal.',
+                textPointer: 0xD2CF
+            }),
+            npc.shepherd(0x04, 0x1A, 0x3D, 0x50C0, { 
+                text: 'you have a\nfriend in\nthe town of\naldra. go and\nsee him.',
+                textPointer: 0xD3E7 
+            }),
+            npc.shepherd(0x08, 0x12, 0x3E, 0x50C4, { 
+                text: '13 clues\nwill solve\cdracula\'s\nriddle.',
+                textPointer: 0xD41F
+            }),
+            fixture.sign(0x0C, 0x1A, 0x3A, 0x50C8, { 
+                text: 'turn right\nfor the jova\nwoods. left\nfor belasco\nmarsh.',
+                textPointer: 0xD343
+            }),
             enemy.zombie(0x0C, 0x0C, 0x01, 0x50CC),
-            npc.shepherd(0x14, 0x1A, 0x41, 0x50D0),
+            npc.shepherd(0x14, 0x1A, 0x41, 0x50D0, { 
+                text: 'a magic\npotion will\ndestroy the\nwall of\evil.',
+                textPointer: 0xD498
+            }),
             enemy.zombie(0x14, 0x14, 0x01, 0x50D4),
-            npc.man(0x18, 0x14, 0x44, 0x50D8),
+            npc.man(0x18, 0x14, 0x44, 0x50D8, { 
+                text: 'rumor has it\n, the ferry\nman at dead\nriver loves\ngarlic.',
+                //text: 'i am a\nfilthy liar\nand you   \nshould not   \ntrust me.   ',
+                textPointer: 0xD526
+            }),
             enemy.zombie(0x18, 0x0C, 0x01, 0x50DC),
             enemy.zombie(0x1C, 0x1A, 0x01, 0x50E0),
             npc.shepherd(0x24, 0x0C, 0x4C, 0x50E4),
@@ -22,7 +43,7 @@ const core = [
             npc.man(0x2C, 0x1A, 0x4E, 0x50EC),
             enemy.zombie(0x28, 0x14, 0x01, 0x50F0),
             enemy.zombie(0x2C, 0x0C, 0x01, 0x50F4),
-            npc.merchant(0x34, 0x12, 0x07, 0x50F8),
+            npc.merchant(0x34, 0x12, 0x07, 0x50F8, { req: [] }),
             enemy.zombie(0x34, 0x12, 0x01, 0x50FC),
             enemy.zombie(0x38, 0x0C, 0x01, 0x5100)
         ]
@@ -166,7 +187,7 @@ const core = [
         area: 0x08,
         submap: 0,
         actors: [
-            npc.merchant(0x0C, 0x0C, 0x08, 0x514E)
+            npc.merchant(0x0C, 0x0C, 0x08, 0x514E, { req: [] })
         ]
     },
     {
@@ -175,7 +196,7 @@ const core = [
         area: 0x09,
         submap: 0,
         actors: [
-            npc.merchant(0x0C, 0x0C, 0x03, 0x5153)
+            npc.merchant(0x0C, 0x0C, 0x03, 0x5153, { req: [] })
         ]
     },
     {
@@ -190,7 +211,7 @@ const core = [
         area: 0x0A,
         submap: 0x01,
         actors: [
-            npc.merchant(0x0C, 0x0C, 0x04, 0x52A5)
+            npc.merchant(0x0C, 0x0C, 0x04, 0x52A5, { req: [ HOLY_WATER ] })
         ]
     },
     {
@@ -199,7 +220,7 @@ const core = [
         area: 0x0B,
         submap: 0,
         actors: [
-            npc.merchant(0x0A, 0x1A, 0x09, 0x52AA),
+            npc.merchant(0x0A, 0x1A, 0x09, 0x52AA, { req: [ HOLY_WATER ] }),
             fixture.book(0x0D, 0x17, 0x42, 0x52AE)
         ]
     },
@@ -209,7 +230,7 @@ const core = [
         area: 0x0C,
         submap: 0,
         actors: [
-            npc.merchant(0x0C, 0x1A, 0x02, 0x51EF)
+            npc.merchant(0x0C, 0x1A, 0x02, 0x51EF, { req: [ HOLY_WATER ] })
         ]
     },
     {
@@ -242,7 +263,7 @@ const core = [
         area: 0x0E,
         submap: 0x01,
         actors: [
-            npc.merchant(0x0C, 0x1A, 0x00, 0x51FF)
+            npc.merchant(0x0C, 0x1A, 0x00, 0x51FF, { req: [ HOLY_WATER ] })
         ]
     },
     {
@@ -257,7 +278,7 @@ const core = [
         area: 0x0F,
         submap: 0x01,
         actors: [
-            npc.merchant(0x0C, 0x1A, 0x02, 0x5159)
+            npc.merchant(0x0C, 0x1A, 0x02, 0x5159, { req: [ HOLY_WATER ] })
         ]
     },
     {
@@ -272,7 +293,7 @@ const core = [
         area: 0x10,
         submap: 0x01,
         actors: [
-            npc.merchant(0x0C, 0x0C, 0x00, 0x515F)
+            npc.merchant(0x0C, 0x0C, 0x00, 0x515F, { req: [ HOLY_WATER ] })
         ]
     },
     {
@@ -287,7 +308,7 @@ const core = [
         area: 0x11,
         submap: 0x01,
         actors: [
-            npc.merchant(0x0C, 0x1A, 0x0A, 0x52B4)
+            npc.merchant(0x0C, 0x1A, 0x0A, 0x52B4, { req: [] })
         ]
     },
     {
@@ -416,7 +437,7 @@ const core = [
             enemy.spider(0x14, 0x2B, 0x1E, 0x5A95, { ground: 0x2E }),
             // block
             enemy.spider(0x1C, 0x2B, 0x1E, 0x5A9D, { ground: 0x2E }),
-            npc.merchant(0x1D, 0x0C, 0x06, 0x5AA1),
+            npc.merchant(0x1D, 0x0C, 0x06, 0x5AA1, { req: [] }),
             enemy.skeleton(0x24, 0x12, 0x1E, 0x5AA5),
             enemy.boneThrower(0x24, 0x26, 0x1E, 0x5AA9),
             enemy.boneThrower(0x28, 0x0C, 0x1E, 0x5AAD),
@@ -488,7 +509,7 @@ const core = [
         actors: [
             fixture.book(0x01, 0x0C, 0x1F, 0x5B3D),
             enemy.gargoyle(0x04, 0x26, 0x02, 0x5B41),
-            npc.merchant(0x07, 0x0C, 0x06, 0x5B45),
+            npc.merchant(0x07, 0x0C, 0x06, 0x5B45, { req: [] }),
             enemy.spearKnight(0x08, 0x22, 0x02, 0x5B49),
             enemy.boneThrower(0x0C, 0x06, 0x02, 0x5B4D),
             enemy.gargoyle(0x0C, 0x26, 0x02, 0x5B51),
@@ -567,7 +588,7 @@ const core = [
             enemy.spearKnight(0x34, 0x08, 0x04, 0x5C3B),
             enemy.boneThrower(0x34, 0x28, 0x04, 0x5C3F),
             enemy.skeleton(0x38, 0x22, 0x04, 0x5C43),
-            npc.merchant(0x38, 0x28, 0x06, 0x5C47),
+            npc.merchant(0x38, 0x28, 0x06, 0x5C47, { req: [] }),
             fixture.orb(0x3D, 0x15, 0x19, 0x5C4B),
             fixture.book(0x3E, 0x08, 0x21, 0x5C4F),
             fixture.book(0x3E, 0x22, 0x22, 0x5C53)
@@ -595,7 +616,7 @@ const core = [
             enemy.spearKnight(0x18, 0x30, 0x08, 0x5C94),
             enemy.skeleton(0x1C, 0x0E, 0x08, 0x5C98),
             enemy.skeleton(0x1C, 0x1E, 0x08, 0x5C9C),
-            npc.merchant(0x23, 0x16, 0x06, 0x5CA0),
+            npc.merchant(0x23, 0x16, 0x06, 0x5CA0, { req: [] }),
             enemy.spearKnight(0x24, 0x20, 0x08, 0x5CA4),
             enemy.mansionBlob(0x24, 0x30, 0x04, 0x5CA8),
             enemy.mansionBlob(0x24, 0x36, 0x04, 0x5CAC),
@@ -687,7 +708,7 @@ const core = [
             enemy.skeleton(0x0C, 0x36, 0x0F, 0x5F8B),
             enemy.skeleton(0x14, 0x36, 0x0F, 0x5F8F),
             enemy.skeleton(0x18, 0x30, 0x0F, 0x5F93),
-            npc.merchant(0x18, 0x2A, 0x06, 0x5F97),
+            npc.merchant(0x18, 0x2A, 0x06, 0x5F97, { req: [] }),
             enemy.skeleton(0x1C, 0x1A, 0x0F, 0x5F9B),
             enemy.skeleton(0x1C, 0x36, 0x0F, 0x5F9F),
             enemy.skeleton(0x28, 0x1A, 0x0F, 0x5FA3),
