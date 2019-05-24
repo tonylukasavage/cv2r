@@ -2,6 +2,11 @@ const { enemy, fixture, npc } = require('./object');
 
 const HOLY_WATER = 'holy water';
 
+const REFUSE_TEXT = {
+    text: 'i refuse to\nexchange my\ncrystal for\nyours.',
+    textPointer: 0xDC35
+};
+
 const core = [
     {
         name: 'Jova',
@@ -33,17 +38,28 @@ const core = [
             enemy.zombie(0x14, 0x14, 0x01, 0x50D4),
             npc.man(0x18, 0x14, 0x44, 0x50D8, { 
                 text: 'rumor has it\n, the ferry\nman at dead\nriver loves\ngarlic.',
-                //text: 'i am a\nfilthy liar\nand you   \nshould not   \ntrust me.   ',
                 textPointer: 0xD526
             }),
             enemy.zombie(0x18, 0x0C, 0x01, 0x50DC),
             enemy.zombie(0x1C, 0x1A, 0x01, 0x50E0),
-            npc.shepherd(0x24, 0x0C, 0x4C, 0x50E4),
-            npc.man(0x28, 0x14, 0x4D, 0x50E8),
-            npc.man(0x2C, 0x1A, 0x4E, 0x50EC),
+            npc.shepherd(0x24, 0x0C, 0x4C, 0x50E4, { 
+                text: 'a crooked\ntrader is\noffering bum\ndeals in\nthis town.',
+                textPointer: 0xD67B
+            }),
+            npc.man(0x28, 0x14, 0x4D, 0x50E8, { 
+                text: 'a flame is\non top of\nthe 6th tree\nin denis\nwoods.',
+                textPointer: 0xD6B0
+            }),
+            npc.man(0x2C, 0x1A, 0x4E, 0x50EC, { 
+                text: 'clues to\ndracula\'s\nriddle are\nin the town\nof veros.',
+                textPointer: 0xD6E2
+            }),
             enemy.zombie(0x28, 0x14, 0x01, 0x50F0),
             enemy.zombie(0x2C, 0x0C, 0x01, 0x50F4),
-            npc.merchant(0x34, 0x12, 0x07, 0x50F8, { req: [] }),
+            npc.merchant(0x34, 0x12, 0x07, 0x50F8, { 
+                text: 'buy a white\ncrystal?',
+                textPointer: 0xD24A
+            }),
             enemy.zombie(0x34, 0x12, 0x01, 0x50FC),
             enemy.zombie(0x38, 0x0C, 0x01, 0x5100)
         ]
@@ -54,15 +70,36 @@ const core = [
         area: 0x01,
         submap: 0,
         actors: [
-            npc.man(0x04, 0x0C, 0x40, 0x522A),
+            npc.man(0x04, 0x0C, 0x40, 0x522A, { 
+                text: 'a rib can\nshield you\nfrom evil.',
+                textPointer: 0xD478
+            }),
             enemy.bat(0x04, 0x08, 0x02, 0x522E, { ground: 0x0C }),
-            npc.man(0x0C, 0x0C, 0x43, 0x5232),
-            fixture.sign(0x0D, 0x0C, 0x3B, 0x5036),
-            npc.man(0x14, 0x0C, 0x48, 0x523A),
-            npc.woman(0x1A, 0x0C, 0x4F, 0x523E),
+            npc.man(0x0C, 0x0C, 0x43, 0x5232, { 
+                text: 'laurels in\nyour soup\nenhances its\naroma.',
+                textPointer: 0xD4FD
+            }),
+            fixture.sign(0x0D, 0x0C, 0x3B, 0x5036, { 
+                text: 'turn right\nfor dabi\'s\npath left\nfor the\nveros woods.',
+                textPointer: 0xD37A
+            }),
+            npc.man(0x14, 0x0C, 0x48, 0x523A, { 
+                text: 'you look\npale,my son.\nyou must\nrest in the\nchurch.',
+                textPointer: 0xD5D4
+            }),
+            npc.woman(0x1A, 0x0C, 0x4F, 0x523E, { 
+                text: 'clues to\ndracula\'s\nriddle are\nin the town\nof alba.',
+                textPointer: 0xD716
+            }),
             enemy.zombie(0x18, 0x0C, 0x02, 0x5242),
-            npc.shepherd(0x1C, 0x0C, 0x50, 0x5246),
-            npc.shepherd(0x24, 0x0C, 0x39, 0x524A),
+            npc.shepherd(0x1C, 0x0C, 0x50, 0x5246, { 
+                text: 'clues to\ndracula\'s\nriddle are\nin berkeley\nmansion.',
+                textPointer: 0xD749
+            }),
+            npc.shepherd(0x24, 0x0C, 0x39, 0x524A, { 
+                text: 'you\'ve got a\nfriend wait\ning for you\nin the town\nof aljiba.',
+                textPointer: 0xD306
+            }),
             enemy.zombie(0x28, 0x0C, 0x02, 0x524E),
             enemy.zombie(0x2C, 0x0C, 0x02, 0x5252),
             enemy.zombie(0x34, 0x08, 0x02, 0x5256),
@@ -75,18 +112,42 @@ const core = [
         area: 0x02,
         submap: 0,
         actors: [
-            npc.crystalDude(0x08, 0x0C, 0x03, 0x517C),
+            npc.crystalDude(0x08, 0x0C, 0x03, 0x517C, { 
+                text: 'i\'d like to\nexchange a\nwhite\ncrystal for\na blue one.',
+                textPointer: 0xD85E
+            }),
             enemy.zombie(0x08, 0x0C, 0x02, 0x5180),
-            npc.man(0x0C, 0x0C, 0x57, 0x5184),
-            fixture.sign(0x0C, 0x1A, 0x51, 0x5188),
+            npc.man(0x0C, 0x0C, 0x57, 0x5184, { 
+                text: 'to restore\nyour life,\nshout in\nfront of\nthe church.',
+                textPointer: 0xD8C6
+            }),
+            fixture.sign(0x0C, 0x1A, 0x51, 0x5188, { 
+                text: 'turn right\nfor camilla\ncemetery,\nleft for the\naljiba woods.',
+                textPointer: 0xD77C
+            }),
             enemy.zombie(0x14, 0x0C, 0x02, 0x518C),
-            npc.woman(0x18, 0x0C, 0x58, 0x5190),
-            npc.shepherd(0x1C, 0x0C, 0x5B, 0x5194),
+            npc.woman(0x18, 0x0C, 0x58, 0x5190, { 
+                text: 'the dead\nriver waits\nto be freed\nfrom the\ncurse.',
+                textPointer: 0xD8FA
+            }),
+            npc.shepherd(0x1C, 0x0C, 0x5B, 0x5194, { 
+                text: 'a laurel \nwill protect\nyou from the\npoison\nmarsh.',
+                textPointer: 0xD96B
+            }),
             enemy.zombie(0x24, 0x1A, 0x05, 0x5198),
-            npc.man(0x28, 0x1A, 0x60, 0x519C),
+            npc.man(0x28, 0x1A, 0x60, 0x519C, { 
+                text: 'buy some\ngarlic.\nit has\nspecial\npowers.',
+                textPointer: 0xDA5C
+            }),
             enemy.zombie(0x2C, 0x0C, 0x02, 0x51A0),
-            npc.shepherd(0x34, 0x0C, 0x69, 0x51A4),
-            npc.man(0x34, 0x12, 0x67, 0x51A8),
+            npc.shepherd(0x34, 0x0C, 0x69, 0x51A4, { 
+                text: 'clues to\ndracula\'s\nriddle are\nin rover\nmansion.',
+                textPointer: 0xDBD7
+            }),
+            npc.man(0x34, 0x12, 0x67, 0x51A8, { 
+                text: 'clues to\ndracula\'s\nriddle are\nin the veros\nwoods.',
+                textPointer: 0xDB74
+            }),
             enemy.zombie(0x38, 0x0C, 0x02, 0x51AC)
         ]
     },
@@ -96,24 +157,51 @@ const core = [
         area: 0x03,
         submap: 0,
         actors: [
-            npc.woman(0x08, 0x0C, 0x5F, 0x5105),
-            npc.woman(0x08, 0x1A, 0x61, 0x5109),
-            npc.woman(0x0C, 0x20, 0x62, 0x510D),
-            fixture.sign(0x0C, 0x28, 0x52, 0x5111),
+            npc.woman(0x08, 0x0C, 0x5F, 0x5105, { 
+                text: 'sorry, pal.\nno time now,\nmaybe\nlater.',
+                textPointer: 0xDA36
+            }),
+            npc.woman(0x08, 0x1A, 0x61, 0x5109, { 
+                text: 'i\'ve been\nwaiting for\na good\nlooking guy\nlike you.',
+                textPointer: 0xDA84
+            }),
+            npc.woman(0x0C, 0x20, 0x62, 0x510D, { 
+                text: 'i want to\nget to know\nyou better.',
+                textPointer: 0xDAB7
+            }),
+            fixture.sign(0x0C, 0x28, 0x52, 0x5111, { 
+                text: 'turn right\nfor the dead\nriver, left\nfor the \nsadam woods.',
+                textPointer: 0xD7B8
+            }),
             enemy.zombie(0x0C, 0x0C, 0x04, 0x5115),
-            npc.woman(0x14, 0x0C, 0x63, 0x5119),
+            npc.woman(0x14, 0x0C, 0x63, 0x5119, { 
+                text: 'i\'ll see\nyou at\nmidnight\non the\nriver bank.',
+                textPointer: 0xDAD9
+            }),
             enemy.zombie(0x14, 0x0C, 0x04, 0x511D),
             enemy.zombie(0x14, 0x1A, 0x04, 0x5121),
-            npc.woman(0x18, 0x1A, 0x66, 0x5125),
+            npc.woman(0x18, 0x1A, 0x66, 0x5125, { 
+                text: 'get a silk\nbag from the\ngraveyard\nduck to live\nlonger.',
+                textPointer: 0xDB3D
+            }),
             enemy.zombie(0x1C, 0x28, 0x04, 0x5129),
-            npc.woman(0x24, 0x0C, 0x5D, 0x512D),
+            npc.woman(0x24, 0x0C, 0x5D, 0x512D, { 
+                text: 'hit deborah\ncliff with\nyour head to\nmake a hole.',
+                textPointer: 0xD9D7
+            }),
             enemy.zombie(0x28, 0x1A, 0x04, 0x5131),
-            npc.crystalDude(0x2C, 0x22, 0x04, 0x5135),
+            npc.crystalDude(0x2C, 0x22, 0x04, 0x5135, { 
+                text: 'i\'d like to\nexchange a\nblue crystal\nfor a red\none.',
+                textPointer: 0xD893
+            }),
             enemy.zombie(0x2C, 0x0C, 0x04, 0x5139),
             enemy.zombie(0x2C, 0x22, 0x04, 0x513D),
             enemy.zombie(0x2C, 0x28, 0x04, 0x5141),
             enemy.zombie(0x34, 0x0C, 0x04, 0x5145),
-            npc.woman(0x38, 0x0C, 0x68, 0x5149)
+            npc.woman(0x38, 0x0C, 0x68, 0x5149, { 
+                text: 'clues to\ndracula\'s\nriddle are\nin bodley\nmansion.',
+                textPointer: 0xDBA6
+            })
         ]
     },
     {
@@ -122,20 +210,41 @@ const core = [
         area: 0x04,
         submap: 0,
         actors: [
-            npc.shepherd(0x08, 0x0C, 0x3F, 0x525F),
-            fixture.sign(0x0C, 0x28, 0x3C, 0x5263),
+            npc.shepherd(0x08, 0x0C, 0x3F, 0x525F, { 
+                text: 'a man living\nin darkness\ncan give\nyour whip\npower.',
+                textPointer: 0xD445
+            }),
+            fixture.sign(0x0C, 0x28, 0x3C, 0x5263, { 
+                text: 'turn right\nfor sadam\nwoods, left\nfor the jam\nwasteland.',
+                textPointer: 0xD3AF
+            }),
             enemy.zombie(0x0C, 0x0C, 0x04, 0x5267),
-            npc.man(0x14, 0x0C, 0x45, 0x526B),
-            npc.man(0x14, 0x1A, 0x46, 0x526F),
+            npc.man(0x14, 0x0C, 0x45, 0x526B, { 
+                text: 'dig up the\n4th grave in\nthe cemetery\nfor a\ndiamond.',
+                textPointer: 0xD560
+            }),
+            npc.man(0x14, 0x1A, 0x46, 0x526F, { 
+                text: 'believe in\nmagic and\nyou\'ll be\nsaved.',
+                textPointer: 0xD594
+            }),
             enemy.zombie(0x18, 0x0C, 0x04, 0x5273),
             enemy.zombie(0x18, 0x18, 0x04, 0x5277),
             enemy.zombie(0x1C, 0x28, 0x04, 0x527B),
             enemy.zombie(0x24, 0x0C, 0x04, 0x527F),
             enemy.zombie(0x24, 0x14, 0x04, 0x5283),
-            npc.shepherd(0x28, 0x14, 0x47, 0x5287),
-            npc.shepherd(0x28, 0x24, 0x4A, 0x528B),
+            npc.shepherd(0x28, 0x14, 0x47, 0x5287, { 
+                text: 'take my\ndaughter,\nplease!',
+                textPointer: 0xD5BA
+            }),
+            npc.shepherd(0x28, 0x24, 0x4A, 0x528B, { 
+                text: 'don\'t make\nme stay.\ni\'ll die.',
+                textPointer: 0xD638
+            }),
             enemy.zombie(0x2C, 0x1A, 0x04, 0x528F),
-            npc.shepherd(0x34, 0x0C, 0x4B, 0x5293),
+            npc.shepherd(0x34, 0x0C, 0x4B, 0x5293, { 
+                text: 'when i was\nyour age,\nwomen loved\nme.',
+                textPointer: 0xD656
+            }),
             enemy.zombie(0x34, 0x12, 0x04, 0x5297),
             enemy.zombie(0x38, 0x0C, 0x04, 0x529B),
             enemy.zombie(0x38, 0x1A, 0x04, 0x529F)
@@ -147,13 +256,25 @@ const core = [
         area: 0x05,
         submap: 0,
         actors: [
-            npc.shepherd(0x04, 0x0C, 0x5E, 0x51B1),
-            fixture.sign(0x0C, 0x0C, 0x53, 0x51B5),
+            npc.shepherd(0x04, 0x0C, 0x5E, 0x51B1, { 
+                text: 'after\ncastlevania\ni warned you\nnot to\nreturn.',
+                textPointer: 0xDA08
+            }),
+            fixture.sign(0x0C, 0x0C, 0x53, 0x51B5, { 
+                text: 'turn left\nfor the\nwicked ditch\n, right to\ngo north.',
+                textPointer: 0xD7F2
+            }),
             enemy.zombie(0x14, 0x0C, 0x08, 0x51B9),
-            npc.shepherd(0x1C, 0x06, 0x65, 0x51BD),
+            npc.shepherd(0x1C, 0x06, 0x65, 0x51BD, { 
+                text: 'you\'ve\nupset the\npeople.\nnow get out\nof town!',
+                textPointer: 0xDB0F
+            }),
             enemy.zombie(0x1C, 0x0C, 0x08, 0x51C1),
             enemy.zombie(0x24, 0x0C, 0x08, 0x51C5),
-            npc.shepherd(0x28, 0x0C, 0x6A, 0x51C9),
+            npc.shepherd(0x28, 0x0C, 0x6A, 0x51C9, { 
+                text: 'the cross in\nlaruba\'s \nmansion must\nbe found.',
+                textPointer: 0xDC07
+            }),
             enemy.zombie(0x2C, 0x0C, 0x08, 0x51CD),
             enemy.zombie(0x34, 0x0C, 0x08, 0x51D1)
         ]
@@ -164,7 +285,10 @@ const core = [
         area: 0x06,
         submap: 0,
         actors: [
-            fixture.sign(0x0C, 0x0C, 0x54, 0x51D6),
+            fixture.sign(0x0C, 0x0C, 0x54, 0x51D6, { 
+                text: 'turn right\nfor vrad\ngraveyard,\nleft for the\ndora woods.',
+                textPointer: 0xD826
+            }),
             enemy.bat(0x14, 0x0C, 0x08, 0x51DA, { ground: 0x0C }),
             enemy.bat(0x18, 0x06, 0x08, 0x51DE, { ground: 0x06 }),
             enemy.bat(0x24, 0x0C, 0x08, 0x51E2, { ground: 0x0C }),
@@ -178,7 +302,10 @@ const core = [
         area: 0x07,
         submap: 0,
         actors: [
-            npc.priest(0x08, 0x08, 0x31, 0x4EED)
+            npc.priest(0x08, 0x08, 0x31, 0x4EED, { 
+                text: 'rest here\nfor a while.',
+                textPointer: 0xD233
+            })
         ]
     },
     {
@@ -187,7 +314,10 @@ const core = [
         area: 0x08,
         submap: 0,
         actors: [
-            npc.merchant(0x0C, 0x0C, 0x08, 0x514E, { req: [] })
+            npc.merchant(0x0C, 0x0C, 0x08, 0x514E, { 
+                text: 'buy a thorn\nwhip?',
+                textPointer: 0xD25F
+            })
         ]
     },
     {
@@ -196,7 +326,10 @@ const core = [
         area: 0x09,
         submap: 0,
         actors: [
-            npc.merchant(0x0C, 0x0C, 0x03, 0x5153, { req: [] })
+            npc.merchant(0x0C, 0x0C, 0x03, 0x5153, { 
+                text: 'want to buy\nholy water?',
+                textPointer: 0xD2B7
+            })
         ]
     },
     {
@@ -211,7 +344,10 @@ const core = [
         area: 0x0A,
         submap: 0x01,
         actors: [
-            npc.merchant(0x0C, 0x0C, 0x04, 0x52A5, { req: [ HOLY_WATER ] })
+            npc.merchant(0x0C, 0x0C, 0x04, 0x52A5, { 
+                text: 'will you buy\na dagger?',
+                textPointer: 0xD2A0
+            })
         ]
     },
     {
@@ -220,8 +356,14 @@ const core = [
         area: 0x0B,
         submap: 0,
         actors: [
-            npc.merchant(0x0A, 0x1A, 0x09, 0x52AA, { req: [ HOLY_WATER ] }),
-            fixture.book(0x0D, 0x17, 0x42, 0x52AE)
+            npc.merchant(0x0A, 0x1A, 0x09, 0x52AA, { 
+                text: 'purchase a\nchain whip?',
+                textPointer: 0xD271
+            }),
+            fixture.book(0x0D, 0x17, 0x42, 0x52AE, { 
+                text: 'clear a path\nat berkeley\nmansion with\na white\ncrystal.',
+                textPointer: 0xD4C6
+            })
         ]
     },
     {
@@ -230,7 +372,10 @@ const core = [
         area: 0x0C,
         submap: 0,
         actors: [
-            npc.merchant(0x0C, 0x1A, 0x02, 0x51EF, { req: [ HOLY_WATER ] })
+            npc.merchant(0x0C, 0x1A, 0x02, 0x51EF, { 
+                text: 'will you buy\nsome garlic?',
+                textPointer: 0xD201
+            })
         ]
     },
     {
@@ -239,7 +384,10 @@ const core = [
         area: 0x0D,
         submap: 0,
         actors: [
-            fixture.book(0x03, 0x15, 0x5C, 0x51F4)
+            fixture.book(0x03, 0x15, 0x5C, 0x51F4, { 
+                text: 'an old gypsy\nholds a\ndiamond in\nfront of deb\nborah cliff.',
+                textPointer: 0xD99D
+            })
         ]
     },
     {
@@ -248,7 +396,10 @@ const core = [
         area: 0x0D,
         submap: 0x01,
         actors: [
-            npc.oldLady(0x0C, 0x1A, 0x59, 0x51F9)
+            npc.oldLady(0x0C, 0x1A, 0x59, 0x51F9, { 
+                text: 'dracula\'s\neyeball\nreflects\nthe curse.',
+                textPointer: 0xD92B
+            })
         ]
     },
     {
@@ -263,7 +414,10 @@ const core = [
         area: 0x0E,
         submap: 0x01,
         actors: [
-            npc.merchant(0x0C, 0x1A, 0x00, 0x51FF, { req: [ HOLY_WATER ] })
+            npc.merchant(0x0C, 0x1A, 0x00, 0x51FF, { 
+                text: 'buy some of\nmy laurels?',
+                textPointer: 0xD21B
+            })
         ]
     },
     {
@@ -278,7 +432,10 @@ const core = [
         area: 0x0F,
         submap: 0x01,
         actors: [
-            npc.merchant(0x0C, 0x1A, 0x02, 0x5159, { req: [ HOLY_WATER ] })
+            npc.merchant(0x0C, 0x1A, 0x02, 0x5159, { 
+                text: 'will you buy\nsome garlic?',
+                textPointer: 0xD201
+            })
         ]
     },
     {
@@ -293,7 +450,10 @@ const core = [
         area: 0x10,
         submap: 0x01,
         actors: [
-            npc.merchant(0x0C, 0x0C, 0x00, 0x515F, { req: [ HOLY_WATER ] })
+            npc.merchant(0x0C, 0x0C, 0x00, 0x515F, { 
+                text: 'buy some of\nmy laurels?',
+                textPointer: 0xD21B
+            })
         ]
     },
     {
@@ -308,7 +468,10 @@ const core = [
         area: 0x11,
         submap: 0x01,
         actors: [
-            npc.merchant(0x0C, 0x1A, 0x0A, 0x52B4, { req: [] })
+            npc.merchant(0x0C, 0x1A, 0x0A, 0x52B4, { 
+                text: 'morning star\n- buy one?',
+                textPointer: 0xD288
+            })
         ]
     },
     {
@@ -317,7 +480,10 @@ const core = [
         area: 0x12,
         submap: 0,
         actors: [
-            npc.oldLady(0x0C, 0x0C, 0x49, 0x52B9)
+            npc.oldLady(0x0C, 0x0C, 0x49, 0x52B9, { 
+                text: 'don\'t look\ninto the\ndeath star,\nor you will\ndie.',
+                textPointer: 0xD607
+            })
         ]
     },
     {
@@ -332,7 +498,10 @@ const core = [
         area: 0x14,
         submap: 0,
         actors: [
-            npc.oldLady(0x0C, 0x0C, 0x64, 0x5204)
+            npc.oldLady(0x0C, 0x0C, 0x64, 0x5204, { 
+                text: 'get back!',
+                textPointer: 0xDB05
+            })
         ]
     },
     {
@@ -341,7 +510,10 @@ const core = [
         area: 0x15,
         submap: 0,
         actors: [
-            npc.merchant(0x0C, 0x1A, 0x00, 0x5209)
+            npc.merchant(0x0C, 0x1A, 0x00, 0x5209, { 
+                text: 'buy some of\nmy laurels?',
+                textPointer: 0xD21B
+            })
         ]
     },
     {
@@ -356,7 +528,10 @@ const core = [
         area: 0x17,
         submap: 0,
         actors: [
-            npc.oldLady(0x0C, 0x0C, 0x5A, 0x520F)
+            npc.oldLady(0x0C, 0x0C, 0x5A, 0x520F, { 
+                text: 'let\'s live\nhere\ntogether.',
+                textPointer: 0xD951
+            })
         ]
     },
     {
@@ -422,7 +597,10 @@ const core = [
         area: 0x06,
         submap: 0x01,
         actors: [
-            npc.crystalDude(0x02, 0x34, 0x01, 0x5A65),
+            npc.crystalDude(0x02, 0x34, 0x01, 0x5A65, { 
+                text: 'i beg of you\nto take\nthese\nlaurels.',
+                textPointer: 0xDCE2
+            }),
             enemy.skeleton(0x03, 0x12, 0x1E, 0x5A69),
             enemy.skeleton(0x03, 0x1A, 0x1E, 0x5A6D),
             enemy.skeleton(0x03, 0x22, 0x1E, 0x5A71),
@@ -437,7 +615,10 @@ const core = [
             enemy.spider(0x14, 0x2B, 0x1E, 0x5A95, { ground: 0x2E }),
             // block
             enemy.spider(0x1C, 0x2B, 0x1E, 0x5A9D, { ground: 0x2E }),
-            npc.merchant(0x1D, 0x0C, 0x06, 0x5AA1, { req: [] }),
+            npc.merchant(0x1D, 0x0C, 0x06, 0x5AA1, { 
+                text: 'invest in an\noak stake?',
+                textPointer: 0xD044
+            }),
             enemy.skeleton(0x24, 0x12, 0x1E, 0x5AA5),
             enemy.boneThrower(0x24, 0x26, 0x1E, 0x5AA9),
             enemy.boneThrower(0x28, 0x0C, 0x1E, 0x5AAD),
@@ -455,7 +636,10 @@ const core = [
         submap: 0x02,
         boss: true,
         actors: [
-            enemy.camilla(0x08, 0x0A, 0xF0, 0x5AC6)
+            enemy.camilla(0x08, 0x0A, 0xF0, 0x5AC6, { 
+                text: 'you now\npossess\nthe golden\nknife.',
+                textPointer: 0xDCC0
+            })
         ]
     },
     {
@@ -464,7 +648,10 @@ const core = [
         area: 0x06,
         submap: 0x03,
         actors: [
-            fixture.orb(0x0D, 0x07, 0x1C, 0x5ACB)
+            fixture.orb(0x0D, 0x07, 0x1C, 0x5ACB, { 
+                text: 'you now\nprossess\ndracula\'s\nrib.',
+                textPointer: 0xCF9C
+            })
         ]
     },
     {
