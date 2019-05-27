@@ -1080,7 +1080,7 @@ const core = [
         actors: [
             fixture.sacredFlame(0x01, 0x0C, 0x76, 0x66B0, { 
                 text: 'you now\npossess\nthe sacred\nflame.',
-                textPointer: 0xDC93
+                textPointer: 0xDC9E
             }),
             enemy.eyeball(0x04, 0x04, 0x02, 0x66B4, { ground: 0x04 }),
             enemy.zigzagBat(0x04, 0x0C, 0x02, 0x66B8, { ground: 0x0C }),
