@@ -649,8 +649,8 @@ const core = [
         submap: 0x03,
         actors: [
             fixture.orb(0x0D, 0x07, 0x1C, 0x5ACB, { 
-                text: 'you now\nprossess\ndracula\'s\nrib.',
-                textPointer: 0xCF9C
+                text: 'you now\nprossess\ndracula\'s\nring.',
+                textPointer: 0xD023
             })
         ]
     },
@@ -685,7 +685,10 @@ const core = [
             enemy.skeleton(0x38, 0x06, 0x02, 0x5B2C),
             enemy.skeleton(0x3C, 0x0C, 0x02, 0x5B30),
             enemy.skeleton(0x3C, 0x22, 0x02, 0x5B34),
-            fixture.book(0x3E, 0x0C, 0x1E, 0x5B38)
+            fixture.book(0x3E, 0x0C, 0x1E, 0x5B38, { 
+                text: 'a symbol of\nevil will\nappear when\nyou strike\nthe stake.',
+                textPointer: 0xD05C
+            })
         ]
     },
     {
@@ -694,9 +697,15 @@ const core = [
         area: 0x07,
         submap: 0x01,
         actors: [
-            fixture.book(0x01, 0x0C, 0x1F, 0x5B3D),
+            fixture.book(0x01, 0x0C, 0x1F, 0x5B3D, { 
+                text: 'destroy the\ncurse and\nyou\'ll rule\nbrahm\'s\nmansion.',
+                textPointer: 0xD094
+            }),
             enemy.gargoyle(0x04, 0x26, 0x02, 0x5B41),
-            npc.merchant(0x07, 0x0C, 0x06, 0x5B45, { req: [] }),
+            npc.merchant(0x07, 0x0C, 0x06, 0x5B45, { 
+                text: 'invest in an\noak stake?',
+                textPointer: 0xD044
+            }),
             enemy.spearKnight(0x08, 0x22, 0x02, 0x5B49),
             enemy.boneThrower(0x0C, 0x06, 0x02, 0x5B4D),
             enemy.gargoyle(0x0C, 0x26, 0x02, 0x5B51),
@@ -714,10 +723,16 @@ const core = [
             enemy.mansionBlob(0x2C, 0x16, 0x01, 0x5B81),
             enemy.skeleton(0x2C, 0x1A, 0x02, 0x5B85),
             enemy.skeleton(0x2C, 0x26, 0x02, 0x5B89),
-            fixture.book(0x2E, 0x16, 0x20, 0x5B8D),
+            fixture.book(0x2E, 0x16, 0x20, 0x5B8D, { 
+                text: 'a flame\nflickers\ninside the\nring of\nfire.',
+                textPointer: 0xD0C7
+            }),
             enemy.mansionBlob(0x34, 0x26, 0x01, 0x5B91),
             enemy.mansionBlob(0x38, 0x26, 0x01, 0x5B95),
-            fixture.orb(0x3D, 0x15, 0x18, 0x5B99)
+            fixture.orb(0x3D, 0x15, 0x18, 0x5B99, { 
+                text: 'you now\nprossess\ndracula\'s\nrib.',
+                textPointer: 0xCF9C
+            })
         ]
     },
     {
