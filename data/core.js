@@ -2,9 +2,14 @@ const { enemy, fixture, npc } = require('./object');
 
 const HOLY_WATER = 'holy water';
 
-const REFUSE_TEXT = {
+const REFUSE_CRYSTAL_TEXT = {
     text: 'i refuse to\nexchange my\ncrystal for\nyours.',
     textPointer: 0xDC35
+};
+
+const REFUSE_FLAME_WHIP_TEXT = {
+    text: 'to break my\nspell, come\nback with a\npowerful\nweapon.',
+    textPointer: 0xDC69
 };
 
 const core = [
@@ -637,8 +642,8 @@ const core = [
         boss: true,
         actors: [
             enemy.camilla(0x08, 0x0A, 0xF0, 0x5AC6, { 
-                text: 'you now\npossess\nthe golden\nknife.',
-                textPointer: 0xDCC0
+                text: 'you now\npossess the\nmagic cross.',
+                textPointer: 0xD1D7
             })
         ]
     },
@@ -790,10 +795,22 @@ const core = [
             enemy.spearKnight(0x34, 0x08, 0x04, 0x5C3B),
             enemy.boneThrower(0x34, 0x28, 0x04, 0x5C3F),
             enemy.skeleton(0x38, 0x22, 0x04, 0x5C43),
-            npc.merchant(0x38, 0x28, 0x06, 0x5C47, { req: [] }),
-            fixture.orb(0x3D, 0x15, 0x19, 0x5C4B),
-            fixture.book(0x3E, 0x08, 0x21, 0x5C4F),
-            fixture.book(0x3E, 0x22, 0x22, 0x5C53)
+            npc.merchant(0x38, 0x28, 0x06, 0x5C47, { 
+                text: 'invest in an\noak stake?',
+                textPointer: 0xD044
+            }),
+            fixture.orb(0x3D, 0x15, 0x19, 0x5C4B, { 
+                text: 'you now\nprossess\ndracula\'s\nheart.',
+                textPointer: 0xCFBC
+            }),
+            fixture.book(0x3E, 0x08, 0x21, 0x5C4F, { 
+                text: 'garlic in\nthe\ngraveyard\nsummons a\nstranger.',
+                textPointer: 0xD0F1
+            }),
+            fixture.book(0x3E, 0x22, 0x22, 0x5C53, { 
+                text: 'destroy the\ncurse with\ndracula\'s\nheart.',
+                textPointer: 0xD11D
+            })
         ]
     },
     {
@@ -802,7 +819,10 @@ const core = [
         area: 0x09,
         submap: 0,
         actors: [
-            fixture.book(0x01, 0x10, 0x23, 0x5C60),
+            fixture.book(0x01, 0x10, 0x23, 0x5C60, { 
+                text: 'place the\nlaurels in a\nsilk bag to\nbring them\nto life.',
+                textPointer: 0xD145
+            }),
             enemy.skeleton(0x03, 0x10, 0x08, 0x5C64),
             enemy.skeleton(0x04, 0x2E, 0x08, 0x5C68),
             enemy.skeleton(0x08, 0x1E, 0x08, 0x5C6C),
@@ -818,7 +838,10 @@ const core = [
             enemy.spearKnight(0x18, 0x30, 0x08, 0x5C94),
             enemy.skeleton(0x1C, 0x0E, 0x08, 0x5C98),
             enemy.skeleton(0x1C, 0x1E, 0x08, 0x5C9C),
-            npc.merchant(0x23, 0x16, 0x06, 0x5CA0, { req: [] }),
+            npc.merchant(0x23, 0x16, 0x06, 0x5CA0, { 
+                text: 'invest in an\noak stake?',
+                textPointer: 0xD044
+            }),
             enemy.spearKnight(0x24, 0x20, 0x08, 0x5CA4),
             enemy.mansionBlob(0x24, 0x30, 0x04, 0x5CA8),
             enemy.mansionBlob(0x24, 0x36, 0x04, 0x5CAC),
@@ -840,7 +863,10 @@ const core = [
             enemy.mansionBat(0x08, 0x32, 0x04, 0x5CCD, { ground: 0x36 }),
             enemy.gargoyle(0x0C, 0x0C, 0x08, 0x5CD1),
             enemy.mansionBat(0x0C, 0x32, 0x04, 0x5CD5, { ground: 0x36 }),
-            fixture.book(0x0E, 0x18, 0x24, 0x5CD9)
+            fixture.book(0x0E, 0x18, 0x24, 0x5CD9, { 
+                text: 'wait for a\nsoul with a\nred crystal\non deborah\ncliff.',
+                textPointer: 0xD17C
+            })
         ]
     },
     {
@@ -850,7 +876,10 @@ const core = [
         submap: 0x02,
         boss: true,
         actors: [
-            enemy.death(0x08, 0x08, 0x80, 0x5CDE)
+            enemy.death(0x08, 0x08, 0x80, 0x5CDE, { 
+                text: 'you now\npossess\nthe golden\nknife.',
+                textPointer: 0xDCC0
+            })
         ]
     },
     {
@@ -859,7 +888,10 @@ const core = [
         area: 0x09,
         submap: 0x03,
         actors: [
-            fixture.orb(0x0D, 0x07, 0x1A, 0x5CE3)
+            fixture.orb(0x0D, 0x07, 0x1A, 0x5CE3, { 
+                text: 'you now\nprossess\ndracula\'s\neyeball.',
+                textPointer: 0xCFDE
+            })
         ]
     },
     {
@@ -910,12 +942,21 @@ const core = [
             enemy.skeleton(0x0C, 0x36, 0x0F, 0x5F8B),
             enemy.skeleton(0x14, 0x36, 0x0F, 0x5F8F),
             enemy.skeleton(0x18, 0x30, 0x0F, 0x5F93),
-            npc.merchant(0x18, 0x2A, 0x06, 0x5F97, { req: [] }),
+            npc.merchant(0x18, 0x2A, 0x06, 0x5F97, { 
+                text: 'invest in an\noak stake?',
+                textPointer: 0xD044
+            }),
             enemy.skeleton(0x1C, 0x1A, 0x0F, 0x5F9B),
             enemy.skeleton(0x1C, 0x36, 0x0F, 0x5F9F),
             enemy.skeleton(0x28, 0x1A, 0x0F, 0x5FA3),
-            fixture.book(0x2C, 0x16, 0x25, 0x5FA7),
-            fixture.orb(0x2D, 0x31, 0x1B, 0x5FAB),
+            fixture.book(0x2C, 0x16, 0x25, 0x5FA7, { 
+                text: 'the curse\nhas killed\nthe laurel\ntree.',
+                textPointer: 0xD1B1
+            }),
+            fixture.orb(0x2D, 0x31, 0x1B, 0x5FAB, { 
+                text: 'you now\nprossess\ndracula\'s\nnail.',
+                textPointer: 0xD002
+            }),
             enemy.boneThrower(0x34, 0x28, 0x06, 0x5FAF),
             enemy.spearKnight(0x38, 0x14, 0x0F, 0x5FB3),
             enemy.spearKnight(0x38, 0x1A, 0x0F, 0x5FB7),
@@ -1037,7 +1078,10 @@ const core = [
         area: 0x03,
         submap: 0x01,
         actors: [
-            fixture.sacredFlame(0x01, 0x0C, 0x76, 0x66B0),
+            fixture.sacredFlame(0x01, 0x0C, 0x76, 0x66B0, { 
+                text: 'you now\npossess\nthe sacred\nflame.',
+                textPointer: 0xDC93
+            }),
             enemy.eyeball(0x04, 0x04, 0x02, 0x66B4, { ground: 0x04 }),
             enemy.zigzagBat(0x04, 0x0C, 0x02, 0x66B8, { ground: 0x0C }),
             enemy.eyeball(0x0C, 0x06, 0x02, 0x66BC, { ground: 0x06 }),
@@ -1054,7 +1098,10 @@ const core = [
         submap: 0x02,
         actors: [
             enemy.spider(0x04, 0x04, 0x02, 0x66D1, { ground: 0x0C }),
-            fixture.book(0x05, 0x0D, 0x0D, 0x66D5),
+            fixture.book(0x05, 0x0D, 0x0D, 0x66D5, { 
+                text: 'to replenish\nearth ,kneel\nby the lake\nwith the\nblue crystal.',
+                textPointer: 0xCE4C
+            }),
             enemy.skeleton(0x08, 0x08, 0x02, 0x66D9),
             enemy.spider(0x0C, 0x06, 0x02, 0x66DD, { ground: 0x08 }),
             enemy.spider(0x14, 0x06, 0x02, 0x66E1, { ground: 0x0C }),
@@ -1128,7 +1175,7 @@ const core = [
         ]
     },
     {
-        name: 'Yuba Lake Path',
+        name: 'Yuba Lake',
         objset: 0x02,
         area: 0x05,
         submap: 0x01
@@ -1287,7 +1334,10 @@ const core = [
         area: 0,
         submap: 0,
         actors: [
-            npc.secretMerchant(0x04, 0x0C, 0x06, 0x6F32),
+            npc.secretMerchant(0x04, 0x0C, 0x06, 0x6F32, { 
+                text: 'i\'ll give\nyou this\nsilver knife\nto save your\nneck.',
+                textPointer: 0xCED8
+            }),
             enemy.deadHand(0x08, 0x0B, 0x08, 0x6F36),
             enemy.deadHand(0x0C, 0x0B, 0x08, 0x6F3A),
             // low priority sprite
@@ -1324,7 +1374,10 @@ const core = [
         area: 0x01,
         submap: 0,
         actors: [
-            npc.secretMerchant(0x04, 0x0C, 0x02, 0x6F88),
+            npc.secretMerchant(0x04, 0x0C, 0x02, 0x6F88, { 
+                text: 'i\'ll give\nyou a silk\nbag.',
+                textPointer: 0xCEBE
+            }),
             enemy.deadHand(0x0A, 0x0B, 0x08, 0x6F8C),
             enemy.deadHand(0x0C, 0x0B, 0x08, 0x6F90),
             // low priority sprite
@@ -1403,7 +1456,10 @@ const core = [
             // block
             enemy.floatingSkull(0x34, 0x0C, 0x0F, 0x727C, { ground: 0x0C }),
             enemy.fireGhoul(0x38, 0x0D, 0x0F, 0x7280),
-            fixture.book(0x3A, 0x0D, 0x11, 0x7284),
+            fixture.book(0x3A, 0x0D, 0x11, 0x7284, { 
+                text: 'dracula\'s\nevil knife\nblurs\ncamilla\'s\nvision.',
+                textPointer: 0xCF0B
+            }),
             enemy.floatingSkull(0x3C, 0x0D, 0x0F, 0x7288, { ground: 0x0D })
         ]
     },
@@ -1422,7 +1478,10 @@ const core = [
             enemy.skeleton(0x0C, 0x22, 0x0F, 0x72A5),
             enemy.skeleton(0x14, 0x08, 0x0F, 0x72A9),
             enemy.floatingSkull(0x14, 0x14, 0x0F, 0x72AD, { ground: 0x14 }),
-            npc.crystalDude(0x16, 0x28, 0x05, 0x72B1),
+            npc.crystalDude(0x16, 0x28, 0x05, 0x72B1, { 
+                text: 'i\'ll give\nyour morning\nstar power\nto burn away\nevil.',
+                textPointer: 0xCE89
+            }),
             enemy.skeleton(0x18, 0x22, 0x0F, 0x72B5),
             enemy.skeleton(0x1C, 0x1A, 0x0F, 0x72B9),
             // block
@@ -1470,7 +1529,10 @@ const core = [
         area: 0,
         submap: 0,
         actors: [
-            npc.crystalDude(0x04, 0x0A, 0x00, 0x684F),
+            npc.crystalDude(0x04, 0x0A, 0x00, 0x684F, { 
+                text: 'i\'ll give\nyou a\ndiamond.',
+                textPointer: 0xCF38
+            }),
             enemy.medusa(0x14, 0x0C, 0x04, 0x6853, { ground: 0x0C }),
             enemy.medusa(0x18, 0x0A, 0x04, 0x6857, { ground: 0x0A }),
             enemy.flower(0x1C, 0x0A, 0x04, 0x685B),
@@ -1509,7 +1571,10 @@ const core = [
         area: 0x01,
         submap: 0x01,
         actors: [
-            fixture.book(0x06, 0x0B, 0x14, 0x6895),
+            fixture.book(0x06, 0x0B, 0x14, 0x6895, { 
+                text: 'dracula\'s\nnail may\nsolve\nthe evil\nmystery.',
+                textPointer: 0xCF68
+            }),
             // block
             // block
             // block
