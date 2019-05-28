@@ -393,7 +393,7 @@ const core = [
         submap: 0,
         actors: [
             fixture.book(0x03, 0x15, 0x5C, 0x51F4, { 
-                text: 'an old gypsy\nholds a\ndiamond in\nfront of deb\nborah cliff.',
+                text: 'an old gypsy\nholds a\ndiamond in\nfront of deb\norah cliff.',
                 textPointer: 0xD99D
             })
         ]
