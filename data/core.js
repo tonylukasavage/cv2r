@@ -62,8 +62,11 @@ const core = [
             enemy.zombie(0x28, 0x14, 0x01, 0x50F0),
             enemy.zombie(0x2C, 0x0C, 0x01, 0x50F4),
             npc.merchant(0x34, 0x12, 0x07, 0x50F8, { 
-                text: 'buy a white\ncrystal?',
-                textPointer: 0xD24A
+               // text: 'buy a white\ncrystal?',
+                text: 'you need my\nheart!  ',
+                textPointer: 0xD24A,
+                choice: [ 0x91, 0x00, 0x02 ],
+                choicePointer: 0x1EE37
             }),
             enemy.zombie(0x34, 0x12, 0x01, 0x50FC),
             enemy.zombie(0x38, 0x0C, 0x01, 0x5100)
