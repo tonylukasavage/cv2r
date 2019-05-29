@@ -1,0 +1,12 @@
+PHP
+
+LDA *$7F
+ASL A
+TAX
+LDA $8B82,X
+STA *$00
+LDA $8B83,X
+STA *$01
+
+PLP
+RTS

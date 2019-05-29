@@ -40,6 +40,17 @@ Options:
 
 ## developer notes
 
+### unused but interesting values
+
+(ROM) 0x1EE25 is 0x090010, which seems to indicate it's a carryable item, but 0x10 doesn't match up with the bit flags currently mapped.
+
+| carry item  | bit |
+|-------------|-----|
+| silk bag    | 1   |
+| magic cross | 2   |
+| laurels     | 3   |
+| garlic      | 4   |
+
 ### progression logic decisions
 
 * The 3 block whip jump in Camilla's Cemetery is **NOT** in logic. This means red crystal is required for Bodley, Laruba, Doina, etc...

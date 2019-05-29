@@ -12,6 +12,11 @@ const REFUSE_FLAME_WHIP_TEXT = {
     textPointer: 0xDC69
 };
 
+const REFUSE_CHECK = {
+    text: 'simon, don\'t\nbe a greedy\nprick. buzz\noff!',
+    textPointer: 0xDD10
+};
+
 const core = [
     {
         name: 'Jova',
@@ -62,11 +67,12 @@ const core = [
             enemy.zombie(0x28, 0x14, 0x01, 0x50F0),
             enemy.zombie(0x2C, 0x0C, 0x01, 0x50F4),
             npc.merchant(0x34, 0x12, 0x07, 0x50F8, { 
-               // text: 'buy a white\ncrystal?',
-                text: 'you need my\nheart!  ',
+                text: 'buy a white\ncrystal?',
+                // text: 'simon, have\na chain!',
                 textPointer: 0xD24A,
-                choice: [ 0x91, 0x00, 0x02 ],
-                choicePointer: 0x1EE37
+                item: [ 0x91, 0x00, 0x20 ],
+                // item: [ 0x34, 0x04, 0x04 ],
+                itemPointer: 0x1EE37
             }),
             enemy.zombie(0x34, 0x12, 0x01, 0x50FC),
             enemy.zombie(0x38, 0x0C, 0x01, 0x5100)
@@ -336,7 +342,9 @@ const core = [
         actors: [
             npc.merchant(0x0C, 0x0C, 0x03, 0x5153, { 
                 text: 'want to buy\nholy water?',
-                textPointer: 0xD2B7
+                textPointer: 0xD2B7,
+                item: [ 0x4A, 0x00, 0x08 ],
+                itemPointer: 0x1EE2B
             })
         ]
     },
@@ -354,7 +362,9 @@ const core = [
         actors: [
             npc.merchant(0x0C, 0x0C, 0x04, 0x52A5, { 
                 text: 'will you buy\na dagger?',
-                textPointer: 0xD2A0
+                textPointer: 0xD2A0,
+                item: [ 0x4A, 0x00, 0x01 ],
+                itemPointer: 0x1EE2E
             })
         ]
     },
@@ -367,6 +377,7 @@ const core = [
             npc.merchant(0x0A, 0x1A, 0x09, 0x52AA, { 
                 text: 'purchase a\nchain whip?',
                 textPointer: 0xD271
+                // 0x929D for 0x4DB value of 0x9, which is used to determine which whip to give you
             }),
             fixture.book(0x0D, 0x17, 0x42, 0x52AE, { 
                 text: 'clear a path\nat berkeley\nmansion with\na white\ncrystal.',
@@ -382,7 +393,9 @@ const core = [
         actors: [
             npc.merchant(0x0C, 0x1A, 0x02, 0x51EF, { 
                 text: 'will you buy\nsome garlic?',
-                textPointer: 0xD201
+                textPointer: 0xD201,
+                item: [ 0x92, 0x00, 0x08 ],
+                itemPointer: 0x1EE28
             })
         ]
     },
@@ -424,7 +437,9 @@ const core = [
         actors: [
             npc.merchant(0x0C, 0x1A, 0x00, 0x51FF, { 
                 text: 'buy some of\nmy laurels?',
-                textPointer: 0xD21B
+                textPointer: 0xD21B,
+                item: [ 0x92, 0x00, 0x04 ],
+                itemPointer: 0x1EE22
             })
         ]
     },
@@ -442,7 +457,9 @@ const core = [
         actors: [
             npc.merchant(0x0C, 0x1A, 0x02, 0x5159, { 
                 text: 'will you buy\nsome garlic?',
-                textPointer: 0xD201
+                textPointer: 0xD201,
+                item: [ 0x92, 0x00, 0x08 ],
+                itemPointer: 0x1EE28
             })
         ]
     },
@@ -460,7 +477,9 @@ const core = [
         actors: [
             npc.merchant(0x0C, 0x0C, 0x00, 0x515F, { 
                 text: 'buy some of\nmy laurels?',
-                textPointer: 0xD21B
+                textPointer: 0xD21B,
+                item: [ 0x92, 0x00, 0x04 ],
+                itemPointer: 0x1EE22
             })
         ]
     },
@@ -520,7 +539,9 @@ const core = [
         actors: [
             npc.merchant(0x0C, 0x1A, 0x00, 0x5209, { 
                 text: 'buy some of\nmy laurels?',
-                textPointer: 0xD21B
+                textPointer: 0xD21B,
+                item: [ 0x92, 0x00, 0x04 ],
+                itemPointer: 0x1EE22
             })
         ]
     },
@@ -625,7 +646,9 @@ const core = [
             enemy.spider(0x1C, 0x2B, 0x1E, 0x5A9D, { ground: 0x2E }),
             npc.merchant(0x1D, 0x0C, 0x06, 0x5AA1, { 
                 text: 'invest in an\noak stake?',
-                textPointer: 0xD044
+                textPointer: 0xD044,
+                item: [ 0x4A, 0x00, 0x40 ],
+                itemPointer: 0x1EE34
             }),
             enemy.skeleton(0x24, 0x12, 0x1E, 0x5AA5),
             enemy.boneThrower(0x24, 0x26, 0x1E, 0x5AA9),
@@ -712,7 +735,9 @@ const core = [
             enemy.gargoyle(0x04, 0x26, 0x02, 0x5B41),
             npc.merchant(0x07, 0x0C, 0x06, 0x5B45, { 
                 text: 'invest in an\noak stake?',
-                textPointer: 0xD044
+                textPointer: 0xD044,
+                item: [ 0x4A, 0x00, 0x40 ],
+                itemPointer: 0x1EE34
             }),
             enemy.spearKnight(0x08, 0x22, 0x02, 0x5B49),
             enemy.boneThrower(0x0C, 0x06, 0x02, 0x5B4D),
@@ -800,7 +825,9 @@ const core = [
             enemy.skeleton(0x38, 0x22, 0x04, 0x5C43),
             npc.merchant(0x38, 0x28, 0x06, 0x5C47, { 
                 text: 'invest in an\noak stake?',
-                textPointer: 0xD044
+                textPointer: 0xD044,
+                item: [ 0x4A, 0x00, 0x40 ],
+                itemPointer: 0x1EE34
             }),
             fixture.orb(0x3D, 0x15, 0x19, 0x5C4B, { 
                 text: 'you now\nprossess\ndracula\'s\nheart.',
@@ -843,7 +870,9 @@ const core = [
             enemy.skeleton(0x1C, 0x1E, 0x08, 0x5C9C),
             npc.merchant(0x23, 0x16, 0x06, 0x5CA0, { 
                 text: 'invest in an\noak stake?',
-                textPointer: 0xD044
+                textPointer: 0xD044,
+                item: [ 0x4A, 0x00, 0x40 ],
+                itemPointer: 0x1EE34
             }),
             enemy.spearKnight(0x24, 0x20, 0x08, 0x5CA4),
             enemy.mansionBlob(0x24, 0x30, 0x04, 0x5CA8),
@@ -947,7 +976,9 @@ const core = [
             enemy.skeleton(0x18, 0x30, 0x0F, 0x5F93),
             npc.merchant(0x18, 0x2A, 0x06, 0x5F97, { 
                 text: 'invest in an\noak stake?',
-                textPointer: 0xD044
+                textPointer: 0xD044,
+                item: [ 0x4A, 0x00, 0x40 ],
+                itemPointer: 0x1EE34
             }),
             enemy.skeleton(0x1C, 0x1A, 0x0F, 0x5F9B),
             enemy.skeleton(0x1C, 0x36, 0x0F, 0x5F9F),
@@ -1340,11 +1371,29 @@ const core = [
             npc.secretMerchant(0x04, 0x0C, 0x06, 0x6F32, { 
                 text: 'i\'ll give\nyou this\nsilver knife\nto save your\nneck.',
                 textPointer: 0xCED8
+
+                // text: [
+                //     'surprise\nmutha fucka!\nhere\'s a\nbetter whip!',
+                //     REFUSE_CHECK.text
+                // ],
+                // textPointer: [ 0xCED8, REFUSE_CHECK.textPointer ],
+                
+                // whip
+                // item: [ 0xEE, 0x34, 0x04, 0xEA, 0xEA, 0xEA ],
+                // itemPointer: 0x6E22
+
+                
+
+                // code: [ 0xA5, 0x4A, 0x09, 0x02, 0x85, 0x4A ],
+                // codePointer: 0x6E22,
+
+                // item: [ 0x4A, 0x00, 0x02 ],
+                // itemPointer: 0x1EE31
             }),
             enemy.deadHand(0x08, 0x0B, 0x08, 0x6F36),
             enemy.deadHand(0x0C, 0x0B, 0x08, 0x6F3A),
             // low priority sprite
-            enemy.blob(0x24, 0x0D, 0x08, 0x6F42),
+            enemy.blob(0x24, 0x0C, 0x08, 0x6F42),
             enemy.blob(0x28, 0x0B, 0x08, 0x6F46),
             // low priority sprite
             enemy.deadHand(0x34, 0x0B, 0x08, 0x6F4E),
