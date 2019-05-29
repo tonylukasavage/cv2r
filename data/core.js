@@ -28,7 +28,7 @@ const core = [
                 textPointer: 0xD3E7 
             }),
             npc.shepherd(0x08, 0x12, 0x3E, 0x50C4, { 
-                text: '13 clues\nwill solve\cdracula\'s\nriddle.',
+                text: '13 clues\nwill solve\ndracula\'s\nriddle.',
                 textPointer: 0xD41F
             }),
             fixture.sign(0x0C, 0x1A, 0x3A, 0x50C8, { 
@@ -37,7 +37,7 @@ const core = [
             }),
             enemy.zombie(0x0C, 0x0C, 0x01, 0x50CC),
             npc.shepherd(0x14, 0x1A, 0x41, 0x50D0, { 
-                text: 'a magic\npotion will\ndestroy the\nwall of\evil.',
+                text: 'a magic\npotion will\ndestroy the\nwall of\nevil.',
                 textPointer: 0xD498
             }),
             enemy.zombie(0x14, 0x14, 0x01, 0x50D4),
