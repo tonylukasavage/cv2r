@@ -1,12 +1,37 @@
 PHP
+PHA
+TYA
+PHA
+TXA
+PHA
 
+
+LDY #$03
+CHECK LDA *$D0,Y
+CMP *$7F
+BEQ REFUSE
+DEY
+CPY #$00
+BNE CHECK
+; standard text
 LDA *$7F
-CLC
-ROR A
-ROR A
-ROR A
-ROR A
+ASL A
 TAX
+LDA $8B82,X
+STA *$00
+LDA $8B83,X
+STA *$01
+; progressive refuse text
+LDA #$40
+STA *$00
+LDA #$9D
+STA #$01
+
+PLA
+TAY
+PLP
+
+RTS
 
 
 
