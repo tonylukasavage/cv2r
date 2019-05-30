@@ -27,16 +27,21 @@ Options:
 * itemizer
   * merchants, including secret ones
   * drac parts
+  * randomize merchant costs (+/- relative to normal cost)
+  * sequential whip upgrades
 * enemizer
   * HP randomizer
+    * Scaled based on location (+/- relative to normal HP)
+    * Scaled based on enemy type (ex., all lizardmen have 6HP)
+    * no scaling, totally random
   * enemy behavior manipulations
 * door randomizer
   * mansion shuffle
   * ALL doors shuffle
 * death/camilla shuffle
-* sequential whip upgrades
 * useful, randomizer-seed-specific hints in books
 * replace mansion blobs with regular blobs when not in mansion
+
 
 ## developer notes
 
