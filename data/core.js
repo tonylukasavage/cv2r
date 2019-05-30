@@ -1370,7 +1370,8 @@ const core = [
         actors: [
             npc.secretMerchant(0x04, 0x0C, 0x06, 0x6F32, { 
                 text: 'i\'ll give\nyou this\nsilver knife\nto save your\nneck.',
-                textPointer: 0xCED8
+                textPointer: 0xCED8,
+                '0xF7': 0x10,
 
                 // text: [
                 //     'surprise\nmutha fucka!\nhere\'s a\nbetter whip!',
@@ -1379,8 +1380,8 @@ const core = [
                 // textPointer: [ 0xCED8, REFUSE_CHECK.textPointer ],
                 
                 // whip
-                // item: [ 0xEE, 0x34, 0x04, 0xEA, 0xEA, 0xEA ],
-                // itemPointer: 0x6E22
+                item: [ 0xEE, 0x34, 0x04, 0xEA, 0xEA, 0xEA ],
+                itemPointer: 0x6E22
 
                 
 
@@ -1428,7 +1429,8 @@ const core = [
         actors: [
             npc.secretMerchant(0x04, 0x0C, 0x02, 0x6F88, { 
                 text: 'i\'ll give\nyou a silk\nbag.',
-                textPointer: 0xCEBE
+                textPointer: 0xCEBE,
+                '0xF7': 0x0F
             }),
             enemy.deadHand(0x0A, 0x0B, 0x08, 0x6F8C),
             enemy.deadHand(0x0C, 0x0B, 0x08, 0x6F90),
