@@ -554,10 +554,16 @@ const core = [
         submap: 0
     },
     {
+        name: 'Alba - Empty Room Before Laurels 2',
+        objset: 0,
+        area: 0x10,
+        submap: 0x01
+    },
+    {
         name: 'Alba - Laurels Room',
         objset: 0,
         area: 0x10,
-        submap: 0x01,
+        submap: 0x02,
         actors: [
             npc.merchant(0x0C, 0x0C, 0x00, 0x515F, { 
                 text: 'buy some of\nmy laurels?',
