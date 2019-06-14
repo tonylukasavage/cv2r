@@ -29,6 +29,7 @@ Options:
   * drac parts
   * randomize merchant costs (+/- relative to normal cost)
   * sequential whip upgrades
+  * include dracula's nail in logic (some current holy water logic is also accessible with nail)
 * enemizer
   * HP randomizer
     * Scaled based on location (+/- relative to normal HP)
