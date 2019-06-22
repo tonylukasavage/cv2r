@@ -46,6 +46,24 @@ Options:
 
 ## developer notes
 
+### code locations for all actors that can hold items
+
+| name                           | RAM  | ROM   | identifier | notes                          |
+|--------------------------------|------|-------|------------|--------------------|
+| merchant (weapon/item)         | |
+| merchant (whip)                | EDF4 | 1EE04 | $7F is #33 (thorn), #34 (chain), or #35 (morning star) | ($40 AND #1F) - #7 = $434 |
+| crystal dude (blue)            | 906F | 507F  | | $7F is 0x55 on accept, 0x6B on reject (text???) |
+| crystal dude (red)             | 9088 | 5098  | | $7F is 0x56 on accept, 0x6B on reject (text???) |
+| laurel dude (laruba)           | 9347 | 5357  | $7F = #78 | |
+| flame whip dude                | 8C72 | 4C82  | $7F = #75 | | 
+| diamond dude                   |
+| secret merchant (silver knife) |
+| secret merchant (silk bag)     |
+| orb                            | | | |
+| Death                          |
+| Camilla                        |
+| sacred flame                   | | | |
+
 ### unused but interesting values
 
 (ROM) 0x1EE25 is 0x090010, which seems to indicate it's a carryable item, but 0x10 doesn't match up with the bit flags currently mapped.
@@ -59,6 +77,8 @@ Options:
 
 ### progression logic decisions
 
+* Whips will be upgraded progressively. No quick jump to morning star or flame whip.
+* Crystals will also be encountered progressively to prevent potential super boring back tracking.
 * The 3 block whip jump in Camilla's Cemetery is **NOT** in logic. This means red crystal is required for Bodley, Laruba, Doina, etc...
 * Laurels are considered required for Laruba Mansion
 * Laurels are **NOT** considered required to cross the swamp in Belasco Marsh
