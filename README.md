@@ -48,6 +48,8 @@ Options:
 
 ### code locations for all actors that can hold items
 
+The `$7F` value is set _after_ the code executes for the given item/weapon/whatever. 
+
 | name                           | RAM  | ROM   | identifier | notes                          |
 |--------------------------------|------|-------|------------|--------------------|
 | merchant (weapon/item)         | |
@@ -56,13 +58,13 @@ Options:
 | crystal dude (red)             | 9088 | 5098  | | $7F is 0x56 on accept, 0x6B on reject (text???) |
 | laurel dude (laruba)           | 9347 | 5357  | $7F = #78 | |
 | flame whip dude                | 8C72 | 4C82  | $7F = #75 | | 
-| diamond dude                   |
-| secret merchant (silver knife) |
-| secret merchant (silk bag)     |
+| diamond dude                   | AA3A | 6A4A  | $7F = #12 | |
+| secret merchant (silver knife) | AE12 | 6E22  | $7F = #10 | |
+| secret merchant (silk bag)     | AE07 | 6E17  | $7F = #0F | |
 | orb                            | | | |
-| Death                          |
-| Camilla                        |
-| sacred flame                   | | | |
+| Death                          | 87C7 | 47D7  | $3BA = #44 (#49 for knife) | still appears as knife no matter what item it actually gives you |
+| Camilla                        | 87BF | 47CF  | $3BA = #42 (#?? for cross) | still appears as cross no matter what item it actually gives you |
+| sacred flame                   | 87CD | 47DD | | |
 
 ### unused but interesting values
 
