@@ -67,6 +67,10 @@ The `$7F` value is set _after_ the code executes for the given item/weapon/whate
 | Camilla                        | 87BF | 47CF  | $3BA = #42 (#?? for cross) | still appears as cross no matter what item it actually gives you |
 | sacred flame                   | 87CD | 47DD | | still appears as flame no matter what item it actually gives you |
 
+### progressive whips and crystals
+
+* `$D0` will track in each bit whether or not you've already received a progressive upgrade from a particular actor. 
+
 ### unused but interesting values
 
 (ROM) 0x1EE25 is 0x092010, which seems to indicate it's a carryable item, but 0x10 doesn't match up with the bit flags currently mapped.
@@ -138,7 +142,7 @@ The `$7F` value is set _after_ the code executes for the given item/weapon/whate
 
 ### in lib/core.js
 
-* **Dead River - Part 2** and **Dead River to Brahm** share the same actors, so this needs to be accounted for during any randomizing that involves the actors in those screens. Essentially, unless otherwise handles, **Dead River - Part 2** will take precedence since it is defined after **Dead River to Brahm** in the `core.js` definition file.
+* **Dead River - Part 2** and **Dead River to Brahm** share the same actors, so this needs to be accounted for during any randomizing that involves the actors in those screens. Essentially, unless otherwise handled, **Dead River - Part 2** will take precedence since it is defined after **Dead River to Brahm** in the `core.js` definition file.
 * `npc.crystalDude` is the same as the (secret) merchant in the non-town pattern tables
 
 ### pattern table re-mapping
@@ -154,6 +158,12 @@ I had to store new 1 byte values (high 4 bits are bg table, low 4 bits are sprit
 | 0x04   | 4          | 2            | 8           |
 | 0x05   | 1          | 2            | 2           |
 
+
+3, 5, 3
+
+101    11000    101
+
+0 + 0 + 0 + 0x35
 
 So I'm mapping 167 bytes, only using 93 of those bytes in total, thereby wasting 74 bytes as unused space between the valid values of the mult-dimensional array. The pseduo-code calculation below shows roughly how, stored in this manner, I can access any bg/sprite table index at any time with the objset, area, and submap values:
 

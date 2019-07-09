@@ -1,0 +1,12 @@
+PHP
+PHA
+
+LDA *$91
+CLC
+ADC #$20
+STA *$91
+
+PLA
+PLP
+
+RTS
