@@ -1,0 +1,23 @@
+PHP
+PHA
+
+CMP #$1
+BNE CHAIN
+<%= thorn %>
+CLV
+BVC DONE
+
+CHAIN CMP #$2
+BNE MORNING_STAR
+<%= chain %>
+CLV
+BVC DONE
+
+MORNING_STAR CMP #$3
+BNE DONE
+<%= morningStar %>
+
+DONE PLA
+PLP
+
+RTS

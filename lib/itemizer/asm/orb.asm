@@ -1,0 +1,35 @@
+PHP
+PHA
+
+CMP #$1
+BNE HEART
+<%= rib %>
+CLV
+BVC DONE
+
+HEART CMP #$2
+BNE EYE
+<%= heart %>
+CLV
+BVC DONE
+
+EYE CMP #$4
+BNE NAIL
+<%= eyeball %>
+CLV
+BVC DONE
+
+NAIL CMP #$8
+BNE RING
+<%= nail %>
+CLV
+BVC DONE
+
+RING CMP #$10
+BNE DONE
+<%= ring %>
+
+DONE PLA
+PLP
+
+RTS
