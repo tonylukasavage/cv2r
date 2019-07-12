@@ -190,6 +190,10 @@ objset | pattern pointers | bg   | sprite | name
 4      | 0x1CD01          | 0x06 | 0x07   | graveyard
 5      | 0x1CD03          | 0x0B | 0x0C   | castlevania
 
+### sale icons and prices
+
+Code for determining the sale icons and prices is at `0x1ED46` ROM (`07:ED36` in RAM). Mapped bank is 3 for these calls.
+
 ### merchant shuffle
 
 // merchant purchasable items: 0x1ee22-0x1ee39
@@ -202,3 +206,84 @@ objset | pattern pointers | bg   | sprite | name
 
 
 // F7 is dpad
+
+// 0x1F6AD is where the dialog starts, 0x0E 0x00 means 0x00 14 times
+
+// 0x83CC code specific to merchants?
+// 0x58,0x59 map -- 0x5E,0x5F ???
+// 0x80EC - code that stores npc "type", value at 0x9140 for thorn
+
+// 0x3ba is 0x2E which is the lower 7 bits of 0xAE which is the actor "type" 
+// 0x4da is the actor "value" 0x08
+// 0x34e is 0xC0
+// 0x32a is 0xC0
+// 0x3de is 0x08
+// 0x438 is 0x01
+
+// $1F6F7 is the price line in dialog ROM
+
+// 0x414 is 0xOB after a pointer chek on 0x3ba when entering room
+// 0x414 times 3 (0x21) goes into 0x94, 
+// then ised to point to 0xDDC3 = (01 1e 0c)
+// 1e goes into 0x306, 0c goes into 3f0
+// 
+
+// $40 is 0x28, gets set to 0x93
+// 0x888D is where whip is checked for merchant chat
+
+// $1ED3D in ROM is 0x5B, which is the whip icon, gets stored at $703
+// the format is 3 bytes for each entry. The first byte is the 
+// icon for sale (index for background PPU table). The second and third
+// bytes are the price. PRICE RANDO!
+// prices: 0x1ED25-0x1ED45
+// price high byte gets stored at $29, $93
+// price low byte gets stored at $28
+
+// 0xE09C is where 0x3de AND 0xf7, which excludes only values with the 4th bit
+// set, meaning merchants that sell whips. This gets put in 0x3de, or zero
+
+// $f6e7 for line in dialog for dashes and hearts
+// 0x1EFE2 is where yes/no dialog choice happens (0xEFD2 RAM)
+
+// $E08C (RAM) watch me whip?
+
+// $40 and $93 determine icon for sale
+// $1D is 0x2E, $18 is 0x05
+
+// $7A
+// * 0-3 == presenting dialog background
+// * 4 == printing dialog text
+// * 5 == non-interactive text end, waiting for B press
+// * 6 == waiting for yes/no choice
+
+// $7E
+// * 0 == start menu
+// * 1 == no interaction dialog
+// * 2 == yes/no dialog
+
+// $F1 is dpad
+
+// ECC7 is where we move to the whip icon, C5D0 is where pointer is set
+// EE9D is the dialog text loop
+
+// 7A increments after dialog completes (5), i think it managed dialog state
+// does $164 hold this value at any stage?
+
+// C058 checks $1A, if Z flag not set, skips all merchant logic!
+
+// $7A needs to be 0x01 for normal dialog
+
+// $103???? at C)FB 
+
+// Change $3BA (or whatever near location has the merchant 0x2E) to the value 0x35.
+// The merchant then moves like a normal NPC and will deliver an npc dialog with no 
+// yes/no interaction. Dialog now points to the unused "you level has increased..." 
+// messages, which should be easy to change.
+
+// Using $7F as a unique ID for actors doesn't work because the multiple 
+// laurel and garlic merchants share the same value. Additionally, laurel 
+// merchants have a $7F value of 0x00, which is intended to be an empty value
+// in the current progressive whip upgrade logic, so that will have to 
+// change.
+
+// whip sale code 0xEDF4 RAM, 0x1EE04 ROM
