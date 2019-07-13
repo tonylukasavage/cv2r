@@ -65,7 +65,7 @@ The `$7F` value is set _after_ the code executes for the given item/weapon/whate
 
 | Death                          | 87C7 | 47D7  | $3BA = #44 (#49 for knife) | still appears as knife no matter what item it actually gives you |
 | Camilla                        | 87BF | 47CF  | $3BA = #42 (#?? for cross) | still appears as cross no matter what item it actually gives you |
-| sacred flame                   | 87CD | 47DD | | still appears as flame no matter what item it actually gives you |
+| sacred flame                   | 87CD | 47DD | | still appears as flame no matter what item it actually gives you (bank 1) |
 
 ### progressive whips and crystals
 
