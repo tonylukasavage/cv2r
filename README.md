@@ -62,7 +62,6 @@ The `$7F` value is set _after_ the code executes for the given item/weapon/whate
 | diamond dude                   | AA3A | 6A4A  | $7F = #12 | |
 | secret merchant (silver knife) | AE12 | 6E22  | $7F = #10 | |
 | secret merchant (silk bag)     | AE07 | 6E17  | $7F = #0F | |
-
 | Death                          | 87C7 | 47D7  | $3BA = #44 (#49 for knife) | still appears as knife no matter what item it actually gives you |
 | Camilla                        | 87BF | 47CF  | $3BA = #42 (#?? for cross) | still appears as cross no matter what item it actually gives you |
 | sacred flame                   | 87CD | 47DD | | still appears as flame no matter what item it actually gives you (bank 1) |
