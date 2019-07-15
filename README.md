@@ -25,10 +25,9 @@ Options:
 ## TODO
 
 * itemizer
-  * merchants, including secret ones
-  * drac parts
   * randomize merchant costs (+/- relative to normal cost)
-  * sequential whip upgrades
+  * progressive whip upgrades
+  * progressive crystal upgrades
   * include dracula's nail in logic (some current holy water logic is also accessible with nail)
 * enemizer
   * HP randomizer
