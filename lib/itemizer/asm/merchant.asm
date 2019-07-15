@@ -79,10 +79,10 @@ BNE O_RING
 JMP $9999
 
 O_RING CMP #$06
-JMP $9999
+BNE F_DONE
 <%= oakRing %>
 
-PLP
+F_DONE PLP
 
 ; z_should_be_empty
 LDA #$1
