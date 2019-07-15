@@ -46,6 +46,14 @@ Options:
 
 ## developer notes
 
+### progression logic decisions
+
+* Whips will be upgraded progressively. No quick jump to morning star or flame whip.
+* Crystals will also be encountered progressively to prevent potential super boring back tracking.
+* The 3 block whip jump in Camilla's Cemetery is **NOT** in logic. This means red crystal is required for Bodley, Laruba, Doina, etc...
+* Laurels are considered required for Laruba Mansion
+* Laurels are **NOT** considered required to cross the swamp in Belasco Marsh
+
 ### code locations for all actors that can hold items
 
 The `$7F` value is set _after_ the code executes for the given item/weapon/whatever. 
@@ -80,14 +88,6 @@ The `$7F` value is set _after_ the code executes for the given item/weapon/whate
 | magic cross | 2   |
 | laurels     | 3   |
 | garlic      | 4   |
-
-### progression logic decisions
-
-* Whips will be upgraded progressively. No quick jump to morning star or flame whip.
-* Crystals will also be encountered progressively to prevent potential super boring back tracking.
-* The 3 block whip jump in Camilla's Cemetery is **NOT** in logic. This means red crystal is required for Bodley, Laruba, Doina, etc...
-* Laurels are considered required for Laruba Mansion
-* Laurels are **NOT** considered required to cross the swamp in Belasco Marsh
 
 ### dialog text
 
