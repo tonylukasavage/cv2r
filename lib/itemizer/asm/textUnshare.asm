@@ -69,7 +69,7 @@ BNE F_DONE
 
 F_DONE PLP
 
-LDA (*$00)
+LDA ($00),Y
 CMP #$FF
 
 RTS
