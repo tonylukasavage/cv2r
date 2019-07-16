@@ -28,7 +28,6 @@ Options:
   * randomize merchant costs (+/- relative to normal cost)
   * progressive whip upgrades
   * progressive crystal upgrades
-  * include dracula's nail in logic (some current holy water logic is also accessible with nail)
 * enemizer
   * HP randomizer
     * Scaled based on location (+/- relative to normal HP)
@@ -41,6 +40,10 @@ Options:
 * death/camilla shuffle
 * useful, randomizer-seed-specific hints in books
 * replace mansion blobs with regular blobs when not in mansion
+* include dracula's nail in logic (some current holy water logic is also accessible with nail)
+* Dead River had some sprite rendering issues. This is likely because both the heart and non-heart screens share the same objset:area:submap
+* Fast travel
+* Graveyard Duck (come on grom!)
 
 
 ## developer notes
