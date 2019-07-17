@@ -25,7 +25,6 @@ Options:
 ## TODO
 
 * itemizer
-  * randomize merchant costs (+/- relative to normal cost)
   * progressive whip upgrades
   * progressive crystal upgrades
 * enemizer
