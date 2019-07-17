@@ -44,6 +44,7 @@ Options:
 * Fast travel
 * Graveyard Duck (come on grom!)
 * represent seed value on title screens with game icons (like ALttP rando)
+* some spiders still kill themselves by spawning to low on the screen
 
 
 ## developer notes

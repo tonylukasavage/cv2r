@@ -13,6 +13,7 @@ program
 	.version(require('../package.json').version)
 	.description('Castlevania II: Simon\'s Quest Randomizer by BloodSweatAndCode')
 	.usage('[options] <rom_input>')
+	.option('-a, --enemy-hp', '[ENEMIZER] randomize enemy HP')
 	.option('-e, --enemizer', '[ENEMIZER] randomize enemies')
 	.option('-i, --itemizer', '[ITEMIZER] randomize items')
 	.option('-o, --output <output>', 'filepath for randomized rom output')
