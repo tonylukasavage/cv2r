@@ -13,17 +13,37 @@ program
 	.version(require('../package.json').version)
 	.description('Castlevania II: Simon\'s Quest Randomizer by BloodSweatAndCode')
 	.usage('[options] <rom_input>')
-	.option('-e, --enemizer', '[ENEMIZER] Randomize enemies')
-	.option('-i, --itemizer', '[ITEMIZER] Randomize items')
+	.option('-e, --enemizer', '[ENEMIZER] randomize enemies')
+	.option('-i, --itemizer', '[ITEMIZER] randomize items')
 	.option('-o, --output <output>', 'filepath for randomized rom output')
-	.option('--run', 'immediately run with emulator after randomizing (fceux or OpenEmu must be in PATH)')
+	.option('-p, --prices', '[ITEMIZER] randomize merchant prices')
+	.option('-r, --run', 'immediately run with emulator after randomizing (fceux or OpenEmu must be in PATH)')
 	.option('-s, --seed <seed>', 'seed to use for randomization');
 
 program.outputHelp = function(cb) {
-	const longest = Math.max(...(this.options.map(o => o.flags.length)));
-	const p = str => pad(str, longest);
-	const printOption = o => console.log(`  ${p(o.flags)}  ${p(o.description.replace(/\[[^\]]+\]/, ''))}`);
+	// make sure we don't have conflicting flags
+	const found = {};
+	this.options.forEach(o => {
+		if (!found[o.short]) { 
+			found[o.short] = o; 
+		} else {
+			throw new Error(`short flag "${o.short}" already used with option "${found[o.short].flags}"`);
+		}
+		if (!found[o.long]) { 
+			found[o.long] = o; 
+		} else {
+			throw new Error(`long flag "${o.long}" already used with option "${found[o.long].flags}"`);
+		}
+	});
 
+	// find the longest flags string in our options
+	const longest = Math.max(...(this.options.map(o => o.flags.length)));
+	
+	// printing convenience functions
+	const p = str => pad(str, longest);
+	const printOption = o => console.log(`  ${p(o.flags)}  ${p(o.description.replace(/\[[^\]]+\]\s+/, ''))}`);
+
+	// sort options into base, itemizer, enemizer, and patches
 	const options = {
 		base: this.options.filter(o => !/^\[/.test(o.description))
 	};
@@ -32,6 +52,7 @@ program.outputHelp = function(cb) {
 		options[i] = this.options.filter(o => rx.test(o.description)); 
 	});
 
+	// print help
 	console.log(red(this.description()));
 	console.log('');
 	console.log(cyan('Usage'));
@@ -78,8 +99,6 @@ async function main(rom, opts = {}) {
 			console.log(`Launching randomized rom with ${cyan(cmd)}`);
 			exec(cmd);
 		}
-
-		// process.exit(0);
 	} catch (err) {
 		console.error(red('### CV2 Randomizer creation failed ###'));
 		console.log(red(err.stack));
