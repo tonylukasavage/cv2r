@@ -24,28 +24,23 @@ Options:
 
 ## TODO
 
+These are roughly ordered in the order I want to tackle them:
+
 * itemizer
   * progressive whip upgrades
   * progressive crystal upgrades
-* enemizer
-  * HP randomizer
-    * Scaled based on location (+/- relative to normal HP)
-    * Scaled based on enemy type (ex., all lizardmen have 6HP)
-    * no scaling, totally random
-  * enemy behavior manipulations
+* Dead River had some sprite rendering issues. This is likely because both the heart and non-heart screens share the same objset:area:submap
+* some spiders still kill themselves by spawning to low on the screen
+* represent seed value on title screens with game icons (like ALttP rando)
+* Graveyard Duck (come on grom!)
+* useful, randomizer-seed-specific hints in books
+* replace mansion blobs with regular blobs when not in mansion
+* include dracula's nail in logic (some current holy water logic is also accessible with nail)
+* Fast travel
 * door randomizer
   * mansion shuffle
   * ALL doors shuffle
 * death/camilla shuffle
-* useful, randomizer-seed-specific hints in books
-* replace mansion blobs with regular blobs when not in mansion
-* include dracula's nail in logic (some current holy water logic is also accessible with nail)
-* Dead River had some sprite rendering issues. This is likely because both the heart and non-heart screens share the same objset:area:submap
-* Fast travel
-* Graveyard Duck (come on grom!)
-* represent seed value on title screens with game icons (like ALttP rando)
-* some spiders still kill themselves by spawning to low on the screen
-
 
 ## developer notes
 
