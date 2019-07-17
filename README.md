@@ -29,6 +29,7 @@ These are roughly ordered in the order I want to tackle them:
 * itemizer
   * progressive whip upgrades
   * progressive crystal upgrades
+* improve text from actors
 * Dead River had some sprite rendering issues. This is likely because both the heart and non-heart screens share the same objset:area:submap
 * some spiders still kill themselves by spawning to low on the screen
 * represent seed value on title screens with game icons (like ALttP rando)
