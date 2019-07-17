@@ -44,6 +44,7 @@ Options:
 * Dead River had some sprite rendering issues. This is likely because both the heart and non-heart screens share the same objset:area:submap
 * Fast travel
 * Graveyard Duck (come on grom!)
+* represent seed value on title screens with game icons (like ALttP rando)
 
 
 ## developer notes
@@ -58,7 +59,7 @@ Options:
 
 ### code locations for all actors that can hold items
 
-The `$7F` value is set _after_ the code executes for the given item/weapon/whatever. 
+The `$7F` value is set _after_ the code executes for the given item/weapon/whatever.
 
 | name                           | RAM  | ROM   | identifier | notes                          |
 |--------------------------------|------|-------|------------|--------------------|
@@ -68,7 +69,7 @@ The `$7F` value is set _after_ the code executes for the given item/weapon/whate
 | crystal dude (red)             | 9088 | 5098  | | $7F is 0x56 on accept, 0x6B on reject (text???) |
 | orb                            | 8794 | 47A4  | $3BA = #25, $4C2,X=???, $8632,Y=($91 values) |
 | laurel dude (laruba)           | 9347 | 5357  | $7F = #78 | |
-| flame whip dude                | 8C72 | 4C82  | $7F = #75 | | 
+| flame whip dude                | 8C72 | 4C82  | $7F = #75 | |
 | diamond dude                   | AA3A | 6A4A  | $7F = #12 | |
 | secret merchant (silver knife) | AE12 | 6E22  | $7F = #10 | |
 | secret merchant (silk bag)     | AE07 | 6E17  | $7F = #0F | |
@@ -78,7 +79,7 @@ The `$7F` value is set _after_ the code executes for the given item/weapon/whate
 
 ### progressive whips and crystals
 
-* `$D0` will track in each bit whether or not you've already received a progressive upgrade from a particular actor. 
+* `$D0` will track in each bit whether or not you've already received a progressive upgrade from a particular actor.
 
 ### unused but interesting values
 
@@ -148,7 +149,7 @@ The `$7F` value is set _after_ the code executes for the given item/weapon/whate
 
 ### pattern table re-mapping
 
-I had to store new 1 byte values (high 4 bits are bg table, low 4 bits are sprite table) for every screen in the game. These needed to stored in a space that could be accessed mathematically based on 3 values: objset ($30), area ($50), and submap ($51 AND #$0xF). Those 3 values together compose a unique reference to every screen. The table below shows how I allocated free bytes in the ROM to essentially store a multi-dimensional array. 
+I had to store new 1 byte values (high 4 bits are bg table, low 4 bits are sprite table) for every screen in the game. These needed to stored in a space that could be accessed mathematically based on 3 values: objset ($30), area ($50), and submap ($51 AND #$0xF). Those 3 values together compose a unique reference to every screen. The table below shows how I allocated free bytes in the ROM to essentially store a multi-dimensional array.
 
 | objset | # of areas | # of submaps | map storage |
 |--------|------------|--------------|-------------|
@@ -182,7 +183,7 @@ JSR $B850: 20 50 B8
 and voila! Each screen now has it's own pattern table mapping! Here's the original mapping, which shows there were only 6 options (instead of the 93 possible options we have now). Here we can see what background and sprite table indexes correspond to what enemy groupings.
 
 
-objset | pattern pointers | bg   | sprite | name 
+objset | pattern pointers | bg   | sprite | name
 -------|------------------|------|--------|--------
 0      | 0x1CCF9          | 0x00 | 0x01   | town
 1      | 0x1CCFB          | 0x08 | 0x09   | mansion
@@ -214,7 +215,7 @@ Code for determining the sale icons and prices is at `0x1ED46` ROM (`07:ED36` in
 // 0x58,0x59 map -- 0x5E,0x5F ???
 // 0x80EC - code that stores npc "type", value at 0x9140 for thorn
 
-// 0x3ba is 0x2E which is the lower 7 bits of 0xAE which is the actor "type" 
+// 0x3ba is 0x2E which is the lower 7 bits of 0xAE which is the actor "type"
 // 0x4da is the actor "value" 0x08
 // 0x34e is 0xC0
 // 0x32a is 0xC0
@@ -224,16 +225,16 @@ Code for determining the sale icons and prices is at `0x1ED46` ROM (`07:ED36` in
 // $1F6F7 is the price line in dialog ROM
 
 // 0x414 is 0xOB after a pointer chek on 0x3ba when entering room
-// 0x414 times 3 (0x21) goes into 0x94, 
+// 0x414 times 3 (0x21) goes into 0x94,
 // then ised to point to 0xDDC3 = (01 1e 0c)
 // 1e goes into 0x306, 0c goes into 3f0
-// 
+//
 
 // $40 is 0x28, gets set to 0x93
 // 0x888D is where whip is checked for merchant chat
 
 // $1ED3D in ROM is 0x5B, which is the whip icon, gets stored at $703
-// the format is 3 bytes for each entry. The first byte is the 
+// the format is 3 bytes for each entry. The first byte is the
 // icon for sale (index for background PPU table). The second and third
 // bytes are the price. PRICE RANDO!
 // prices: 0x1ED25-0x1ED45
@@ -274,17 +275,17 @@ Code for determining the sale icons and prices is at `0x1ED46` ROM (`07:ED36` in
 
 // $7A needs to be 0x01 for normal dialog
 
-// $103???? at C)FB 
+// $103???? at C)FB
 
 // Change $3BA (or whatever near location has the merchant 0x2E) to the value 0x35.
-// The merchant then moves like a normal NPC and will deliver an npc dialog with no 
-// yes/no interaction. Dialog now points to the unused "you level has increased..." 
+// The merchant then moves like a normal NPC and will deliver an npc dialog with no
+// yes/no interaction. Dialog now points to the unused "you level has increased..."
 // messages, which should be easy to change.
 
-// Using $7F as a unique ID for actors doesn't work because the multiple 
-// laurel and garlic merchants share the same value. Additionally, laurel 
+// Using $7F as a unique ID for actors doesn't work because the multiple
+// laurel and garlic merchants share the same value. Additionally, laurel
 // merchants have a $7F value of 0x00, which is intended to be an empty value
-// in the current progressive whip upgrade logic, so that will have to 
+// in the current progressive whip upgrade logic, so that will have to
 // change.
 
 // whip sale code 0xEDF4 RAM, 0x1EE04 ROM

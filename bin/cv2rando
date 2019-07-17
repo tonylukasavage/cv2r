@@ -7,16 +7,48 @@ const fs = require('fs').promises;
 const os = require('os');
 const path = require('path');
 const program = require('commander');
+const { pad } = require('../lib/utils');
 
 program
 	.version(require('../package.json').version)
 	.description('Castlevania II: Simon\'s Quest Randomizer by BloodSweatAndCode')
 	.usage('[options] <rom_input>')
-	.option('-e, --enemizer', 'Randomize enemies')
-	.option('-i, --itemizer', 'Randomize items')
+	.option('-e, --enemizer', '[ENEMIZER] Randomize enemies')
+	.option('-i, --itemizer', '[ITEMIZER] Randomize items')
 	.option('-o, --output <output>', 'filepath for randomized rom output')
-	.option('--run', 'immediately run with fceux after randomizing (fceux must be in PATH)')
+	.option('--run', 'immediately run with emulator after randomizing (fceux or OpenEmu must be in PATH)')
 	.option('-s, --seed <seed>', 'seed to use for randomization');
+
+program.outputHelp = function(cb) {
+	const longest = Math.max(...(this.options.map(o => o.flags.length)));
+	const p = str => pad(str, longest);
+	const printOption = o => console.log(`  ${p(o.flags)}  ${p(o.description.replace(/\[[^\]]+\]/, ''))}`);
+
+	const options = {
+		base: this.options.filter(o => !/^\[/.test(o.description))
+	};
+	[ 'itemizer', 'enemizer', 'patch' ].forEach(i => {
+		const rx = new RegExp(`^\\[${i.toUpperCase()}\\]`); 
+		options[i] = this.options.filter(o => rx.test(o.description)); 
+	});
+
+	console.log(red(this.description()));
+	console.log('');
+	console.log(cyan('Usage'));
+	console.log(`  cv2rando ${this.usage()}`);
+	console.log('');
+	console.log(cyan('Options'));
+	options.base.forEach(printOption);
+	console.log('');
+	console.log(cyan('Itemizer Flags (must set -i)'));
+	options.itemizer.forEach(printOption);
+	console.log('');
+	console.log(cyan('Enemizer Flags (must set -e)'));
+	options.enemizer.forEach(printOption);
+	console.log('');
+	console.log(cyan('Patches'));
+	options.patch.forEach(printOption);
+}
 
 async function main(rom, opts = {}) {
 	try {
