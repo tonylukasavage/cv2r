@@ -41,6 +41,9 @@ These are roughly ordered in the order I want to tackle them:
   * mansion shuffle
   * ALL doors shuffle
 * death/camilla shuffle
+* patches
+  * OHKO
+  * disable quick kill
 
 ## developer notes
 

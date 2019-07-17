@@ -19,7 +19,8 @@ program
 	.option('-o, --output <output>', 'filepath for randomized rom output')
 	.option('-p, --prices', '[ITEMIZER] randomize merchant prices')
 	.option('-r, --run', 'immediately run with emulator after randomizing (fceux or OpenEmu must be in PATH)')
-	.option('-s, --seed <seed>', 'seed to use for randomization');
+	.option('-s, --seed <seed>', 'seed to use for randomization')
+	.option('-z, --debug', 'enable debug output');
 
 program.outputHelp = function(cb) {
 	// make sure we don't have conflicting flags
@@ -83,6 +84,10 @@ async function main(rom, opts = {}) {
 
 		// process command line arguments
 		program.parse(process.argv);
+		if (program.debug) {
+			global.debug = true;
+		}
+
 		const rom = program.args[0];
 		if (!rom) {
 			throw new Error('must specify a ROM file');
