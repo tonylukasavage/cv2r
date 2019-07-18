@@ -27,9 +27,8 @@ Options:
 These are roughly ordered in the order I want to tackle them:
 
 * itemizer
-  * progressive whip upgrades
+  * progressive whip upgrades (too many, seed: )
   * progressive crystal upgrades
-* Bad Laruba mansion sprite rendering (first screen, seed I13yveQBMAZXvu2X)
 * improve text from actors
 * instant dialog text patch
 * Dead River had some sprite rendering issues (boat specifically). This is likely because both the heart and non-heart screens share the same objset:area:submap
