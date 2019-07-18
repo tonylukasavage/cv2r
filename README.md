@@ -29,7 +29,6 @@ These are roughly ordered in the order I want to tackle them:
 * itemizer
   * progressive whip upgrades (too many, seed: I13yveQBMAZXvu2X)
   * progressive crystal upgrades
-* Heart mansion wrong warp sets objset to 0x60, screws up simon sprite
 * improve text from actors
 * instant dialog text patch
 * Laurel room in Alba glitches at night
@@ -190,7 +189,6 @@ JSR $B850: 20 50 B8
 ```
 
 and voila! Each screen now has it's own pattern table mapping! Here's the original mapping, which shows there were only 6 options (instead of the 93 possible options we have now). Here we can see what background and sprite table indexes correspond to what enemy groupings.
-
 
 objset | pattern pointers | bg   | sprite | name
 -------|------------------|------|--------|--------
