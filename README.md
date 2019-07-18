@@ -27,10 +27,12 @@ Options:
 These are roughly ordered in the order I want to tackle them:
 
 * itemizer
-  * progressive whip upgrades (too many, seed: )
+  * progressive whip upgrades (too many, seed: I13yveQBMAZXvu2X)
   * progressive crystal upgrades
+* Heart mansion wrong warp sets objset to 0x60, screws up simon sprite
 * improve text from actors
 * instant dialog text patch
+* Laurel room in Alba glitches at night
 * Dead River had some sprite rendering issues (boat specifically). This is likely because both the heart and non-heart screens share the same objset:area:submap
 * change sprites on boss drops to match the item you're actually getting
 * leeches render improperly sometimes (do i have high jump and low jump mixed up?)
