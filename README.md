@@ -29,12 +29,21 @@ These are roughly ordered in the order I want to tackle them:
 * itemizer
   * progressive whip upgrades
   * progressive crystal upgrades
+* Bad Laruba mansion sprite rendering (first screen, seed I13yveQBMAZXvu2X)
 * improve text from actors
-* Dead River had some sprite rendering issues. This is likely because both the heart and non-heart screens share the same objset:area:submap
+* instant dialog text patch
+* Dead River had some sprite rendering issues (boat specifically). This is likely because both the heart and non-heart screens share the same objset:area:submap
+* change sprites on boss drops to match the item you're actually getting
+* leeches render improperly sometimes (do i have high jump and low jump mixed up?)
 * some spiders still kill themselves by spawning to low on the screen
 * represent seed value on title screens with game icons (like ALttP rando)
 * Graveyard Duck (come on grom!)
 * useful, randomizer-seed-specific hints in books
+* adjust sales prices for progression items (re-route ROM access based on inventory)
+* ferry man wants something besides heart
+* drain water with something other than blue/red crystal
+* fix low priority screen rendering
+* fix flower rendering when not on "graveyard" pattern tables
 * replace mansion blobs with regular blobs when not in mansion
 * include dracula's nail in logic (some current holy water logic is also accessible with nail)
 * Fast travel
