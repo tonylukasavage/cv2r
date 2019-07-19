@@ -29,7 +29,6 @@ These are roughly ordered in the order I want to tackle them:
 * sale icon for progressive crystals can be confusing
 * improve text from actors
   * implement text that indicates you already grabbed a progressive item from an actor
-* instant dialog text patch
 * Laurel room in Alba glitches at night
 * change sprites on boss drops to match the item you're actually getting
 * leeches render improperly sometimes (do i have high jump and low jump mixed up?)
