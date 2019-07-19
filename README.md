@@ -7,25 +7,47 @@ Castlevania II: Simon's Quest Randomizer by **BloodSweatAndCode**. Come find me 
 ## usage
 
 ```
-Usage: cv2rando [options] <rom_input>
-
 Castlevania II: Simon's Quest Randomizer by BloodSweatAndCode
 
-Options:
-  -V, --version          output the version number
-  -o, --output <output>  filepath for randomized rom output
-  --run                  immediately run with fceux after randomizing (fceux must be in PATH)
-  -s, --seed <seed>      seed to use for randomization
-  -d, --double-hearts    [PATCH] double the value of each heart
-  -f, --fast-day-night   [PATCH] get rid of the day-night cycle dialog boxes
-  -n, --night-party      [PATCH] enable NPCs and door entry at night
-  -h, --help             output usage information
+Usage
+  cv2rando [options] <rom_input>
+
+Examples
+  # Generate a seed with all game flags enabled (Windows)
+  node --no-warnings .\bin\cv2rando --all --seed BSAC cv2.nes
+
+  # Generate a seed with all game flags enabled (Mac/Linux)
+  ./bin/cv2rando --all --seed BSAC cv2.nes
+
+Options
+  -V, --version            output the version number
+  -A, --all                enable all itemizer, enemizer, and patch flags
+  -o, --output <output>    filepath for randomized rom output
+  -r, --run                immediately run with emulator after randomizing (fceux or OpenEmu must be in PATH)
+  -s, --seed <seed>        seed to use for randomization
+  -z, --debug              enable debug output
+
+Itemizer Flags (must set -i)
+  -i, --itemizer           randomize items
+  -p, --prices             randomize merchant prices
+
+Enemizer Flags (must set -e)
+  -a, --enemy-hp           randomize enemy HP
+  -e, --enemizer           randomize enemies
+
+Patches
+  -d, --double-hearts      double the value of each heart
+  -f, --fast-day-night     get rid of the day-night cycle dialog boxes
+  -t, --fast-text          Dialog boxes load text fast
+  -n, --night-party        enable NPCs and door entry at night
+  -g, --penalty-reduction  Cut hearts in half after game over
 ```
 
 ## TODO
 
 These are roughly ordered in the order I want to tackle them:
 
+* crystal upgrade failing on burb's seed, though it worked for me and sath (seed: my1IEbAcTqski0vd)
 * sale icon for progressive crystals can be confusing
 * improve text from actors
   * implement text that indicates you already grabbed a progressive item from an actor
