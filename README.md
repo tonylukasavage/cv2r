@@ -31,7 +31,6 @@ These are roughly ordered in the order I want to tackle them:
   * implement text that indicates you already grabbed a progressive item from an actor
 * instant dialog text patch
 * Laurel room in Alba glitches at night
-* Dead River had some sprite rendering issues (boat specifically). This is likely because both the heart and non-heart screens share the same objset:area:submap
 * change sprites on boss drops to match the item you're actually getting
 * leeches render improperly sometimes (do i have high jump and low jump mixed up?)
 * some spiders still kill themselves by spawning to low on the screen
