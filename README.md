@@ -47,7 +47,6 @@ Patches
 
 These are roughly ordered in the order I want to tackle them:
 
-* crystal upgrade failing on burb's seed, though it worked for me and sath (seed: my1IEbAcTqski0vd)
 * sale icon for progressive crystals can be confusing
 * improve text from actors
   * implement text that indicates you already grabbed a progressive item from an actor
