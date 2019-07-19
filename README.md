@@ -26,8 +26,6 @@ Options:
 
 These are roughly ordered in the order I want to tackle them:
 
-* itemizer
-  * progressive crystal upgrades
 * improve text from actors
   * implement text that indicates you already grabbed a progressive item from an actor
 * instant dialog text patch
