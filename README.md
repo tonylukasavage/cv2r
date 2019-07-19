@@ -27,9 +27,9 @@ Options:
 These are roughly ordered in the order I want to tackle them:
 
 * itemizer
-  * progressive whip upgrades (too many, seed: I13yveQBMAZXvu2X)
   * progressive crystal upgrades
 * improve text from actors
+  * implement text that indicates you already grabbed a progressive item from an actor
 * instant dialog text patch
 * Laurel room in Alba glitches at night
 * Dead River had some sprite rendering issues (boat specifically). This is likely because both the heart and non-heart screens share the same objset:area:submap
