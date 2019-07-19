@@ -1,18 +1,20 @@
 #!/usr/bin/env node --no-warnings
 
-const { cyan, green, red } = require('chalk');
+const { cyan, gray, green, red } = require('chalk');
 const { exec } = require('child_process');
+const camelcase = require('camelcase');
 const cv2rando = require('../lib/cv2rando');
 const fs = require('fs').promises;
 const os = require('os');
 const path = require('path');
 const program = require('commander');
-const { pad } = require('../lib/utils');
+const { isGameFlag, pad } = require('../lib/utils');
 
 program
 	.version(require('../package.json').version)
 	.description('Castlevania II: Simon\'s Quest Randomizer by BloodSweatAndCode')
 	.usage('[options] <rom_input>')
+	.option('-A, --all', 'enable all itemizer, enemizer, and patch flags')
 	.option('-a, --enemy-hp', '[ENEMIZER] randomize enemy HP')
 	.option('-e, --enemizer', '[ENEMIZER] randomize enemies')
 	.option('-i, --itemizer', '[ITEMIZER] randomize items')
@@ -60,6 +62,13 @@ program.outputHelp = function(cb) {
 	console.log(cyan('Usage'));
 	console.log(`  cv2rando ${this.usage()}`);
 	console.log('');
+	console.log(cyan('Examples'));
+	console.log(gray('  # Generate a seed with all game flags enabled (Windows)'));
+	console.log('  node --no-warnings .\\bin\\cv2rando --all --seed BSAC cv2.nes');
+	console.log('');
+	console.log(gray('  # Generate a seed with all game flags enabled (Mac/Linux)'));
+	console.log('  ./bin/cv2rando --all --seed BSAC cv2.nes');
+	console.log('');
 	console.log(cyan('Options'));
 	options.base.forEach(printOption);
 	console.log('');
@@ -86,6 +95,14 @@ async function main(rom, opts = {}) {
 		program.parse(process.argv);
 		if (program.debug) {
 			global.debug = true;
+		}
+
+		if (program.all) {
+			program.options.forEach(o => {
+				if (isGameFlag(o)) {
+					program[camelcase(o.long)] = true;
+				}
+			});
 		}
 
 		const rom = program.args[0];

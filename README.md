@@ -26,6 +26,7 @@ Options:
 
 These are roughly ordered in the order I want to tackle them:
 
+* dead hands placing too low in Joma Marsh
 * sale icon for progressive crystals can be confusing
 * improve text from actors
   * implement text that indicates you already grabbed a progressive item from an actor
