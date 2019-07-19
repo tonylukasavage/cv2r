@@ -47,23 +47,27 @@ Patches
 
 These are roughly ordered in the order I want to tackle them:
 
+### alpha 1
 * sale icon for progressive crystals can be confusing
 * improve text from actors
   * implement text that indicates you already grabbed a progressive item from an actor
 * Laurel room in Alba glitches at night
-* change sprites on boss drops to match the item you're actually getting
-* leeches render improperly sometimes (do i have high jump and low jump mixed up?)
 * some spiders still kill themselves by spawning to low on the screen
+* leeches render improperly sometimes (do i have high jump and low jump mixed up?)
+* automated testing
+
+### future releases
+* include dracula's nail in logic (some current holy water logic is also accessible with nail)
+* useful, randomizer-seed-specific hints in books
+* change sprites on boss drops to match the item you're actually getting
 * represent seed value on title screens with game icons (like ALttP rando)
 * Graveyard Duck (come on grom!)
-* useful, randomizer-seed-specific hints in books
 * adjust sales prices for progression items (re-route ROM access based on inventory)
 * ferry man wants something besides heart
 * drain water with something other than blue/red crystal
 * fix low priority screen rendering
 * fix flower rendering when not on "graveyard" pattern tables
 * replace mansion blobs with regular blobs when not in mansion
-* include dracula's nail in logic (some current holy water logic is also accessible with nail)
 * Fast travel
 * door randomizer
   * mansion shuffle
