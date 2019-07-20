@@ -49,9 +49,7 @@ These are roughly ordered in the order I want to tackle them:
 
 ### alpha 1
 
-game starts at $C000
-bank 7, $FBD2-$FBFE (44 bytes)
-
+* [bought whip, lost crystal](https://www.twitch.tv/videos/455603901?t=09s)
 * still having crystal/whip issues where the item doesn't update your inventory
   * clear SRAM on start
   * implement up+A solution
@@ -66,7 +64,6 @@ bank 7, $FBD2-$FBFE (44 bytes)
 
 ### future releases
 
-* Implement an up+A equivalent (maybe Canight can help with some select button logic)
 * include dracula's nail in logic (some current holy water logic is also accessible with nail)
 * useful, randomizer-seed-specific hints in books
 * change sprites on boss drops to match the item you're actually getting
