@@ -88,7 +88,8 @@ async function main(rom, opts = {}) {
 		const patches = await fs.readdir(path.join(__dirname, '..', 'patch'));
 		patches.filter(p => /\.js$/.test(p)).forEach(p => {
 			const patch = require(`../patch/${p}`);
-			program.option(patch.flags, `[PATCH] ${patch.description}`);
+			const desc = `${patch.explicit ? '' : '[PATCH]: '}${patch.description}`;
+			program.option(patch.flags, desc);
 		});
 
 		// process command line arguments
