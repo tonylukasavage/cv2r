@@ -81,6 +81,7 @@ These are roughly ordered in the order I want to tackle them:
 * some spiders still kill themselves by spawning to low on the screen
 * leeches render improperly sometimes (do i have high jump and low jump mixed up?)
 * automated testing
+* Windows executable
 
 ### future releases
 
@@ -345,3 +346,7 @@ Code for determining the sale icons and prices is at `0x1ED46` ROM (`07:ED36` in
 // change.
 
 // whip sale code 0xEDF4 RAM, 0x1EE04 ROM
+
+// palette hacking
+  // $82 day/night? 1/0
+  // $C7E7 is where day/night is checked
