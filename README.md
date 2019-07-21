@@ -43,6 +43,28 @@ Patches
   -g, --penalty-reduction  Cut hearts in half after game over
 ```
 
+## install
+
+I plan to make executables so this installation isn't necessary, but until then, follow these steps:
+
+1. Install [node.js](https://nodejs.org/en/)
+2. Download the latest build of [cv2rando](https://github.com/BloodSweatAndCode/cv2-rando/archive/master.zip)
+3. Extract cv2rando to a folder
+4. Copy a vanilla cv2 rom into the cv2rando folder as "cv2.nes"
+5. In a command prompt:
+```
+cd /path/to/cv2rando
+npm install
+
+# on Windows
+node --no-warnings .\bin\cv2rando --all --seed ThisIsMySeed cv2.nes
+
+# on Mac/Linux (I've done ZERO Linux testing)
+./bin/cv2rando --all --seed ThisIsMySeed cv2.nes
+```
+
+You can now find your new cv2 rando rom in the `/path/to/cv2rando/tmp` folder
+
 ## TODO
 
 These are roughly ordered in the order I want to tackle them:
