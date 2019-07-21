@@ -49,9 +49,7 @@ These are roughly ordered in the order I want to tackle them:
 
 ### alpha 1
 
-* [bought whip, lost crystal](https://www.twitch.tv/videos/455603901?t=09s)
-* still having crystal/whip issues where the item doesn't update your inventory
-  * clear SRAM on start
+* Need way to get back to Jovah without reset and/or password since SRAM clears now
   * implement up+A solution
   * disable passwords
 * sale icon for progressive crystals can be confusing
