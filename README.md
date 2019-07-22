@@ -77,8 +77,6 @@ These are roughly ordered in the order I want to tackle them:
 * sale icon for progressive crystals can be confusing
 * improve text from actors
   * implement text that indicates you already grabbed a progressive item from an actor
-* some spiders still kill themselves by spawning to low on the screen
-* leeches render improperly sometimes (do i have high jump and low jump mixed up?)
 * automated testing
 * Windows executable
 
