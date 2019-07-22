@@ -84,7 +84,9 @@ These are roughly ordered in the order I want to tackle them:
 
 * logic update
   * include dracula's nail in logic (some current holy water logic is also accessible with nail)
+  * make ring make you immune to marsh damage, then include it in any laurels logic
 * useful, randomizer-seed-specific hints in books
+* Identify "immobile" enemies and make sure they aren't at the top or bottom stairs
 * change sprites on boss drops to match the item you're actually getting
 * represent seed value on title screens with game icons (like ALttP rando)
 * Graveyard Duck (come on grom!)
@@ -106,6 +108,7 @@ These are roughly ordered in the order I want to tackle them:
 * patches
   * OHKO
   * disable quick kill
+* book item shuffle
 
 ## developer notes
 
