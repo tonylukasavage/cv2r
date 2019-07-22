@@ -69,35 +69,40 @@ You can now find your new cv2 rando rom in the `/path/to/cv2rando/tmp` folder
 
 These are roughly ordered in the order I want to tackle them:
 
-### alpha 1
+### 0.1.0 (alpha 1)
 
 * Need way to get back to Jovah without reset and/or password since SRAM clears now
   * implement up+A solution
   * disable passwords
-* sale icon for progressive crystals can be confusing
+* sale icon for progressive crystals can be confusing, needs to look like next crystal
 * improve text from actors
   * implement text that indicates you already grabbed a progressive item from an actor
 * automated testing
 * Windows executable
 
-### future releases
+### 0.2.0
 
-* include dracula's nail in logic (some current holy water logic is also accessible with nail)
+* logic update
+  * include dracula's nail in logic (some current holy water logic is also accessible with nail)
 * useful, randomizer-seed-specific hints in books
 * change sprites on boss drops to match the item you're actually getting
 * represent seed value on title screens with game icons (like ALttP rando)
 * Graveyard Duck (come on grom!)
 * adjust sales prices for progression items (re-route ROM access based on inventory)
-* ferry man wants something besides heart
-* drain water with something other than blue/red crystal
 * fix low priority screen rendering
 * fix flower rendering when not on "graveyard" pattern tables
 * replace mansion blobs with regular blobs when not in mansion
+
+### future releases
+
+* logic updates
+  * drain water with something other than blue/red crystal
+  * ferry man wants something besides heart
 * Fast travel
 * door randomizer
   * mansion shuffle
   * ALL doors shuffle
-* death/camilla shuffle
+* death/camilla shuffle in boss room, maybe have them appear in other locations
 * patches
   * OHKO
   * disable quick kill
