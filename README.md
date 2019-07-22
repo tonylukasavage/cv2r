@@ -76,7 +76,7 @@ These are roughly ordered in the order I want to tackle them:
   * disable passwords
 * sale icon for progressive crystals can be confusing, needs to look like next crystal
 * improve text from actors
-  * implement text that indicates you already grabbed a progressive item from an actor
+* implement text that indicates you already grabbed a progressive item from an actor
 * automated testing
 * Windows executable
 
