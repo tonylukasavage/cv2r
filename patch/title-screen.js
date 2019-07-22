@@ -16,6 +16,5 @@ module.exports = {
 		{ offset: 0x010194, value: textToHexString(" made by   ") },
 		//Fifth row, 24 characters
 		{ offset: 0x0101A2, value: textToHexString("   bloodsweatandcode    ") },
-		//{ offset: 0x01041E, value: textToHexString("version " + version) + ' C1' }
 	]
 };
