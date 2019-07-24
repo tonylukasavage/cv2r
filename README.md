@@ -94,6 +94,8 @@ These are roughly ordered in the order I want to tackle them:
 * fix low priority screen rendering
 * fix flower rendering when not on "graveyard" pattern tables
 * replace mansion blobs with regular blobs when not in mansion
+* Fix oak stake rendering on non-mansion pattern tables
+* practice flags (subpixel HUD, for example)
 
 ### future releases
 
@@ -111,6 +113,31 @@ These are roughly ordered in the order I want to tackle them:
 * book item shuffle
 
 ## developer notes
+
+### up+a
+
+FC = PPU_SCROLL Y
+FD = PPU_SCROLL X
+
+* these are all fixed by a second fast travel
+  * ferry teleports to broken yomi
+  * background rendering (below) issue when fast traveling from other screens
+
+rom $A187 is objset, then area for Jovah
+0xC03C is RTI loop
+
+set simon y pos:
+ 07:E0E0:BD 36 03  LDA $0336,X @ $0336 = #$48
+ 07:E0E3:18        CLC
+ 07:E0E4:7D 7E 03  ADC $037E,X @ $037E = #$98
+ 07:E0E7:9D 36 03  STA $0336,X @ $0336 = #$48
+ 07:E0EA:BD 24 03  LDA $0324,X @ $0324 = #$79
+ 07:E0ED:7D 6C 03  ADC $036C,X @ $036C = #$FE
+>07:E0F0:9D 24 03  STA $0324,X @ $0324 = #$79
+
+red crystal tornado at 01:A956 ram, 6966 rom
+core function 07:C0E7
+$1C determines which bank will load
 
 ### progression logic decisions
 
