@@ -17,17 +17,14 @@ STA $3D8
 STA $446
 
 ; sets_FC_y_scroll
-LDA #$2E
+LDA #$0D
 STA *$56
 
 ; sets_map_pos
-LDA #$04
+LDA #$00
 STA *$5C
-LDA #$21
+LDA #$1D
 STA *$5D
-
-; LDA_#$2E
-; STA_*$8C
 
 ; accumulator_will_set_simon_x_pos
 LDA #$8F
@@ -38,8 +35,3 @@ STA $600F
 
 DONE PLP
 RTS
-
-
-; t3B_02
-; t69_04
-; t8C_3D
