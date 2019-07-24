@@ -71,9 +71,7 @@ These are roughly ordered in the order I want to tackle them:
 
 ### 0.1.0 (alpha 1)
 
-* Need way to get back to Jovah without reset and/or password since SRAM clears now
-  * implement up+A solution
-  * disable passwords
+* holy water should be required for laruba checks
 * sale icon for progressive crystals can be confusing, needs to look like next crystal
 * improve text from actors
 * implement text that indicates you already grabbed a progressive item from an actor
@@ -82,12 +80,14 @@ These are roughly ordered in the order I want to tackle them:
 
 ### 0.2.0
 
+* sprite glitch (https://clips.twitch.tv/GentleEphemeralFoxMingLee) spiders????
 * logic update
   * include dracula's nail in logic (some current holy water logic is also accessible with nail)
   * make ring make you immune to marsh damage, then include it in any laurels logic
 * useful, randomizer-seed-specific hints in books
 * Identify "immobile" enemies and make sure they aren't at the top or bottom stairs
 * change sprites on boss drops to match the item you're actually getting
+* Disable password
 * represent seed value on title screens with game icons (like ALttP rando)
 * Graveyard Duck (come on grom!)
 * adjust sales prices for progression items (re-route ROM access based on inventory)
@@ -111,6 +111,7 @@ These are roughly ordered in the order I want to tackle them:
   * OHKO
   * disable quick kill
 * book item shuffle
+* add sound to jovah warp
 
 ## developer notes
 

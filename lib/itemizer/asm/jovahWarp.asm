@@ -1,7 +1,7 @@
 ; orig_code
 JSR $C88A
 
-; select+up+a+b
+; select->up+a+b
 PHP
 LDA *$26
 CMP #$2
