@@ -10,13 +10,19 @@ Castlevania II: Simon's Quest Randomizer by **BloodSweatAndCode**. Come find me 
 Castlevania II: Simon's Quest Randomizer by BloodSweatAndCode
 
 Usage
-  cv2rando [options] <rom_input>
+  cv2rando [options] <vanilla_rom_file>
 
 Examples
-  # Generate a seed with all game flags enabled (Windows)
+  # Show this help (Windows)
+  node --no-warnings .\bin\cv2rando --help
+
+  # Show this help (Mac/Linux)
+  ./bin/cv2rando --help
+
+  # Generate a rom with the seed "BSAC" with all game flags enabled (Windows)
   node --no-warnings .\bin\cv2rando --all --seed BSAC cv2.nes
 
-  # Generate a seed with all game flags enabled (Mac/Linux)
+  # Generate a rom with the seed "BSAC" with all game flags enabled (Mac/Linux)
   ./bin/cv2rando --all --seed BSAC cv2.nes
 
 Options
@@ -35,7 +41,7 @@ Enemizer Flags (must set -e)
   -a, --enemy-hp           randomize enemy HP
   -e, --enemizer           randomize enemies
 
-Patches (all get set with --all flag)
+Patches (all set with --all flag)
   -f, --fast-day-night     get rid of the day-night cycle dialog boxes
   -t, --fast-text          Dialog boxes load text fast
   -h, --hearts-patch       Every enemy will drop a heart
