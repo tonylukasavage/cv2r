@@ -81,7 +81,6 @@ These are roughly ordered in the order I want to tackle them:
 
 ### 0.1.0 (alpha 1)
 
-* holy water should be required for laruba checks
 * unable to swap off heart in inventory if only item
 * sale icon for progressive crystals can be confusing, needs to look like next crystal
 * improve text from actors
