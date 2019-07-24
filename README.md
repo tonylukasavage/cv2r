@@ -115,31 +115,6 @@ These are roughly ordered in the order I want to tackle them:
 
 ## developer notes
 
-### up+a
-
-FC = PPU_SCROLL Y
-FD = PPU_SCROLL X
-
-* these are all fixed by a second fast travel
-  * ferry teleports to broken yomi
-  * background rendering (below) issue when fast traveling from other screens
-
-rom $A187 is objset, then area for Jovah
-0xC03C is RTI loop
-
-set simon y pos:
- 07:E0E0:BD 36 03  LDA $0336,X @ $0336 = #$48
- 07:E0E3:18        CLC
- 07:E0E4:7D 7E 03  ADC $037E,X @ $037E = #$98
- 07:E0E7:9D 36 03  STA $0336,X @ $0336 = #$48
- 07:E0EA:BD 24 03  LDA $0324,X @ $0324 = #$79
- 07:E0ED:7D 6C 03  ADC $036C,X @ $036C = #$FE
->07:E0F0:9D 24 03  STA $0324,X @ $0324 = #$79
-
-red crystal tornado at 01:A956 ram, 6966 rom
-core function 07:C0E7
-$1C determines which bank will load
-
 ### progression logic decisions
 
 * Whips will be upgraded progressively. No quick jump to morning star or flame whip.
@@ -286,7 +261,10 @@ objset | pattern pointers | bg   | sprite | name
 
 Code for determining the sale icons and prices is at `0x1ED46` ROM (`07:ED36` in RAM). Mapped bank is 3 for these calls.
 
-### merchant shuffle
+### random notes
+
+red crystal tornado at 01:A956 ram, 6966 rom
+core function 07:C0E7
 
 // merchant purchasable items: 0x1ee22-0x1ee39
 

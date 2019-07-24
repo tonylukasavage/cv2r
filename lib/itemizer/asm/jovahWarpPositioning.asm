@@ -30,7 +30,7 @@ STA *$5D
 LDA #$8F
 ; simon_y_pos
 STA $324
-; select+up+a+b_flag
+; jovah_warp_flag
 STA $600F
 
 DONE PLP
