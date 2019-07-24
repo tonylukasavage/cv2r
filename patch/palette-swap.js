@@ -2,6 +2,7 @@ module.exports = {
 	name: 'Palette Swap',
 	description: 'Change palette stuff',
 	flags: '-x, --palette-swap',
+	explicit: true,
 	patch: [
 		// Title Screen 
 		{ offset: 0x01CAC9, value: "0F 28 03 1C 0F 28 20 1C" },
