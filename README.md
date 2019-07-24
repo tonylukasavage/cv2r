@@ -35,12 +35,16 @@ Enemizer Flags (must set -e)
   -a, --enemy-hp           randomize enemy HP
   -e, --enemizer           randomize enemies
 
-Patches
-  -d, --double-hearts      double the value of each heart
+Patches (all get set with --all flag)
   -f, --fast-day-night     get rid of the day-night cycle dialog boxes
   -t, --fast-text          Dialog boxes load text fast
+  -h, --hearts-patch       Every enemy will drop a heart
   -n, --night-party        enable NPCs and door entry at night
   -g, --penalty-reduction  Cut hearts in half after game over
+
+Explicit Patches (these are NOT set with --all flag)
+  -d, --double-hearts      double the value of each heart
+  -x, --palette-swap       Change palette stuff
 ```
 
 ## install
