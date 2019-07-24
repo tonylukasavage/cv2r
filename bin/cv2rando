@@ -8,7 +8,7 @@ const fs = require('fs').promises;
 const os = require('os');
 const path = require('path');
 const program = require('commander');
-const { isGameFlag, pad } = require('../lib/utils');
+const { isAllFlag, pad } = require('../lib/utils');
 
 program
 	.version(require('../package.json').version)
@@ -51,7 +51,7 @@ program.outputHelp = function(cb) {
 	const options = {
 		base: this.options.filter(o => !/^\[/.test(o.description))
 	};
-	[ 'itemizer', 'enemizer', 'patch' ].forEach(i => {
+	[ 'itemizer', 'enemizer', 'patch', 'patch-x' ].forEach(i => {
 		const rx = new RegExp(`^\\[${i.toUpperCase()}\\]`); 
 		options[i] = this.options.filter(o => rx.test(o.description)); 
 	});
@@ -78,8 +78,11 @@ program.outputHelp = function(cb) {
 	console.log(cyan('Enemizer Flags (must set -e)'));
 	options.enemizer.forEach(printOption);
 	console.log('');
-	console.log(cyan('Patches'));
+	console.log(cyan('Patches (all get set with --all flag)'));
 	options.patch.forEach(printOption);
+	console.log('');
+	console.log(cyan('Explicit Patches (these are NOT set with --all flag)'));
+	options['patch-x'].forEach(printOption);
 }
 
 async function main(rom, opts = {}) {
@@ -88,8 +91,9 @@ async function main(rom, opts = {}) {
 		const patches = await fs.readdir(path.join(__dirname, '..', 'patch'));
 		patches.filter(p => /\.js$/.test(p)).forEach(p => {
 			const patch = require(`../patch/${p}`);
-			const desc = `${patch.explicit ? '' : '[PATCH]: '}${patch.description}`;
+			const desc = `[PATCH${patch.explicit ? '-X' : ''}] ${patch.description}`;
 			program.option(patch.flags, desc);
+			program.options[program.options.length - 1].explicit = patch.explicit;
 		});
 
 		// process command line arguments
@@ -100,7 +104,7 @@ async function main(rom, opts = {}) {
 
 		if (program.all) {
 			program.options.forEach(o => {
-				if (isGameFlag(o)) {
+				if (isAllFlag(o)) {
 					program[camelcase(o.long)] = true;
 				}
 			});
