@@ -81,11 +81,11 @@ These are roughly ordered in the order I want to tackle them:
 
 ### 0.1.0 (alpha 1)
 
-* unable to swap off heart in inventory if only item
 * sale icon for progressive crystals can be confusing, needs to look like next crystal
 * improve text from actors
 * implement text that indicates you already grabbed a progressive item from an actor
 * automated testing
+* move anything _not_ itemizer specific out of itemizer
 * Windows executable
 
 ### 0.2.0
@@ -109,6 +109,8 @@ These are roughly ordered in the order I want to tackle them:
 
 ### future releases
 
+* "Lazy River" patch for vanilla Dead River
+* Randomize the conditions that allow you to enter Drac's Mansion, give hints in game
 * logic updates
   * drain water with something other than blue/red crystal
   * ferry man wants something besides heart
@@ -124,6 +126,19 @@ These are roughly ordered in the order I want to tackle them:
 * add sound to jovah warp
 
 ## developer notes
+
+### bank switching
+
+Set value $1C to the number of the bank then execute a JSR at the following location. If you want to set it based on the accumulator, subtract 2 from the RAM address, which will in turn set $1C to the value of the accumulator.
+
+| bank | RAM address |
+|------|-------------|
+| 7    | $C185       |
+
+### inventory
+
+$4F is selected quest item
+$90 is selected weapon/carry item
 
 ### progression logic decisions
 
