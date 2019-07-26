@@ -66,11 +66,11 @@ I plan to make executables so this installation isn't necessary, but until then,
 cd /path/to/cv2rando
 npm install
 
-# on Windows
-node --no-warnings .\bin\cv2rando --all --seed ThisIsMySeed cv2.nes
+# on Windows, "BSAC" is replaced by your seed (any string)
+node --no-warnings .\bin\cv2rando --all --seed BSAC cv2.nes
 
-# on Mac/Linux (I've done ZERO Linux testing)
-./bin/cv2rando --all --seed ThisIsMySeed cv2.nes
+# on Mac/Linux (I've done ZERO Linux testing), "BSAC" is replaced by your seed (any string)
+./bin/cv2rando --all --seed BSAC cv2.nes
 ```
 
 You can now find your new cv2 rando rom in the `/path/to/cv2rando/tmp` folder
@@ -84,7 +84,9 @@ These are roughly ordered in the order I want to tackle them:
 * sale icon for progressive crystals can be confusing, needs to look like next crystal
 * improve text from actors
 * implement text that indicates you already grabbed a progressive item from an actor
+* represent seed value on title screens with game icons (like ALttP rando) CRC32
 * automated testing
+* Re-work modSaleData to be dynamic like every other bank write
 * move anything _not_ itemizer specific out of itemizer
 * Windows executable
 
@@ -98,7 +100,6 @@ These are roughly ordered in the order I want to tackle them:
 * Identify "immobile" enemies and make sure they aren't at the top or bottom stairs
 * change sprites on boss drops to match the item you're actually getting
 * Disable password
-* represent seed value on title screens with game icons (like ALttP rando)
 * Graveyard Duck (come on grom!)
 * adjust sales prices for progression items (re-route ROM access based on inventory)
 * fix low priority screen rendering
@@ -125,6 +126,13 @@ These are roughly ordered in the order I want to tackle them:
 * book item shuffle
 * add sound to jovah warp
 
+### elite flag ideas
+
+* jovah warp penality
+* text encrypted until some item is attained (eyeball???)
+* Changing invisible/holy water blocks
+* Change criteria to break bridge wall to drac's mansion, put hints to criteria in books/npcs
+
 ## developer notes
 
 ### bank switching
@@ -145,7 +153,7 @@ $90 is selected weapon/carry item
 * Whips will be upgraded progressively. No quick jump to morning star or flame whip.
 * Crystals will also be encountered progressively to prevent potential super boring back tracking.
 * The 3 block whip jump in Camilla's Cemetery is **NOT** in logic. This means red crystal is required for Bodley, Laruba, Doina, etc...
-* Laurels are considered required for Laruba Mansion
+* Laurels and Holy Water are considered required for Laruba Mansion
 * Laurels are **NOT** considered required to cross the swamp in Belasco Marsh
 
 ### code locations for all actors that can hold items
