@@ -1,26 +1,19 @@
-const _ = require('lodash');
-const core = require('./lib/core');
+const test = require('ava');
+const path = require('path');
+const { promisify } = require('util');
 
-const lens = {};
-core.forEach(c => {
-	if (!c.actors) { return; }
-	c.actors.forEach(a => {
-		if (!a.text || !a.holdsItem) { return; }
-		if (!lens[a.name]) { lens[a.name] = []; }
-		lens[a.name].push(a.text.length);
+const exec = promisify(require('child_process').exec);
+ 
+function randomString() {
+	return Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+}
+
+for (let i = 0; i < 1000; i++) {
+	const seed = randomString();
+	const filename = path.join(__dirname, 'tmp', `cv2-test-${seed}.rom`);
+	const cmd = `./bin/cv2rando --all --seed ${seed} --output "${filename}" cv2.nes`;
+	test(cmd, async t => {
+		await exec(cmd);
+		t.pass();
 	});
-});
-
-Object.keys(lens).forEach(key => {
-	lens[key] = _.uniq(lens[key]).sort();
-});
-
-console.log(lens);
-
-// console.log({
-// 	min: Math.min(...lens),
-// 	max: Math.max(...lens),
-// 	avg: Math.floor(lens.reduce((a,b) => a + b, 0) / lens.length)
-// });
-
-// console.log(_.uniq(lens).sort());
+}

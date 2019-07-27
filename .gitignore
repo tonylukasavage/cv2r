@@ -1,4 +1,5 @@
 cv2.nes
 cv2*.nes
 tmp
+roms
 node_modules

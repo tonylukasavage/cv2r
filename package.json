@@ -4,7 +4,9 @@
   "description": "Castlevania II: Simon's Quest Randomizer",
   "main": "lib/cv2-rando.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "pretest": "rm -rf ./tmp && mkdir tmp",
+    "test": "ava test.js",
+    "posttest": "rm -rf tmp"
   },
   "author": "BloodSweatAndCode",
   "license": "ISC",
@@ -15,5 +17,8 @@
     "lodash": "^4.17.13",
     "mkdirp": "^0.5.1",
     "seedrandom": "^3.0.1"
+  },
+  "devDependencies": {
+    "ava": "^2.2.0"
   }
 }
