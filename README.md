@@ -75,63 +75,6 @@ node --no-warnings .\bin\cv2rando --all --seed BSAC cv2.nes
 
 You can now find your new cv2 rando rom in the `/path/to/cv2rando/tmp` folder
 
-## TODO
-
-These are roughly ordered in the order I want to tackle them:
-
-### 0.1.0 (alpha 1)
-
-* sale icon for progressive crystals can be confusing, needs to look like next crystal
-* improve text from actors
-* implement text that indicates you already grabbed a progressive item from an actor
-* represent seed value on title screens with game icons (like ALttP rando) CRC32
-* automated testing
-* Re-work modSaleData to be dynamic like every other bank write
-* move anything _not_ itemizer specific out of itemizer
-* Windows executable
-
-### 0.2.0
-
-* sprite glitch (https://clips.twitch.tv/GentleEphemeralFoxMingLee) spiders????
-* logic update
-  * include dracula's nail in logic (some current holy water logic is also accessible with nail)
-  * make ring make you immune to marsh damage, then include it in any laurels logic
-* useful, randomizer-seed-specific hints in books
-* Identify "immobile" enemies and make sure they aren't at the top or bottom stairs
-* change sprites on boss drops to match the item you're actually getting
-* Disable password
-* Graveyard Duck (come on grom!)
-* adjust sales prices for progression items (re-route ROM access based on inventory)
-* fix low priority screen rendering
-* fix flower rendering when not on "graveyard" pattern tables
-* replace mansion blobs with regular blobs when not in mansion
-* Fix oak stake rendering on non-mansion pattern tables
-* practice flags (subpixel HUD, for example)
-
-### future releases
-
-* "Lazy River" patch for vanilla Dead River
-* Randomize the conditions that allow you to enter Drac's Mansion, give hints in game
-* logic updates
-  * drain water with something other than blue/red crystal
-  * ferry man wants something besides heart
-* Fast travel
-* door randomizer
-  * mansion shuffle
-  * ALL doors shuffle
-* death/camilla shuffle in boss room, maybe have them appear in other locations
-* patches
-  * OHKO
-  * disable quick kill
-* book item shuffle
-* add sound to jovah warp
-
-### elite flag ideas
-
-* jovah warp penality
-* text encrypted until some item is attained (eyeball???)
-* Changing invisible/holy water blocks
-* Change criteria to break bridge wall to drac's mansion, put hints to criteria in books/npcs
 
 ## developer notes
 
