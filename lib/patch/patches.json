@@ -1,0 +1,11 @@
+{
+  "core": [
+    "sram",
+    "clear-objects",
+    "title-screen",
+    "room-palette-fix",
+    "game-state-checks",
+    "enemizer"
+  ],
+  "options": []
+}
