@@ -5,7 +5,9 @@
     "title-screen",
     "room-palette-fix",
     "game-state-checks",
-    "enemizer"
+    "enemizer",
+    "itemizer",
+    "actor-core"
   ],
   "options": []
 }
