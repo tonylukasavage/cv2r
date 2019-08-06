@@ -10,8 +10,8 @@ function randomString() {
 
 for (let i = 0; i < 1000; i++) {
 	const seed = randomString();
-	const filename = path.join(__dirname, 'tmp', `cv2-test-${seed}.rom`);
-	const cmd = `./bin/cv2rando --all --seed ${seed} --output "${filename}" cv2.nes`;
+	const filename = path.join(__dirname, 'tmp', `cv2-test-${seed}`);
+	const cmd = `./bin/cv2rando --seed ${seed} --output "${filename}" cv2.nes`;
 	test(cmd, async t => {
 		await exec(cmd);
 		t.pass();
