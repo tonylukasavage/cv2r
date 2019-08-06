@@ -1,3 +1,7 @@
+## 0.0.16 - 2019-08-06
+
+* cv2-rando is now fully patch-driven, including what was internal code like itemizer, enemizer, and shared assembly subroutines like clear-objects
+
 ## 0.0.15 - 2019-07-27
 
 * Added crc32 sum of the seed to the title screen
