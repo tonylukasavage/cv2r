@@ -1,5 +1,6 @@
-cv2.nes
-cv2*.nes
 tmp
+output
 roms
+*.nes
 node_modules
+.DS_Store

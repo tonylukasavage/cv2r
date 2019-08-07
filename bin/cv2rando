@@ -1,25 +1,28 @@
 #!/usr/bin/env node --no-warnings
 
-const { cyan, gray, green, red } = require('chalk');
+const _ = require('lodash');
+const { cyan, gray, green, magenta, red, yellow } = require('chalk');
 const { exec } = require('child_process');
 const camelcase = require('camelcase');
 const cv2rando = require('../lib/cv2rando');
-const fs = require('fs').promises;
+const fs = require('fs');
 const os = require('os');
 const path = require('path');
 const program = require('commander');
-const { isAllFlag, pad } = require('../lib/utils');
+const { getDifficulties } = require('../lib/patch-manager');
+const { isAllFlag, log, pad, printHeader } = require('../lib/utils');
+
+const palettes = fs.readdirSync(path.join(__dirname, '..', 'lib', 'palette')).map(p => p.replace(/\.js$/, ''));
+const optionList = array => array.map(a => magenta(a)).join(', ');
+const bin = process.platform === 'win32' ? 'node .\\bin\\cv2rando' : './bin/cv2rando';
 
 program
 	.version(require('../package.json').version)
-	.description('Castlevania II: Simon\'s Quest Randomizer by BloodSweatAndCode')
-	.usage('[options] <vanilla_rom_file>')
-	.option('-A, --all', 'enable all itemizer, enemizer, and patch flags')
-	.option('-a, --enemy-hp', '[ENEMIZER] randomize enemy HP')
-	.option('-e, --enemizer', '[ENEMIZER] randomize enemies')
-	.option('-i, --itemizer', '[ITEMIZER] randomize items')
+	.description(`${yellow('Castlevania II: Simon\'s Quest Randomizer')} by ${red('Blood')}${cyan('Sweat')}And${green('Code')}`)
+	.usage('[options] [vanilla_rom_file]')
+	.option('-d, --difficulty <difficulty>', `Difficulty setting: ${optionList(getDifficulties())}`, 'standard')
 	.option('-o, --output <output>', 'filepath for randomized rom output')
-	.option('-p, --prices', '[ITEMIZER] randomize merchant prices')
+	.option('-p, --palette <palette>', `palette selection: ${optionList(palettes)}`)
 	.option('-r, --run', 'immediately run with emulator after randomizing (fceux or OpenEmu must be in PATH)')
 	.option('-s, --seed <seed>', 'seed to use for randomization')
 	.option('-z, --debug', 'enable debug output');
@@ -42,94 +45,66 @@ program.outputHelp = function(cb) {
 
 	// find the longest flags string in our options
 	const longest = Math.max(...(this.options.map(o => o.flags.length)));
-	
-	// printing convenience functions
 	const p = str => pad(str, longest);
-	const printOption = o => console.log(`  ${p(o.flags)}  ${p(o.description.replace(/\[[^\]]+\]\s+/, ''))}`);
-
-	// sort options into base, itemizer, enemizer, and patches
-	const options = {
-		base: this.options.filter(o => !/^\[/.test(o.description))
-	};
-	[ 'itemizer', 'enemizer', 'patch', 'patch-x' ].forEach(i => {
-		const rx = new RegExp(`^\\[${i.toUpperCase()}\\]`); 
-		options[i] = this.options.filter(o => rx.test(o.description)); 
-	});
 
 	// print help
-	console.log(red(this.description()));
+	console.log(this.description());
 	console.log('');
 	console.log(cyan('Usage'));
 	console.log(`  cv2rando ${this.usage()}`);
 	console.log('');
 	console.log(cyan('Examples'));
-	console.log(gray('  # Show this help (Windows)'));
-	console.log('  node --no-warnings .\\bin\\cv2rando --help');
+	console.log(gray('  # Show this help'));
+	console.log(`  ${bin} --help`);
 	console.log('');
-	console.log(gray('  # Show this help (Mac/Linux)'));
-	console.log('  ./bin/cv2rando --help');
+	console.log(gray('  # Generate a rom with the seed "BSAC" at standard difficulty'));
+	console.log(`  ${bin} --seed BSAC cv2.nes`);
 	console.log('');
-	console.log(gray('  # Generate a rom with the seed "BSAC" with all game flags enabled (Windows)'));
-	console.log('  node --no-warnings .\\bin\\cv2rando --all --seed BSAC cv2.nes');
+	console.log(gray('  # Generate a rom with the seed "BurbAndSath" at hard difficulty'));
+	console.log(`  ${bin} --seed BurbAndSath --difficulty hard cv2.nes`);
 	console.log('');
-	console.log(gray('  # Generate a rom with the seed "BSAC" with all game flags enabled (Mac/Linux)'));
-	console.log('  ./bin/cv2rando --all --seed BSAC cv2.nes');
+	console.log(gray('  # Generate a rom with a random seed using the "Rondo of Burb" palette'));
+	console.log(`  ${bin} --palette rondo-of-burb cv2.nes`);
 	console.log('');
 	console.log(cyan('Options'));
-	options.base.forEach(printOption);
+	this.options.forEach(o => console.log(`  ${p(o.flags)}  ${p(o.description)}`));
 	console.log('');
-	console.log(cyan('Itemizer Flags (must set -i)'));
-	options.itemizer.forEach(printOption);
-	console.log('');
-	console.log(cyan('Enemizer Flags (must set -e)'));
-	options.enemizer.forEach(printOption);
-	console.log('');
-	console.log(cyan('Patches (all set with --all flag)'));
-	options.patch.forEach(printOption);
-	console.log('');
-	console.log(cyan('Explicit Patches (these are NOT set with --all flag)'));
-	options['patch-x'].forEach(printOption);
 }
 
-async function main(rom, opts = {}) {
+async function main() {
 	try {
-		// load patches as command line options
-		const patches = await fs.readdir(path.join(__dirname, '..', 'patch'));
-		patches.filter(p => /\.js$/.test(p)).forEach(p => {
-			const patch = require(`../patch/${p}`);
-			const desc = `[PATCH${patch.explicit ? '-X' : ''}] ${patch.description}`;
-			program.option(patch.flags, desc);
-			program.options[program.options.length - 1].explicit = patch.explicit;
-		});
-
 		// process command line arguments
 		program.parse(process.argv);
 		if (program.debug) {
 			global.debug = true;
 		}
-
-		if (program.all) {
-			program.options.forEach(o => {
-				if (isAllFlag(o)) {
-					program[camelcase(o.long)] = true;
-				}
-			});
+		if (!getDifficulties().includes(program.difficulty)) {
+			throw new Error(`invalid difficulty, valid choices are: ${optionList(getDifficulties())}`);
 		}
-
-		const rom = program.args[0];
-		if (!rom) {
-			throw new Error('must specify a ROM file');
+		if (program.palette && !palettes.includes(program.palette)) {
+			throw new Error(`invalid palette, valid choices are: ${optionList(palettes)}`);
 		}
+		program.rom = program.args[0];
+
+		printHeader('options');
+		const opts = _.pick(program, program.options.map(o => camelcase(o.long)).concat('rom'));
+		opts.version = program.version();
+		log(opts);
+		log('');
 
 		// create the rando based on command line options and config.json
-		const newRom = await cv2rando(program.args[0], program);
-		console.log(`CV2 Randomizer successfully written to ${green(newRom)}`);
+		const output = await cv2rando(program);
+		console.log(`CV2 Randomizer ${green('successful!')}`);
+		console.log(`* rom:     ${cyan(output.rom)}`);
+		console.log(`* patch:   ${cyan(output.patch)}`);
+		console.log(`* spoiler: ${cyan(output.spoiler)}`);
 
 		// run the rom, if necessary
 		if (program.run) {
 			const cmd = os.platform() === 'darwin' ? 
-				`open -a OpenEmu ${newRom}` : 
-				`fceux ${newRom}`;
+				`open -a OpenEmu ${output.rom}` : 
+				`fceux ${output.rom}`;
+			console.log('');
 			console.log(`Launching randomized rom with ${cyan(cmd)}`);
 			exec(cmd);
 		}

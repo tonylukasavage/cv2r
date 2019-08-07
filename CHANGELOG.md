@@ -1,3 +1,10 @@
+## 0.0.16 - 2019-08-06
+
+* cv2-rando is now fully patch-driven, including what was internal code like itemizer, enemizer, shared assembly subroutines like clear-objects, etc...
+* Added `-d, --difficulty` option for making reasonable groups of patches based on difficulty. For now the options are `easy`, `standard`, and `hard`. `standard` is the default setting.
+* Added `-p, --palette` option to allow explicitly picking palettes. Palettes are structured and behave like any other patch but have their own folder at `lib/palette` to keep them all together. By default the palette will be the original Simon's Quest palette.
+* Cleaner `--debug` output
+
 ## 0.0.15 - 2019-07-27
 
 * Added crc32 sum of the seed to the title screen
