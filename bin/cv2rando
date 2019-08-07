@@ -1,5 +1,6 @@
 #!/usr/bin/env node --no-warnings
 
+const _ = require('lodash');
 const { cyan, gray, green, magenta, red, yellow } = require('chalk');
 const { exec } = require('child_process');
 const camelcase = require('camelcase');
@@ -9,7 +10,7 @@ const os = require('os');
 const path = require('path');
 const program = require('commander');
 const { getDifficulties } = require('../lib/patch-manager');
-const { isAllFlag, pad } = require('../lib/utils');
+const { isAllFlag, log, pad, printHeader } = require('../lib/utils');
 
 const palettes = fs.readdirSync(path.join(__dirname, '..', 'lib', 'palette')).map(p => p.replace(/\.js$/, ''));
 const optionList = array => array.map(a => magenta(a)).join(', ');
@@ -84,6 +85,12 @@ async function main() {
 			throw new Error(`invalid palette, valid choices are: ${optionList(palettes)}`);
 		}
 		program.rom = program.args[0];
+
+		printHeader('options');
+		const opts = _.pick(program, program.options.map(o => camelcase(o.long)).concat('rom'));
+		opts.version = program.version();
+		log(opts);
+		log('');
 
 		// create the rando based on command line options and config.json
 		const output = await cv2rando(program);
