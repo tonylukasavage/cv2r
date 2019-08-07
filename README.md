@@ -10,47 +10,29 @@ Castlevania II: Simon's Quest Randomizer by **BloodSweatAndCode**. Come find me 
 Castlevania II: Simon's Quest Randomizer by BloodSweatAndCode
 
 Usage
-  cv2rando [options] <vanilla_rom_file>
+  cv2rando [options] [vanilla_rom_file]
 
 Examples
-  # Show this help (Windows)
-  node --no-warnings .\bin\cv2rando --help
-
-  # Show this help (Mac/Linux)
+  # Show this help
   ./bin/cv2rando --help
 
-  # Generate a rom with the seed "BSAC" with all game flags enabled (Windows)
-  node --no-warnings .\bin\cv2rando --all --seed BSAC cv2.nes
+  # Generate a rom with the seed "BSAC" at standard difficulty
+  ./bin/cv2rando --seed BSAC cv2.nes
 
-  # Generate a rom with the seed "BSAC" with all game flags enabled (Mac/Linux)
-  ./bin/cv2rando --all --seed BSAC cv2.nes
+  # Generate a rom with the seed "BurbAndSath" at hard difficulty
+  ./bin/cv2rando --seed BurbAndSath --difficulty hard cv2.nes
+
+  # Generate a rom with a random seed using the "Rondo of Burb" palette
+  ./bin/cv2rando --palette rondo-of-burb cv2.nes
 
 Options
-  -V, --version            output the version number
-  -A, --all                enable all itemizer, enemizer, and patch flags
-  -o, --output <output>    filepath for randomized rom output
-  -r, --run                immediately run with emulator after randomizing (fceux or OpenEmu must be in PATH)
-  -s, --seed <seed>        seed to use for randomization
-  -z, --debug              enable debug output
-
-Itemizer Flags (must set -i)
-  -i, --itemizer           randomize items
-  -p, --prices             randomize merchant prices
-
-Enemizer Flags (must set -e)
-  -a, --enemy-hp           randomize enemy HP
-  -e, --enemizer           randomize enemies
-
-Patches (all set with --all flag)
-  -f, --fast-day-night     get rid of the day-night cycle dialog boxes
-  -t, --fast-text          Dialog boxes load text fast
-  -h, --hearts-patch       Every enemy will drop a heart
-  -n, --night-party        enable NPCs and door entry at night
-  -g, --penalty-reduction  Cut hearts in half after game over
-
-Explicit Patches (these are NOT set with --all flag)
-  -d, --double-hearts      double the value of each heart
-  -x, --palette-swap       Change palette stuff
+  -V, --version                  output the version number
+  -d, --difficulty <difficulty>  Difficulty setting: easy, standard, hard
+  -o, --output <output>          filepath for randomized rom output
+  -p, --palette <palette>        palette selection: rondo-of-burb
+  -r, --run                      immediately run with emulator after randomizing (fceux or OpenEmu must be in PATH)
+  -s, --seed <seed>              seed to use for randomization
+  -z, --debug                    enable debug output
 ```
 
 ## install
