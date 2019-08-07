@@ -1,25 +1,27 @@
 #!/usr/bin/env node --no-warnings
 
-const { cyan, gray, green, red, yellow } = require('chalk');
+const { cyan, gray, green, magenta, red, yellow } = require('chalk');
 const { exec } = require('child_process');
 const camelcase = require('camelcase');
 const cv2rando = require('../lib/cv2rando');
-const fs = require('fs').promises;
+const fs = require('fs');
 const os = require('os');
 const path = require('path');
 const program = require('commander');
+const { getDifficulties } = require('../lib/patch-manager');
 const { isAllFlag, pad } = require('../lib/utils');
-const { difficulty } = require('../cv2rando.manifest.js');
 
-const difficulties = Object.keys(difficulty);
+const palettes = fs.readdirSync(path.join(__dirname, '..', 'lib', 'palette')).map(p => p.replace(/\.js$/, ''));
+const optionList = array => array.map(a => magenta(a)).join(', ');
+const bin = process.platform === 'win32' ? 'node .\\bin\\cv2rando' : './bin/cv2rando';
 
 program
 	.version(require('../package.json').version)
-	.description('Castlevania II: Simon\'s Quest Randomizer by BloodSweatAndCode')
+	.description(`${yellow('Castlevania II: Simon\'s Quest Randomizer')} by ${red('Blood')}${cyan('Sweat')}And${green('Code')}`)
 	.usage('[options] [vanilla_rom_file]')
-	.option('-d, --difficulty <difficulty>', `Difficulty setting: [ ${difficulties} ]`, 'standard')
+	.option('-d, --difficulty <difficulty>', `Difficulty setting: ${optionList(getDifficulties())}`, 'standard')
 	.option('-o, --output <output>', 'filepath for randomized rom output')
-	//.option('-p, --prices', '[ITEMIZER] randomize merchant prices')
+	.option('-p, --palette <palette>', `palette selection: ${optionList(palettes)}`)
 	.option('-r, --run', 'immediately run with emulator after randomizing (fceux or OpenEmu must be in PATH)')
 	.option('-s, --seed <seed>', 'seed to use for randomization')
 	.option('-z, --debug', 'enable debug output');
@@ -45,23 +47,23 @@ program.outputHelp = function(cb) {
 	const p = str => pad(str, longest);
 
 	// print help
-	console.log(red(this.description()));
+	console.log(this.description());
 	console.log('');
 	console.log(cyan('Usage'));
 	console.log(`  cv2rando ${this.usage()}`);
 	console.log('');
 	console.log(cyan('Examples'));
-	console.log(gray('  # Show this help (Windows)'));
-	console.log('  node .\\bin\\cv2rando --help');
+	console.log(gray('  # Show this help'));
+	console.log(`  ${bin} --help`);
 	console.log('');
-	console.log(gray('  # Show this help (Mac/Linux)'));
-	console.log('  ./bin/cv2rando --help');
+	console.log(gray('  # Generate a rom with the seed "BSAC" at standard difficulty'));
+	console.log(`  ${bin} --seed BSAC cv2.nes`);
 	console.log('');
-	console.log(gray('  # Generate a rom with the seed "BSAC" at standard difficulty (Windows)'));
-	console.log('  node .\\bin\\cv2rando --seed BSAC cv2.nes');
+	console.log(gray('  # Generate a rom with the seed "BurbAndSath" at hard difficulty'));
+	console.log(`  ${bin} --seed BurbAndSath --difficulty hard cv2.nes`);
 	console.log('');
-	console.log(gray('  # Generate a rom with the seed "BurbAndSath" at hard difficulty (Mac/Linux)'));
-	console.log('  ./bin/cv2rando --seed BurbAndSath --difficulty hard cv2.nes');
+	console.log(gray('  # Generate a rom with a random seed using the "Rondo of Burb" palette'));
+	console.log(`  ${bin} --palette rondo-of-burb cv2.nes`);
 	console.log('');
 	console.log(cyan('Options'));
 	this.options.forEach(o => console.log(`  ${p(o.flags)}  ${p(o.description)}`));
@@ -75,8 +77,11 @@ async function main() {
 		if (program.debug) {
 			global.debug = true;
 		}
-		if (!difficulties.includes(program.difficulty)) {
-			throw new Error(`invalid difficulty, must be [ ${difficulties.join(', ')} ]`);
+		if (!getDifficulties().includes(program.difficulty)) {
+			throw new Error(`invalid difficulty, valid choices are: ${optionList(getDifficulties())}`);
+		}
+		if (program.palette && !palettes.includes(program.palette)) {
+			throw new Error(`invalid palette, valid choices are: ${optionList(palettes)}`);
 		}
 		program.rom = program.args[0];
 
