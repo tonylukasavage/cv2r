@@ -21,6 +21,7 @@ program
 	.description(`${yellow('Castlevania II: Simon\'s Quest Randomizer')} by ${red('Blood')}${cyan('Sweat')}And${green('Code')}`)
 	.usage('[options] [vanilla_rom_file]')
 	.option('-d, --difficulty <difficulty>', `Difficulty setting: ${optionList(getDifficulties())}`, 'standard')
+	.option('-j, --json', 'output patch and spoiler as json, disables all other output')
 	.option('-o, --output <output>', 'filepath for randomized rom output')
 	.option('-p, --palette <palette>', `palette selection: ${optionList(palettes)}`)
 	.option('-r, --run', 'immediately run with emulator after randomizing (fceux or OpenEmu must be in PATH)')
@@ -75,7 +76,7 @@ async function main() {
 	try {
 		// process command line arguments
 		program.parse(process.argv);
-		if (program.debug) {
+		if (program.debug && !program.json) {
 			global.debug = true;
 		}
 		if (!getDifficulties().includes(program.difficulty)) {
@@ -93,19 +94,20 @@ async function main() {
 		log('');
 
 		// create the rando based on command line options and config.json
+		const outputLog = msg => !opts.json && console.log(msg);
 		const output = await cv2rando(program);
-		console.log(`CV2 Randomizer ${green('successful!')}`);
-		console.log(`* rom:     ${cyan(output.rom)}`);
-		console.log(`* patch:   ${cyan(output.patch)}`);
-		console.log(`* spoiler: ${cyan(output.spoiler)}`);
+		outputLog(`CV2 Randomizer ${green('successful!')}`);
+		outputLog(`* rom:     ${cyan(output.rom)}`);
+		outputLog(`* patch:   ${cyan(output.patch)}`);
+		outputLog(`* spoiler: ${cyan(output.spoiler)}`);
 
 		// run the rom, if necessary
 		if (program.run) {
 			const cmd = os.platform() === 'darwin' ? 
 				`open -a OpenEmu ${output.rom}` : 
 				`fceux ${output.rom}`;
-			console.log('');
-			console.log(`Launching randomized rom with ${cyan(cmd)}`);
+			outputLog('');
+			outputLog(`Launching randomized rom with ${cyan(cmd)}`);
 			exec(cmd);
 		}
 	} catch (err) {
