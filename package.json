@@ -3,7 +3,9 @@
   "version": "0.0.17",
   "description": "Castlevania II: Simon's Quest Randomizer",
   "main": "lib/cv2-rando.js",
-  "bin": "bin/cv2rando",
+  "bin": {
+    "cv2rando": "bin/cv2rando"
+  },
   "scripts": {
     "pretest": "rm -rf ./tmp && mkdir tmp",
     "test": "ava test.js",
