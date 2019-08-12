@@ -1,3 +1,8 @@
+## 0.0.18 - 2019-08-12
+
+* Don't output spoiler csv file when `--json` is used
+* update `package.json` to use the bin name `cv2rando`
+
 ## 0.0.17 - 2019-08-11
 
 * Fixed title screen bug
