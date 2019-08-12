@@ -23,7 +23,7 @@ program
 	.option('-d, --difficulty <difficulty>', `Difficulty setting: ${optionList(getDifficulties())}`, 'standard')
 	.option('-j, --json', 'output patch and spoiler as json, disables all other output')
 	.option('-o, --output <output>', 'filepath for randomized rom output')
-	.option('-p, --palette <palette>', `palette selection: ${optionList(palettes)}`)
+	.option('-p, --palette <palette>', `palette selection: ${optionList(palettes)}`, 'simons-quest')
 	.option('-r, --run', 'immediately run with emulator after randomizing (fceux or OpenEmu must be in PATH)')
 	.option('-s, --seed <seed>', 'seed to use for randomization')
 	.option('-z, --debug', 'enable debug output');
