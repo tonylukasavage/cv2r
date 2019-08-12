@@ -1,4 +1,4 @@
-#!/usr/bin/env node --no-warnings
+#!/usr/bin/env node
 
 const _ = require('lodash');
 const { cyan, gray, green, magenta, red, yellow } = require('chalk');
