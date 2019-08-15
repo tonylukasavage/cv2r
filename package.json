@@ -9,7 +9,7 @@
   },
   "scripts": {
     "pretest": "rm -rf ./tmp && mkdir tmp",
-    "test": "ava test.js",
+    "test": "eslint --ignore-pattern \"6502assembler.js\" ./**/*.js && ava test.js",
     "posttest": "rm -rf tmp"
   },
   "author": "BloodSweatAndCode",
@@ -24,6 +24,7 @@
     "seedrandom": "^3.0.1"
   },
   "devDependencies": {
-    "ava": "^2.2.0"
+    "ava": "^2.2.0",
+    "eslint": "^6.1.0"
   }
 }

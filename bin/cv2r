@@ -10,7 +10,7 @@ const os = require('os');
 const path = require('path');
 const program = require('commander');
 const { getDifficulties } = require('../lib/patch-manager');
-const { isAllFlag, log, pad, printHeader } = require('../lib/utils');
+const { log, pad, printHeader } = require('../lib/utils');
 
 const palettes = fs.readdirSync(path.join(__dirname, '..', 'lib', 'palette')).map(p => p.replace(/\.js$/, ''));
 const optionList = array => array.map(a => magenta(a)).join(', ');
