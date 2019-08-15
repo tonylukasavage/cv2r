@@ -1,10 +1,11 @@
 {
-  "name": "cv2-rando",
+  "name": "cv2r",
   "version": "0.0.18",
   "description": "Castlevania II: Simon's Quest Randomizer",
-  "main": "lib/cv2-rando.js",
+  "main": "lib/cv2r.js",
   "bin": {
-    "cv2rando": "bin/cv2rando"
+    "cv2rando": "bin/cv2r",
+    "cv2r": "bin/cv2r"
   },
   "scripts": {
     "pretest": "rm -rf ./tmp && mkdir tmp",

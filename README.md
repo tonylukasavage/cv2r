@@ -1,6 +1,6 @@
-# cv2-rando
+# cv2r - Castlevania II: Simon's Quest Randomizer
 
-Castlevania II: Simon's Quest Randomizer by **BloodSweatAndCode**. Come find me running this and other retro games on [Twitch](https://www.twitch.tv/bloodsweatandcode)!
+cv2r - Castlevania II: Simon's Quest Randomizer by **BloodSweatAndCode**. Come find me running this and other retro games on [Twitch](https://www.twitch.tv/bloodsweatandcode)!
 
 **WARNING** This is still **pre-alpha**
 
@@ -10,26 +10,27 @@ Castlevania II: Simon's Quest Randomizer by **BloodSweatAndCode**. Come find me 
 Castlevania II: Simon's Quest Randomizer by BloodSweatAndCode
 
 Usage
-  cv2rando [options] [vanilla_rom_file]
+  cv2r [options] [vanilla_rom_file]
 
 Examples
   # Show this help
-  ./bin/cv2rando --help
+  node .\bin\cv2r --help
 
   # Generate a rom with the seed "BSAC" at standard difficulty
-  ./bin/cv2rando --seed BSAC cv2.nes
+  node .\bin\cv2r --seed BSAC cv2.nes
 
   # Generate a rom with the seed "BurbAndSath" at hard difficulty
-  ./bin/cv2rando --seed BurbAndSath --difficulty hard cv2.nes
+  node .\bin\cv2r --seed BurbAndSath --difficulty hard cv2.nes
 
   # Generate a rom with a random seed using the "Rondo of Burb" palette
-  ./bin/cv2rando --palette rondo-of-burb cv2.nes
+  node .\bin\cv2r --palette rondo-of-burb cv2.nes
 
 Options
   -V, --version                  output the version number
   -d, --difficulty <difficulty>  Difficulty setting: easy, standard, hard
+  -j, --json                     output patch and spoiler as json, disables all other output
   -o, --output <output>          filepath for randomized rom output
-  -p, --palette <palette>        palette selection: rondo-of-burb
+  -p, --palette <palette>        palette selection: rondo-of-burb, simons-quest
   -r, --run                      immediately run with emulator after randomizing (fceux or OpenEmu must be in PATH)
   -s, --seed <seed>              seed to use for randomization
   -z, --debug                    enable debug output
@@ -40,22 +41,22 @@ Options
 I plan to make executables so this installation isn't necessary, but until then, follow these steps:
 
 1. Install [node.js](https://nodejs.org/en/)
-2. Download the latest build of [cv2rando](https://github.com/BloodSweatAndCode/cv2-rando/archive/master.zip)
-3. Extract cv2rando to a folder
-4. Copy a vanilla cv2 rom into the cv2rando folder as "cv2.nes"
+2. Download the latest build of [cv2r](https://github.com/BloodSweatAndCode/cv2r/archive/master.zip)
+3. Extract cv2r to a folder
+4. Copy a vanilla cv2 rom into the cv2r folder as "cv2.nes"
 5. In a command prompt:
 ```
-cd /path/to/cv2rando
+cd /path/to/cv2r
 npm install
 
 # on Windows, "BSAC" is replaced by your seed (any string)
-node --no-warnings .\bin\cv2rando --all --seed BSAC cv2.nes
+node --no-warnings .\bin\cv2r --all --seed BSAC cv2.nes
 
 # on Mac/Linux (I've done ZERO Linux testing), "BSAC" is replaced by your seed (any string)
-./bin/cv2rando --all --seed BSAC cv2.nes
+./bin/cv2r --all --seed BSAC cv2.nes
 ```
 
-You can now find your new cv2 rando rom in the `/path/to/cv2rando/tmp` folder
+You can now find your new cv2 rando rom in the `/path/to/cv2r/tmp` folder
 
 
 ## developer notes

@@ -4,7 +4,7 @@ const _ = require('lodash');
 const { cyan, gray, green, magenta, red, yellow } = require('chalk');
 const { exec } = require('child_process');
 const camelcase = require('camelcase');
-const cv2rando = require('../lib/cv2rando');
+const cv2r = require('../lib/cv2r');
 const fs = require('fs');
 const os = require('os');
 const path = require('path');
@@ -14,7 +14,7 @@ const { isAllFlag, log, pad, printHeader } = require('../lib/utils');
 
 const palettes = fs.readdirSync(path.join(__dirname, '..', 'lib', 'palette')).map(p => p.replace(/\.js$/, ''));
 const optionList = array => array.map(a => magenta(a)).join(', ');
-const bin = process.platform === 'win32' ? 'node .\\bin\\cv2rando' : './bin/cv2rando';
+const bin = process.platform === 'win32' ? 'node .\\bin\\cv2r' : './bin/cv2r';
 
 program
 	.version(require('../package.json').version)
@@ -52,7 +52,7 @@ program.outputHelp = function(cb) {
 	console.log(this.description());
 	console.log('');
 	console.log(cyan('Usage'));
-	console.log(`  cv2rando ${this.usage()}`);
+	console.log(`  cv2r ${this.usage()}`);
 	console.log('');
 	console.log(cyan('Examples'));
 	console.log(gray('  # Show this help'));
@@ -95,7 +95,7 @@ async function main() {
 
 		// create the rando based on command line options and config.json
 		const outputLog = msg => !opts.json && console.log(msg);
-		const output = await cv2rando(program);
+		const output = await cv2r(program);
 		outputLog(`CV2 Randomizer ${green('successful!')}`);
 		outputLog(`* rom:     ${cyan(output.rom)}`);
 		outputLog(`* patch:   ${cyan(output.patch)}`);
