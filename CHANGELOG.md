@@ -1,3 +1,8 @@
+## 0.0.19 - 2019-08-14
+
+* All references and files named `cv2-rando` or `cv2rando` have been changed to `cv2r`, including the repo name. I have saved the `cv2rando` binary for now, but it will be removed in 0.1.0.
+* Made `npm test` work on Windows in a [cmder](https://cmder.net/) prompt. Still doesn't work in default Windows command line.
+
 ## 0.0.18 - 2019-08-12
 
 * Don't output spoiler csv file when `--json` is used
