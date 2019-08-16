@@ -2,4 +2,4 @@ language: node_js
 node_js: 
   - 10
 before_script:
-  - ls -al ./bin/node_modules
+  - ls -al ./bin
