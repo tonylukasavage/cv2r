@@ -1,4 +1,4 @@
-# cv2r - Castlevania II: Simon's Quest Randomizer
+# cv2r - Castlevania II: Simon's Quest Randomizer [![Build Status](https://travis-ci.org/BloodSweatAndCode/cv2r.svg?branch=master)](https://travis-ci.org/BloodSweatAndCode/cv2r)
 
 cv2r - Castlevania II: Simon's Quest Randomizer by **BloodSweatAndCode**. Come find me running this and other retro games on [Twitch](https://www.twitch.tv/bloodsweatandcode)!
 
