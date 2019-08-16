@@ -1,2 +1,5 @@
 language: node_js
-  - '10'
+node_js: 
+  - 10
+before_script:
+  - chmod +x ./bin/cv2r
