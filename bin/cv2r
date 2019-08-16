@@ -28,7 +28,7 @@ program
 	.option('-s, --seed <seed>', 'seed to use for randomization')
 	.option('-z, --debug', 'enable debug output');
 
-program.outputHelp = function(cb) {
+program.outputHelp = function() {
 	// make sure we don't have conflicting flags
 	const found = {};
 	this.options.forEach(o => {
