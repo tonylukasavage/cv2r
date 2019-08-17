@@ -1,3 +1,10 @@
+## 0.0.20 - 2019-08-17
+
+* Fixed bug with prices being too high (#54)
+* Updated `difficulty` settings to support cv2r.com
+* Added travis-ci support, all PRs run through linting and tests
+* Added code linting to enforce code style
+
 ## 0.0.19 - 2019-08-14
 
 * All references and files named `cv2-rando` or `cv2rando` have been changed to `cv2r`, including the repo name. I have saved the `cv2rando` binary for now, but it will be removed in 0.1.0.
