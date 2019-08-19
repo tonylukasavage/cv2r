@@ -74,37 +74,23 @@ Set value $1C to the number of the bank then execute a JSR at the following loca
 $4F is selected quest item
 $90 is selected weapon/carry item
 
-### progression logic decisions
-
-* Whips will be upgraded progressively. No quick jump to morning star or flame whip.
-* Crystals will also be encountered progressively to prevent potential super boring back tracking.
-* The 3 block whip jump in Camilla's Cemetery is **NOT** in logic. This means red crystal is required for Bodley, Laruba, Doina, etc...
-* Laurels and Holy Water are considered required for Laruba Mansion
-* Laurels are **NOT** considered required to cross the swamp in Belasco Marsh
-
 ### code locations for all actors that can hold items
 
-The `$7F` value is set _after_ the code executes for the given item/weapon/whatever.
-
-| name                           | RAM  | ROM   | identifier | notes                          |
-|--------------------------------|------|-------|------------|--------------------|
-| merchant (weapon/item)         | EDD8 | 1EDE8 | | values start at $EE12 RAM, $1EE22 ROM  |
-| merchant (whip)                | EDF4 | 1EE04 | $7F is #33 (thorn), #34 (chain), or #35 (morning star) | ($40 AND #1F) - #7 = $434 |
-| crystal dude (blue)            | 906F | 507F  | | $7F is 0x55 on accept, 0x6B on reject (text???) |
-| crystal dude (red)             | 9088 | 5098  | | $7F is 0x56 on accept, 0x6B on reject (text???) |
-| orb                            | 8794 | 47A4  | $3BA = #25, $4C2,X=???, $8632,Y=($91 values) |
-| laurel dude (laruba)           | 9347 | 5357  | $7F = #78 | |
-| flame whip dude                | 8C72 | 4C82  | $7F = #75 | |
-| diamond dude                   | AA3A | 6A4A  | $7F = #12 | |
-| secret merchant (silver knife) | AE12 | 6E22  | $7F = #10 | |
-| secret merchant (silk bag)     | AE07 | 6E17  | $7F = #0F | |
-| Death                          | 87C7 | 47D7  | $3BA = #44 (#49 for knife) | still appears as knife no matter what item it actually gives you |
-| Camilla                        | 87BF | 47CF  | $3BA = #42 (#?? for cross) | still appears as cross no matter what item it actually gives you |
-| sacred flame                   | 87CD | 47DD | | still appears as flame no matter what item it actually gives you (bank 1) |
-
-### progressive whips and crystals
-
-* `$D0` will track in each bit whether or not you've already received a progressive upgrade from a particular actor.
+| name                           | RAM  | ROM   | notes              |
+|--------------------------------|------|-------|--------------------|
+| merchant (weapon/item)         | EDD8 | 1EDE8 | $7F set early |
+| merchant (whip)                | EDF4 | 1EE04 | $7F set early |
+| crystal dude (blue)            | 906F | 507F  | |
+| crystal dude (red)             | 9088 | 5098  | |
+| orb                            | 8794 | 47A4  | |
+| laurel dude (laruba)           | 9347 | 5357  | $7F set early |
+| flame whip dude                | 8C72 | 4C82  | |
+| diamond dude                   | AA3A | 6A4A  | |
+| secret merchant (silver knife) | AE12 | 6E22  | |
+| secret merchant (silk bag)     | AE07 | 6E17  | $7F set early |
+| Death                          | 87C7 | 47D7  | still appears as knife no matter what item it actually gives you, $7F set early |
+| Camilla                        | 87BF | 47CF  | still appears as cross no matter what item it actually gives you, $7F set early |
+| sacred flame                   | 87CD | 47DD  | still appears as flame no matter what item it actually gives you (bank 1), $7F set early |
 
 ### unused but interesting values
 
@@ -216,10 +202,6 @@ objset | pattern pointers | bg   | sprite | name
 4      | 0x1CD01          | 0x06 | 0x07   | graveyard
 5      | 0x1CD03          | 0x0B | 0x0C   | castlevania
 
-### sale icons and prices
-
-Code for determining the sale icons and prices is at `0x1ED46` ROM (`07:ED36` in RAM). Mapped bank is 3 for these calls.
-
 ### random notes
 
 red crystal tornado at 01:A956 ram, 6966 rom
@@ -320,3 +302,7 @@ core function 07:C0E7
 // palette hacking
   // $82 day/night? 1/0
   // $C7E7 is where day/night is checked
+
+800E, 401e (rom) for the area checks to determine which actor to load
+
+3d and 3e are used as a pointer to the actors for a particular area
