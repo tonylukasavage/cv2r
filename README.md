@@ -76,21 +76,33 @@ $90 is selected weapon/carry item
 
 ### code locations for all actors that can hold items
 
-| name                           | RAM  | ROM   | notes              |
-|--------------------------------|------|-------|--------------------|
-| merchant (weapon/item)         | EDD8 | 1EDE8 | $7F set early |
-| merchant (whip)                | EDF4 | 1EE04 | $7F set early |
-| crystal dude (blue)            | 906F | 507F  | |
-| crystal dude (red)             | 9088 | 5098  | |
-| orb                            | 8794 | 47A4  | |
-| laurel dude (laruba)           | 9347 | 5357  | $7F set early |
-| flame whip dude                | 8C72 | 4C82  | |
-| diamond dude                   | AA3A | 6A4A  | |
-| secret merchant (silver knife) | AE12 | 6E22  | |
-| secret merchant (silk bag)     | AE07 | 6E17  | $7F set early |
-| Death                          | 87C7 | 47D7  | still appears as knife no matter what item it actually gives you, $7F set early |
-| Camilla                        | 87BF | 47CF  | still appears as cross no matter what item it actually gives you, $7F set early |
-| sacred flame                   | 87CD | 47DD  | still appears as flame no matter what item it actually gives you (bank 1), $7F set early |
+| name                           | RAM  | ROM   | $7F       | notes              |
+|--------------------------------|------|-------|-----------|--------------------|
+| merchant (weapon/item)         | EDD8 | 1EDE8 | see below | $7F set early      |
+| merchant (whip)                | EDF4 | 1EE04 | see below | $7F set early      |
+| crystal dude (blue)            | 906F | 507F  | 0x55      |                    |
+| crystal dude (red)             | 9088 | 5098  | 0x56      |                    |
+| orb                            | 8794 | 47A4  | 0x18-0x1C |                    |
+| laurel dude (laruba)           | 9347 | 5357  | 0x78      | $7F set early      |
+| flame whip dude                | 8C72 | 4C82  | 0x0E      |                    |
+| diamond dude                   | AA3A | 6A4A  | 0x12      |                    |
+| secret merchant (silver knife) | AE12 | 6E22  | 0x10      |                    |
+| secret merchant (silk bag)     | AE07 | 6E17  | 0x0F      | $7F set early      |
+| Death                          | 87C7 | 47D7  | 0x77      | still appears as knife no matter what item it actually gives you, $7F set early |
+| Camilla                        | 87BF | 47CF  | 0x26      | still appears as cross no matter what item it actually gives you, $7F set early |
+| sacred flame                   | 87CD | 47DD  | 0x76      | still appears as flame no matter what item it actually gives you (bank 1), $7F set early |
+
+| merchant      | $7F  |
+|---------------|------|
+| thorn whip    | 0x33 |
+| chain whip    | 0x34 |
+| morning star  | 0x35 |
+| white crystal | 0x32 |
+| holy water    | 0x37 |
+| dagger        | 0x36 |
+| garlic        | 0x2F |
+| laurels       | 0x30 |
+| oak stake     | 0x1D |
 
 ### unused but interesting values
 
