@@ -106,7 +106,7 @@ $90 is selected weapon/carry item
 
 ### sram usage
 
-We use SRAM values ($6000-$7FFF) to track progressive whip and crystal upgrades throughout the game to ensure you can't get the same progression item from the same actor more than once. Here's how we use those values.
+We use SRAM values ($6000-$7FFF) to track progressive whip and crystal upgrades throughout the game to ensure you can't get the same progression item from the same actor more than once. It's also used for other state and temporary variables when necessary. Here's how we use those values.
 
 | memory | usage |
 |--------|-------|
@@ -194,13 +194,6 @@ I had to store new 1 byte values (high 4 bits are bg table, low 4 bits are sprit
 | 0x03   | 5          | 5            | 25          |
 | 0x04   | 4          | 2            | 8           |
 | 0x05   | 1          | 2            | 2           |
-
-
-3, 5, 3
-
-101    11000    101
-
-0 + 0 + 0 + 0x35
 
 So I'm mapping 167 bytes, only using 93 of those bytes in total, thereby wasting 74 bytes as unused space between the valid values of the mult-dimensional array. The pseduo-code calculation below shows roughly how, stored in this manner, I can access any bg/sprite table index at any time with the objset, area, and submap values:
 
