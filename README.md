@@ -78,19 +78,19 @@ $90 is selected weapon/carry item
 
 | name                           | RAM  | ROM   | $7F       | notes              |
 |--------------------------------|------|-------|-----------|--------------------|
-| merchant (weapon/item)         | EDD8 | 1EDE8 | see below | $7F set early      |
-| merchant (whip)                | EDF4 | 1EE04 | see below | $7F set early      |
+| merchant (weapon/item)         | EDD8 | 1EDE8 | see below |                    |
+| merchant (whip)                | EDF4 | 1EE04 | see below |                    |
 | crystal dude (blue)            | 906F | 507F  | 0x55      |                    |
 | crystal dude (red)             | 9088 | 5098  | 0x56      |                    |
 | orb                            | 8794 | 47A4  | 0x18-0x1C |                    |
-| laurel dude (laruba)           | 9347 | 5357  | 0x78      | $7F set early      |
+| laurel dude (laruba)           | 9347 | 5357  | 0x78      |                    |
 | flame whip dude                | 8C72 | 4C82  | 0x0E      |                    |
 | diamond dude                   | AA3A | 6A4A  | 0x12      |                    |
 | secret merchant (silver knife) | AE12 | 6E22  | 0x10      |                    |
-| secret merchant (silk bag)     | AE07 | 6E17  | 0x0F      | $7F set early      |
-| Death                          | 87C7 | 47D7  | 0x77      | still appears as knife no matter what item it actually gives you, $7F set early |
-| Camilla                        | 87BF | 47CF  | 0x26      | still appears as cross no matter what item it actually gives you, $7F set early |
-| sacred flame                   | 87CD | 47DD  | 0x76      | still appears as flame no matter what item it actually gives you (bank 1), $7F set early |
+| secret merchant (silk bag)     | AE07 | 6E17  | 0x0F      |                    |
+| Death                          | 87C7 | 47D7  | 0x77      | still appears as knife no matter what item it actually gives you |
+| Camilla                        | 87BF | 47CF  | 0x26      | still appears as cross no matter what item it actually gives you |
+| sacred flame                   | 87CD | 47DD  | 0x76      | still appears as flame no matter what item it actually gives you |
 
 | merchant      | $7F  |
 |---------------|------|
@@ -103,6 +103,18 @@ $90 is selected weapon/carry item
 | garlic        | 0x2F |
 | laurels       | 0x30 |
 | oak stake     | 0x1D |
+
+### sram usage
+
+We use SRAM values ($6000-$7FFF) to track progressive whip and crystal upgrades throughout the game to ensure you can't get the same progression item from the same actor more than once. Here's how we use those values.
+
+| memory | usage |
+|--------|-------|
+| $6000  | Temporary variable used to store original X register when loading the correct (with respect to progression) crystal sale icon for merchants | 
+| $600D  | Temporary variable used to store original memory bank when bank switching is necessary, specifically in the game state checks for jovah warp and inventory deselect |
+| $600F  | If set to a non-zero (0x00) value a jovah warp is currently in progress |
+| $6010-$601B | Tracks whip progression. When you acquire a whip, it adds an entry to this range which marks the actor as "checked". The range consists of 3 entries, 4 bytes in size each. The 4 bytes, in order, are: objset($30), area($50), submap($51 & 0x7), actor identifier($7F) |
+| $6030-$6037 | Tracks crystal progression. When you acquire a crystal, it adds an entry to this range which marks the actor as "checked". The range consists of 2 entries, 4 bytes in size each. The 4 bytes, in order, are: objset($30), area($50), submap($51 & 0x7), actor identifier($7F) |
 
 ### unused but interesting values
 
@@ -119,18 +131,18 @@ $90 is selected weapon/carry item
 
 `0xCC84` is where all the text starts in the ROM. First one is "What a horrible night to have a curse".
 
-| Char | Value |
-|------|-------|
+| Char | Value   |
+|------|---------|
 | (space) | 0x00 |
-| A    | 0x01  |
-| B    | 0x02     |
-| C    | 0x03     |
-| D    | 0x04     |
-| E    | 0x05     |
-| F    | 0x06     |
-| G    | 0x07     |
-| H    | 0x08     |
-| I    | 0x09     |
+| A    | 0x01    |
+| B    | 0x02    |
+| C    | 0x03    |
+| D    | 0x04    |
+| E    | 0x05    |
+| F    | 0x06    |
+| G    | 0x07    |
+| H    | 0x08    |
+| I    | 0x09    |
 | J    | 0x0A    |
 | K    | 0x0B    |
 | L    | 0x0C    |
@@ -152,18 +164,18 @@ $90 is selected weapon/carry item
 | '    | 0x1C    |
 | ^    | 0x1D    |
 | ,    | 0x1E    |
-| 0    | 0x36     |
-| 1    | 0x37     |
-| 2    | 0x38     |
-| 3    | 0x39     |
-| 4    | 0x3A     |
-| 5    | 0x3B     |
-| 6    | 0x3C     |
-| 7    | 0x3D     |
-| 8    | 0x3E     |
-| 9    | 0x3F     |
+| 0    | 0x36    |
+| 1    | 0x37    |
+| 2    | 0x38    |
+| 3    | 0x39    |
+| 4    | 0x3A    |
+| 5    | 0x3B    |
+| 6    | 0x3C    |
+| 7    | 0x3D    |
+| 8    | 0x3E    |
+| 9    | 0x3F    |
 | (new line) | 0xFE |
-| (end) | 0xFF |
+| (end) | 0xFF   |
 
 ### in lib/core.js
 
