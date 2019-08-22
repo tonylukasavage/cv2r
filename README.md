@@ -104,6 +104,10 @@ $90 is selected weapon/carry item
 | laurels       | 0x30 |
 | oak stake     | 0x1D |
 
+; if (($7F == 0x26) && ($7F < 0x1D || $7F > 0x37))  {
+;   $600E = 0x01
+; }
+
 ### sram usage
 
 We use SRAM values ($6000-$7FFF) to track progressive whip and crystal upgrades throughout the game to ensure you can't get the same progression item from the same actor more than once. It's also used for other state and temporary variables when necessary. Here's how we use those values.
