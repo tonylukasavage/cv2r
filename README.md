@@ -58,6 +58,12 @@ node --no-warnings .\bin\cv2r --all --seed BSAC cv2.nes
 
 You can now find your new cv2 rando rom in the `/path/to/cv2r/tmp` folder
 
+## RAM mapping
+
+| address | function                      |
+|---------|-------------------------------|
+| 001C    | currently loaded memory bank  |
+| 003F    | 0xFF when talking to NPC      |
 
 ## developer notes
 
@@ -224,6 +230,9 @@ objset | pattern pointers | bg   | sprite | name
 5      | 0x1CD03          | 0x0B | 0x0C   | castlevania
 
 ### random notes
+
+In RAM, `7:E373` is a subroutine that does 4 LSRs. `7:E378` does 4 ASLs.
+
 
 red crystal tornado at 01:A956 ram, 6966 rom
 core function 07:C0E7
