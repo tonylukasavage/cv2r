@@ -1,3 +1,12 @@
+## 0.0.21 - 2018-08-24
+
+### [Youtube video explaining 0.0.21 update](https://www.youtube.com/watch?v=FI9WD07OFjM)
+
+* Crystal sale icons update progressively, so you see white crystal as a sales icon from a merchant if you have no crystal, blue if you have white, and red if you have blue.
+* With some ROM hacking, `$7F` in RAM can now be used as a unique identifier for any actor Simon is interacting with. The relevant values have been catalogued in the [README](https://github.com/BloodSweatAndCode/cv2r#code-locations-for-all-actors-that-can-hold-items).
+* SRAM usage has been documented in the [README](https://github.com/BloodSweatAndCode/cv2r#sram-usage).
+* Actors will present "refuse text" if you've already acquired an item from them. It will currently say "NICE TRY SIMON". Additionally, merchants will have their sale icon replaced with an "X" and the sale price will become "9999" to prevent any confusion on attempting to repurchase an already acquired whip/crystal.
+
 ## 0.0.20 - 2019-08-17
 
 * Fixed bug with prices being too high (#54)
