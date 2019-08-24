@@ -1,6 +1,19 @@
 PHP
 
-LDA *$7F
+LDA $600E
+BNE NORMAL
+
+JSR $<%= isChecked %>
+LDA $600C
+CMP #$01
+BNE NORMAL
+LDA #$<%= refuseLowByte %>
+STA *$00
+LDA #$<%= refuseHighByte %>
+STA *$01
+JMP $9999
+
+NORMAL LDA *$7F
 
 CMP #$2F
 BNE L_TOP
@@ -71,5 +84,12 @@ F_DONE PLP
 
 LDA ($00),Y
 CMP #$FF
+BNE GETOUT
 
-RTS
+PHP
+LDA #$0
+STA $600E
+LDA ($00),Y
+PLP
+
+GETOUT RTS

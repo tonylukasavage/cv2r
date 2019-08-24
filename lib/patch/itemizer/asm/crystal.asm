@@ -50,7 +50,19 @@ LDA *$51
 AND #$7
 STA $6033,Y
 
-LDA *$91
+; if ($7F == 0x26 || $7F < 0x1D || $7F > 0x37)  {
+;   $600E = 0x01
+; }
+LDA *$7F
+CMP #$26
+BEQ MARK
+CMP #$1D
+BCC MARK
+CMP #$38
+BCC NOMARK
+MARK STA $600E
+
+NOMARK LDA *$91
 CLC
 ADC #$20
 STA *$91
