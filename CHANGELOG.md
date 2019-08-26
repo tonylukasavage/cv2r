@@ -1,3 +1,11 @@
+## 0.1.0 (alpha) - 2018-08-25
+
+We are officially **alpha** boys!
+
+* Fixed bug where bosses had randomized hp, which sometimes caused overflow values that gave Camilla extremely low HP
+* Fixed regression with jovah warp where the ferry man would be present in Jovah after warp
+* Safe guarding against sacred flame and secret merchants despawning by never using projectile enemies (fireballs, bones, or webs) in those screens
+
 ## 0.0.21 - 2018-08-24
 
 ### [Youtube video explaining 0.0.21 update](https://www.youtube.com/watch?v=FI9WD07OFjM)
