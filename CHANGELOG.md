@@ -1,3 +1,7 @@
+## 0.1.1 - 2018-08-26 
+
+* Rolled back ferry man jovah warp quirk fix, as it caused issues where you couldn't cross Dead River to Brahm's, even with heart equipped
+
 ## 0.1.0 (alpha) - 2018-08-25
 
 We are officially **alpha** boys!
