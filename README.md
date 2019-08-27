@@ -124,7 +124,7 @@ We use SRAM values ($6000-$7FFF) to track progressive whip and crystal upgrades 
 | $600C  | Used by is-checked. A value of 1 means the current actor has already been checked. 0 means it has not and an item can still be acquired. |
 | $600D  | Temporary variable used to store original memory bank when bank switching is necessary, specifically in the game state checks for jovah warp and inventory deselect |
 | $600E  | If set to a non-zero value, it indicates that an actor should use its normal, non-refuse text despite having been marked as checked. This is necessary because most non-merchant actors add the item to your inventory _before_ they display their text. |
-| $600F  | If set to a non-zero (0x00) value a jovah warp is currently in progress |
+| $600F  | If set to 0x01 a jovah warp is currently in progress |
 | $6010-$601B | Tracks whip progression. When you acquire a whip, it adds an entry to this range which marks the actor as "checked". The range consists of 3 entries, 4 bytes in size each. The 4 bytes, in order, are: objset($30), area($50), submap($51 & 0x7), actor identifier($7F) |
 | $601C-$6024 | Tracks crystal progression. When you acquire a crystal, it adds an entry to this range which marks the actor as "checked". The range consists of 2 entries, 4 bytes in size each. The 4 bytes, in order, are: objset($30), area($50), submap($51 & 0x7), actor identifier($7F) |
 
