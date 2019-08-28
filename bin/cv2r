@@ -32,13 +32,13 @@ program.outputHelp = function() {
 	// make sure we don't have conflicting flags
 	const found = {};
 	this.options.forEach(o => {
-		if (!found[o.short]) { 
-			found[o.short] = o; 
+		if (!found[o.short]) {
+			found[o.short] = o;
 		} else {
 			throw new Error(`short flag "${o.short}" already used with option "${found[o.short].flags}"`);
 		}
-		if (!found[o.long]) { 
-			found[o.long] = o; 
+		if (!found[o.long]) {
+			found[o.long] = o;
 		} else {
 			throw new Error(`long flag "${o.long}" already used with option "${found[o.long].flags}"`);
 		}
@@ -70,7 +70,7 @@ program.outputHelp = function() {
 	console.log(cyan('Options'));
 	this.options.forEach(o => console.log(`  ${p(o.flags)}  ${p(o.description)}`));
 	console.log('');
-}
+};
 
 async function main() {
 	try {
@@ -103,8 +103,8 @@ async function main() {
 
 		// run the rom, if necessary
 		if (program.run) {
-			const cmd = os.platform() === 'darwin' ? 
-				`open -a OpenEmu ${output.rom}` : 
+			const cmd = os.platform() === 'darwin' ?
+				`open -a OpenEmu ${output.rom}` :
 				`fceux ${output.rom}`;
 			outputLog('');
 			outputLog(`Launching randomized rom with ${cyan(cmd)}`);
