@@ -58,14 +58,23 @@ node --no-warnings .\bin\cv2r --all --seed BSAC cv2.nes
 
 You can now find your new cv2 rando rom in the `/path/to/cv2r/tmp` folder
 
+## developer notes
+
+## sprite mapping
+
+| sprite | location |
+|--------|----------|
+| death drop (golden knife) | $29518-$2952B |
+| camilla drop (cross, 1st half) | $2A618-$2A619 |
+| camilla drop (cross, 2nd half) | $2A71E-$2A71F |
+
 ## RAM mapping
 
 | address | function                      |
 |---------|-------------------------------|
 | 001C    | currently loaded memory bank  |
 | 003F    | 0xFF when talking to NPC      |
-
-## developer notes
+| 003BA-003BF | 49 - golden knife (Death drop) |
 
 ### bank switching
 
