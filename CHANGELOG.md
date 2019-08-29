@@ -1,3 +1,7 @@
+## 0.1.2 - 2018-08-28
+
+* Boss drop sprites have been changed from golden knife an magic to be bags, like the ones inside orbs
+
 ## 0.1.1 - 2018-08-26 
 
 * Rolled back ferry man jovah warp quirk fix, as it caused issues where you couldn't cross Dead River to Brahm's, even with heart equipped
