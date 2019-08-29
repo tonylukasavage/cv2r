@@ -1,6 +1,14 @@
+## 0.1.4 - 2018-08-28
+
+* Camilla still drops bag, but Death is back to dropping golden knife due to the fact that the same sprite used for the drop AND all dagger/knife usage by Simon
+
+## 0.1.3 - 2018-08-28
+
+* Boss drop sprites have been changed from golden knife and magic cross to be bags, like the ones inside orbs
+
 ## 0.1.2 - 2018-08-28
 
-* Boss drop sprites have been changed from golden knife an magic to be bags, like the ones inside orbs
+* git tagging issue, no updates
 
 ## 0.1.1 - 2018-08-26 
 
