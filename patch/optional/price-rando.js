@@ -1,11 +1,11 @@
 // random prices
 // merchant prices will be +/-25% based on the base price in lib/patch/itemizer/items.js
 module.exports = {
+	id: 'price-rando',
 	name: 'Price Randomizer',
 	description: 'Randomize the prices merchant sell items by +/-25%',
 	patch: function(pm, opts) {
-		const core = require('../core');
-		const { randomDecimal } = require('../utils');
+		const { core, utils: { randomDecimal } } = require('../../lib');
 		const { rng } = opts;
 
 		core.forEach(loc => {

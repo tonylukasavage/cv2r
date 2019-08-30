@@ -1,7 +1,7 @@
 module.exports = {
+	id: 'double-hearts',
 	name: 'Double Hearts',
-	description: 'Doubles the value of every heart dropped by killing an enemy.',
-	flags: '-d, --double-hearts',
+	description: 'Doubles the value of every heart dropped',
 	explicit: true,
 	patch: [
 		{ offset: 0x474F, bytes: [ 0x04 ] },

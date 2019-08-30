@@ -4,7 +4,7 @@
 		"description": "The easiest mode for CV2R. Lots of hearts, reduced penalties, and a little more sanity around the enemization. A good place to star tfor brand new players.",
 		"patches": [
 			"double-hearts",
-			"hearts-patch",
+			"100-hearts",
 			"penalty-reduction"
 		]
 	},
@@ -13,7 +13,7 @@
 		"description": "The most common way to run CV2R. Some heart buffs to keep the game moving, but that's all the help you'll get. Merchant prices and enemy HP are randomized.",
 		"patches": [
 			"enemy-hp",
-			"hearts-patch",
+			"100-hearts",
 			"penalty-reduction",
 			"price-rando"
 		]

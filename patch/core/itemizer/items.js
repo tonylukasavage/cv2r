@@ -1,7 +1,5 @@
-const assemble = require('../../6502assembler');
-const bank = require('../../bank');
 const path = require('path');
-const { modSubroutine } = require('../../utils');
+const { assemble, bank, utils: { modSubroutine } } = require('../../../lib');
 
 let items = module.exports = [];
 
@@ -23,7 +21,7 @@ items.initItems = function initItems(pm) {
 			whip.bankCode[bankIndex] = `
 JSR $${loc.ram.toString(16)}
 `;
-		});    
+		});
 	});
 	whips.forEach(w => {
 		w.whip = true;
@@ -76,7 +74,7 @@ STA *$${w.memory.toString(16)}
 JSR $${loc.ram.toString(16)}
 `;
 			crystal.text = 'want a\ncrystal?';
-		});    
+		});
 	});
 
 	inventory.forEach(i => {
@@ -98,15 +96,15 @@ STA *$${i.memory.toString(16)}
 		{ name: 'silk bag', value: 0x01, icon: 0x5C, price: 100 },
 		{ name: 'magic cross', value: 0x02, icon: 0x5A, price: 100 },
 		{ name: 'laurels', value: 0x04, icon: 0x58, price: 50, count: 5, bankCode: [] },
-		{ name: 'garlic', value: 0x08, icon: 0x6D, price: 50, count: 2, bankCode: [] } 
+		{ name: 'garlic', value: 0x08, icon: 0x6D, price: 50, count: 2, bankCode: [] }
 	];
 
 	// TODO: can this be optimized for garlic and laurels to share?
 	// write subroutines to handle garlic and laurels since they require more logic
 	// than the other items in the game and would unnecessarily chew up rom space
-	const carryValues = [ 
-		{ memory: '4C', value: 0x04 }, 
-		{ memory: '4D', value: 0x08 } 
+	const carryValues = [
+		{ memory: '4C', value: 0x04 },
+		{ memory: '4D', value: 0x08 }
 	];
 	bankIndexes.forEach(bankIndex => {
 		carryValues.forEach(values => {
