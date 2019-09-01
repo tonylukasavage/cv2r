@@ -1,3 +1,7 @@
+## 0.1.5 - 2018-08-31
+
+* Huge refactor of patch system. Allows cv2r.com to generate roms with manually specified patches, instead of relying entirely on the difficulty system.
+
 ## 0.1.4 - 2018-08-28
 
 * Camilla still drops bag, but Death is back to dropping golden knife due to the fact that the same sprite used for the drop AND all dagger/knife usage by Simon
@@ -10,7 +14,7 @@
 
 * git tagging issue, no updates
 
-## 0.1.1 - 2018-08-26 
+## 0.1.1 - 2018-08-26
 
 * Rolled back ferry man jovah warp quirk fix, as it caused issues where you couldn't cross Dead River to Brahm's, even with heart equipped
 
