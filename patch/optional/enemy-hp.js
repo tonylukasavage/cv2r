@@ -4,18 +4,19 @@
 // if the first skeleton on a screen has its hp randomized to 3 hp, all skeletons on the
 // same screen will have 3 hp.
 module.exports = {
+	id: 'enemy-hp',
 	name: 'Enemy HP Randomizer',
-	description: 'Randomize enemy HP by +/-50%. All enemies of the same type on the same screen will end up with the same HP.',
+	short: 'Randomize enemy HP by +/-50%',
+	description: 'Randomize enemy HP by +/-50%',
 	patch: function(pm, opts) {
-		const core = require('../core');
-		const { randomInt } = require('../utils');
+		const { core, utils: { randomInt } } = require('../../lib');
 		const { rng } = opts;
 
 		core.forEach(loc => {
 			if (!loc.actors) { return; }
 			const hpMap = {};
 			loc.actors.filter(a => a.enemy && !a.boss).forEach(enemy => {
-				if (!hpMap[enemy.id]) { 
+				if (!hpMap[enemy.id]) {
 					const half = Math.floor(enemy.data / 2);
 					const range = enemy.data < 2 ? [ 1, 2 ] : [ enemy.data - half, enemy.data + half ];
 					hpMap[enemy.id] = randomInt(rng, ...range);

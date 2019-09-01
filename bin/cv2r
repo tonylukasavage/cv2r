@@ -5,14 +5,12 @@ const { cyan, gray, green, magenta, red, yellow } = require('chalk');
 const { exec } = require('child_process');
 const camelcase = require('camelcase');
 const cv2r = require('../lib/cv2r');
-const fs = require('fs');
 const os = require('os');
-const path = require('path');
+const patchManager = require('../lib/patch-manager');
 const program = require('commander');
 const { getDifficulties } = require('../lib/patch-manager');
 const { log, pad, printHeader } = require('../lib/utils');
 
-const palettes = fs.readdirSync(path.join(__dirname, '..', 'lib', 'palette')).map(p => p.replace(/\.js$/, ''));
 const optionList = array => array.map(a => magenta(a)).join(', ');
 const bin = process.platform === 'win32' ? 'node .\\bin\\cv2r' : './bin/cv2r';
 
@@ -20,15 +18,16 @@ program
 	.version(require('../package.json').version)
 	.description(`${yellow('Castlevania II: Simon\'s Quest Randomizer')} by ${red('Blood')}${cyan('Sweat')}And${green('Code')}`)
 	.usage('[options] [vanilla_rom_file]')
-	.option('-d, --difficulty <difficulty>', `Difficulty setting: ${optionList(getDifficulties())}`, 'standard')
+	.option('-d, --difficulty <difficulty>', `Difficulty setting: ${optionList(getDifficulties())}`)
 	.option('-j, --json', 'output patch and spoiler as json, disables all other output')
 	.option('-o, --output <output>', 'filepath for randomized rom output')
-	.option('-p, --palette <palette>', `palette selection: ${optionList(palettes)}`, 'simons-quest')
+	.option('-p, --palette <palette>', 'palette for the game, see list below', 'simons-quest')
 	.option('-r, --run', 'immediately run with emulator after randomizing (fceux or OpenEmu must be in PATH)')
 	.option('-s, --seed <seed>', 'seed to use for randomization')
+	.option('-x, --patch <patches>', 'comma separated list of patches to apply, see list below')
 	.option('-z, --debug', 'enable debug output');
 
-program.outputHelp = function() {
+program.outputHelp = async function() {
 	// make sure we don't have conflicting flags
 	const found = {};
 	this.options.forEach(o => {
@@ -67,9 +66,23 @@ program.outputHelp = function() {
 	console.log(gray('  # Generate a rom with a random seed using the "Rondo of Burb" palette'));
 	console.log(`  ${bin} --palette rondo-of-burb cv2.nes`);
 	console.log('');
+	console.log(gray('  # Generate a custom rom with a list of patches'));
+	console.log(`  ${bin} --patch enemy-hp,hearts-patch,price-rando cv2.nes`);
+	console.log('');
 	console.log(cyan('Options'));
 	this.options.forEach(o => console.log(`  ${p(o.flags)}  ${p(o.description)}`));
 	console.log('');
+	console.log('## PATCHES');
+	console.log('');
+	patchManager.getPatches().forEach(patch => {
+		console.log(`  ${p(patch.id)}  ${p(patch.short || patch.description)}`);
+	});
+	console.log('');
+	console.log('## PALETTES');
+	console.log('');
+	patchManager.getPatches('palette').forEach(patch => {
+		console.log(`  ${p(patch.id)}  ${p(patch.description)}`);
+	});
 };
 
 async function main() {
@@ -79,12 +92,22 @@ async function main() {
 		if (program.debug && !program.json) {
 			global.debug = true;
 		}
-		if (!getDifficulties().includes(program.difficulty)) {
+
+		if (!program.difficulty && !program.patch) {
+			program.difficulty = 'standard';
+		}
+		if (program.difficulty && program.patch) {
+			throw new Error('cannot set difficulty and patch list, must be one or the other');
+		}
+		if (!program.patch && !getDifficulties().includes(program.difficulty)) {
 			throw new Error(`invalid difficulty, valid choices are: ${optionList(getDifficulties())}`);
 		}
+
+		const palettes = (await patchManager.getPatches('palette')).map(p => p.id);
 		if (program.palette && !palettes.includes(program.palette)) {
 			throw new Error(`invalid palette, valid choices are: ${optionList(palettes)}`);
 		}
+		// eslint-disable-next-line
 		program.rom = program.args[0];
 
 		printHeader('options');

@@ -1,6 +1,5 @@
-const bank = require('../../bank');
 const path = require('path');
-const { modSubroutine } = require('../../utils');
+const { bank, utils: { modSubroutine } } = require('../../../lib');
 
 module.exports = {
 	patch: function(pm) {

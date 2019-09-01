@@ -1,12 +1,9 @@
 const _ = require('lodash');
-const assemble = require('../../6502assembler');
-const bank = require('../../bank');
-const core = require('../../core');
 const fs = require('fs').promises;
 const items = require('./items');
-const memory = require('../../memory-loc');
 const path = require('path');
-const { log, modData, modSubroutine, modText, pad, randomInt, textToBytes } = require('../../utils');
+const { assemble, bank, core, memory, utils } = require('../../../lib');
+const { log, modData, modSubroutine, modText, pad, randomInt, textToBytes } = utils;
 
 const sharedItemTypes = [
 	'garlicAljiba',
@@ -56,8 +53,8 @@ function randomize(rng) {
 	const itemDeps = countsSorted.sort((a,b) => a.value < b.value).map(c => c.name);
 
 	// Make a list of all items to be randomized. Whips are not specified by name
-	// as they are updated progressively. Same goes for crystals, though they have 
-	// item dependencies, so their order and adherence to dependencies still needs to be 
+	// as they are updated progressively. Same goes for crystals, though they have
+	// item dependencies, so their order and adherence to dependencies still needs to be
 	// maintained to avoid potential soft locks.
 	const itemList = [];
 	items.forEach(item => {
@@ -68,9 +65,9 @@ function randomize(rng) {
 		}
 	});
 
-	// attach an item randomly to an actor 
+	// attach an item randomly to an actor
 	function processItem(item, isDep) {
-		
+
 		// remove dependency from item list (yet to be placed items)
 		//const key = /crystal/.test(item) ? 'crystal' : item;
 		const key = item;
@@ -80,7 +77,7 @@ function randomize(rng) {
 		// get all actors for which requirements are met and no item has been placed
 		const choices = actors.filter(a => ((!a.requirements.includes(item) || !isDep) && !a.newItem));
 		if (!choices.length) {
-			throw new Error(`cannot find free actor for ${item}`); 
+			throw new Error(`cannot find free actor for ${item}`);
 		}
 
 		// choose a random actor in `choices` subset and assign the item to it
@@ -95,7 +92,7 @@ function randomize(rng) {
 
 		// add the requirement(s) of the chosen actor to all other actors that have the
 		// current item as a requirement. For example, if we assigned 'holy water' to an
-		// actor that has 'garlic' as a requirement, we need to add 'garlic' as a 
+		// actor that has 'garlic' as a requirement, we need to add 'garlic' as a
 		// requirement to all other actors that have 'holy water' as a requirement.
 		isDep && actors.forEach(a => {
 			if (a.requirements.includes(item)) {
@@ -112,7 +109,7 @@ function randomize(rng) {
 
 // Write and re-route data that determines the sales icon and prices for all merchants
 function modSaleData(pm) {
-	
+
 	// merchant sale data on bank 3 (copying the original data from unhacked ROM)
 	const saleBank = bank[3];
 	const file = path.join(__dirname, 'data', 'sale.txt');
@@ -155,7 +152,7 @@ function modSaleData(pm) {
 		saleValues[itemType] = saleOffset.toString(16);
 		const romLoc = saleBank.rom.start + saleBank.offset;
 		pm.add([ 0, 0, 0 ], romLoc);
-		core.getActor({ itemType }).salePointer = romLoc; 
+		core.getActor({ itemType }).salePointer = romLoc;
 		saleBank.offset += 3;
 		saleOffset += 3;
 	}
@@ -204,7 +201,7 @@ module.exports = {
 			}
 		});
 
-		// Establish unique id for each check by ensuring the $7F is set BEFORE a 
+		// Establish unique id for each check by ensuring the $7F is set BEFORE a
 		// a check actually gives you an item. By default this is only the case
 		// with sale merchants.
 		const checkIdDir = path.join(__dirname, 'checkId');
@@ -259,7 +256,7 @@ module.exports = {
 		itemActors.forEach(actor => {
 			let jsrBuf;
 			const item = items.find(i => i.name === actor.itemName);
-			
+
 			// garlic and laurels subroutine needs to access the appropriate bank
 			if ([ 'garlic', 'laurels' ].includes(item.name) || item.whip || item.crystal) {
 				item.code = item.bankCode[actor.bank];
@@ -333,8 +330,8 @@ STA *$01
 						buf = Buffer.concat([buf, Buffer.alloc(diff, 0xEA)]);
 					// still can't fit the code? We got a problem...
 					} else if (diff < 0) {
-						throw new Error(JSON.stringify({ 
-							message: 'still failed to write item code', item, actor 
+						throw new Error(JSON.stringify({
+							message: 'still failed to write item code', item, actor
 						}));
 					}
 
@@ -345,7 +342,7 @@ STA *$01
 					bank[actor.bank].offset += jsrCode.length;
 				} else if (actor.code.length > item.codeBytes.length) {
 					buf = Buffer.concat([buf, Buffer.alloc(diff, 0xEA)]);
-				} 
+				}
 
 				// write new code to the actor ROM location
 				pm.add([...buf], actor.code.loc.rom);
@@ -357,7 +354,7 @@ STA *$01
 				if (!item.crystal && !item.whip) {
 					actor.text = `${item.name.replace(' ', '\n')}?`;
 				}
-				
+
 				// handle price and sales icon
 				// first byte is the icon, next 2 are the price (0x01 0x72 == 172)
 				actor.sale = [ item.icon, Math.floor(item.price / 100), item.price % 100 ];
@@ -401,7 +398,7 @@ STA *$01
 			values: deathValues,
 			invoke: {
 				romLoc: 0x47D7,
-				bytes: [ 0xEA, 0xD0, 0x06 ] 
+				bytes: [ 0xEA, 0xD0, 0x06 ]
 			}
 		});
 
@@ -410,7 +407,7 @@ STA *$01
 			values: camillaValues,
 			invoke: {
 				romLoc: 0x47CF,
-				padding: 3 
+				padding: 3
 			}
 		});
 
@@ -425,7 +422,7 @@ STA *$01
 			values: orbValues,
 			invoke: {
 				romLoc: 0x47A7,
-				padding: 1 
+				padding: 1
 			}
 		});
 

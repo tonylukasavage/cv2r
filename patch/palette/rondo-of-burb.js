@@ -1,8 +1,9 @@
 module.exports = {
+	id: 'rondo-of-burb',
 	name: 'Rondo of Burb',
 	description: 'Burb\'s custom color palette',
 	patch: [
-		// Title Screen 
+		// Title Screen
 		{ offset: 0x01CAC9, bytes: '0F 28 03 1C 0F 28 20 1C' },
 		{ offset: 0x01CA8F, bytes: '0F 28 03 20 0F 00 0C 10 0F 28 03 1C 0F 28 1B 1C' },
 
@@ -78,7 +79,7 @@ module.exports = {
 		{ offset: 0x01202B, bytes: '0F 0F 0F 0F 0F 0F 0F 0F 0F 0F 0F 0F 0F 0F 0F 0F' },
 
 		//Endings
-		
+
 		//Best Ending
 		{ offset: 0x0127F9, bytes: '0F 00 20 10 0F 16 26 10 0F 07 05 1A 0F 04 38 10' },
 
