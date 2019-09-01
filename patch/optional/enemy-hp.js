@@ -7,7 +7,7 @@ module.exports = {
 	id: 'enemy-hp',
 	name: 'Enemy HP Randomizer',
 	short: 'Randomize enemy HP by +/-50%',
-	description: 'Randomize enemy HP by +/-50%. All enemies of the same type on the same screen will end up with the same HP.',
+	description: 'Randomize enemy HP by +/-50%',
 	patch: function(pm, opts) {
 		const { core, utils: { randomInt } } = require('../../lib');
 		const { rng } = opts;
