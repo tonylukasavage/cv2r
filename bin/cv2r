@@ -7,9 +7,10 @@ const camelcase = require('camelcase');
 const cv2r = require('../lib/cv2r');
 const os = require('os');
 const patchManager = require('../lib/patch-manager');
+const path = require('path');
 const program = require('commander');
 const { getDifficulties } = require('../lib/patch-manager');
-const { log, pad, printHeader } = require('../lib/utils');
+const { log, pad, printHeader, validateRom } = require('../lib/utils');
 
 const optionList = array => array.map(a => magenta(a)).join(', ');
 const bin = process.platform === 'win32' ? 'node .\\bin\\cv2r' : './bin/cv2r';
@@ -26,6 +27,27 @@ program
 	.option('-s, --seed <seed>', 'seed to use for randomization')
 	.option('-x, --patch <patches>', 'comma separated list of patches to apply, see list below')
 	.option('-z, --debug', 'enable debug output');
+
+program
+	.command('patch <name> [files...]')
+	.description(`create a cv2r patch
+
+Examples:
+
+  # create a patch by diff'ing a vanilla rom with a hacked rom 
+  ${bin} patch "My Patch Name" cv2.nes cv2-hacked.nes
+
+  # create a patch from an IPS file
+  ${bin} patch "My Patch Name" --method ips some-hack.ips`)
+	.option('-d, --description <description>', 'brief description of the patch to be created')
+	.option('-i, --id <id>', 'id for the patch, also used as its filename')
+	.option('-m, --method <method>', `method used to create patch: ${patchManager.getPatchMethods()}`, 'diff')
+	.option('-o, --output <output>', 'directory in which to store created patch', path.join(__dirname, '..', 'patch', 'optional'))
+	.option('-t, --type <type>', `type of patch to create: ${patchManager.order.join(', ')}`, 'optional')
+	.action(async (name, files, opts) => {
+		await patchManager.generatePatch(name, files, opts);
+		process.exit(0);
+	});
 
 program.outputHelp = async function() {
 	// make sure we don't have conflicting flags
@@ -109,6 +131,7 @@ async function main() {
 		}
 		// eslint-disable-next-line
 		program.rom = program.args[0];
+		if (program.rom) { validateRom(program.rom); }
 
 		printHeader('options');
 		const opts = _.pick(program, program.options.map(o => camelcase(o.long)).concat('rom'));
