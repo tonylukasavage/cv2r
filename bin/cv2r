@@ -10,7 +10,7 @@ const patchManager = require('../lib/patch-manager');
 const path = require('path');
 const program = require('commander');
 const { getDifficulties } = require('../lib/patch-manager');
-const { log, pad, printHeader } = require('../lib/utils');
+const { log, pad, printHeader, validateRom } = require('../lib/utils');
 
 const optionList = array => array.map(a => magenta(a)).join(', ');
 const bin = process.platform === 'win32' ? 'node .\\bin\\cv2r' : './bin/cv2r';
@@ -131,6 +131,7 @@ async function main() {
 		}
 		// eslint-disable-next-line
 		program.rom = program.args[0];
+		if (program.rom) { validateRom(program.rom); }
 
 		printHeader('options');
 		const opts = _.pick(program, program.options.map(o => camelcase(o.long)).concat('rom'));
