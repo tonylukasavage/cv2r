@@ -1,24 +1,31 @@
-## 0.1.5 - 2018-08-31
+## 0.1.6 - 2019-09-02
 
-* Huge refactor of patch system. Allows cv2r.com to generate roms with manually specified patches, instead of relying entirely on the difficulty system.
+* CV2 roms are validated when passed into the CLI
+* Added `cv2r patch` command to allow easily creating patches
+  * `cv2r patch --method diff cv2.nes cv2-hacked.nes` will generate a ready-to-use patch by diff'ing a vanilla CV2 ROM with a hacked CV2 ROM.
+  * `cv2r patch --method ips cv2.ips` will generate a ready-to-use patch by translating an existing [IPS patch](http://fileformats.archiveteam.org/wiki/IPS_(binary_patch_format)) into a cv2r-compatible form.
 
-## 0.1.4 - 2018-08-28
+## 0.1.5 - 2019-08-31
+
+* Huge refactor of patch system. Allows cv2r.com to generate roms with manually specified patches (using a comma-separated list with `--patch`), instead of relying entirely on the difficulty system.
+
+## 0.1.4 - 2019-08-28
 
 * Camilla still drops bag, but Death is back to dropping golden knife due to the fact that the same sprite used for the drop AND all dagger/knife usage by Simon
 
-## 0.1.3 - 2018-08-28
+## 0.1.3 - 2019-08-28
 
 * Boss drop sprites have been changed from golden knife and magic cross to be bags, like the ones inside orbs
 
-## 0.1.2 - 2018-08-28
+## 0.1.2 - 2019-08-28
 
 * git tagging issue, no updates
 
-## 0.1.1 - 2018-08-26
+## 0.1.1 - 2019-08-26
 
 * Rolled back ferry man jovah warp quirk fix, as it caused issues where you couldn't cross Dead River to Brahm's, even with heart equipped
 
-## 0.1.0 (alpha) - 2018-08-25
+## 0.1.0 (alpha) - 2019-08-25
 
 We are officially **alpha** boys!
 
@@ -26,7 +33,7 @@ We are officially **alpha** boys!
 * Fixed regression with jovah warp where the ferry man would be present in Jovah after warp
 * Safe guarding against sacred flame and secret merchants despawning by never using projectile enemies (fireballs, bones, or webs) in those screens
 
-## 0.0.21 - 2018-08-24
+## 0.0.21 - 2019-08-24
 
 ### [Youtube video explaining 0.0.21 update](https://www.youtube.com/watch?v=FI9WD07OFjM)
 
