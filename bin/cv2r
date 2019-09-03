@@ -1,10 +1,11 @@
 #!/usr/bin/env node
 
 const _ = require('lodash');
-const { cyan, gray, green, magenta, red, yellow } = require('chalk');
+const { cyan, gray, green, red, yellow } = require('chalk');
 const { exec } = require('child_process');
 const camelcase = require('camelcase');
 const cv2r = require('../lib/cv2r');
+const difficulty = require('../config/difficulty');
 const os = require('os');
 const patchManager = require('../lib/patch-manager');
 const path = require('path');
@@ -12,14 +13,14 @@ const program = require('commander');
 const { getDifficulties } = require('../lib/patch-manager');
 const { log, pad, printHeader, validateRom } = require('../lib/utils');
 
-const optionList = array => array.map(a => magenta(a)).join(', ');
+const optionList = array => array.map(a => green(a)).join(', ');
 const bin = process.platform === 'win32' ? 'node .\\bin\\cv2r' : './bin/cv2r';
 
 program
 	.version(require('../package.json').version)
 	.description(`${yellow('Castlevania II: Simon\'s Quest Randomizer')} by ${red('Blood')}${cyan('Sweat')}And${green('Code')}`)
 	.usage('[options] [vanilla_rom_file]')
-	.option('-d, --difficulty <difficulty>', `Difficulty setting: ${optionList(getDifficulties())}`)
+	.option('-d, --difficulty <difficulty>', 'difficulty setting for the game, see list below')
 	.option('-j, --json', 'output patch and spoiler as json, disables all other output')
 	.option('-o, --output <output>', 'filepath for randomized rom output')
 	.option('-p, --palette <palette>', 'palette for the game, see list below', 'simons-quest')
@@ -34,7 +35,7 @@ program
 
 Examples:
 
-  # create a patch by diff'ing a vanilla rom with a hacked rom 
+  # create a patch by diff'ing a vanilla rom with a hacked rom
   ${bin} patch "My Patch Name" cv2.nes cv2-hacked.nes
 
   # create a patch from an IPS file
@@ -49,7 +50,7 @@ Examples:
 		process.exit(0);
 	});
 
-program.outputHelp = async function() {
+program.outputHelp = function() {
 	// make sure we don't have conflicting flags
 	const found = {};
 	this.options.forEach(o => {
@@ -68,6 +69,18 @@ program.outputHelp = async function() {
 	// find the longest flags string in our options
 	const longest = Math.max(...(this.options.map(o => o.flags.length)));
 	const p = str => pad(str, longest);
+	const desc = text => {
+		const width = process.stdout.columns - longest - 20;
+		const rx = new RegExp('.{1,' + width + '}[\\s\\r\\n\\t]', 'g');
+		const lines = text.match(rx);
+		lines.forEach((line, index) => {
+			if (index) {
+				console.log(' '.repeat(longest + 4) + line);
+			} else {
+				process.stdout.write(line + '\n');
+			}
+		});
+	};
 
 	// print help
 	console.log(this.description());
@@ -94,13 +107,23 @@ program.outputHelp = async function() {
 	console.log(cyan('Options'));
 	this.options.forEach(o => console.log(`  ${p(o.flags)}  ${p(o.description)}`));
 	console.log('');
-	console.log('## PATCHES');
+	console.log(cyan('Difficulties'));
+	console.log('');
+	Object.keys(difficulty).forEach(key => {
+		const { description, patches } = difficulty[key];
+		process.stdout.write(`  ${p(key)}  `);
+		desc(description);
+		console.log(' '.repeat(longest + 4) + 'PATCHES: ' + green(patches.join(', ')));
+		console.log('');
+	});
+	console.log('');
+	console.log(cyan('Patches'));
 	console.log('');
 	patchManager.getPatches().forEach(patch => {
 		console.log(`  ${p(patch.id)}  ${p(patch.short || patch.description)}`);
 	});
 	console.log('');
-	console.log('## PALETTES');
+	console.log(cyan('Palettes'));
 	console.log('');
 	patchManager.getPatches('palette').forEach(patch => {
 		console.log(`  ${p(patch.id)}  ${p(patch.description)}`);
@@ -125,7 +148,7 @@ async function main() {
 			throw new Error(`invalid difficulty, valid choices are: ${optionList(getDifficulties())}`);
 		}
 
-		const palettes = (await patchManager.getPatches('palette')).map(p => p.id);
+		const palettes = patchManager.getPatches('palette').map(p => p.id);
 		if (program.palette && !palettes.includes(program.palette)) {
 			throw new Error(`invalid palette, valid choices are: ${optionList(palettes)}`);
 		}

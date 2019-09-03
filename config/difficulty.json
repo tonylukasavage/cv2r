@@ -1,10 +1,11 @@
 {
 	"easy": {
 		"name": "Easy",
-		"description": "The easiest mode for CV2R. Lots of hearts, reduced penalties, and a little more sanity around the enemization. A good place to star tfor brand new players.",
+		"description": "The easiest mode for CV2R. Lots of hearts, reduced penalties, and a little more sanity around the enemization. A good place to start for brand new players.",
 		"patches": [
 			"double-hearts",
 			"100-hearts",
+			"lazy-river",
 			"penalty-reduction"
 		]
 	},
@@ -20,7 +21,7 @@
 	},
 	"hard": {
 		"name": "Hard",
-		"description": "Ready for a challenge? No heart buffs with merchant prices and enemy HP randomized.",
+		"description": "Ready for a challenge? No help with your heart grinds. Merchant prices and enemy HP randomized.",
 		"patches": [
 			"enemy-hp",
 			"price-rando"
