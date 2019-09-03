@@ -1,3 +1,7 @@
+## 0.1.7 - 2019-09-02
+
+* "Lazy River" patch for vanilla enemies on Dead River
+
 ## 0.1.6 - 2019-09-02
 
 * CV2 roms are validated when passed into the CLI

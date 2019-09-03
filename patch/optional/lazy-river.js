@@ -22,7 +22,6 @@ module.exports = {
 			const locPick = _.pick(loc, [ 'objset', 'area', 'submap' ]);   
 			for (let drLoc of deadRiverLocs) {
 				if (equal(drLoc, locPick)) { 
-					console.log(drLoc, locPick);
 					return true; 
 				}
 			}
