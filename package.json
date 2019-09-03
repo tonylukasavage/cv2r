@@ -21,7 +21,8 @@
     "crc32": "^0.2.2",
     "lodash": "^4.17.13",
     "mkdirp": "^0.5.1",
-    "seedrandom": "^3.0.1"
+    "seedrandom": "^3.0.1",
+    "shallow-equal": "^1.2.0"
   },
   "devDependencies": {
     "ava": "^2.2.0",
