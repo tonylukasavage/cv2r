@@ -3,7 +3,7 @@
 * Immobile enemies no longer spawn at the top or bottom of stairs
 * Immobile enemies no longer spawn on the block climb to the top of Berkeley Mansion
 * The inescapable zigzag bat no longer appears on the stair climb out of Berkeley Mansion
-* Improved `cv2r --help` 
+* Improved `cv2r --help`
 
 ## 0.1.7 - 2019-09-02
 

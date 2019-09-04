@@ -19,10 +19,10 @@ module.exports = {
 		];
 
 		core.filter(loc => {
-			const locPick = _.pick(loc, [ 'objset', 'area', 'submap' ]);   
+			const locPick = _.pick(loc, [ 'objset', 'area', 'submap' ]);
 			for (let drLoc of deadRiverLocs) {
-				if (equal(drLoc, locPick)) { 
-					return true; 
+				if (equal(drLoc, locPick)) {
+					return true;
 				}
 			}
 			return false;

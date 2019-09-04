@@ -67,7 +67,7 @@ CLC
 ADC #$20
 STA *$91
 
-DONE 
+DONE
 PLA
 TAY
 PLP

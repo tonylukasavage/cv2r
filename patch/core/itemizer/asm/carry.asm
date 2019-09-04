@@ -18,7 +18,7 @@ CMP *$D0
 BCS C_DONE
 INC *$<%= memory %>
 
-C_DONE PLP 
+C_DONE PLP
 LDA *$<%= memory %>
 
 RTS

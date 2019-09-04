@@ -7,7 +7,7 @@ BNE CRYCHK
 LDA #$18
 BNE DONE
 
-CRYCHK 
+CRYCHK
 LDA $<%= saleIcons %>,Y
 CMP #$5E
 BEQ CRYS
@@ -16,7 +16,7 @@ BEQ CRYS
 CMP #$6E
 BNE DONE
 
-CRYS 
+CRYS
 LDA *$91
 AND #$60
 CLC
@@ -35,6 +35,6 @@ TAX
 LOAD LDA $<%= crystalIcons %>,X
 LDX $6000
 
-DONE 
+DONE
 PLP
-RTS 
+RTS
