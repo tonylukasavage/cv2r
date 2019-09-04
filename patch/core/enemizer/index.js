@@ -85,7 +85,6 @@ module.exports = {
 
 			// change enemies for the location based on the pattern table value
 			const enemies = object.enemiesBySpritePattern(spritePattern, { exclude });
-			const len = enemies.length;
 			loc.actors.forEach(a => {
 				// we're only randomizing enemies
 				if (!a.enemy) { return; }
@@ -93,8 +92,16 @@ module.exports = {
 				// no boss rando for now
 				if (a.boss) { return; }
 
+				// if this is an actor normally positioned on top or bottom of a staircase
+				// then don't replace it with an immobile enemy
+				let filteredEnemies = enemies.slice(0);
+				if (a.stairs) {
+					filteredEnemies = filteredEnemies.filter(e => !e.immobile);
+				}
+
 				// hey look, a new enemy!
-				const newEnemy = enemies[randomInt(rng, 0, len - 1)];
+				const len = filteredEnemies.length;
+				const newEnemy = filteredEnemies[randomInt(rng, 0, len - 1)];
 				a.id = newEnemy.id;
 
 				// try to stop spiders from killing themsevles below the screen
