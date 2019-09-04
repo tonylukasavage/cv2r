@@ -99,6 +99,12 @@ module.exports = {
 					filteredEnemies = filteredEnemies.filter(e => !e.immobile);
 				}
 
+				// remove this bat as it creates inescapable spawns in certain areas
+				// of Berkeley mansion
+				if (a.noZigZagBat) {
+					filteredEnemies = filteredEnemies.filter(e => e.name !== 'zigzag bat');
+				}
+
 				// hey look, a new enemy!
 				const len = filteredEnemies.length;
 				const newEnemy = filteredEnemies[randomInt(rng, 0, len - 1)];
