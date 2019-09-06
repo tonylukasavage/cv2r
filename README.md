@@ -60,7 +60,24 @@ You can now find your new cv2 rando rom in the `/path/to/cv2r/tmp` folder
 
 ## developer notes
 
-## sprite mapping
+### Death Fight
+
+`01:8D1C` execute breakpoint with X==#7
+
+$32A death y position
+$32B-$32D death scythe y position
+$34E death x position
+$34F-$351 death scythe x position
+$372 Death y delta
+$373 holds the next x pos increment of the scythe
+$384 Death y delta????
+$396 Death's x delta
+$397-$399 Death scythes' x delta
+$426 - 1 if death mirrored, 0 if not
+
+`07:E1B7`,`1E18B` code where value is added to scythe x position
+
+### sprite mapping
 
 | sprite | location |
 |--------|----------|
@@ -68,7 +85,7 @@ You can now find your new cv2 rando rom in the `/path/to/cv2r/tmp` folder
 | camilla drop (cross, 1st half) | $2A618-$2A619 |
 | camilla drop (cross, 2nd half) | $2A71E-$2A71F |
 
-## RAM mapping
+### RAM mapping
 
 | address | function                      |
 |---------|-------------------------------|
@@ -129,7 +146,7 @@ We use SRAM values ($6000-$7FFF) to track progressive whip and crystal upgrades 
 
 | memory | usage |
 |--------|-------|
-| $6000  | Temporary variable used to store original X register when loading the correct (with respect to progression) crystal sale icon for merchants | 
+| $6000  | Temporary variable used to store original X register when loading the correct (with respect to progression) crystal sale icon for merchants |
 | $600C  | Used by is-checked. A value of 1 means the current actor has already been checked. 0 means it has not and an item can still be acquired. |
 | $600D  | Temporary variable used to store original memory bank when bank switching is necessary, specifically in the game state checks for jovah warp and inventory deselect |
 | $600E  | If set to a non-zero value, it indicates that an actor should use its normal, non-refuse text despite having been marked as checked. This is necessary because most non-merchant actors add the item to your inventory _before_ they display their text. |
