@@ -13,9 +13,5 @@ JSR $C118
 LDA #$0E
 NOP
 NOP
-NOP
-NOP
-NOP
-NOP
 `
 };
