@@ -1,3 +1,7 @@
+## 0.1.9 - 2019-09-05
+
+* Fixed bug where projectiles from enemies sometimes were thrown in the wrong direction
+
 ## 0.1.8 - 2019-09-03
 
 * Immobile enemies no longer spawn at the top or bottom of stairs
