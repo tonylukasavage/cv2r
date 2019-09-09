@@ -1,3 +1,9 @@
+## 0.1.10 - 2019-09-08
+
+* GRAVEYARD DUCK!!!
+* Fixed a bug with the `cv2r patch` command
+* Added a tool for extracting sprite tables from a rom at `tools/sprite-extract.js`
+
 ## 0.1.9 - 2019-09-05
 
 * Fixed bug where projectiles from enemies sometimes were thrown in the wrong direction
