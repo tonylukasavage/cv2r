@@ -222,7 +222,7 @@ We use SRAM values ($6000-$7FFF) to track progressive whip and crystal upgrades 
 
 ### pattern table re-mapping
 
-I had to store new 1 byte values (high 4 bits are bg table, low 4 bits are sprite table) for every screen in the game. These needed to stored in a space that could be accessed mathematically based on 3 values: objset ($30), area ($50), and submap ($51 AND #$0xF). Those 3 values together compose a unique reference to every screen. The table below shows how I allocated free bytes in the ROM to essentially store a multi-dimensional array.
+I had to store new 1 byte values. High 3 bits are zero (but could be bg table), low 5 bits are sprite table for every screen in the game. These needed to stored in a space that could be accessed mathematically based on 3 values: objset ($30), area ($50), and submap ($51 AND #$0xF). Those 3 values together compose a unique reference to every screen. The table below shows how I allocated free bytes in the ROM to essentially store a multi-dimensional array.
 
 | objset | # of areas | # of submaps | map storage |
 |--------|------------|--------------|-------------|

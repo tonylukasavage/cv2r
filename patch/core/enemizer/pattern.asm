@@ -61,7 +61,7 @@ STA *$52
 TAY
 
 LDA $B720,Y
-AND #$0F
+AND #$1F
 STA $102
 
 PLA

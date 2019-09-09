@@ -16,6 +16,8 @@ const { log, pad, printHeader, validateRom } = require('../lib/utils');
 const optionList = array => array.map(a => green(a)).join(', ');
 const bin = process.platform === 'win32' ? 'node .\\bin\\cv2r' : './bin/cv2r';
 
+let isCommand = false;
+
 program
 	.version(require('../package.json').version)
 	.description(`${yellow('Castlevania II: Simon\'s Quest Randomizer')} by ${red('Blood')}${cyan('Sweat')}And${green('Code')}`)
@@ -40,14 +42,14 @@ Examples:
 
   # create a patch from an IPS file
   ${bin} patch "My Patch Name" --method ips some-hack.ips`)
-	.option('-d, --description <description>', 'brief description of the patch to be created')
+	.option('-d, --desc <desc>', 'brief description of the patch to be created')
 	.option('-i, --id <id>', 'id for the patch, also used as its filename')
 	.option('-m, --method <method>', `method used to create patch: ${patchManager.getPatchMethods()}`, 'diff')
 	.option('-o, --output <output>', 'directory in which to store created patch', path.join(__dirname, '..', 'patch', 'optional'))
 	.option('-t, --type <type>', `type of patch to create: ${patchManager.order.join(', ')}`, 'optional')
 	.action(async (name, files, opts) => {
+		isCommand = true;
 		await patchManager.generatePatch(name, files, opts);
-		process.exit(0);
 	});
 
 program.outputHelp = function() {
@@ -134,6 +136,8 @@ async function main() {
 	try {
 		// process command line arguments
 		program.parse(process.argv);
+		if (isCommand) { return; }
+
 		if (program.debug && !program.json) {
 			global.debug = true;
 		}
