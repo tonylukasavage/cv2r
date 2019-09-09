@@ -17,8 +17,10 @@ function ptv(bg, sprite) {
 const BASE_LOC_PTR = 0x7730;
 const OBJ_OFFSET = 0x30;
 const mapSize = [ 2, 4, 4, 5, 2, 2 ];
-const bgPatternMap = [ 0x00, 0x08, 0x02, 0x04, 0x06, 0x0B ];
 const spritePatternMap = [ 0x01, 0x09, 0x03, 0x05, 0x07, 0x0C ];
+
+// saving this variable, but we aren't using it because we don't randmize background table
+// const bgPatternMap = [ 0x00, 0x08, 0x02, 0x04, 0x06, 0x0B ];
 
 module.exports = {
 	patch: async function(pm, opts) {
@@ -42,7 +44,7 @@ module.exports = {
 			// don't enemize town or castlevania actors
 			if ([ 0x00, 0x05 ].includes(loc.objset) || loc.boss) {
 				loc.pattern = {
-					value: ptv(bgPatternMap[loc.objset], loc.camilla ? 0x0A : spritePatternMap[loc.objset]),
+					value: ptv(0, loc.camilla ? 0x0A : spritePatternMap[loc.objset]),
 					pointer: BASE_LOC_PTR + offset
 				};
 				return;
@@ -53,12 +55,12 @@ module.exports = {
 			// would work, but would be boring since it's only bats and zombies.
 			const spriteId = randomInt(rng, 1, 4);
 			const spritePattern = spritePatternMap[spriteId];
-			const bgPattern = bgPatternMap[loc.objset];
+			const bgPattern = 0;
 
 			// Assign bg and sprite pattern tables as single byte, as well as a pointer
 			// to this byte in memory.
 			loc.pattern = {
-				value: ptv(bgPattern, spritePattern),
+				value: ptv(0, spritePattern),
 				pointer: BASE_LOC_PTR + offset
 			};
 			if (!loc.actors) { return; }

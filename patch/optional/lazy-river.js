@@ -28,7 +28,8 @@ module.exports = {
 			return false;
 		}).forEach(loc => {
 			// use the fishman pattern table
-			pm.add([ (2 << 4) | 3 ], loc.pattern.pointer);
+			// value is 0x23 if bg table was included
+			pm.add([ 0x3 ], loc.pattern.pointer);
 
 			// re-insert vanilla enemies
 			if (loc.submap === 0) {
