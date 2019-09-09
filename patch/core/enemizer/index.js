@@ -17,7 +17,7 @@ function ptv(bg, sprite) {
 const BASE_LOC_PTR = 0x7730;
 const OBJ_OFFSET = 0x30;
 const mapSize = [ 2, 4, 4, 5, 2, 2 ];
-const spritePatternMap = [ 0x01, 0x09, 0x03, 0x05, 0x07, 0x0C ];
+const spritePatternMap = [ 0x01, 0x0A, 0x03, 0x05, 0x07, 0x0C ];
 
 // saving this variable, but we aren't using it because we don't randmize background table
 // const bgPatternMap = [ 0x00, 0x08, 0x02, 0x04, 0x06, 0x0B ];
@@ -44,7 +44,7 @@ module.exports = {
 			// don't enemize town or castlevania actors
 			if ([ 0x00, 0x05 ].includes(loc.objset) || loc.boss) {
 				loc.pattern = {
-					value: ptv(0, loc.camilla ? 0x0A : spritePatternMap[loc.objset]),
+					value: ptv(0, loc.death ? 0x09 : spritePatternMap[loc.objset]),
 					pointer: BASE_LOC_PTR + offset
 				};
 				return;
