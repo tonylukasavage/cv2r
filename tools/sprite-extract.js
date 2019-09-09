@@ -1,4 +1,4 @@
-const { green, red } = require('chalk');
+const { red } = require('chalk');
 const fs = require('fs');
 
 const [ name, rom, offset ] = process.argv.slice(2);
