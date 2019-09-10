@@ -53,8 +53,13 @@ module.exports = {
 			// Select a random sprite pattern table for the enemies we'll render in this
 			// screen. Currently this excludes town (0x01) and castlevania (0x0C). Town
 			// would work, but would be boring since it's only bats and zombies.
+			const [ forceEnemy, forceTable ] = opts.devForceEnemy ? opts.devForceEnemy.split(':') : [];
+			if (!forceEnemy !== !forceTable) {
+				throw new Error('must specify --dev-force-enemy as "enemyId:tableId"');
+			}
+
 			const spriteId = randomInt(rng, 1, 4);
-			const spritePattern = spritePatternMap[spriteId];
+			const spritePattern = forceTable ? parseInt(forceTable, 16) : spritePatternMap[spriteId];
 			const bgPattern = 0;
 
 			// Assign bg and sprite pattern tables as single byte, as well as a pointer
@@ -86,7 +91,12 @@ module.exports = {
 			}
 
 			// change enemies for the location based on the pattern table value
-			const enemies = object.enemiesBySpritePattern(spritePattern, { exclude });
+			let enemies;
+			if (forceEnemy) {
+				enemies = object.enemies.filter(e => e.id === parseInt(forceEnemy, 16));
+			} else {
+				enemies = object.enemiesBySpritePattern(spritePattern, { exclude });
+			}
 			loc.actors.forEach(a => {
 				// we're only randomizing enemies
 				if (!a.enemy) { return; }

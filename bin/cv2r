@@ -29,7 +29,8 @@ program
 	.option('-r, --run', 'immediately run with emulator after randomizing (fceux or OpenEmu must be in PATH)')
 	.option('-s, --seed <seed>', 'seed to use for randomization')
 	.option('-x, --patch <patches>', 'comma separated list of patches to apply, see list below')
-	.option('-z, --debug', 'enable debug output');
+	.option('-z, --debug', 'enable debug output')
+	.option('--dev-force-enemy <devForceEnemy>', 'Spawn only one type of enemy, specified as "enemyId:tableId". For example, spawning only harpies would be "--dev-force-enemy 0x3B:0x7". Values for enemy and table id can be found in lib/object.js.');
 
 program
 	.command('patch <name> [files...]')
@@ -107,7 +108,9 @@ program.outputHelp = function() {
 	console.log(`  ${bin} --patch enemy-hp,hearts-patch,price-rando cv2.nes`);
 	console.log('');
 	console.log(cyan('Options'));
-	this.options.forEach(o => console.log(`  ${p(o.flags)}  ${p(o.description)}`));
+	this.options
+		.filter(o => !/^--dev-/.test(o.flags))
+		.forEach(o => console.log(`  ${p(o.flags)}  ${p(o.description)}`));
 	console.log('');
 	console.log(cyan('Difficulties'));
 	console.log('');
@@ -130,6 +133,15 @@ program.outputHelp = function() {
 	patchManager.getPatches('palette').forEach(patch => {
 		console.log(`  ${p(patch.id)}  ${p(patch.description)}`);
 	});
+	console.log('');
+	console.log(cyan('Developer Flags'));
+	console.log('');
+	this.options
+		.filter(o => /^--dev-/.test(o.flags))
+		.forEach(o => {
+			process.stdout.write(`  ${p(o.flags)}  `);
+			desc(o.description);
+		});
 };
 
 async function main() {
