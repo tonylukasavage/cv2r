@@ -73,7 +73,7 @@ program.outputHelp = function() {
 	const p = str => pad(str, longest);
 	const desc = text => {
 		const width = process.stdout.columns - longest - 20;
-		const rx = new RegExp('.{1,' + width + '}[\\s\\r\\n\\t]', 'g');
+		const rx = new RegExp('.{1,' + width + '}(?:[\\s\\r\\n\\t$]|$)', 'g');
 		const lines = text.match(rx);
 		lines.forEach((line, index) => {
 			if (index) {
