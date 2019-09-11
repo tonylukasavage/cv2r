@@ -257,6 +257,10 @@ objset | pattern pointers | bg   | sprite | name
 4      | 0x1CD01          | 0x06 | 0x07   | graveyard
 5      | 0x1CD03          | 0x0B | 0x0C   | castlevania
 
+### flower
+
+animation code at `01:AAF9`, `6B09`
+
 ### random notes
 
 In RAM, `7:E373` is a subroutine that does 4 LSRs. `7:E378` does 4 ASLs.
