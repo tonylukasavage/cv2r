@@ -261,6 +261,14 @@ objset | pattern pointers | bg   | sprite | name
 
 animation code at `01:AAF9`, `6B09`
 
+### oak + orb
+
+`01:89F5`, `4A05` is oak hitting orb
+
+$B = #01 from oak pointer
+
+$303 = #AD for golden knife
+
 ### random notes
 
 In RAM, `7:E373` is a subroutine that does 4 LSRs. `7:E378` does 4 ASLs.
