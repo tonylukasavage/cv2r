@@ -1,5 +1,14 @@
 # CHANGELOG
 
+## 0.1.11 - 2019-09-12
+
+* Fixed oak stake glitches by replacing its sprite with the dagger/knife sprite, since it's available on all sprite tables.
+* Fixed bug with glitchy flower sprite by no longer animating the flower when it shoots a fireball
+* Fixed sprite glitch where visible sprite replaced the transparent "low priority" sprite in locations where there were marshes and dead hands.
+* Fixed intermittent sprite glitch that appeared on mansion spider's "line".
+* Fixed `--help` multi-line description output
+* Added `--dev-force-enemy <enemyId:tableId>` option to force only one type of enemy to be rendered in the randomizer. Useful for testing bugs related to specific enemies.
+
 ## 0.1.10 - 2019-09-08
 
 * GRAVEYARD DUCK!!!
