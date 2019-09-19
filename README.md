@@ -269,6 +269,97 @@ $B = #01 from oak pointer
 
 $303 = #AD for golden knife
 
+### audio
+
+$B1-$B6 are sound ids
+
+| sound | high byte | low byte | notes |
+|-------|-----------|----------|-------|
+| B1 | BD | B7 | |
+| B2 | BE | B8 | |
+| B3 | BF | B9 | |
+| B4 | C0 | BA | |
+| B5 | C1 | BB | simon sfx |
+| B6 | C2 | BC | |
+
+07:C0FB process audio
+
+
+#30 at NOISE_VOL ($400C) plus 8 NOPs
+#7F at $400D plus 8 NOPs
+
+
+$9D-9E mirrors $bb,$C1
+
+$164 determines which $4000+ range value gets set
+
+af = 1
+169 = a
+b5 = a
+bb = d6
+c1 = 82
+df = 0
+
+
+
+$AA = 0
+$164 = 3
+$168 = 0
+$169 = a
+$16a = 00
+$16b = 4
+$16c = APU_STATUS & #10
+
+$DF = 0
+
+$8137 where sound start?
+
+* whip (leather)
+  * $00AF = 0x01 (trigger sound)
+  * $00B5 = 0x0A (whip sound id)
+  * $00BB = 0xD6 (pointer?)
+  * $00C1 = 0x82 (pointer?)
+* jump landing
+  * $00AF = 0x01 (trigger sound)
+  * $00B5 = 0x07 (jump sound id)
+  * $00BB = 0xBE (pointer?)
+  * $00C1 = 0x82 (pointer?)
+
+$00A3 = 0x55 (?????? is this needed for timing?)
+
+
+$B4 CLC or SEC before sound set
+
+`00:82D6`, `2E6` whip sound?
+
+$B5 and $169 write #A
+
+00:A3B9
+
+169 = 0a
+3ea = 80
+3b5 = ff // triggers whip animation
+
+16a = ff // trigger sound?
+af = 1 // trigger sound?
+
+ 00:A2CE:AD 99 A2  LDA $A299 = #$37
+ 00:A2D1:85 A3     STA $00A3 = #$37
+ 00:A2D3:AD 9A A2  LDA $A29A = #$81
+ 00:A2D6:85 A4     STA $00A4 = #$81
+
+
+  00:9D9E:B5 B7     LDA $B7,X @ $00BB = #$D6
+ 00:9DA0:85 A1     STA $00A1 = #$D6
+ 00:9DA2:B5 BD     LDA $BD,X @ $00C1 = #$82
+ 00:9DA4:85 A2     STA $00A2 = #$82
+
+ 445 457 wgi pcount down
+
+ 457 whip stuff?
+
+ 3f???
+
 ### random notes
 
 In RAM, `7:E373` is a subroutine that does 4 LSRs. `7:E378` does 4 ASLs.
