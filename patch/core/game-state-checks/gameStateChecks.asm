@@ -31,6 +31,17 @@ STA *$26
 LDA #$01
 STA $600F
 
+; setup warp sound
+LDA #$2D
+STA *$B4
+LDA #$A5
+STA *$BA
+LDA #$85
+STA *$C0
+LDA #$01
+STA *$C6
+STA *$AE
+
 ; pop return address and reset flags
 PLA
 PLA
