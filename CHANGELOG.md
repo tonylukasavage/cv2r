@@ -2,7 +2,8 @@
 
 ## 0.1.12 - (unreleased)
 
-* initial crowd control experiments (only local SDK testing support)
+* OHKO! Everything that does damage kills you in one hit. The lone exception is marshes, which still do the same amount of damage they always did. I may introduce a "OHKO Extreme" mode later where marshes also kill in one touch, but that would require logic changes to make everything left of Belasco Marsh require laurels, and that's a bigger change than I wanna make now.
+* Added sound to jovah warp (up+a)
 
 ## 0.1.11 - 2019-09-12
 
