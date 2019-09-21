@@ -1,9 +1,10 @@
 # CHANGELOG
 
-## 0.1.12 - (unreleased)
+## 0.1.12 - 2019-09-21
 
 * OHKO! Everything that does damage kills you in one hit. The lone exception is marshes, which still do the same amount of damage they always did. I may introduce a "OHKO Extreme" mode later where marshes also kill in one touch, but that would require logic changes to make everything left of Belasco Marsh require laurels, and that's a bigger change than I wanna make now.
 * Added sound to jovah warp (up+a)
+* Not strictly tied to CV2R, but I created the [cv2-crowd-control](https://github.com/BloodSweatAndCode/cv2-crowd-control) project to eventually support [Crowd Control](https://crowdcontrol.live/) with both CV2 and CV2R.
 
 ## 0.1.11 - 2019-09-12
 
