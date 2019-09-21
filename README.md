@@ -60,6 +60,28 @@ You can now find your new cv2 rando rom in the `/path/to/cv2r/tmp` folder
 
 ## developer notes
 
+### collision detection
+
+Marsh does 1 HP of damage every 16 frames, or more specifically, any time you are in the marsh and the global counter ($1D) & 0x0F == 0.
+
+Damage calculated at 03:8031
+
+Damage applied at:
+07:D354 - spikes/marsh (accumulator holds damage value and gets set in $08)
+07:D356 - all other damage ($08 already set to damage specific to enemy)
+
+$0C == 0x03 when taking taking from marsh/spikes
+
+$500-$6FF used for environment collision detection
+* AA = water
+* FF = marsh/spikes
+
+$8F used for marsh and spikes
+* 00 = town
+* 01 = town room
+* 41 = marsh
+* 81 = spikes
+
 ### Death Fight
 
 `01:8D1C` execute breakpoint with X==#7
