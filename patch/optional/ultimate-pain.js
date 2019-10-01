@@ -1,5 +1,5 @@
 module.exports = {
-	id: 'ultimate-pain',
+	id: 'invisible-enemies',
 	name: 'Invisible Enemies',
 	description: 'The ULTIMATE pain, Invisible enemies - including bosses!',
 	patch: [
