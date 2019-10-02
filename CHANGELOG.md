@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 0.1.15 - 2019-10-02
+
+* "Samus" is a new experimental optional patch that lets you play as Samus, minus the Power Suit. Anything sharing Simon's palette (like HP and hearts) is gonna change to match Samus's colors, meaning lots of green.
+
 ## 0.1.14 - 2019-10-01
 
 * Fixed bug with invisible enemies patch filename
