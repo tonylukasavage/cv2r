@@ -1052,7 +1052,7 @@ finalSpritePatch.push({
 
 module.exports = {
 	id: 'samus',
-	name: 'Samus',
+	name: 'Samus (experimental)',
 	description: 'Samus, minus the Power Suit',
 	patch: finalSpritePatch
 };
