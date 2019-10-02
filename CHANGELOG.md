@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 0.1.14 - 2019-10-01
+
+* Fixed bug with invisible enemies patch filename
+
 ## 0.1.13 - 2019-10-01
 
 Thanks to Burb for this update, it was all him!
