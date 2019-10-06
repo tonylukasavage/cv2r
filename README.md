@@ -60,6 +60,33 @@ You can now find your new cv2 rando rom in the `/path/to/cv2r/tmp` folder
 
 ## developer notes
 
+### managing text
+
+character values are tile index in PPU CHR viewer
+
+space = 1
+new line = 2
+next screen = 3
+
+$126C2 is first char of ending text
+
+ROM ~$12730 for ending text
+
+$47D is y line of ending text
+$47E index for what line of ending that we're on (continues over screens)
+$47F is x pos of ending text character
+$480 ???? (0x35)
+$481 dracule resurrect on zero?
+$483 countdown of screens left?
+
+
+$5E is x pos of text
+$5F is y pos of text
+
+### death counting
+
+07:C294, 01C2A4
+
 ### collision detection
 
 Marsh does 1 HP of damage every 16 frames, or more specifically, any time you are in the marsh and the global counter ($1D) & 0x0F == 0.
@@ -175,6 +202,8 @@ We use SRAM values ($6000-$7FFF) to track progressive whip and crystal upgrades 
 | $600F  | If set to 0x01 a jovah warp is currently in progress |
 | $6010-$601B | Tracks whip progression. When you acquire a whip, it adds an entry to this range which marks the actor as "checked". The range consists of 3 entries, 4 bytes in size each. The 4 bytes, in order, are: objset($30), area($50), submap($51 & 0x7), actor identifier($7F) |
 | $601C-$6024 | Tracks crystal progression. When you acquire a crystal, it adds an entry to this range which marks the actor as "checked". The range consists of 2 entries, 4 bytes in size each. The 4 bytes, in order, are: objset($30), area($50), submap($51 & 0x7), actor identifier($7F) |
+| $6030 | Stats - death count |
+| $6031-$6032 | Stats - Kill count |
 
 ### unused but interesting values
 
