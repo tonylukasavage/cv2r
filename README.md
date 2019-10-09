@@ -179,7 +179,9 @@ We use SRAM values ($6000-$7FFF) to track progressive whip and crystal upgrades 
 | $600F  | If set to 0x01 a jovah warp is currently in progress |
 | $6010-$601B | Tracks whip progression. When you acquire a whip, it adds an entry to this range which marks the actor as "checked". The range consists of 3 entries, 4 bytes in size each. The 4 bytes, in order, are: objset($30), area($50), submap($51 & 0x7), actor identifier($7F) |
 | $601C-$6024 | Tracks crystal progression. When you acquire a crystal, it adds an entry to this range which marks the actor as "checked". The range consists of 2 entries, 4 bytes in size each. The 4 bytes, in order, are: objset($30), area($50), submap($51 & 0x7), actor identifier($7F) |
-| $6030-XXXX| Stats - 1st death count |
+| $6030 | Death count |
+| $6031-$6032 | Kill count |
+| $6033-$6034 | Hearts picked up |
 
 ### unused but interesting values
 
