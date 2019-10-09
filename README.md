@@ -60,6 +60,41 @@ You can now find your new cv2 rando rom in the `/path/to/cv2r/tmp` folder
 
 ## developer notes
 
+### managing text
+
+20 AE D8 CE D2 D4 D3 EE D8 01 D6 DA CA D8 D9 02 20 EE D4 CB 01 D7 CA DB CA D3 CC CA 01 EF 02 21 2E CE D3 C6 D7 C8 CE D8 D8 CE D8 D2 01 CE D8 02
+
+14 characters across on each line
+4 lines per screen
+
+character values are tile index in PPU CHR viewer
+
+space = 1
+new line = 2
+next screen = 3
+4
+5
+6
+
+$126C2 is first char of ending text
+
+ROM ~$12730 for ending text
+
+$47A 1 - text, 2 - no simon, 3 - rumbling, 4 - drac starts rising, 7 - hand out
+$47B
+$47C coutndown til next screen transition after end text leading to draula rising (0x10)
+$47D is y line of ending text
+$47E index for what line of ending that we're on (continues over screens)
+$47F is x pos of ending text character
+$480 countdown til next char??? (??? for each char, 0x35 between lines)
+$481 dracule resurrect on not zero?
+$482 countdown til next screen (starts at 0x40)
+$483 ending screen index
+$484 id of screens for final screen
+
+$5E is x pos of text
+$5F is y pos of text
+
 ### death counting
 
 07:C294, 01C2A4
@@ -182,6 +217,7 @@ We use SRAM values ($6000-$7FFF) to track progressive whip and crystal upgrades 
 | $6030 | Death count |
 | $6031-$6032 | Kill count |
 | $6033-$6034 | Hearts picked up |
+
 
 ### unused but interesting values
 

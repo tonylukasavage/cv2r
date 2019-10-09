@@ -1,5 +1,20 @@
 # CHANGELOG
 
+## 0.1.15 - 2019-10-02
+
+* "Samus" is a new experimental optional patch that lets you play as Samus, minus the Power Suit. Anything sharing Simon's palette (like HP and hearts) is gonna change to match Samus's colors, meaning lots of green.
+
+## 0.1.14 - 2019-10-01
+
+* Fixed bug with invisible enemies patch filename
+
+## 0.1.13 - 2019-10-01
+
+Thanks to Burb for this update, it was all him!
+
+* "Paint It Black" optional patch where everything except Simon, enemies, stairs, and orbs are black
+* "Invisible Enemies" optional patch that, well, makes enemies invisible, including bosses!
+
 ## 0.1.12 - 2019-09-21
 
 * OHKO! Everything that does damage kills you in one hit. The lone exception is marshes, which still do the same amount of damage they always did. I may introduce a "OHKO Extreme" mode later where marshes also kill in one touch, but that would require logic changes to make everything left of Belasco Marsh require laurels, and that's a bigger change than I wanna make now.
