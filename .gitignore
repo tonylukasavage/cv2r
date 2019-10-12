@@ -2,6 +2,8 @@ tmp
 output
 roms
 *.nes
+*.deb
+*.zip
 node_modules
 .DS_Store
 cv2.ips
