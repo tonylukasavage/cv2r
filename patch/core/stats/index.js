@@ -1,5 +1,5 @@
 const path = require('path');
-const { bank, utils: { modData, modSubroutine } } = require('../../../lib');
+const { bank, memory, utils: { modData, modSubroutine } } = require('../../../lib');
 
 module.exports = {
 	patch: function(pm) {
@@ -21,14 +21,24 @@ module.exports = {
 			}
 		});
 
-		const mod = modData(pm.name, path.join(__dirname, 'data', 'stat-names.txt'), bank[4]);
+		const bcdTableLow = modData(pm.name, path.join(__dirname, 'data', 'bcd-table-low.txt'), bank[4]);
+		const bcdTableHigh = modData(pm.name, path.join(__dirname, 'data', 'bcd-table-high.txt'), bank[4]);
+		memory.bcd16 = modSubroutine(pm.name, path.join(__dirname, 'asm', 'bcd16.asm'), bank[4], {
+			values: {
+				bcdTableLow: bcdTableLow.ram.toString(16),
+				bcdTableHigh: bcdTableHigh.ram.toString(16)
+			}
+		});
+
+		const statNames = modData(pm.name, path.join(__dirname, 'data', 'stat-names.txt'), bank[4]);
 		modSubroutine(pm.name, path.join(__dirname, 'asm', 'stats.asm'), bank[4], {
 			invoke: {
 				romLoc: 0x122CC,
 				padding: 2
 			},
 			values: {
-				statNames: mod.ram.toString(16)
+				statNames: statNames.ram.toString(16),
+				bcd16: memory.bcd16.ram.toString(16)
 			}
 		});
 
