@@ -6,6 +6,11 @@
 ; $D3-$D7 - 5 digit decimal number, stored lowest to highest.
 ;           Ex. 12345 stored as 05 04 03 02 01
 
+TXA
+PHA
+TYA
+PHA
+
 ; clear result values
 LDA #$00
 STA *$D3
@@ -44,5 +49,10 @@ DEX
 BNE LOOP
 LDA *$D1
 STA *$D3
+
+PLA
+TAY
+PLA
+TAX
 
 RTS

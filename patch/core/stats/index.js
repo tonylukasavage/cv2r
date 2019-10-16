@@ -30,7 +30,9 @@ module.exports = {
 			}
 		});
 
+		const statLoc = modData(pm.name, path.join(__dirname, 'data', 'stat-loc.txt'), bank[4]);
 		const statNames = modData(pm.name, path.join(__dirname, 'data', 'stat-names.txt'), bank[4]);
+		const writeStats = modSubroutine(pm.name, path.join(__dirname, 'asm', 'write-stats.asm'), bank[4]);
 		modSubroutine(pm.name, path.join(__dirname, 'asm', 'stats.asm'), bank[4], {
 			invoke: {
 				romLoc: 0x122CC,
@@ -38,7 +40,9 @@ module.exports = {
 			},
 			values: {
 				statNames: statNames.ram.toString(16),
-				bcd16: memory.bcd16.ram.toString(16)
+				bcd16: memory.bcd16.ram.toString(16),
+				writeStats: writeStats.ram.toString(16),
+				statLoc: statLoc.ram.toString(16)
 			}
 		});
 

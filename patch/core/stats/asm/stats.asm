@@ -19,26 +19,22 @@ BNE NAME
 STX *$22
 
 ; setup deaths
-LDA $6030
+LDY #$00
+LDX #$00
+DOSTAT
+LDA $6030,Y
 STA *$D2
-LDA $6031
+LDA $6031,Y
 STA *$D1
 JSR $<%= bcd16 %>
-
-; load each character of stat value into PPU instructions
-LDX #$05
-LDY #$0E
-; +14
-LOOPCH
-LDA *$D2,X
-BEQ NEXTCH
-CLC
-ADC #$E0
-STA $700,Y
-NEXTCH
+LDA $<%= statLoc %>,X
+STA *$D0
+JSR $<%= writeStats %>
 INY
-DEX
-BNE LOOPCH
+INY
+INX
+CMP #$03
+BNE DOSTAT
 
 DONE
 PLA
