@@ -1,0 +1,20 @@
+; original code we replaced
+JSR $C82E
+
+PHP
+
+LDA $6031
+CMP #$FF
+BNE LOW
+LDA $6030
+CMP #$FF
+BEQ DONE
+INC $6030
+LDA #$00
+STA $6031
+BEQ DONE
+LOW INC $6031
+
+DONE
+PLP
+RTS

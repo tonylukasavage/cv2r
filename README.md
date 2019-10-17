@@ -60,7 +60,33 @@ You can now find your new cv2 rando rom in the `/path/to/cv2r/tmp` folder
 
 ## developer notes
 
+====PPU Instruction Format====
+ Byte 1 - Sets PPU_CONTROL value
+ Bytes 2-3 - 2 bytes written to PPU_ADDRESS (high byte first)
+ Byte 4-N - Writes byte 4 to PPU_DATA (i.e., adding sprite/tile to screen)
+
+ Instructions are followed by 0xFF, signaling the end of the PPU instruction
+
 ### managing text
+
+$22 tells PPU what the last instruction is (the number of values in the 700 range)
+
+A2CD (122DD) - LDA #$0E change to LDA #$0A to stay on end screen
+
+A2B9 (122C9) - $47A gets incremented, when equals 0x07, final screen
+
+PPU 208e - C9CAC6D9CDD8010101E1E2E3E4E50101
+01010000000000000000A2A4BBBCBDBE
+A7010101010101010101010101010101
+01010000000000000000B4BF0101C0C1
+D0CED1D1D801010101E1E2E3E4E50101
+010100000000000000C2C3A7010101C4
+A6A70101010101010101010101010101
+0101000000000000AF0101010101ADC5
+CDCAC6D7D9D8010101E1E2E3E4E5
+
+
+
 
 20 AE D8 CE D2 D4 D3 EE D8 01 D6 DA CA D8 D9 02 20 EE D4 CB 01 D7 CA DB CA D3 CC CA 01 EF 02 21 2E CE D3 C6 D7 C8 CE D8 D8 CE D8 D2 01 CE D8 02
 
@@ -78,8 +104,21 @@ next screen = 3
 
 $126C2 is first char of ending text
 
-ROM ~$12730 for ending text
+$18 is game state
+0 - black screen
+1 - start screen
+4 - immediately following 0x0F game starting
+5 - immediately following 0x04, main game state
+6 - after death, goes back to 0x05
+7 - continue screen
+8 - game start/password screen, also password entry screen
+A - ending screen
+E - after ending screen, just before transitioning back to start screen, then goes to 0x00, then 0x01
+F - game starting?
 
+
+ROM ~$12730 for ending text
+$1E start screen when 1
 $47A 1 - text, 2 - no simon, 3 - rumbling, 4 - drac starts rising, 7 - hand out
 $47B
 $47C coutndown til next screen transition after end text leading to draula rising (0x10)
@@ -214,8 +253,10 @@ We use SRAM values ($6000-$7FFF) to track progressive whip and crystal upgrades 
 | $600F  | If set to 0x01 a jovah warp is currently in progress |
 | $6010-$601B | Tracks whip progression. When you acquire a whip, it adds an entry to this range which marks the actor as "checked". The range consists of 3 entries, 4 bytes in size each. The 4 bytes, in order, are: objset($30), area($50), submap($51 & 0x7), actor identifier($7F) |
 | $601C-$6024 | Tracks crystal progression. When you acquire a crystal, it adds an entry to this range which marks the actor as "checked". The range consists of 2 entries, 4 bytes in size each. The 4 bytes, in order, are: objset($30), area($50), submap($51 & 0x7), actor identifier($7F) |
-| $6030 | Stats - death count |
-| $6031-$6032 | Stats - Kill count |
+| $6030-$6031 | Death count |
+| $6032-$6033 | Kill count |
+| $6034-$6035 | Hearts picked up |
+
 
 ### unused but interesting values
 
