@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## 0.1.16 - 2019-10-16-2019
+
+* STATS! Shows the number of death, enemy kills, and hearts collected on the final ending screen.
+* I had fun with an alternate set of text for the best ending. Enjoy! :P
+
 ## 0.1.15 - 2019-10-02
 
 * "Samus" is a new experimental optional patch that lets you play as Samus, minus the Power Suit. Anything sharing Simon's palette (like HP and hearts) is gonna change to match Samus's colors, meaning lots of green.
