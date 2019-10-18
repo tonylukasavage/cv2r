@@ -1,6 +1,11 @@
 # CHANGELOG
 
-## 0.1.16 - 2019-10-16-2019
+## 0.1.17 - 2019-10-18
+
+* Fix best ending text glitch
+* Additional checks to prevent immobile enemies on stairs and other bad locations
+
+## 0.1.16 - 2019-10-16
 
 * STATS! Shows the number of death, enemy kills, and hearts collected on the final ending screen.
 * I had fun with an alternate set of text for the best ending. Enjoy! :P
