@@ -60,6 +60,15 @@ You can now find your new cv2 rando rom in the `/path/to/cv2r/tmp` folder
 
 ## developer notes
 
+### QK
+
+$3B7-$3B9 weapon index
+$8C67 = 0xB9 = 185 damage
+
+When weapon index is set to 0x80 on last frame, it points to the 185 damage
+
+### PPU writing
+
 ====PPU Instruction Format====
  Byte 1 - Sets PPU_CONTROL value
  Bytes 2-3 - 2 bytes written to PPU_ADDRESS (high byte first)
@@ -133,10 +142,6 @@ $484 id of screens for final screen
 
 $5E is x pos of text
 $5F is y pos of text
-
-### death counting
-
-07:C294, 01C2A4
 
 ### collision detection
 
