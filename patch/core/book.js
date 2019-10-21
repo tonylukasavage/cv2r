@@ -23,21 +23,22 @@ module.exports = {
 			} else if (item.includes('crystal')) {
 				item = 'crystal';
 			}
-			
 			// set clue text based on actor type
 			if (actor === 'Death') {
 				clues.push('Death guards\n' + item);
 			} else if (actor === 'Camilla') {
 				clues.push('Camilla\ndefends\n' + item);
 			} else if (actor === 'merchant') {
-				//ignore basic merchants to make clues more relevant
-				//clues.push(item + '\nfor sale in\n' + location);
+				// ignore basic merchants to make clues more relevant
+				// clues.push(item + '\nfor sale in\n' + location);
 			} else if (actor === 'sacred flame') {
 				clues.push(item + '\nis hidden\non Dabi\'s Path');
 			} else if (actor === 'orb') {
 				clues.push(item + '\nhidden in\n' + location + ' orb');
-			} else if (actor === 'crystal dude' || actor === 'secret merchant') {
+			} else if (actor === 'crystal dude') {
 				clues.push('Get a free\n' + item + '\nin ' + location);
+			} else if (actor === 'secret merchant') {
+				clues.push('Garlic Addict\nhas ' + item + '\nin ' + location);
 			}
 		});
 
@@ -51,16 +52,13 @@ module.exports = {
 
 				// make sure new text does not exceed the text it is replacing
 				if (clues[index].length > maxlength) {
-					//trim some words out to try to make it fit
-					clues[index] = clues[index].replace(/ ?mansion/i, '');
-					clues[index] = clues[index].replace(/ ?graveyard/i, '');
-					clues[index] = clues[index].replace(/ ?woods/i, '');
-					clues[index] = clues[index].replace(/ ?cemetery/i, '');
-					
-					//trim end whitespace
+					// trim some words out to try to make it fit
+					clues[index] = clues[index].replace(/ ?(?:mansion|graveyard|woods)/i, '');
+					clues[index] = clues[index].replace(/camilla cemetery/i, 'cemetery');
+					// trim end whitespace
 					clues[index] = clues[index].trim();
-					
-					//hard truncate if that wasn't enough
+
+					// hard truncate if that wasn't enough
 					if (clues[index].length > maxlength) {
 						clues[index] = clues[index].slice(0, maxlength - 1);
 					}
