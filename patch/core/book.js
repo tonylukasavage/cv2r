@@ -38,7 +38,7 @@ module.exports = {
 				clues.push(item + '\nis hidden\non Dabi\'s Path');
 			} else if (actor === 'orb') {
 				clues.push(item + '\nhidden in\n' + location + ' orb');
-			} else if (actor === 'crystal dude') {
+			} else if (actor === 'crystal dude' || actor === 'secret merchant') {
 				clues.push('Get a free\n' + item + '\nin ' + location);
 			}
 		});
