@@ -1,5 +1,5 @@
 
-const { core, utils: { randomInt, textToBytes }} = require('../../lib');
+const { core, utils: { log, randomInt, textToBytes }} = require('../../lib');
 
 module.exports = {
 	patch: function(pm, opts) {
@@ -43,6 +43,8 @@ module.exports = {
 			}
 		});
 
+		log('Book Clues');
+		log('----------');
 		core.forEach(loc => {
 			if (!loc.actors) { return; }
 			loc.actors.filter(a => a.fixture && a.name === 'book').forEach(a => {
@@ -53,6 +55,10 @@ module.exports = {
 				while (clues[index].length > maxlength) {
 					clues[index] = clues[index].slice(0, maxlength - 1);
 				}
+				log(`[${a.text.length}] ` + a.text.replace(/\n/g, ' '));
+				log(`[${clues[index].length}] ` + clues[index].replace(/\n/g, ' '));
+				log('---');
+
 				const textBytes = textToBytes(clues[index]);
 				pm.add(textBytes, a.textPointer);
 
