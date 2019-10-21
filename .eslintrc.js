@@ -30,6 +30,10 @@ module.exports = {
 		],
 		'space-before-blocks': [
 			'error'
+		],
+		'eqeqeq': [
+			'error',
+			'smart'
 		]
 	}
 };
