@@ -23,7 +23,7 @@ module.exports = {
 			} else if (item.includes('crystal')) {
 				item = 'crystal';
 			}
-			log(actor);
+			
 			// set clue text based on actor type
 			if (actor === 'Death') {
 				clues.push('Death guards\n' + item);
