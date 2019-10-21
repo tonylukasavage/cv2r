@@ -21,10 +21,10 @@ module.exports = {
 			location = location.trim();
 
 			// normalize whip and crystal text
-			if (item.includes('whip')) {
-				item = 'a whip';
+			if (item.includes('whip') || item.includes('morning star')) {
+				item = 'whip';
 			} else if (item.includes('crystal')) {
-				item = 'a crystal';
+				item = 'crystal';
 			}
 
 			// set clue text based on actor type
@@ -33,13 +33,13 @@ module.exports = {
 			} else if (actor === 'Camilla') {
 				clues.push('Camilla\ndefends\n' + item);
 			} else if (actor === 'merchant') {
-				clues.push('A merchant\nsells\n' + item + '\nin ' + location);
+				clues.push(item + '\nfor sale in\n' + location);
 			} else if (actor === 'sacred flame') {
 				clues.push(item + '\nis hidden\non Dabi\'s Path');
 			} else if (actor === 'orb') {
-				clues.push(location + ' hides\n' + item);
+				clues.push(item + '\nhidden in\n' + location + ' orb');
 			} else if (actor === 'crystal dude') {
-				clues.push('someone is\ngiving away\n' + item + '\nin ' + location);
+				clues.push('Get a free\n' + item + '\nin ' + location);
 			}
 		});
 
