@@ -14,9 +14,6 @@ module.exports = {
 			// remove parenthesized text from location
 			location = location.replace(/\(.*/, '');
 
-			// scrap "Mansion" qualifier
-			location = location.replace(/Mansion.*/, '');
-
 			// get rid of any extra whitespace
 			location = location.trim();
 
@@ -26,14 +23,15 @@ module.exports = {
 			} else if (item.includes('crystal')) {
 				item = 'crystal';
 			}
-
+			log(actor);
 			// set clue text based on actor type
 			if (actor === 'Death') {
 				clues.push('Death guards\n' + item);
 			} else if (actor === 'Camilla') {
 				clues.push('Camilla\ndefends\n' + item);
 			} else if (actor === 'merchant') {
-				clues.push(item + '\nfor sale in\n' + location);
+				//ignore basic merchants to make clues more relevant
+// 				clues.push(item + '\nfor sale in\n' + location);
 			} else if (actor === 'sacred flame') {
 				clues.push(item + '\nis hidden\non Dabi\'s Path');
 			} else if (actor === 'orb') {
@@ -52,8 +50,20 @@ module.exports = {
 				const maxlength = a.text.length;
 
 				// make sure new text does not exceed the text it is replacing
-				while (clues[index].length > maxlength) {
-					clues[index] = clues[index].slice(0, maxlength - 1);
+				if (clues[index].length > maxlength) {
+					//trim some words out to try to make it fit
+					clues[index] = clues[index].replace(/ ?mansion/i, '');
+					clues[index] = clues[index].replace(/ ?graveyard/i, '');
+					clues[index] = clues[index].replace(/ ?woods/i, '');
+					clues[index] = clues[index].replace(/ ?cemetery/i, '');
+					
+					//trim end whitespace
+					clues[index] = clues[index].trim();
+					
+					//hard truncate if that wasn't enough
+					if (clues[index].length > maxlength) {
+						clues[index] = clues[index].slice(0, maxlength - 1);
+					}
 				}
 				log(`[${a.text.length}] ` + a.text.replace(/\n/g, ' '));
 				log(`[${clues[index].length}] ` + clues[index].replace(/\n/g, ' '));
