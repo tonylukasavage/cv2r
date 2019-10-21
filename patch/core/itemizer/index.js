@@ -60,7 +60,7 @@ function randomize(rng) {
 	items.forEach(item => {
 		const count = item.count || 1;
 		for (let i = 0; i < count; i++) {
-			//itemList.push(item.whip ? 'whip' : item.crystal ? 'crystal' : item.name);
+			// itemList.push(item.whip ? 'whip' : item.crystal ? 'crystal' : item.name);
 			itemList.push(item.name);
 		}
 	});
@@ -69,7 +69,7 @@ function randomize(rng) {
 	function processItem(item, isDep) {
 
 		// remove dependency from item list (yet to be placed items)
-		//const key = /crystal/.test(item) ? 'crystal' : item;
+		// const key = /crystal/.test(item) ? 'crystal' : item;
 		const key = item;
 		const index = itemList.findIndex(i => i === key);
 		itemList.splice(index, 1);

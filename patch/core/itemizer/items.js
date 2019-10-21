@@ -8,7 +8,7 @@ items.initItems = function initItems(pm) {
 
 	// "value" property refers to the value set at 0x0434 (RAM) when you own a whip
 	const whips = [
-		//{ name: 'leather whip', value: 0x00, icon: 0x5B },
+		// { name: 'leather whip', value: 0x00, icon: 0x5B },
 		{ name: 'thorn whip', value: 0x01, icon: 0x5B, bankCode: [] },
 		{ name: 'chain whip', value: 0x02, icon: 0x5B, bankCode: [] },
 		{ name: 'morning star', value: 0x03, icon: 0x5B, bankCode: [] },
