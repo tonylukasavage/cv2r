@@ -24,6 +24,16 @@ module.exports = {
 		'semi': [
 			'error',
 			'always'
+		],
+		'space-infix-ops': [
+			'error'
+		],
+		'space-before-blocks': [
+			'error'
+		],
+		'eqeqeq': [
+			'error',
+			'smart'
 		]
 	}
 };

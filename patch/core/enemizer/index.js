@@ -133,7 +133,7 @@ module.exports = {
 					if ([object.POS_GROUND, object.POS_DEADHAND].includes(newEnemy.pos) && a.marshPos) {
 						// dead hands position too low in marshes
 						if (newEnemy.pos === object.POS_DEADHAND) {
-							a.y = a.marshPos -1;
+							a.y = a.marshPos - 1;
 						// bone dragons position too high in marshes
 						} else if (newEnemy.name === 'bone dragon') {
 							a.y = a.marshPos + 1;
