@@ -34,6 +34,10 @@ module.exports = {
 		'eqeqeq': [
 			'error',
 			'smart'
-		]
+		],
+		'no-trailing-spaces': [ 'error' ],
+		'no-irregular-whitespace': [ 'error' ],
+		'no-multi-spaces': [ 'error', { 'ignoreEOLComments': true } ],
+		'spaced-comment': [ 'error', 'always' ]
 	}
 };

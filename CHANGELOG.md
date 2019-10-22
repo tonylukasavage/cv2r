@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## 0.1.18 - 2019-10-21
+
+* NEW OPTIONAL PATCH: Disable quick kills, no more last frame subweapon 185 damage!
+* NEW OPTIONAL PATCH: Drac Fight Downgrade. Reduces your whip to thorn and your level to 2 once the summoning explosion appears in the Dracula fight.
+* Books now contain randomizer-specific clues (thanks kaelari!)
+* Fixed rare bug where jovah warp caused a black screen soft lock
+
 ## 0.1.17 - 2019-10-18
 
 * Fix best ending text glitch

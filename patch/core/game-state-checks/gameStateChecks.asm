@@ -52,6 +52,7 @@ LDA #$00
 STA *$30
 STA *$50
 STA *$51
+STA *$8E
 
 ; transition code
 JMP $CF8C
