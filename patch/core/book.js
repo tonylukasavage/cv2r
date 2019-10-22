@@ -27,11 +27,9 @@ module.exports = {
 			// remove parenthesized text from location
 			location = location.replace(/\(.*/, '');
 
-
 			// remove some text qualifiers to make messages shorter
 			location = location.replace(/ ?(?:mansion|graveyard|woods)/i, '');
 			location = location.replace(/camilla cemetery/i, 'cemetery');
-
 			location = location.trim();
 
 			// normalize whip and crystal text

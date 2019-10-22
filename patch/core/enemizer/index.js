@@ -82,7 +82,6 @@ module.exports = {
 			// no mansion blob without ceiling
 			if (!loc.ceiling) {
 				exclude.push('mansion blob');
-
 			}
 
 			// Exclude projectile enemies from screens that have critical sprites that
