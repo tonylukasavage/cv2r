@@ -46,8 +46,7 @@ module.exports = {
 			} else if (actor === 'Camilla') {
 				clues.push('Camilla\ndefends\n' + item);
 			} else if (actor === 'merchant') {
-				// ignore basic merchants to make clues more relevant
-				// clues.push(item + '\nfor sale in\n' + location);
+				clues.push(item + '\nfor sale in\n' + location);
 			} else if (actor === 'sacred flame') {
 				clues.push(item + '\nis hidden\non Dabi\'s Path');
 			} else if (actor === 'orb') {
