@@ -1,5 +1,15 @@
 
 const { core, utils: { log, randomInt, textToBytes }} = require('../../lib');
+const VOWELS = [ 'a', 'e', 'i', 'o', 'u' ];
+const MULTI = [ 'garlic', 'laurels' ];
+
+function article(word) {
+	return VOWELS.includes(word.toLowerCase().charAt(0)) ? 'an' : 'a';
+}
+
+function multi(item) {
+	return MULTI.includes(item) ? 'free' : 'a free';
+}
 
 module.exports = {
 	patch: function(pm, opts) {
@@ -8,13 +18,20 @@ module.exports = {
 		global.spoiler.forEach(spoil =>{
 			let [ item, actor, location ] = spoil;
 
+			// don't leave clues for jova
+			if (location.includes('Jova')) { return; }
+
 			// remove location descriptors
 			location = location.replace(/-.*/, '');
 
 			// remove parenthesized text from location
 			location = location.replace(/\(.*/, '');
 
-			// get rid of any extra whitespace
+
+			// remove some text qualifiers to make messages shorter
+			location = location.replace(/ ?(?:mansion|graveyard|woods)/i, '');
+			location = location.replace(/camilla cemetery/i, 'cemetery');
+
 			location = location.trim();
 
 			// normalize whip and crystal text
@@ -34,11 +51,15 @@ module.exports = {
 			} else if (actor === 'sacred flame') {
 				clues.push(item + '\nis hidden\non Dabi\'s Path');
 			} else if (actor === 'orb') {
-				clues.push(item + '\nhidden in\n' + location + ' orb');
+				clues.push(item + '\nsealed in\n' + location + ' orb');
 			} else if (actor === 'crystal dude') {
-				clues.push('Get a free\n' + item + '\nin ' + location);
+				clues.push(location + `\nhas ${multi(item)}\n` + item);
 			} else if (actor === 'secret merchant') {
-				clues.push('Garlic Addict\nhas ' + item + '\nin ' + location);
+				if (location.includes('Storigoi')) {
+					clues.push(`graveyard\nduck has ${article(item)}\n` + item);
+				} else {
+					clues.push(`garlic needed\nto get ${article(item)}\n` + item);
+				}
 			}
 		});
 
@@ -49,16 +70,10 @@ module.exports = {
 			loc.actors.filter(a => a.fixture && a.name === 'book').forEach(a => {
 				const index = randomInt(rng, 0, clues.length - 1);
 				const maxlength = a.text.length;
+				clues[index] = clues[index].trim();
 
 				// make sure new text does not exceed the text it is replacing
 				if (clues[index].length > maxlength) {
-					// trim some words out to try to make it fit
-					clues[index] = clues[index].replace(/ ?(?:mansion|graveyard|woods)/i, '');
-					clues[index] = clues[index].replace(/camilla cemetery/i, 'cemetery');
-					// trim end whitespace
-					clues[index] = clues[index].trim();
-
-					// hard truncate if that wasn't enough
 					if (clues[index].length > maxlength) {
 						clues[index] = clues[index].slice(0, maxlength - 1);
 					}
