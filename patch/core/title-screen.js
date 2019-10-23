@@ -22,8 +22,9 @@ module.exports = {
 		titlePrint('  randomizer  ', 0x01041E);
 		titlePrint(titlePad(`v${version}`, 13), 0x010169);
 
-		// TODO: I have no idea why this this platform check is necessary, maybe crc32?
-		titlePrint(`      seed ${crc32(seed)}     `, 0x010179);
+		const hash = crc32(seed);
+		const spaces = Array(13 - hash.length).fill(' ').join('');
+		titlePrint(`      seed ${hash}${spaces}`, 0x010179);
 
 		titlePrint('           ', 0x010194);
 		titlePrint('  by bloodsweatandcode  ', 0x0101A2);
