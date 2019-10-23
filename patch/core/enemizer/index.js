@@ -79,6 +79,11 @@ module.exports = {
 				exclude.push('leech', 'high jump leech');
 			}
 
+			// no mansion blob without ceiling
+			if (!loc.ceiling) {
+				exclude.push('mansion blob');
+			}
+
 			// Exclude projectile enemies from screens that have critical sprites that
 			// shouldn't be despawned. Specifically sacred flame and the secret garlic
 			// merchants can despawn if too many projectile sprites fill the screen.
@@ -97,6 +102,7 @@ module.exports = {
 			} else {
 				enemies = object.enemiesBySpritePattern(spritePattern, { exclude });
 			}
+
 			loc.actors.forEach(a => {
 				// we're only randomizing enemies
 				if (!a.enemy) { return; }
