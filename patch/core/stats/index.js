@@ -46,11 +46,17 @@ module.exports = {
 			}
 		});
 
+		// send the non-best endings to the final drac hand screen
+		pm.add([ 0xA9, 0x02 ], 0x12406);
+		modSubroutine(pm.name, path.join(__dirname, 'asm', 'clear.asm'), bank[4], {
+			invoke: {
+				romLoc: 0x12408
+			}
+		});
+
 		// Stop at final ending screen. Normally the value 0x0E is loaded at this
 		// point to cycle back to main screen, but the intent is to remain on the
 		// stats screen indefinitely and force a reset to leave it.
 		pm.add([ 0x0A ], 0x122DE);
-
-
 	}
 };

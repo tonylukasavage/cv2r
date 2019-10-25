@@ -18,7 +18,7 @@ CPX #$3C
 BNE NAME
 STX *$22
 
-; setup deaths
+; write stat values to screen
 LDY #$00
 LDX #$00
 DOSTAT
