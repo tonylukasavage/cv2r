@@ -6,7 +6,7 @@
 * Password option has been removed from the game start menu
 * Added stats to all ending screens
 * Fixed bug where zeroes did not appear in ending stats
-* Mansion blos will now only appear in screens with ceilings
+* Mansion blobs will now only appear in screens with ceilings
 
 ## 0.1.18 - 2019-10-21
 
