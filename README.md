@@ -60,6 +60,12 @@ You can now find your new cv2 rando rom in the `/path/to/cv2r/tmp` folder
 
 ## developer notes
 
+### Ending screens
+
+> 15 days
+9-15 days
+0-8 days
+
 ### QK
 
 $3B7-$3B9 weapon index
