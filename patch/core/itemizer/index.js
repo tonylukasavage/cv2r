@@ -69,7 +69,6 @@ function randomize(rng) {
 	function processItem(item, isDep) {
 
 		// remove dependency from item list (yet to be placed items)
-		// const key = /crystal/.test(item) ? 'crystal' : item;
 		const key = item;
 		const index = itemList.findIndex(i => i === key);
 		itemList.splice(index, 1);
