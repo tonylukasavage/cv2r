@@ -1029,7 +1029,7 @@ const spritePatches = [
 // 0x21010 - 0x2C010 every 0x2000 bytes
 // 1 3 5 7 9 A C
 
-const offsets = [ 0, 0x2000, 0x4000, 0x6000, 0x8000, 0x9000, 0xB000 ];
+const offsets = [ 0, 0x2000, 0x4000, 0x6000, 0x8000, 0x9000, 0xB000, 0x17000 ];
 const finalSpritePatch = [];
 for (let i = 0; i < offsets.length; i++) {
 	spritePatches.forEach(sp => {
