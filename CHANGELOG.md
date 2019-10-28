@@ -1,5 +1,15 @@
 # CHANGELOG
 
+## 0.1.20 - 2019-10-27
+
+* Item base price adjustments (old -> new)
+  * Whips: 150 -> 100-150
+  * Crystals: 100 -> 50-100
+  * Golden knife: 150 -> 125
+  * Silver knife: 100 -> 50
+  * Sacred flame: 100 -> 75
+* Fixed bug where Samus sprite switched back to Simon in Storigoi Graveyard (thanks Burb!)
+
 ## 0.1.19 - 2019-10-25
 
 * Seed is represented as game icons in the game start menu
