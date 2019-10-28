@@ -1,17 +1,55 @@
+const wrap = require('word-wrap');
+const { core, utils: { log, shuffleArray, textToBytes }} = require('../../lib');
+const ITEM_WRAP = {};
 
-const { core, utils: { log, randomInt, textToBytes }} = require('../../lib');
-const VOWELS = [ 'a', 'e', 'i', 'o', 'u' ];
-const MULTI = [ 'garlic', 'laurels' ];
+[
+	'dagger',
+	'silver knife',
+	'golden knife',
+	'holy water',
+	'diamond',
+	'sacred flame',
+	'rib',
+	'heart',
+	'eyeball',
+	'nail',
+	'ring',
+	'silk bag',
+	'magic cross'
+].forEach(item => {
+	ITEM_WRAP[item] = {
+		prefix: 'the',
+		suffix: 'is'
+	};
+});
 
-function article(word) {
-	if (MULTI.includes(word)) {
-		return 'some';
-	}
-	return VOWELS.includes(word.toLowerCase().charAt(0)) ? 'an' : 'a';
+[
+	'crystal',
+	'oak stake',
+	'whip'
+].forEach(item => {
+	ITEM_WRAP[item] = {
+		prefix: item === 'oak stake' ? 'an' : 'a',
+		suffix: 'is'
+	};
+});
+
+ITEM_WRAP.laurels = {
+	prefix: 'some',
+	suffix: 'are'
+};
+
+ITEM_WRAP.garlic = {
+	prefix: 'some',
+	suffix: 'is'
+};
+
+function preWrap(item) {
+	return `${ITEM_WRAP[item].prefix} ${item}`;
 }
 
-function multi(item) {
-	return MULTI.includes(item) ? 'free' : 'a free';
+function fullWrap(item) {
+	return `${ITEM_WRAP[item].prefix} ${item} ${ITEM_WRAP[item].suffix}`;
 }
 
 // make sure we fit in the box. 14 characters will hit the edge, 5 lines will fit without hitting, 6th will overflow.
@@ -59,17 +97,10 @@ function testWhite(x) {
 	return white.test(x.charAt(0));
 }
 
-
 module.exports = {
 	patch: function(pm, opts) {
 		const { rng } = opts;
 		const clues = [];
-		function shuffleArray(array) {
-			for (let i = array.length - 1; i > 0; i--) {
-				let j = randomInt(rng, 0, i);
-				[array[i], array[j]] = [array[j], array[i]];
-			}
-		}
 
 		global.spoiler.forEach(spoil =>{
 			let [ item, actor, location ] = spoil;
@@ -93,24 +124,25 @@ module.exports = {
 			} else if (item.includes('crystal')) {
 				item = 'crystal';
 			}
+
 			// set clue text based on actor type
 			if (actor === 'Death') {
-				clues.push(`Death guards ${article(item)} ` + item);
+				clues.push(`Death guards ${preWrap(item)}`);
 			} else if (actor === 'Camilla') {
-				clues.push(`Camilla defends ${article(item)} ` + item);
+				clues.push(`Camilla defends ${preWrap(item)}`);
 			} else if (actor === 'merchant') {
-				clues.push(`${article(item)} ` + item + ' for sale in ' + location);
+				clues.push(`${fullWrap(item)} for sale in ${location}`);
 			} else if (actor === 'sacred flame') {
-				clues.push(`${article(item)} ` + item + ' hidden on Dabi\'s Path');
+				clues.push(`${fullWrap(item)} hidden on Dabi's Path`);
 			} else if (actor === 'orb') {
-				clues.push(`${article(item)} ` + item + ' sealed in ' + location + '\'s orb');
+				clues.push(`${fullWrap(item)} sealed in ${location}'s orb`);
 			} else if (actor === 'crystal dude') {
-				clues.push(`${multi(item)} ` + item + ' in ' + location);
+				clues.push(`${fullWrap(item)} free in ${location}`);
 			} else if (actor === 'secret merchant') {
 				if (location.includes('Storigoi')) {
-					clues.push(`graveyard duck has ${article(item)} ` + item);
+					clues.push(`graveyard duck has ${preWrap(item)}`);
 				} else {
-					clues.push(`garlic needed to get ${article(item)} ` + item);
+					clues.push(`garlic needed to get ${preWrap(item)}`);
 				}
 			} else {
 				// we didn't match any actor?! what's going on here
@@ -118,7 +150,7 @@ module.exports = {
 
 			}
 			// do this here so shortest checking is correct, wordWrap potentially adds a few chars
-			clues[clues.length - 1] = wordWrap(clues[clues.length - 1]);
+			clues[clues.length - 1] = wrap(clues[clues.length - 1], { indent: '', trim: true, width: 13 });
 		});
 		let i = 0;
 		let shortest = 100;
@@ -128,7 +160,7 @@ module.exports = {
 			}
 			i++;
 		}
-		shuffleArray(clues);
+		shuffleArray(clues, rng);
 		log('Book Clues');
 		log('----------');
 		core.forEach(loc => {
