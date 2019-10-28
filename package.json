@@ -21,7 +21,8 @@
     "lodash": "^4.17.13",
     "mkdirp": "^0.5.1",
     "seedrandom": "^3.0.1",
-    "shallow-equal": "^1.2.0"
+    "shallow-equal": "^1.2.0",
+    "word-wrap": "^1.2.3"
   },
   "devDependencies": {
     "ava": "^2.2.0",

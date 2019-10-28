@@ -1,20 +1,62 @@
+const wrap = require('word-wrap');
+const { core, utils: { log, shuffleArray, textToBytes }} = require('../../lib');
+const ITEM_WRAP = {};
 
-const { core, utils: { log, randomInt, textToBytes }} = require('../../lib');
-const VOWELS = [ 'a', 'e', 'i', 'o', 'u' ];
-const MULTI = [ 'garlic', 'laurels' ];
+[
+	'dagger',
+	'silver knife',
+	'golden knife',
+	'holy water',
+	'diamond',
+	'sacred flame',
+	'rib',
+	'heart',
+	'eyeball',
+	'nail',
+	'ring',
+	'silk bag',
+	'magic cross'
+].forEach(item => {
+	ITEM_WRAP[item] = {
+		prefix: 'the',
+		suffix: 'is'
+	};
+});
 
-function article(word) {
-	return VOWELS.includes(word.toLowerCase().charAt(0)) ? 'an' : 'a';
+[
+	'crystal',
+	'oak stake',
+	'whip'
+].forEach(item => {
+	ITEM_WRAP[item] = {
+		prefix: item === 'oak stake' ? 'an' : 'a',
+		suffix: 'is'
+	};
+});
+
+ITEM_WRAP.laurels = {
+	prefix: 'some',
+	suffix: 'are'
+};
+
+ITEM_WRAP.garlic = {
+	prefix: 'some',
+	suffix: 'is'
+};
+
+function preWrap(item) {
+	return `${ITEM_WRAP[item].prefix} ${item}`;
 }
 
-function multi(item) {
-	return MULTI.includes(item) ? 'free' : 'a free';
+function fullWrap(item) {
+	return `${ITEM_WRAP[item].prefix} ${item} ${ITEM_WRAP[item].suffix}`;
 }
 
 module.exports = {
 	patch: function(pm, opts) {
 		const { rng } = opts;
 		const clues = [];
+
 		global.spoiler.forEach(spoil =>{
 			let [ item, actor, location ] = spoil;
 
@@ -28,8 +70,7 @@ module.exports = {
 			location = location.replace(/\(.*/, '');
 
 			// remove some text qualifiers to make messages shorter
-			location = location.replace(/ ?(?:mansion|graveyard|woods)/i, '');
-			location = location.replace(/camilla cemetery/i, 'cemetery');
+			location = location.replace(/ ?mansion/i, '');
 			location = location.trim();
 
 			// normalize whip and crystal text
@@ -38,35 +79,61 @@ module.exports = {
 			} else if (item.includes('crystal')) {
 				item = 'crystal';
 			}
+
 			// set clue text based on actor type
 			if (actor === 'Death') {
-				clues.push('Death guards\n' + item);
+				clues.push(`Death guards ${preWrap(item)}`);
 			} else if (actor === 'Camilla') {
-				clues.push('Camilla\ndefends\n' + item);
+				clues.push(`Camilla defends ${preWrap(item)}`);
 			} else if (actor === 'merchant') {
-				clues.push(item + '\nfor sale in\n' + location);
+				clues.push(`${fullWrap(item)} for sale in ${location}`);
 			} else if (actor === 'sacred flame') {
-				clues.push(item + '\nis hidden\non Dabi\'s Path');
+				clues.push(`${fullWrap(item)} hidden on Dabi's Path`);
 			} else if (actor === 'orb') {
-				clues.push(item + '\nsealed in\n' + location + ' orb');
+				clues.push(`${fullWrap(item)} sealed in ${location}'s orb`);
 			} else if (actor === 'crystal dude') {
-				clues.push(location + `\nhas ${multi(item)}\n` + item);
+				clues.push(`${fullWrap(item)} free in ${location}`);
 			} else if (actor === 'secret merchant') {
 				if (location.includes('Storigoi')) {
-					clues.push(`graveyard\nduck has ${article(item)}\n` + item);
+					clues.push(`graveyard duck has ${preWrap(item)}`);
 				} else {
-					clues.push(`garlic needed\nto get ${article(item)}\n` + item);
+					clues.push(`garlic needed to get ${preWrap(item)}`);
 				}
+			} else {
+				// we didn't match any actor?! what's going on here
+				return;
+
 			}
 		});
 
+		let shortest = 100;
+		for (let i = 0; i < clues.length; i++) {
+			clues[i] = wrap(clues[i], { indent: '', trim: true, width: 13 });
+			shortest = clues[i].length < shortest ? clues[i].length : shortest;
+		}
+
+		shuffleArray(clues, rng);
 		log('Book Clues');
 		log('----------');
 		core.forEach(loc => {
 			if (!loc.actors) { return; }
 			loc.actors.filter(a => a.fixture && a.name === 'book').forEach(a => {
-				const index = randomInt(rng, 0, clues.length - 1);
-				const maxlength = a.text.length;
+				let index = 0;
+				let maxlength = a.text.length;
+				if (maxlength < shortest) {
+					// we shorter than the shortest clue, this probably should never happen, we'll truncate later. set this so we'll match the shortest clue
+					maxlength = shortest;
+				}
+				while (clues[index] != null && clues[index].length > maxlength) {
+					log('skipping a clue for lack of space in book');
+					index += 1;
+				}
+
+				if (maxlength === shortest) {
+					// set this back and then we'll truncate
+					maxlength = a.text.length;
+				}
+
 				clues[index] = clues[index].trim();
 
 				// make sure new text does not exceed the text it is replacing
@@ -75,6 +142,7 @@ module.exports = {
 						clues[index] = clues[index].slice(0, maxlength - 1);
 					}
 				}
+
 				log(`[${a.text.length}] ` + a.text.replace(/\n/g, ' '));
 				log(`[${clues[index].length}] ` + clues[index].replace(/\n/g, ' '));
 				log('---');
