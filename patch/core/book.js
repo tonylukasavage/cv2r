@@ -52,51 +52,6 @@ function fullWrap(item) {
 	return `${ITEM_WRAP[item].prefix} ${item} ${ITEM_WRAP[item].suffix}`;
 }
 
-// make sure we fit in the box. 14 characters will hit the edge, 5 lines will fit without hitting, 6th will overflow.
-function wordWrap(str, maxWidth = 13) {
-	let newLineStr = '\n';
-	let startingString = str;
-	let res = '';
-	let lines = 1;
-	while (str.length > maxWidth) {
-		let found = false;
-		lines += 1;
-		// Inserts new line at first whitespace of the line
-		for (let i = maxWidth - 1; i >= 0; i--) {
-			if (testWhite(str.charAt(i))) {
-				res = res + str.slice(0, i).trim() + newLineStr;
-				str = str.slice(i + 1);
-				found = true;
-				break;
-			}
-		}
-		// Inserts new line at maxWidth position, the word is too long to wrap
-		if (!found) {
-			res += str.slice(0, maxWidth) + newLineStr;
-			str = str.slice(maxWidth);
-		}
-
-	}
-	if (lines > 5) {
-		// too many lines! redo linebreaking without word breaking to fit on fewer lines (hopefully)
-		str = startingString;
-		res = '';
-
-		while (str.length > maxWidth) {
-			res += str.slice(0, maxWidth).trim() + newLineStr;
-			str = str.slice(maxWidth);
-		}
-		// this is the best we can do, if we still don't fit there's just too much text
-	}
-
-	return res + str;
-}
-
-function testWhite(x) {
-	var white = new RegExp(/^\s$/);
-	return white.test(x.charAt(0));
-}
-
 module.exports = {
 	patch: function(pm, opts) {
 		const { rng } = opts;
@@ -149,17 +104,14 @@ module.exports = {
 				return;
 
 			}
-			// do this here so shortest checking is correct, wordWrap potentially adds a few chars
-			clues[clues.length - 1] = wrap(clues[clues.length - 1], { indent: '', trim: true, width: 13 });
 		});
-		let i = 0;
+
 		let shortest = 100;
-		while (i < clues.length) {
-			if (clues[i].length < shortest) {
-				shortest = clues[i].length;
-			}
-			i++;
+		for (let i = 0; i < clues.length; i++) {
+			clues[i] = wrap(clues[i], { indent: '', trim: true, width: 13 });
+			shortest = clues[i].length < shortest ? clues[i].length : shortest;
 		}
+
 		shuffleArray(clues, rng);
 		log('Book Clues');
 		log('----------');
