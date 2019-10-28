@@ -1,9 +1,9 @@
 const path = require('path');
-const { assemble, bank, utils: { modSubroutine } } = require('../../../lib');
+const { assemble, bank, utils: { randomInt, modSubroutine } } = require('../../../lib');
 
 let items = module.exports = [];
 
-items.initItems = function initItems(pm) {
+items.initItems = function initItems(pm, rng) {
 	const bankIndexes = [ 1, 3 ];
 
 	// "value" property refers to the value set at 0x0434 (RAM) when you own a whip
@@ -27,17 +27,17 @@ JSR $${loc.ram.toString(16)}
 		w.whip = true;
 		w.memory = 0x434;
 		w.text = 'How \'bout\na whip?';
-		w.price = 150;
+		w.price = randomInt(rng, 100, 150);
 	});
 
 	// "value" property refers to the value added to 0x004A (RAM) when you own a weapon
 	const weapons = [
 		{ name: 'dagger', value: 0x01, icon: 0x54, price: 50 },
-		{ name: 'silver knife', value: 0x02, icon: 0x55, price: 100 },
-		{ name: 'golden knife', value: 0x04, icon: 0x6F, price: 150 },
+		{ name: 'silver knife', value: 0x02, icon: 0x55, price: 50 },
+		{ name: 'golden knife', value: 0x04, icon: 0x6F, price: 125 },
 		{ name: 'holy water', value: 0x08, icon: 0x57, price: 50 },
 		{ name: 'diamond', value: 0x10, icon: 0x70, price: 50 },
-		{ name: 'sacred flame', value: 0x20, icon: 0x69, price: 100 },
+		{ name: 'sacred flame', value: 0x20, icon: 0x69, price: 75 },
 		{ name: 'oak stake', value: 0x40, icon: 0x59, price: 50, count: 5 }
 	];
 
@@ -78,7 +78,7 @@ JSR $${loc.ram.toString(16)}
 	});
 
 	inventory.forEach(i => {
-		i.price = 100;
+		i.price = i.crystal ? randomInt(rng, 50, 100) : 100;
 		i.memory = 0x91;
 		if (i.dracPart) {
 			i.code = `

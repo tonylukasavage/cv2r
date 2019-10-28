@@ -184,7 +184,7 @@ module.exports = {
 		const textValues = {};
 
 		// initialize items
-		items.initItems(pm);
+		items.initItems(pm, rng);
 
 		// randomize game items amongst all available actors
 		randomize(rng);
@@ -369,7 +369,7 @@ STA *$01
 			}
 			pm.add(textToBytes(actor.text), actor.textPointer);
 
-			log(`${pad(item.name, 15)} | ${pad(actor.name, 15)} | ${actor.locationName}`);
+			log(`${pad(item.name, 15)} | ${pad(actor.name + (actor.name === 'merchant' ? ' (' + item.price + ')' : ''), 15)} | ${actor.locationName}`);
 			spoiler.push([ item.name, actor.name, actor.locationName ]);
 		});
 
