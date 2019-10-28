@@ -4,7 +4,7 @@ const VOWELS = [ 'a', 'e', 'i', 'o', 'u' ];
 const MULTI = [ 'garlic', 'laurels' ];
 
 function article(word) {
-	if (MULTI.includes(word)){
+	if (MULTI.includes(word)) {
 		return 'some';
 	}
 	return VOWELS.includes(word.toLowerCase().charAt(0)) ? 'an' : 'a';
@@ -15,17 +15,16 @@ function multi(item) {
 }
 
 // make sure we fit in the box. 14 characters will hit the edge, 5 lines will fit without hitting, 6th will overflow.
-function wordWrap(str, maxWidth=13) {
-	let newLineStr = "\n";
+function wordWrap(str, maxWidth = 13) {
+	let newLineStr = '\n';
 	let startingString = str;
-	let done = false;
 	let res = '';
 	let lines = 1;
 	while (str.length > maxWidth) {
 		let found = false;
-		lines+=1;
+		lines += 1;
 		// Inserts new line at first whitespace of the line
-		for (i = maxWidth - 1; i >= 0; i--) {
+		for (let i = maxWidth - 1; i >= 0; i--) {
 			if (testWhite(str.charAt(i))) {
 				res = res + str.slice(0, i).trim() + newLineStr;
 				str = str.slice(i + 1);
@@ -40,7 +39,7 @@ function wordWrap(str, maxWidth=13) {
 		}
 
 	}
-	if (lines > 5){
+	if (lines > 5) {
 		// too many lines! redo linebreaking without word breaking to fit on fewer lines (hopefully)
 		str = startingString;
 		res = '';
@@ -58,7 +57,7 @@ function wordWrap(str, maxWidth=13) {
 function testWhite(x) {
 	var white = new RegExp(/^\s$/);
 	return white.test(x.charAt(0));
-};
+}
 
 
 module.exports = {
@@ -100,13 +99,13 @@ module.exports = {
 			} else if (actor === 'Camilla') {
 				clues.push(`Camilla defends ${article(item)} ` + item);
 			} else if (actor === 'merchant') {
-				clues.push(`${article(item)} ` +item + ' for sale in ' + location);
+				clues.push(`${article(item)} ` + item + ' for sale in ' + location);
 			} else if (actor === 'sacred flame') {
-				clues.push(`${article(item)} ` +item + ' hidden on Dabi\'s Path');
+				clues.push(`${article(item)} ` + item + ' hidden on Dabi\'s Path');
 			} else if (actor === 'orb') {
-				clues.push(`${article(item)} ` +item + ' sealed in ' + location + '\'s orb');
+				clues.push(`${article(item)} ` + item + ' sealed in ' + location + '\'s orb');
 			} else if (actor === 'crystal dude') {
-				clues.push(`${multi(item)} ` + item + " in "+location);
+				clues.push(`${multi(item)} ` + item + ' in ' + location);
 			} else if (actor === 'secret merchant') {
 				if (location.includes('Storigoi')) {
 					clues.push(`graveyard duck has ${article(item)} ` + item);
@@ -114,18 +113,18 @@ module.exports = {
 					clues.push(`garlic needed to get ${article(item)} ` + item);
 				}
 			} else {
-				//we didn't match any actor?! what's going on here
+				// we didn't match any actor?! what's going on here
 				return;
 
 			}
 			// do this here so shortest checking is correct, wordWrap potentially adds a few chars
-			clues[clues.length-1]=wordWrap(clues[clues.length-1]);
+			clues[clues.length - 1] = wordWrap(clues[clues.length - 1]);
 		});
 		let i = 0;
-		let shortest=100;
-		while (i<clues.length){
-			if (clues[i].length < shortest){
-				shortest=clues[i].length;
+		let shortest = 100;
+		while (i < clues.length) {
+			if (clues[i].length < shortest) {
+				shortest = clues[i].length;
 			}
 			i++;
 		}
@@ -136,14 +135,14 @@ module.exports = {
 			if (!loc.actors) { return; }
 			loc.actors.filter(a => a.fixture && a.name === 'book').forEach(a => {
 				let index = 0;
-				const maxlength = a.text.length;
-				if (maxlength < shortest){
+				let maxlength = a.text.length;
+				if (maxlength < shortest) {
 					// we shorter than the shortest clue, this probably should never happen, we'll truncate later. set this so we'll match the shortest clue
-					maxlength=shortest;
+					maxlength = shortest;
 				}
-				while (clues[index] != null && clues[index].length > maxlength){
+				while (clues[index] != null && clues[index].length > maxlength) {
 					log('skipping a clue for lack of space in book');
-					index+=1;
+					index += 1;
 				}
 
 				if (maxlength === shortest) {
