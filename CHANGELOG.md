@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## 0.1.20 - 2019-10-27
+## 0.1.20 - 2019-10-28
 
 * Item base price adjustments (old -> new)
   * Whips: 150 -> 100-150
@@ -9,6 +9,7 @@
   * Silver knife: 100 -> 50
   * Sacred flame: 100 -> 75
 * Fixed bug where Samus sprite switched back to Simon in Storigoi Graveyard (thanks Burb!)
+* Fixed bug with truncated book clues (thanks Kaelari!)
 
 ## 0.1.19 - 2019-10-25
 
