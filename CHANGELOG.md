@@ -1,5 +1,20 @@
 # CHANGELOG
 
+## 1.0.0 - 2019-11-05
+
+We made it boys! 1.0.0! Thank you to the awesome CV2R community for helping get this project to this point. I could not have done it without you guys!
+
+* Nail logic implemented
+* Patch to give Simon immunity to marshes when Dracula's ring is equipped. Activating this patch will also update the itemizer logic so that any check that required laurels can now be opened with laurels OR ring.
+* Difficulty updates
+  * `Easy` difficulty now includes the ring marsh immunity patch
+  * Created `Elite` difficulty with the following patch list
+    * Enemy HP rando
+    * Price rando
+    * Quick kill disabled
+    * Dracula fight downgrade (thorn whip and Simon level 2)
+* Implemented optional patches that can be applied BEFORE the core patches. This was necessary when implemeting the logic changes for the ring marsh immunity patch. Any optional patch can be made a pre-core patch by adding the property `pre: true`.
+
 ## 0.1.20 - 2019-10-28
 
 * Item base price adjustments (old -> new)
