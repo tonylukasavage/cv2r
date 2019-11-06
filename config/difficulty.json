@@ -6,7 +6,8 @@
 			"double-hearts",
 			"100-hearts",
 			"lazy-river",
-			"penalty-reduction"
+			"penalty-reduction",
+			"ring-marsh-immunity"
 		]
 	},
 	"standard": {
@@ -25,6 +26,16 @@
 		"patches": [
 			"enemy-hp",
 			"price-rando"
+		]
+	},
+	"elite": {
+		"name": "Elite",
+		"description": "The true test of any CV2R runner's skill and grit. Quick kills are disabled. Also, your whip becomes thorn and level goes to 2 at Dracula fight.",
+		"patches": [
+			"enemy-hp",
+			"price-rando",
+			"disable-qk",
+			"drac-downgrade"
 		]
 	}
 }

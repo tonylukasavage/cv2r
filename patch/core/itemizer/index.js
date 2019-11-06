@@ -42,10 +42,11 @@ function randomize(rng) {
 	actors.forEach((a, index) => {
 		a.index = index;
 		a.requirements.forEach(r => {
-			if (!counts[r]) {
-				counts[r] = 1;
+			const updateCount = (i) => counts[i] = !counts[i] ? 1 : counts[i] + 1;
+			if (Array.isArray(r)) {
+				r.forEach(i => updateCount(i));
 			} else {
-				counts[r]++;
+				updateCount(r);
 			}
 		});
 	});
@@ -74,7 +75,16 @@ function randomize(rng) {
 		itemList.splice(index, 1);
 
 		// get all actors for which requirements are met and no item has been placed
-		const choices = actors.filter(a => ((!a.requirements.includes(item) || !isDep) && !a.newItem));
+		const choices = actors.filter(actor => {
+			return !actor.newItem && (!isDep || actor.requirements.reduce((a, req) => {
+				if (Array.isArray(req)) {
+					return req.includes(item) ? a && true : false;
+				} else {
+					return a && (item !== req);
+				}
+			}, true));
+		});
+
 		if (!choices.length) {
 			throw new Error(`cannot find free actor for ${item}`);
 		}
@@ -94,7 +104,7 @@ function randomize(rng) {
 		// actor that has 'garlic' as a requirement, we need to add 'garlic' as a
 		// requirement to all other actors that have 'holy water' as a requirement.
 		isDep && actors.forEach(a => {
-			if (a.requirements.includes(item)) {
+			if (_.flatten(a.requirements).includes(item)) {
 				a.requirements = _.union(a.requirements, reqs);
 			}
 		});
