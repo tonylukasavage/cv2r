@@ -4,6 +4,18 @@ cv2r - Castlevania II: Simon's Quest Randomizer by **BloodSweatAndCode**. Come f
 
 Also, you can skip this repository entirely if you just want to generate a seed and play by going to the [CV2R Website](https://cv2r.herokuapp.com/).
 
+## supported platforms
+
+* NES console
+* [NT Mini](https://www.analogue.co/nt-mini/)
+* [fceux](http://www.fceux.com/web/home.html)
+* [mesen](https://www.mesen.ca/)
+
+### platforms with known issues
+
+* [bizhawk](https://github.com/BloodSweatAndCode/cv2r/issues/108)
+  * There is [bizhawk bug](https://github.com/BloodSweatAndCode/cv2r/issues/108) that causes a crash on the "game start" screen after a few seconds when using the `QuickNes` core. If you press start before the crash, gameplay will continue normally. You can avoid the crash entirely by using the `NesHawk` core, but your seed icons will still be glitched.
+
 ## usage
 
 ```
