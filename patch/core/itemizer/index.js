@@ -99,6 +99,21 @@ function randomize(rng) {
 		const aIndex = actors.findIndex(a => a.index === choice.index);
 		actors.splice(aIndex, 1);
 
+		// holy water or nail is placed in a [holy water,nail] requirement, we
+		// need special handling. For example, if holy water is placed in the
+		// sacred flame spot, we need to add nail as a requirement to anything
+		// that also requires holy water.
+		const isPartOfOr = reqs.reduce((a,r) => {
+			return (Array.isArray(r) && r.indexOf(key) !== -1) || a;
+		}, false);
+		if (isPartOfOr) {
+			if (key === 'holy water') {
+				reqs.push('nail');
+			} else if (key === 'nail') {
+				reqs.push('holy water');
+			}
+		}
+
 		// add the requirement(s) of the chosen actor to all other actors that have the
 		// current item as a requirement. For example, if we assigned 'holy water' to an
 		// actor that has 'garlic' as a requirement, we need to add 'garlic' as a
