@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 1.0.1 - 2019-11-11
+
+* Fixed bug in nail logic that sometimes created unbeatable seeds due to both nail and holy water being behind breakable block checks
+
 ## 1.0.0 - 2019-11-05
 
 We made it boys! 1.0.0! Thank you to the awesome CV2R community for helping get this project to this point. I could not have done it without you guys!
