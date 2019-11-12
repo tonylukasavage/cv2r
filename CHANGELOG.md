@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## 1.0.2 - 2019-11-12
+
+* Fixed bug with ring-marsh-immunity patch that caused all prices to be glitched and/or impossible to afford.
+* Fixed bug with [cv2r.herokuapp.com](https:\\cv2r.herokuapp.com) where generating multiple seeds in a row would create corrupted ROMs, resulting in unexpected bugs and quirks in gameplay.
+
 ## 1.0.1 - 2019-11-11
 
 * Fixed bug in nail logic that sometimes created unbeatable seeds due to both nail and holy water being behind breakable block checks
