@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 1.0.3 - 2019-11-13
+
+* ACTAULLY fixed easy seeds, no more price glitching
+
 ## 1.0.2 - 2019-11-12
 
 * Fixed bug with ring-marsh-immunity patch that caused all prices to be glitched and/or impossible to afford.
