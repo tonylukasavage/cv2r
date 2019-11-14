@@ -19,11 +19,10 @@ module.exports = {
 			});
 		});
 
-		// reduce marsh damage to zero when ring is equipped in marsh
 		modSubroutine(pm.name, path.join(__dirname, 'ring-marsh-immunity.asm'), bank[3], {
 			invoke: {
-				romLoc: 0xC088,
-				padding: 2
+				jump: true,
+				romLoc: 0xC08A
 			}
 		});
 	}

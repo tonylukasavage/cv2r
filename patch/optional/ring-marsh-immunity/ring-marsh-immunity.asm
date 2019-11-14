@@ -1,6 +1,3 @@
-; need to pop the return address off the stack since we're jumping out
-PLA
-PLA
 PHP
 
 ; see if ring is equipped

@@ -7,7 +7,7 @@ BNE NORMAL
 LDA #$99
 BNE DONE
 
-NORMAL LDA $9E6B,Y
+NORMAL LDA $<%= saleTable %>,Y
 
 DONE
 PLP

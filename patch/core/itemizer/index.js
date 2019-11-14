@@ -259,7 +259,8 @@ module.exports = {
 				{ romLoc: 0x1ED16 }
 			],
 			values: {
-				isChecked: memory.isChecked.ram.toString(16)
+				isChecked: memory.isChecked.ram.toString(16),
+				saleTable: saleLoc.ram.toString(16)
 			}
 		});
 
