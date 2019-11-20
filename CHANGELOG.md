@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 1.0.4 - 2019-11-19
+
+* Fixed issues where moving platforms did not spawn in Debious Woods (flame whip dude screen) and the Yuba Lake (the road to Rover) by preventing projectile enemies from spawning there.
+
 ## 1.0.3 - 2019-11-13
 
 * ACTAULLY fixed easy seeds, no more price glitching
