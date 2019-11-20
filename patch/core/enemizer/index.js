@@ -87,11 +87,8 @@ module.exports = {
 			// Exclude projectile enemies from screens that have critical sprites that
 			// shouldn't be despawned. Specifically sacred flame and the secret garlic
 			// merchants can despawn if too many projectile sprites fill the screen.
-			if (
-				(loc.objset === 2 && loc.area === 3 && loc.submap === 1) || // dabi's path
-				(loc.objset === 3 && loc.area === 0 && loc.submap === 0) || // camilla cemetery
-				(loc.objset === 3 && loc.area === 1 && loc.submap === 0)    // storigoi graveyard
-			) {
+			// This can also happen with moving blocks.
+			if (loc.spriteLimit) {
 				exclude.push(...(object.enemies.filter(e => e.projectile).map(e => e.name)));
 			}
 
