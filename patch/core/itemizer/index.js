@@ -2,6 +2,7 @@ const _ = require('lodash');
 const fs = require('fs').promises;
 const items = require('./items');
 const path = require('path');
+const vm = require('vm');
 const { assemble, bank, core, memory, utils } = require('../../../lib');
 const { log, modData, modSubroutine, modText, pad, randomInt, textToBytes } = utils;
 
@@ -41,13 +42,9 @@ function randomize(rng) {
 	const actors = itemActors();
 	actors.forEach((a, index) => {
 		a.index = index;
-		a.requirements.forEach(r => {
-			const updateCount = (i) => counts[i] = !counts[i] ? 1 : counts[i] + 1;
-			if (Array.isArray(r)) {
-				r.forEach(i => updateCount(i));
-			} else {
-				updateCount(r);
-			}
+		a.requirements.replace(/[()&|]/g, '').split(/\s+/).filter(r => r !== '').forEach(r => {
+			const name = r.toLowerCase().replace(/_/g, ' ');
+			counts[name] = !counts[name] ? 1 : counts[name] + 1;
 		});
 	});
 	Object.keys(counts).forEach(key => countsSorted.push({ name: key, value: counts[key] }));
@@ -75,14 +72,24 @@ function randomize(rng) {
 		itemList.splice(index, 1);
 
 		// get all actors for which requirements are met and no item has been placed
+		const setVal = i => (i !== item);
+		const sandbox = {
+			HOLY_WATER: setVal('holy water'),
+			WHITE_CRYSTAL: setVal('white crystal'),
+			BLUE_CRYSTAL: setVal('blue crystal'),
+			RED_CRYSTAL: setVal('red crystal'),
+			OAK_STAKE: setVal('oak stake'),
+			HEART: setVal('heart'),
+			LAURELS: setVal('laurels'),
+			GARLIC: setVal('garlic'),
+			NAIL: setVal('nail')
+		};
 		const choices = actors.filter(actor => {
-			return !actor.newItem && (!isDep || actor.requirements.reduce((a, req) => {
-				if (Array.isArray(req)) {
-					return req.includes(item) ? a && true : false;
-				} else {
-					return a && (item !== req);
-				}
-			}, true));
+			if (actor.newItem) { return false; }
+			if (!isDep) { return true; }
+			if (actor.requirements === '') { return true; }
+			const script = new vm.Script(actor.requirements);
+			return script.runInNewContext(sandbox);
 		});
 
 		if (!choices.length) {
@@ -92,25 +99,17 @@ function randomize(rng) {
 		// choose a random actor in `choices` subset and assign the item to it
 		const choiceIndex = randomInt(rng, 0, choices.length - 1);
 		const choice = choices[choiceIndex];
-		const reqs = choice.requirements;
+		let reqs = choice.requirements;
 		choice.itemName = key;
 
 		// remove chosen actor from list after processing
 		const aIndex = actors.findIndex(a => a.index === choice.index);
 		actors.splice(aIndex, 1);
 
-		// holy water or nail is placed in a [holy water,nail] requirement, we
-		// need special handling. For example, if holy water is placed in the
-		// sacred flame spot, we need to add nail as a requirement to anything
-		// that also requires holy water.
-		const isPartOfOr = reqs.reduce((a,r) => {
-			return (Array.isArray(r) && r.indexOf(key) !== -1) || a;
-		}, false);
-		if (isPartOfOr) {
-			if (key === 'holy water') {
-				reqs.push('nail');
-			} else if (key === 'nail') {
-				reqs.push('holy water');
+		// special handling to ensure holy water and nail aren't behind each other
+		if (item === 'holy water') {
+			if (reqs.includes('HOLY_WATER || NAIL')) {
+				reqs = `(${reqs}) && NAIL`;
 			}
 		}
 
@@ -119,8 +118,9 @@ function randomize(rng) {
 		// actor that has 'garlic' as a requirement, we need to add 'garlic' as a
 		// requirement to all other actors that have 'holy water' as a requirement.
 		isDep && actors.forEach(a => {
-			if (_.flatten(a.requirements).includes(item)) {
-				a.requirements = _.union(a.requirements, reqs);
+			const key = item.toUpperCase().replace(' ', '_');
+			if (reqs !== '' && a.requirements.indexOf(key) !== -1) {
+				a.requirements = a.requirements.replace(new RegExp(key, 'g'), `(${key} && (${reqs}))`);
 			}
 		});
 	}
