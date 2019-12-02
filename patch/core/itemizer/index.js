@@ -34,7 +34,7 @@ function itemActors() {
 }
 
 // distribute all items in the game to actors that can hold them, based on progression logic
-function randomize(rng) {
+function randomize(rng, { logic }) {
 	const counts = {};
 	const countsSorted = [];
 
@@ -42,7 +42,7 @@ function randomize(rng) {
 	const actors = itemActors();
 	actors.forEach((a, index) => {
 		a.index = index;
-		a.requirements.replace(/[()&|]/g, '').split(/\s+/).filter(r => r !== '').forEach(r => {
+		a.requirements[logic].replace(/[()&|]/g, '').split(/\s+/).filter(r => r !== '').forEach(r => {
 			const name = r.toLowerCase().replace(/_/g, ' ');
 			counts[name] = !counts[name] ? 1 : counts[name] + 1;
 		});
@@ -87,8 +87,8 @@ function randomize(rng) {
 		const choices = actors.filter(actor => {
 			if (actor.newItem) { return false; }
 			if (!isDep) { return true; }
-			if (actor.requirements === '') { return true; }
-			const script = new vm.Script(actor.requirements);
+			if (actor.requirements[logic] === '') { return true; }
+			const script = new vm.Script(actor.requirements[logic]);
 			return script.runInNewContext(sandbox);
 		});
 
@@ -99,7 +99,7 @@ function randomize(rng) {
 		// choose a random actor in `choices` subset and assign the item to it
 		const choiceIndex = randomInt(rng, 0, choices.length - 1);
 		const choice = choices[choiceIndex];
-		let reqs = choice.requirements;
+		let reqs = choice.requirements[logic];
 		choice.itemName = key;
 
 		// remove chosen actor from list after processing
@@ -119,8 +119,8 @@ function randomize(rng) {
 		// requirement to all other actors that have 'holy water' as a requirement.
 		isDep && actors.forEach(a => {
 			const key = item.toUpperCase().replace(' ', '_');
-			if (reqs !== '' && a.requirements.indexOf(key) !== -1) {
-				a.requirements = a.requirements.replace(new RegExp(key, 'g'), `(${key} && (${reqs}))`);
+			if (reqs !== '' && a.requirements[logic].indexOf(key) !== -1) {
+				a.requirements[logic] = a.requirements[logic].replace(new RegExp(key, 'g'), `(${key} && (${reqs}))`);
 			}
 		});
 	}
@@ -212,7 +212,7 @@ module.exports = {
 		items.initItems(pm, rng);
 
 		// randomize game items amongst all available actors
-		randomize(rng);
+		randomize(rng, opts);
 
 		// write all merchant sale icon and price data
 		const saleLoc = modSaleData(pm);
