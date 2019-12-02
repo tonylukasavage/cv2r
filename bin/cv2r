@@ -6,6 +6,7 @@ const { exec } = require('child_process');
 const camelcase = require('camelcase');
 const cv2r = require('../lib/cv2r');
 const difficulty = require('../config/difficulty');
+const logic = require('../config/logic');
 const os = require('os');
 const patchManager = require('../lib/patch-manager');
 const path = require('path');
@@ -158,8 +159,8 @@ async function main() {
 		if (!program.logic) {
 			program.logic = 'standard';
 		}
-		if (![ 'standard', 'hard', 'none' ].includes(program.logic)) {
-			throw new Error(`invalid logic, valid choices are: ${optionList(['standard', 'hard', 'none'])}`);
+		if (!logic.includes(program.logic)) {
+			throw new Error(`invalid logic, valid choices are: ${optionList(logic)}`);
 		}
 
 		if (!program.difficulty && !program.patch) {
