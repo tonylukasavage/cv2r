@@ -9,7 +9,7 @@
   },
   "scripts": {
     "pretest": "rm -rf ./tmp && mkdir tmp",
-    "test": "eslint --ignore-pattern \"6502assembler.js\" \"./**/*.js\" && ava test.js",
+    "test": "eslint --ignore-pattern \"6502assembler.js\" \"./**/*.js\" && ava ./test/**/*.test.js",
     "posttest": "rm -rf tmp"
   },
   "author": "BloodSweatAndCode",
