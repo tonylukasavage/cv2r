@@ -6,6 +6,7 @@ const { exec } = require('child_process');
 const camelcase = require('camelcase');
 const cv2r = require('../lib/cv2r');
 const difficulty = require('../config/difficulty');
+const logic = require('../config/logic');
 const os = require('os');
 const patchManager = require('../lib/patch-manager');
 const path = require('path');
@@ -24,6 +25,7 @@ program
 	.usage('[options] [vanilla_rom_file]')
 	.option('-d, --difficulty <difficulty>', 'difficulty setting for the game, see list below')
 	.option('-j, --json', 'output patch and spoiler as json, disables all other output')
+	.option('-l, --logic <logic>', 'logic to be applied to itemization')
 	.option('-o, --output <output>', 'filepath for randomized rom output')
 	.option('-p, --palette <palette>', 'palette for the game, see list below', 'simons-quest')
 	.option('-r, --run', 'immediately run with emulator after randomizing (fceux or OpenEmu must be in PATH)')
@@ -152,6 +154,13 @@ async function main() {
 
 		if (program.debug && !program.json) {
 			global.debug = true;
+		}
+
+		if (!program.logic) {
+			program.logic = 'standard';
+		}
+		if (!logic.includes(program.logic)) {
+			throw new Error(`invalid logic, valid choices are: ${optionList(logic)}`);
 		}
 
 		if (!program.difficulty && !program.patch) {
