@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 1.1.0 - 2019-12-11
+
+* Logic rework, supports full conditional logic now
+* New `--logic` option when generating seeds from CLI, also available on [cv2r.herokuapp.com](https://cv2r.herokuapp.com/). You can now select from `standard` or `glitch` logic. Full explanation of requirements for each set of logic can be found on the [docs site](https://cv2r.herokuapp.com/doc?logic=glitch).
+* "Simon Claus" sprite for Simon, thanks to 2snek, just in time for the holidays!
+
 ## 1.0.4 - 2019-11-19
 
 * Fixed issues where moving platforms did not spawn in Debious Woods (flame whip dude screen) and the Yuba Lake (the road to Rover) by preventing projectile enemies from spawning there.
