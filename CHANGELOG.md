@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 1.0.5 - 2019-12-11
+
+* "Simon Claus" sprite from 2snek, just in time for the holidays!
+
 ## 1.0.4 - 2019-11-19
 
 * Fixed issues where moving platforms did not spawn in Debious Woods (flame whip dude screen) and the Yuba Lake (the road to Rover) by preventing projectile enemies from spawning there.
