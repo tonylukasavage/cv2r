@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 1.1.1 - 2019-12-11
+
+* Glitch logic update: Change Bodley orb requirement from `(HOLY_WATER || NAIL) && ((WHITE_CRYSTAL && BLUE_CRYSTAL && RED_CRYSTAL) || LAURELS) && OAK_STAKE` to `((WHITE_CRYSTAL && BLUE_CRYSTAL && RED_CRYSTAL) || LAURELS) && OAK_STAKE`. In other words, removed holy water or nail as a requirement for Bodley orb.
+
 ## 1.1.0 - 2019-12-11
 
 * Logic rework, supports full conditional logic now
