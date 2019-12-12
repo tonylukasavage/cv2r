@@ -30,6 +30,7 @@ program
 	.option('-p, --palette <palette>', 'palette for the game, see list below', 'simons-quest')
 	.option('-r, --run', 'immediately run with emulator after randomizing (fceux or OpenEmu must be in PATH)')
 	.option('-s, --seed <seed>', 'seed to use for randomization')
+	.option('-S, --simon <simon>', 'sprite to use for simon', 'simon-default')
 	.option('-x, --patch <patches>', 'comma separated list of patches to apply, see list below')
 	.option('-z, --debug', 'enable debug output')
 	.option('--dev-force-enemy <devForceEnemy>', 'Spawn only one type of enemy, specified as "enemyId:tableId". For example, spawning only harpies would be "--dev-force-enemy 0x3B:0x7". Values for enemy and table id can be found in lib/object.js.');
