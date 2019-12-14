@@ -6,6 +6,8 @@ const vm = require('vm');
 const { assemble, bank, core, memory, utils } = require('../../../lib');
 const { log, modData, modSubroutine, modText, pad, randomInt, textToBytes } = utils;
 
+const coreCopy = JSON.parse(JSON.stringify(core));
+
 const sharedItemTypes = [
 	'garlicAljiba',
 	'laurelsAljiba',
@@ -42,6 +44,7 @@ function randomize(rng, { logic }) {
 	const actors = itemActors();
 	actors.forEach((a, index) => {
 		a.index = index;
+		a.requirements[logic] =
 		a.requirements[logic].replace(/[()&|]/g, '').split(/\s+/).filter(r => r !== '').forEach(r => {
 			const name = r.toLowerCase().replace(/_/g, ' ');
 			counts[name] = !counts[name] ? 1 : counts[name] + 1;
@@ -121,7 +124,10 @@ function randomize(rng, { logic }) {
 		const key = item.toUpperCase().replace(' ', '_');
 		const rx = new RegExp(key, 'g');
 		const body = reqs ? reqs.replace(rx, 'false') : 'true';
-		funcs[key] = `function ${key}_X() { return ${body}; }`;
+		funcs[key] = `function ${key}_X() { ${body}; }`;
+		Object.keys(funcs).forEach(key2 => {
+			funcs[key2] = funcs[key2].replace(new RegExp(key + '(?!_)', 'g'), key + '_X()');
+		});
 		isDep && actors.forEach(a => {
 			a.requirements[logic] = a.requirements[logic].replace(rx, `${key}_X()`);
 		});
@@ -214,7 +220,18 @@ module.exports = {
 		items.initItems(pm, rng);
 
 		// randomize game items amongst all available actors
-		randomize(rng, opts);
+		function wrapper() {
+			try {
+				randomize(rng, opts);
+			} catch (err) {
+				if (err.message.includes('cannot find free actor')) {
+					wrapper();
+				} else {
+					throw err;
+				}
+			}
+		}
+		wrapper();
 
 		// write all merchant sale icon and price data
 		const saleLoc = modSaleData(pm);
