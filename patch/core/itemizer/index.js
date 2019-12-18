@@ -42,6 +42,15 @@ function randomize(rng, { logic }) {
 	const actors = itemActors();
 	actors.forEach((a, index) => {
 		a.index = index;
+
+		// if we need to do randomization more than once, make sure to reset logic to original state
+		if (a.originalRequirements) {
+			a.requirements[logic] = a.originalRequirements;
+		} else {
+			a.originalRequirements = a.requirements[logic];
+		}
+
+		// get a rough count of how often an item is required for prioritization of placement
 		a.requirements[logic].replace(/[()&|]/g, '').split(/\s+/).filter(r => r !== '').forEach(r => {
 			const name = r.toLowerCase().replace(/_/g, ' ');
 			counts[name] = !counts[name] ? 1 : counts[name] + 1;
@@ -121,7 +130,10 @@ function randomize(rng, { logic }) {
 		const key = item.toUpperCase().replace(' ', '_');
 		const rx = new RegExp(key, 'g');
 		const body = reqs ? reqs.replace(rx, 'false') : 'true';
-		funcs[key] = `function ${key}_X() { return ${body}; }`;
+		funcs[key] = `function ${key}_X() { ${body}; }`;
+		Object.keys(funcs).forEach(key2 => {
+			funcs[key2] = funcs[key2].replace(new RegExp(key + '(?!_)', 'g'), key + '_X()');
+		});
 		isDep && actors.forEach(a => {
 			a.requirements[logic] = a.requirements[logic].replace(rx, `${key}_X()`);
 		});
@@ -213,8 +225,19 @@ module.exports = {
 		// initialize items
 		items.initItems(pm, rng);
 
-		// randomize game items amongst all available actors
-		randomize(rng, opts);
+		// randomize game items amongst all available actors. Retry if necessary.
+		function wrapper() {
+			try {
+				randomize(rng, opts);
+			} catch (err) {
+				if (err.message.includes('cannot find free actor')) {
+					wrapper();
+				} else {
+					throw err;
+				}
+			}
+		}
+		wrapper();
 
 		// write all merchant sale icon and price data
 		const saleLoc = modSaleData(pm);
