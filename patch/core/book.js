@@ -113,8 +113,8 @@ module.exports = {
 		}
 
 		shuffleArray(clues, rng);
-		log('Book Clues');
-		log('----------');
+		log('Book Clues', true);
+		log('----------', true);
 		core.forEach(loc => {
 			if (!loc.actors) { return; }
 			loc.actors.filter(a => a.fixture && a.name === 'book').forEach(a => {
@@ -125,7 +125,7 @@ module.exports = {
 					maxlength = shortest;
 				}
 				while (clues[index] != null && clues[index].length > maxlength) {
-					log('skipping a clue for lack of space in book');
+					log('skipping a clue for lack of space in book', true);
 					index += 1;
 				}
 
@@ -143,9 +143,9 @@ module.exports = {
 					}
 				}
 
-				log(`[${a.text.length}] ` + a.text.replace(/\n/g, ' '));
-				log(`[${clues[index].length}] ` + clues[index].replace(/\n/g, ' '));
-				log('---');
+				log(`[${a.text.length}] ` + a.text.replace(/\n/g, ' '), true);
+				log(`[${clues[index].length}] ` + clues[index].replace(/\n/g, ' '), true);
+				log('---', true);
 
 				const textBytes = textToBytes(clues[index]);
 				pm.add(textBytes, a.textPointer);

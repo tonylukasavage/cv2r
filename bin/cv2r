@@ -30,7 +30,9 @@ program
 	.option('-p, --palette <palette>', 'palette for the game, see list below', 'simons-quest')
 	.option('-r, --run', 'immediately run with emulator after randomizing (fceux or OpenEmu must be in PATH)')
 	.option('-s, --seed <seed>', 'seed to use for randomization')
+	.option('-S, --simon <simon>', 'sprite to use for simon', 'simon-default')
 	.option('-x, --patch <patches>', 'comma separated list of patches to apply, see list below')
+	.option('-y, --show-spoilers', 'show spoilers in debug logging (must use with --debug)')
 	.option('-z, --debug', 'enable debug output')
 	.option('--dev-force-enemy <devForceEnemy>', 'Spawn only one type of enemy, specified as "enemyId:tableId". For example, spawning only harpies would be "--dev-force-enemy 0x3B:0x7". Values for enemy and table id can be found in lib/object.js.');
 
@@ -153,9 +155,10 @@ async function main() {
 		if (isCommand) { return; }
 
 		if (program.debug && !program.json) {
-			global.debug = true;
+			global.debug = program.showSpoilers ? 'spoiler' : true;
 		}
 
+		// validate logic flag
 		if (!program.logic) {
 			program.logic = 'standard';
 		}
@@ -163,6 +166,7 @@ async function main() {
 			throw new Error(`invalid logic, valid choices are: ${optionList(logic)}`);
 		}
 
+		// validate difficulty or custom patch flag
 		if (!program.difficulty && !program.patch) {
 			program.difficulty = 'standard';
 		}
@@ -173,10 +177,18 @@ async function main() {
 			throw new Error(`invalid difficulty, valid choices are: ${optionList(getDifficulties())}`);
 		}
 
+		// validate palette flag
 		const palettes = patchManager.getPatches('palette').map(p => p.id);
 		if (program.palette && !palettes.includes(program.palette)) {
 			throw new Error(`invalid palette, valid choices are: ${optionList(palettes)}`);
 		}
+
+		// validate simon sprite flag
+		const simon = patchManager.getPatches('simon').map(p => p.id);
+		if (program.simon && !simon.includes(program.simon)) {
+			throw new Error(`invalid simon sprite, valid choices are: ${optionList(simon)}`);
+		}
+
 		// eslint-disable-next-line
 		program.rom = program.args[0];
 		if (program.rom) { validateRom(program.rom); }

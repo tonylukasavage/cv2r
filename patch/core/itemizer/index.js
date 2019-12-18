@@ -302,7 +302,7 @@ module.exports = {
 			.filter(a => a.itemName);
 
 		let spoiler = [ [ 'item', 'actor', 'location' ] ];
-		log('');
+		log('', true);
 		itemActors.forEach(actor => {
 			let jsrBuf;
 			const item = items.find(i => i.name === actor.itemName);
@@ -420,7 +420,7 @@ STA *$01
 			}
 			pm.add(textToBytes(actor.text), actor.textPointer);
 
-			log(`${pad(item.name, 15)} | ${pad(actor.name + (actor.name === 'merchant' ? ' (' + item.price + ')' : ''), 15)} | ${actor.locationName}`);
+			log(`${pad(item.name, 15)} | ${pad(actor.name + (actor.name === 'merchant' ? ' (' + item.price + ')' : ''), 15)} | ${actor.locationName}`, true);
 			spoiler.push([ item.name, actor.name, actor.locationName ]);
 		});
 
