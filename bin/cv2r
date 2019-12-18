@@ -158,6 +158,7 @@ async function main() {
 			global.debug = program.showSpoilers ? 'spoiler' : true;
 		}
 
+		// validate logic flag
 		if (!program.logic) {
 			program.logic = 'standard';
 		}
@@ -165,6 +166,7 @@ async function main() {
 			throw new Error(`invalid logic, valid choices are: ${optionList(logic)}`);
 		}
 
+		// validate difficulty or custom patch flag
 		if (!program.difficulty && !program.patch) {
 			program.difficulty = 'standard';
 		}
@@ -175,10 +177,18 @@ async function main() {
 			throw new Error(`invalid difficulty, valid choices are: ${optionList(getDifficulties())}`);
 		}
 
+		// validate palette flag
 		const palettes = patchManager.getPatches('palette').map(p => p.id);
 		if (program.palette && !palettes.includes(program.palette)) {
 			throw new Error(`invalid palette, valid choices are: ${optionList(palettes)}`);
 		}
+
+		// validate simon sprite flag
+		const simon = patchManager.getPatches('simon').map(p => p.id);
+		if (program.simon && !simon.includes(program.simon)) {
+			throw new Error(`invalid simon sprite, valid choices are: ${optionList(simon)}`);
+		}
+
 		// eslint-disable-next-line
 		program.rom = program.args[0];
 		if (program.rom) { validateRom(program.rom); }
