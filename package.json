@@ -8,7 +8,7 @@
     "cv2r": "bin/cv2r"
   },
   "scripts": {
-    "ava": "ava",
+    "ava": "ava --verbose --concurrency 2",
     "eslint": "eslint --ignore-pattern 6502assembler.js \"**/*.js\"",
     "pretest": "rm -rf ./tmp && mkdir tmp",
     "test": "npm run eslint && npm run ava",

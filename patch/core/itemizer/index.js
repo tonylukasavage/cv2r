@@ -72,40 +72,45 @@ function randomize(rng, { logic }) {
 	});
 
 	// attach an item randomly to an actor
-	const funcs = {};
+	const itemKeys = [ 'HOLY_WATER', 'WHITE_CRYSTAL', 'BLUE_CRYSTAL', 'RED_CRYSTAL', 'OAK_STAKE', 'HEART',
+		'LAURELS', 'GARLIC', 'NAIL' ];
+	const baseFuncs = {};
+	itemKeys.forEach(ik => {
+		baseFuncs[ik] = `function ${ik}() { return true; }`;
+	});
+
+	let ctr = 0;
+
 	function processItem(item, isDep) {
+		const funcLogic = i => i.replace(/([A-Z_]+)/g, `$1('${item}')`);
+		const itemToKey = i => i.toUpperCase().replace(/\s+/g, '_');
+		const funcs = Object.assign({}, baseFuncs);
+		funcs[itemToKey(item)] = `function ${itemToKey(item)}() { return false; }`;
 
 		// remove dependency from item list (yet to be placed items)
 		const index = itemList.findIndex(i => i === item);
 		itemList.splice(index, 1);
 
-		// get all actors for which requirements are met and no item has been placed
-		const setVal = i => (i !== item);
-		const sandbox = {
-			HOLY_WATER: setVal('holy water'),
-			WHITE_CRYSTAL: setVal('white crystal'),
-			BLUE_CRYSTAL: setVal('blue crystal'),
-			RED_CRYSTAL: setVal('red crystal'),
-			OAK_STAKE: setVal('oak stake'),
-			HEART: setVal('heart'),
-			LAURELS: setVal('laurels'),
-			GARLIC: setVal('garlic'),
-			NAIL: setVal('nail')
-		};
-
 		// render all dynamically created logic functions before evaluating logic
 		const funcCode = Object.keys(funcs).reduce((a,c) => {
 			return a + funcs[c] + '\n';
-		}, '');
+		}, '');// 'function cv(i) { return i.toLowerCase().replace(/_/g, " "); }\n');
+
+		console.log('-- ' + item + ' ---');
+		console.log(funcCode);
 
 		// evaluate the logic of all available actors
 		const choices = actors.filter(actor => {
 			if (actor.newItem) { return false; }
 			if (!isDep) { return true; }
 			if (actor.requirements[logic] === '') { return true; }
-			const script = new vm.Script(funcCode + actor.requirements[logic]);
-			return script.runInNewContext(sandbox);
+			console.log(funcCode + actor.requirements[logic].replace(/([A-Z_]+)/g, `$1('${item}')`));
+			console.log('-----');
+			const script = new vm.Script(funcCode + funcLogic(actor.requirements[logic]));
+			return script.runInNewContext();
 		});
+		// console.log(choices.map(c => ({ name: c.name, text: c.text, req: c.requirements.standard })));
+		// process.exit(0);
 
 		// bail if we can't find an available actor
 		if (!choices.length) {
@@ -127,16 +132,23 @@ function randomize(rng, { logic }) {
 		// change all instances of this item in logic to a call to this
 		// new dynamically created function. For example, HEART becomes
 		// HEART_X(), which will evaluate the requirements for HEART.
-		const key = item.toUpperCase().replace(' ', '_');
+		const key = itemToKey(item);
 		const rx = new RegExp(key, 'g');
-		const body = reqs ? reqs.replace(rx, 'false') : 'true';
-		funcs[key] = `function ${key}_X() { ${body}; }`;
-		Object.keys(funcs).forEach(key2 => {
-			funcs[key2] = funcs[key2].replace(new RegExp(key + '(?!_)', 'g'), key + '_X()');
-		});
-		isDep && actors.forEach(a => {
-			a.requirements[logic] = a.requirements[logic].replace(rx, `${key}_X()`);
-		});
+		const body = (reqs ? reqs.replace(rx, 'false') : 'true');
+		baseFuncs[key] = `function ${key}(i) { ${funcLogic(body)}; }`;
+
+		console.log(item);
+		console.log(baseFuncs);
+
+		if (ctr++ === 5) {
+			process.exit();
+		}
+		// Object.keys(funcs).forEach(key2 => {
+		// 	funcs[key2] = funcs[key2].replace(new RegExp(key + '(?!_)', 'g'), key + '_X()');
+		// });
+		// isDep && actors.forEach(a => {
+		// 	a.requirements[logic] = a.requirements[logic].replace(rx, `${key}_X()`);
+		// });
 	}
 
 	// Add items to actors based on dependencies, starting with progression items
