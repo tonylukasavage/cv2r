@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## 1.1.3 - 2020-01-01
+
+* Added Link from Zelda 2 as a playable sprite for Simon!
+* Added `--sprite` option to allow you to change Simon's sprite. You can now use any sprite available for Simon without having to create a custom seed. This means selectable sprites will be choosable even in tournament and race settings. Will be selectable from the cv2r website.
+* Fixed uncommon logic bug (about 2% of the time) that would cause an error during ROM generation
+* Replaced `ava` test framework with `mocha` due to ava crashing during automated testing of ROM generation.
+
 ## 1.1.2 - 2019-12-13
 
 * Fixed logic bug that was creating unbeatable seeds on a regular basis
