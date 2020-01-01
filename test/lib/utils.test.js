@@ -1,4 +1,4 @@
-const test = require('ava');
+const assert = require('assert');
 const utils = require('../../lib/utils');
 
 const logicTests = [
@@ -76,9 +76,10 @@ const logicTests = [
 	}
 ];
 
-logicTests.forEach(({ input, output }) => {
-	test(`#parseLogic('${input.replace(/\t/g, '')}')`, async t => {
-		t.plan(1);
-		t.deepEqual(utils.parseLogic(input), output);
+describe('lib/utils.js', function() {
+	logicTests.forEach(({ input, output }) => {
+		it(`#parseLogic('${input.replace(/\t/g, '')}')`, async () => {
+			assert.deepEqual(utils.parseLogic(input), output);
+		});
 	});
 });

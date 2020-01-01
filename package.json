@@ -8,10 +8,10 @@
     "cv2r": "bin/cv2r"
   },
   "scripts": {
-    "ava": "ava --verbose --concurrency 2",
+    "mocha": "mocha test/**/*.test.js",
     "eslint": "eslint --ignore-pattern 6502assembler.js \"**/*.js\"",
     "pretest": "rm -rf ./tmp && mkdir tmp",
-    "test": "npm run eslint && npm run ava",
+    "test": "npm run eslint && npm run mocha",
     "posttest": "rm -rf tmp"
   },
   "author": "BloodSweatAndCode",
@@ -27,7 +27,8 @@
     "word-wrap": "^1.2.3"
   },
   "devDependencies": {
-    "ava": "^2.2.0",
-    "eslint": "^6.1.0"
+    "eslint": "^6.1.0",
+    "mocha": "^6.2.2",
+    "should": "^13.2.3"
   }
 }

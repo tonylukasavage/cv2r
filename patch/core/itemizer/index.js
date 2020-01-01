@@ -76,41 +76,52 @@ function randomize(rng, { logic }) {
 		'LAURELS', 'GARLIC', 'NAIL' ];
 	const baseFuncs = {};
 	itemKeys.forEach(ik => {
-		baseFuncs[ik] = `function ${ik}() { return true; }`;
+		baseFuncs[ik] = `base.${ik} = function ${ik}() { return true; };`;
 	});
 
-	let ctr = 0;
-
 	function processItem(item, isDep) {
-		const funcLogic = i => i.replace(/([A-Z_]+)/g, `$1('${item}')`);
+		const evalLogic = i => i.replace(/([A-Z_]+)/g, 'funcs.$1(clone())');
+		const funcLogic = i => i.replace(/([A-Z_]+)/g, 'funcs.$1(i)');
 		const itemToKey = i => i.toUpperCase().replace(/\s+/g, '_');
 		const funcs = Object.assign({}, baseFuncs);
-		funcs[itemToKey(item)] = `function ${itemToKey(item)}() { return false; }`;
+		funcs[itemToKey(item)] = `base.${itemToKey(item)} = function ${itemToKey(item)}() { return false; };`;
 
 		// remove dependency from item list (yet to be placed items)
 		const index = itemList.findIndex(i => i === item);
 		itemList.splice(index, 1);
 
 		// render all dynamically created logic functions before evaluating logic
-		const funcCode = Object.keys(funcs).reduce((a,c) => {
-			return a + funcs[c] + '\n';
-		}, '');// 'function cv(i) { return i.toLowerCase().replace(/_/g, " "); }\n');
+		let funcCode = `
+// generate logic functions with "visited" checks to prevent infinite loop
+const base = {};
+const items = [ 'HOLY_WATER', 'WHITE_CRYSTAL', 'BLUE_CRYSTAL', 'RED_CRYSTAL', 'OAK_STAKE', 'LAURELS', 'NAIL', 'HEART', 'GARLIC' ];
+const funcs = {};
+items.forEach(item => {
+	funcs[item] = function(v) {
+		if (v[item]) { return false; }
+		v[item] = true;
+		return base[item](v);
+	};
+});
 
-		console.log('-- ' + item + ' ---');
-		console.log(funcCode);
+// execute logic check
+const visited = { ${itemToKey(item)}: true };
+const clone = () => Object.assign({}, visited);
+
+// base logic functions
+`;
+		funcCode += Object.keys(funcs).reduce((a,c) => {
+			return a + funcs[c] + '\n';
+		}, '');
 
 		// evaluate the logic of all available actors
 		const choices = actors.filter(actor => {
 			if (actor.newItem) { return false; }
 			if (!isDep) { return true; }
 			if (actor.requirements[logic] === '') { return true; }
-			console.log(funcCode + actor.requirements[logic].replace(/([A-Z_]+)/g, `$1('${item}')`));
-			console.log('-----');
-			const script = new vm.Script(funcCode + funcLogic(actor.requirements[logic]));
+			const script = new vm.Script(funcCode + evalLogic(actor.requirements[logic]));
 			return script.runInNewContext();
 		});
-		// console.log(choices.map(c => ({ name: c.name, text: c.text, req: c.requirements.standard })));
-		// process.exit(0);
 
 		// bail if we can't find an available actor
 		if (!choices.length) {
@@ -128,27 +139,11 @@ function randomize(rng, { logic }) {
 		actors.splice(aIndex, 1);
 
 		// Dyanmically create a logic function for the current item to be
-		// used in logic evaluation for all following items. Additionally,
-		// change all instances of this item in logic to a call to this
-		// new dynamically created function. For example, HEART becomes
-		// HEART_X(), which will evaluate the requirements for HEART.
+		// used in logic evaluation for all following items.
 		const key = itemToKey(item);
 		const rx = new RegExp(key, 'g');
 		const body = (reqs ? reqs.replace(rx, 'false') : 'true');
-		baseFuncs[key] = `function ${key}(i) { ${funcLogic(body)}; }`;
-
-		console.log(item);
-		console.log(baseFuncs);
-
-		if (ctr++ === 5) {
-			process.exit();
-		}
-		// Object.keys(funcs).forEach(key2 => {
-		// 	funcs[key2] = funcs[key2].replace(new RegExp(key + '(?!_)', 'g'), key + '_X()');
-		// });
-		// isDep && actors.forEach(a => {
-		// 	a.requirements[logic] = a.requirements[logic].replace(rx, `${key}_X()`);
-		// });
+		baseFuncs[key] = `base.${key} = function ${key}(i) { return ${funcLogic(body)}; };`;
 	}
 
 	// Add items to actors based on dependencies, starting with progression items
