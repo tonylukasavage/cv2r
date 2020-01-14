@@ -23,9 +23,12 @@ BNE DONE
 LDA *$F1
 CMP #$C8
 BNE DONE
+BEQ UNPAUS
+
+DONE RTS
 
 ; unpause game
-LDA #$00
+UNPAUS LDA #$00
 STA *$26
 
 ; flag warp
@@ -89,4 +92,4 @@ STA $600A
 DOJUMP
 JMP $CF8C
 
-DONE RTS
+; DONE RTS

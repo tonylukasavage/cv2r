@@ -6,7 +6,7 @@ BNE DONE
 
 LDA #$03
 JSR $C185
-JSR $<%= posFunc %>
+JSR $<%= warpPositioning %>
 LDA #$02
 JSR $C185
 
