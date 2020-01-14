@@ -5,10 +5,13 @@ CPY $600F
 BNE DONE
 
 LDA #$03
-JSR $C185
+JSR $C183
 JSR $<%= warpPositioning %>
 LDA #$02
-JSR $C185
+JSR $C183
+
+; accumulator will set simon x pos ($348)
+LDA $600A
 
 ; LDA #$00
 ; ; y_subpixel

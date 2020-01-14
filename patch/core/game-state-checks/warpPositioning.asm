@@ -35,7 +35,4 @@ STA $324
 ; jovah_warp_flag
 STA $600F
 
-; accumulator will set simon x pos ($348)
-LDA $600A
-
 RTS
