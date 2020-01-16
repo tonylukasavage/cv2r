@@ -50,10 +50,21 @@ PLA
 PLA
 PLP
 
-; diamond cross warp?
+; diamond warp flag set?
+LDA $6006
+BEQ DOJW
+
+; diamond equipped?
 LDA *$90
 CMP #$05
 BNE DOJW
+
+; cross in inventory?
+LDA *$92
+AND #$02
+BEQ DOJW
+
+; setup location and simon positioning for diamond warp
 LDA #$03
 STA $6007
 LDA #$14
@@ -72,7 +83,7 @@ STA $600B
 STA *$8E
 BEQ DOJUMP
 
-; redirect to jovah
+; setup location and simon position for jova warp
 DOJW
 LDA #$0D
 STA $600B
