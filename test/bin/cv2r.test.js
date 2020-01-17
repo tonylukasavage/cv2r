@@ -67,7 +67,9 @@ describe('bin/cv2r', function() {
 						HEART: setVal('heart'),
 						LAURELS: setVal('laurels'),
 						GARLIC: setVal('garlic'),
-						NAIL: setVal('nail')
+						NAIL: setVal('nail'),
+						DIAMOND: setVal('diamond'),
+						MAGIC_CROSS: setVal('magic cross')
 					};
 					for (let i = 1; i < spoiler.length; i++) {
 						const script = new vm.Script(spoiler[i][3]);

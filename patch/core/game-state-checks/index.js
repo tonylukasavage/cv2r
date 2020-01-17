@@ -5,6 +5,7 @@ module.exports = {
 	patch: function(pm) {
 		// subroutine to handle jovah warp and inventory quest item deselect code
 		memory.gameStateChecks = modSubroutine(pm.name, path.join(__dirname, 'gameStateChecks.asm'), bank[2]);
+		memory.warpPositioning = modSubroutine(pm.name, path.join(__dirname, 'warpPositioning.asm'), bank[3]);
 
 		// bank switch and JSR on bank 7 to invoke the game state checks on bank 2, where
 		// there's more free space
@@ -22,6 +23,9 @@ module.exports = {
 			invoke: {
 				romLoc: 0x1CFF8,
 				padding: 1
+			},
+			values: {
+				warpPositioning: memory.warpPositioning.ram.toString(16)
 			}
 		});
 
