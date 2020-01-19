@@ -26,6 +26,7 @@ STA *$59
 ; sets_map_pos
 LDA #$00
 STA *$5C
+STA *$57
 LDA #$1D
 STA *$5D
 
