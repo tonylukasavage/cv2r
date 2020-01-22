@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 1.2.1 - 2020-01-22
+
+* Add "Diamond Warp" difficulty to make it easier to select in website
+
 ## 1.2.0 - 2020-01-22
 
 * "Diamond warp" - If you own the magic cross AND have the diamond equipped, doing a select->up+a+b will not take you to Jova. It will instead take you to Bordia Mountains, otherwise known as "dead end swamp", the giant swamp that is very near Dracula's mansion. Diamond warp can be enabled as a patch in any custom difficulty seed. It has NOT been added to any default difficulties.
