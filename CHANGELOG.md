@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## 1.2.0 - 2020-01-22
+
+* "Diamond warp" - If you own the magic cross AND have the diamond equipped, doing a select->up+a+b will not take you to Jova. It will instead take you to Bordia Mountains, otherwise known as "dead end swamp", the giant swamp that is very near Dracula's mansion. Diamond warp can be enabled as a patch in any custom difficulty seed. It has NOT been added to any default difficulties.
+* To go with the diamond warp ability, I also added diamond warp logic. This will be updated on the website documentation, but in short, having diamond and cross helps put Bodley and Doina in logic. Nothing to the left Bodley is in logic until you get red crystal, though, due to the lake you need to drain.
+
 ## 1.1.3 - 2020-01-01
 
 * Added Link from Zelda 2 as a playable sprite for Simon!
