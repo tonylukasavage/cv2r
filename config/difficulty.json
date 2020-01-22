@@ -37,5 +37,16 @@
 			"disable-qk",
 			"drac-downgrade"
 		]
+	},
+	"diamondWarp": {
+		"name": "Diamond Warp",
+		"description": "Standard difficulty, but will add Doina and Bodley to logic if magic cross and diamond are in logic. Intended to be used with Diamond Warp logic.",
+		"patches": [
+			"enemy-hp",
+			"100-hearts",
+			"penalty-reduction",
+			"price-rando",
+			"diamond-warp"
+		]
 	}
 }
