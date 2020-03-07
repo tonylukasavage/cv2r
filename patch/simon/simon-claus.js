@@ -246,5 +246,6 @@ module.exports = {
 	id: 'simon-claus',
 	name: 'Simon Claus',
 	description: '',
+	author: '2snek',
 	patch: finalSpritePatch
 };

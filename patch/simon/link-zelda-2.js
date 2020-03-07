@@ -1197,5 +1197,6 @@ module.exports = {
 	id: 'link-zelda-2',
 	name: 'Link (Zelda 2)',
 	description: '',
+	author: 'BloodSweatAndCode',
 	patch: finalSpritePatch
 };

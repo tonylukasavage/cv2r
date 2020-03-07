@@ -1060,5 +1060,6 @@ module.exports = {
 	id: 'mario',
 	name: 'Mario',
 	description: 'Mario from Super Mario Bros.',
+	author: 'BloodSweatAndCode',
 	patch: finalSpritePatch
 };

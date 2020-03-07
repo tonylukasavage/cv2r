@@ -1054,5 +1054,6 @@ module.exports = {
 	id: 'samus',
 	name: 'Samus',
 	description: 'Samus, minus the Power Suit',
+	author: 'BloodSweatAndCode',
 	patch: finalSpritePatch
 };
