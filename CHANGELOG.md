@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## 1.3.0 - 2020-03-06
+
+* Sprite Maker for easily creating new sprites for Simon available at [https://cv2r.herokuapp.com/sprite-maker](https://cv2r.herokuapp.com/sprite-maker)
+* Added Mario and Ghost Simon sprites
+* Added authors to all sprites
+
 ## 1.2.1 - 2020-01-22
 
 * Add "Diamond Warp" difficulty to make it easier to select in website
