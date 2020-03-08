@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 1.3.2 - 2020-03-08
+
+* Added "Pit" from Kid Icarus and "Karnov" to the selectable Simon sprites
+
 ## 1.3.1 - 2020-03-07
 
 * Added "Hero" from Crystalis and "Ryu Hayabusa" from Ninja Gaiden to the selectable Simon sprites
