@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 1.3.1 - 2020-03-07
+
+* Added "Hero" from Crystalis and "Ryu Hayabusa" from Ninja Gaiden to the selectable Simon sprites
+
 ## 1.3.0 - 2020-03-06
 
 * Sprite Maker for easily creating new sprites for Simon available at [https://cv2r.herokuapp.com/sprite-maker](https://cv2r.herokuapp.com/sprite-maker)
