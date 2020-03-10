@@ -1059,7 +1059,7 @@ finalSpritePatch.push({
 module.exports = {
 	id: 'crystalis',
 	name: 'Hero (Crystalis)',
-	description: 'The main character from Crystalis',
+	description: 'Hero, the main character from Crystalis',
 	author: 'BloodSweatAndCode',
 	patch: finalSpritePatch
 };

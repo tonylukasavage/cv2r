@@ -1059,7 +1059,7 @@ finalSpritePatch.push({
 module.exports = {
 	id: 'ghost-simon',
 	name: 'Ghost Simon',
-	description: 'Simon\'s motives are so transparent',
+	description: 'A ghostly version of our favorite vampire hunter',
 	author: 'BloodSweatAndCode',
 	patch: finalSpritePatch
 };

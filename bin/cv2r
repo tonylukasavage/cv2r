@@ -115,6 +115,7 @@ program.outputHelp = function() {
 	this.options
 		.filter(o => !/^--dev-/.test(o.flags))
 		.forEach(o => console.log(`  ${p(o.flags)}  ${p(o.description)}`));
+
 	console.log('');
 	console.log(cyan('Difficulties'));
 	console.log('');
@@ -125,18 +126,31 @@ program.outputHelp = function() {
 		console.log(' '.repeat(longest + 4) + 'PATCHES: ' + green(patches.join(', ')));
 		console.log('');
 	});
+
 	console.log('');
 	console.log(cyan('Patches'));
 	console.log('');
 	patchManager.getPatches().forEach(patch => {
+		const description = p(patch.short || patch.description);
+		process.stdout.write(`  ${p(patch.id)}  `);
+		desc(description);
+		console.log('');
+	});
+
+	console.log('');
+	console.log(cyan('Simon Sprites'));
+	console.log('');
+	patchManager.getPatches('simon').forEach(patch => {
 		console.log(`  ${p(patch.id)}  ${p(patch.short || patch.description)}`);
 	});
+
 	console.log('');
 	console.log(cyan('Palettes'));
 	console.log('');
 	patchManager.getPatches('palette').forEach(patch => {
 		console.log(`  ${p(patch.id)}  ${p(patch.description)}`);
 	});
+
 	console.log('');
 	console.log(cyan('Developer Flags'));
 	console.log('');
