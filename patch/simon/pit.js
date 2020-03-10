@@ -1057,9 +1057,9 @@ finalSpritePatch.push({
 });
 
 module.exports = {
-	id: 'pit-kid-icarus',
+	id: 'pit',
 	name: 'Pit (Kid Icarus)',
-	description: '',
+	description: 'Pit from Kid Icarus',
 	author: 'BloodSweatAndCode',
 	patch: finalSpritePatch
 };

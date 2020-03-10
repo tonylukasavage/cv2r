@@ -1057,9 +1057,9 @@ finalSpritePatch.push({
 });
 
 module.exports = {
-	id: 'hero-crystalis',
+	id: 'crystalis',
 	name: 'Hero (Crystalis)',
-	description: '',
+	description: 'The main character from Crystalis',
 	author: 'BloodSweatAndCode',
 	patch: finalSpritePatch
 };

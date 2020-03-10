@@ -245,7 +245,7 @@ for (let i = 0; i < offsets.length; i++) {
 module.exports = {
 	id: 'simon-claus',
 	name: 'Simon Claus',
-	description: '',
+	description: 'A holly, jolly Simon',
 	author: '2snek',
 	patch: finalSpritePatch
 };

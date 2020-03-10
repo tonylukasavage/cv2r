@@ -1058,8 +1058,8 @@ finalSpritePatch.push({
 
 module.exports = {
 	id: 'ryu-hayabusa',
-	name: 'Ryu Hayabusa',
-	description: '',
+	name: 'Ryu Hayabusa (Ninja Gaiden)',
+	description: 'Ryu Hayabusa from Ninja Gaiden',
 	author: 'BloodSweatAndCode',
 	patch: finalSpritePatch
 };

@@ -1194,9 +1194,9 @@ finalSpritePatch.push({
 });
 
 module.exports = {
-	id: 'link-zelda-2',
+	id: 'link-z2',
 	name: 'Link (Zelda 2)',
-	description: '',
+	description: 'Link from The Legend of Zelda 2',
 	author: 'BloodSweatAndCode',
 	patch: finalSpritePatch
 };

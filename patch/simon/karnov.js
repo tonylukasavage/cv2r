@@ -1059,7 +1059,7 @@ finalSpritePatch.push({
 module.exports = {
 	id: 'karnov',
 	name: 'Karnov',
-	description: '',
+	description: 'Your friendly neighborhood beefy fire-breather',
 	author: 'BloodSweatAndCode',
 	patch: finalSpritePatch
 };
