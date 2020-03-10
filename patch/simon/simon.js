@@ -1,7 +1,7 @@
 module.exports = {
-	id: 'simon-default',
+	id: 'simon',
 	name: 'Simon (Default)',
-	description: 'The standard CV2 Simon Belmont sprite',
+	description: 'The default CV2 Simon Belmont sprite',
 	author: 'Konami',
 	patch: function() {}
 };
