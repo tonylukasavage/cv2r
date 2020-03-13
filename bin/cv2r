@@ -76,13 +76,13 @@ program.outputHelp = function() {
 	// find the longest flags string in our options
 	const longest = Math.max(...(this.options.map(o => o.flags.length)));
 	const p = str => pad(str, longest);
-	const desc = text => {
+	const desc = (text, pad = 0) => {
 		const width = process.stdout.columns - longest - 20;
 		const rx = new RegExp('.{1,' + width + '}(?:[\\s\\r\\n\\t$]|$)', 'g');
 		const lines = text.match(rx);
 		lines.forEach((line, index) => {
 			if (index) {
-				console.log(' '.repeat(longest + 4) + line);
+				console.log(' '.repeat(longest + 4 + pad) + line);
 			} else {
 				process.stdout.write(line + '\n');
 			}
@@ -121,9 +121,10 @@ program.outputHelp = function() {
 	console.log('');
 	Object.keys(difficulty).forEach(key => {
 		const { description, patches } = difficulty[key];
-		process.stdout.write(`  ${p(key)}  `);
+		process.stdout.write(`  * ${p(key)}`);
 		desc(description);
-		console.log(' '.repeat(longest + 4) + 'PATCHES: ' + green(patches.join(', ')));
+		process.stdout.write(' '.repeat(longest + 4) + 'PATCHES: ');
+		desc(green(patches.join(', ')));
 		console.log('');
 	});
 
@@ -132,7 +133,7 @@ program.outputHelp = function() {
 	console.log('');
 	patchManager.getPatches().forEach(patch => {
 		const description = p(patch.short || patch.description);
-		process.stdout.write(`  ${p(patch.id)}  `);
+		process.stdout.write(`  * ${p(patch.id)}`);
 		desc(description);
 		console.log('');
 	});
@@ -140,15 +141,17 @@ program.outputHelp = function() {
 	console.log('');
 	console.log(cyan('Simon Sprites'));
 	console.log('');
+	console.log('  A new sprite can be used for Simon by providing one of the ids below, for example `--simon samus`. Additionally, you can specify a patch by file directly by providing the patch file path instead of patch id, like this `--simon /path/to/simon-patch.json`. This is particularly useful when creating and testing sprites made with Sprite Maker.');
+	console.log('');
 	patchManager.getPatches('simon').forEach(patch => {
-		console.log(`  ${p(patch.id)}  ${p(patch.short || patch.description)}`);
+		console.log(`  * ${p(patch.id)}  ${p(patch.short || patch.description)}`);
 	});
 
 	console.log('');
 	console.log(cyan('Palettes'));
 	console.log('');
 	patchManager.getPatches('palette').forEach(patch => {
-		console.log(`  ${p(patch.id)}  ${p(patch.description)}`);
+		console.log(`  * ${p(patch.id)}  ${p(patch.description)}`);
 	});
 
 	console.log('');
@@ -157,8 +160,8 @@ program.outputHelp = function() {
 	this.options
 		.filter(o => /^--dev-/.test(o.flags))
 		.forEach(o => {
-			process.stdout.write(`  ${p(o.flags)}  `);
-			desc(o.description);
+			process.stdout.write(`  * ${p(o.flags)}  `);
+			desc(o.description, 2);
 		});
 };
 
