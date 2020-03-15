@@ -8,7 +8,7 @@ const cv2r = require('../lib/cv2r');
 const difficulty = require('../config/difficulty');
 const logic = require('../config/logic');
 const os = require('os');
-const patchManager = require('../lib/patch-manager');
+const pm = require('../lib/patch-manager');
 const path = require('path');
 const program = require('commander');
 const { getDifficulties } = require('../lib/patch-manager');
@@ -49,12 +49,12 @@ Examples:
   ${bin} patch "My Patch Name" --method ips some-hack.ips`)
 	.option('-d, --desc <desc>', 'brief description of the patch to be created')
 	.option('-i, --id <id>', 'id for the patch, also used as its filename')
-	.option('-m, --method <method>', `method used to create patch: ${patchManager.getPatchMethods()}`, 'diff')
+	.option('-m, --method <method>', `method used to create patch: ${pm.getPatchMethods()}`, 'diff')
 	.option('-o, --output <output>', 'directory in which to store created patch', path.join(__dirname, '..', 'patch', 'optional'))
-	.option('-t, --type <type>', `type of patch to create: ${patchManager.order.join(', ')}`, 'optional')
+	.option('-t, --type <type>', `type of patch to create: ${pm.order.join(', ')}`, 'optional')
 	.action(async (name, files, opts) => {
 		isCommand = true;
-		await patchManager.generatePatch(name, files, opts);
+		await pm.generatePatch(name, files, opts);
 	});
 
 program.outputHelp = function() {
@@ -131,7 +131,7 @@ program.outputHelp = function() {
 	console.log('');
 	console.log(cyan('Patches'));
 	console.log('');
-	patchManager.getPatches().forEach(patch => {
+	pm.getPatches().forEach(patch => {
 		const description = p(patch.short || patch.description);
 		process.stdout.write(`  * ${p(patch.id)}`);
 		desc(description);
@@ -143,14 +143,14 @@ program.outputHelp = function() {
 	console.log('');
 	console.log('  A new sprite can be used for Simon by providing one of the ids below, for example `--simon samus`. Additionally, you can specify a patch by file directly by providing the patch file path instead of patch id, like this `--simon /path/to/simon-patch.json`. This is particularly useful when creating and testing sprites made with Sprite Maker.');
 	console.log('');
-	patchManager.getPatches('simon').forEach(patch => {
+	pm.getPatches('simon').forEach(patch => {
 		console.log(`  * ${p(patch.id)}  ${p(patch.short || patch.description)}`);
 	});
 
 	console.log('');
 	console.log(cyan('Palettes'));
 	console.log('');
-	patchManager.getPatches('palette').forEach(patch => {
+	pm.getPatches('palette').forEach(patch => {
 		console.log(`  * ${p(patch.id)}  ${p(patch.description)}`);
 	});
 
@@ -195,14 +195,14 @@ async function main() {
 		}
 
 		// validate palette flag
-		const palettes = patchManager.getPatches('palette').map(p => p.id);
-		if (program.palette && !palettes.includes(program.palette)) {
+		const palettes = pm.getPatches('palette').map(p => p.id);
+		if (program.palette && !(pm.isPatchFile(program.palette) || palettes.includes(program.palette) )) {
 			throw new Error(`invalid palette, valid choices are: ${optionList(palettes)}`);
 		}
 
 		// validate simon sprite flag
-		const simon = patchManager.getPatches('simon').map(p => p.id);
-		if (program.simon && !simon.includes(program.simon)) {
+		const simon = pm.getPatches('simon').map(p => p.id);
+		if (program.simon && !(pm.isPatchFile(program.simon) || simon.includes(program.simon) )) {
 			throw new Error(`invalid simon sprite, valid choices are: ${optionList(simon)}`);
 		}
 
