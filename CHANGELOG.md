@@ -2,6 +2,7 @@
 
 ## 1.4.0 - 2020-03-09
 
+* All sprites in the `patch/simon` folder are loadable in the cv2r.com Sprite Maker
 * All patches can now be loaded directly from a file. For example, a custom simon sprite patch can be loaded via `--simon /path/to/simon-patch.json`. Or if you had a custom patch to load into a list, `--patch 100-hearts,/path/to/custom-patch.js`. Bear in mind this generally only works with patches that have no dependencies within the cv2r project.
 * Patches can now be loaded not only as Javascript files (`.js`) but also now JSON files (`.json`). As an example, see the new Bang from Clash at Demonhead sprite at `cv2r/patch/simon/bang/index.json`.
 * All Simon sprite ids and descriptions are now listed when you execute `cv2r --help` from the CLI
