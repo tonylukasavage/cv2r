@@ -8,6 +8,7 @@
 * All Simon sprite ids and descriptions are now listed when you execute `cv2r --help` from the CLI
 * Normalized all the ids, names, and descriptions of the current Simon sprite patches. 
 * Added "Bang" from Clash at Demonhead to the selectable Simon sprites
+* Improved Link from Zelda 2, Samus and Simon Claus sprite
 
 ## 1.3.2 - 2020-03-08
 
