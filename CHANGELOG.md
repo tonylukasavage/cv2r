@@ -2,26 +2,33 @@
 
 ## 1.4.0 - 2020-03-23
 
+* New Simon Sprites
+  * Bang from "Clash at Demonhead"
+  * Simon The Elf
 * All sprites in the `patch/simon` folder are loadable in the cv2r.com Sprite Maker
 * All patches can now be loaded directly from a file. For example, a custom simon sprite patch can be loaded via `--simon /path/to/simon-patch.json`. Or if you had a custom patch to load into a list, `--patch 100-hearts,/path/to/custom-patch.js`. Bear in mind this generally only works with patches that have no dependencies within the cv2r project. Useful for patch testing.
 * Patches can now be loaded not only as Javascript files (`.js`) but also now JSON files (`.json`). For example, .
 * All Simon sprite ids and descriptions are now listed when you execute `cv2r --help` from the CLI
-* Normalized all the ids, names, and descriptions of the current Simon sprite patches. 
-* Added "Bang" from Clash at Demonhead to the selectable Simon sprites
 * Improved Link from Zelda 2, Samus and Simon Claus sprite
 
 ## 1.3.2 - 2020-03-08
 
-* Added "Pit" from Kid Icarus and "Karnov" to the selectable Simon sprites
+* New Simon Sprites
+  * Pit from "Kid Icarus"
+  * Karnov from "Karnov"
 
 ## 1.3.1 - 2020-03-07
 
-* Added "Hero" from Crystalis and "Ryu Hayabusa" from Ninja Gaiden to the selectable Simon sprites
+* New Simon Sprites
+  * Hero from "Crystalis"
+  * Ryu Hayabusa from "Ninja Gaiden"
 
 ## 1.3.0 - 2020-03-06
 
 * Sprite Maker for easily creating new sprites for Simon available at [https://cv2r.herokuapp.com/sprite-maker](https://cv2r.herokuapp.com/sprite-maker)
-* Added Mario and Ghost Simon sprites
+* New Simon Sprites
+  * Mario from "Super Mario Bros."
+  * Ghost Simon
 * Added authors to all sprites
 
 ## 1.2.1 - 2020-01-22
