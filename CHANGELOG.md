@@ -5,11 +5,14 @@
 * New Simon Sprites
   * Bang from "Clash at Demonhead"
   * Simon The Elf
-* All sprites in the `patch/simon` folder are loadable in the cv2r.com Sprite Maker
+* Updated Simon Sprites
+  * Link from "Zelda 2"
+  * Samus from "Metroid"
+  * Simon Claus
+* All sprites in the `patch/simon` folder are loadable in the cv2r.com Sprite Maker via their `index.json` file
 * All patches can now be loaded directly from a file. For example, a custom simon sprite patch can be loaded via `--simon /path/to/simon-patch.json`. Or if you had a custom patch to load into a list, `--patch 100-hearts,/path/to/custom-patch.js`. Bear in mind this generally only works with patches that have no dependencies within the cv2r project. Useful for patch testing.
 * Patches can now be loaded not only as Javascript files (`.js`) but also now JSON files (`.json`). For example, .
 * All Simon sprite ids and descriptions are now listed when you execute `cv2r --help` from the CLI
-* Improved Link from Zelda 2, Samus and Simon Claus sprite
 
 ## 1.3.2 - 2020-03-08
 
