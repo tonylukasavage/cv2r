@@ -2,7 +2,7 @@
 	"name": "Simon The Elf",
 	"id": "simon-the-elf",
 	"author": "BloodSweatAndCode",
-	"description": "Simon The Elf, what\\'s your favorite color?",
+	"description": "Simon The Elf, what's your favorite color?",
 	"spriteMaker": true,
 	"patch": [
 		{
