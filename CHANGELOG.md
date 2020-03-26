@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## 1.4.1 - ?????
+
+* New Simon Sprites
+  * Samus with Power Suit
+
 ## 1.4.0 - 2020-03-23
 
 * New Simon Sprites
