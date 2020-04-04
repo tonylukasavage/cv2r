@@ -19,7 +19,7 @@ module.exports = {
 			}
 		});
 
-		modSubroutine(pm.name, path.join(__dirname, 'town-door-enter-pos.asm'), bank[7], {
+		modSubroutine(pm.name, path.join(__dirname, 'town-door-enter-pos.asm'), bank[8], {
 			invoke: {
 				romLoc: 0x1E77B,
 				padding: 1
