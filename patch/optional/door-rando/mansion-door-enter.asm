@@ -1,0 +1,6 @@
+LDA *$30
+STA $6100
+LDA #$00
+STA *$30
+LDA #$17
+RTS

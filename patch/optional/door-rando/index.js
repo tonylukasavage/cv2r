@@ -20,6 +20,19 @@ module.exports = {
 			}
 		});
 
+		modSubroutine(pm.name, path.join(__dirname, 'mansion-door-enter.asm'), bank[3], {
+			invoke: {
+				romLoc: 0xC7FC,
+				padding: 2
+			}
+		});
+
+		modSubroutine(pm.name, path.join(__dirname, 'mansion-door-enter-pos.asm'), bank[9], {
+			invoke: {
+				romLoc: 0x1E7DF
+			}
+		});
+
 		modSubroutine(pm.name, path.join(__dirname, 'mansion-exit.asm'), bank[7], {
 			invoke: {
 				romLoc: 0x1D0F9
