@@ -3,8 +3,16 @@ const assemble = require('../../../lib/6502assembler');
 const fs = require('fs');
 const path = require('path');
 const { bank, memory, utils: { modSubroutine } } = require('../../../lib');
-// town is 10 bytes
-// mansion is 11 bytes
+
+const NOP = 0xEA;
+
+function pad(bytes, len) {
+	const ret = bytes.slice(0);
+	while (ret.length < len) {
+		ret.push(NOP);
+	}
+	return ret;
+}
 
 module.exports = {
 	pre: true,
@@ -13,13 +21,20 @@ module.exports = {
 	description: 'All town and mansion doors are randomized',
 	patch: function(pm) {
 		memory.doorEntryPos = modSubroutine(pm.name, path.join(__dirname, 'door-entry-pos.asm'), bank[3]);
+		memory.bankSwitch232 = modSubroutine(pm.name, path.join(__dirname, 'bank-switch.asm'), bank[8], {
+			values: {
+				doorEntryPos: memory.doorEntryPos.ram.toString(16)
+			}
+		});
 
-		// override town and and mansion door positioning code to use mine on bank 3 
-		const codeRaw = fs.readFileSync(path.join(__dirname, 'bank-switch.asm'));
-		const code = _.template(codeRaw)({ doorEntryPos: memory.doorEntryPos.ram.toString(16) });
+		// override town and and mansion door positioning code to use mine on bank 3
+		// const codeRaw = fs.readFileSync(path.join(__dirname, 'bank-switch.asm'));
+		// const code = _.template(codeRaw)({ doorEntryPos: memory.doorEntryPos.ram.toString(16) });
+		// const bytes = assemble(code);
+		const code = `JSR $${memory.bankSwitch232.ram.toString(16)}`;
 		const bytes = assemble(code);
-		pm.add(bytes, 0x1E77B); // + 1
-		pm.add(bytes, 0x1E7DF); // + 2
+		pm.add(pad(bytes, 10), 0x1E77B);
+		pm.add(pad(bytes, 11), 0x1E7DF);
 
 		modSubroutine(pm.name, path.join(__dirname, 'town-door-enter.asm'), bank[3], {
 			invoke: {
