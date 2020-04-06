@@ -1,5 +1,10 @@
+const _ = require('lodash');
+const assemble = require('../../../lib/6502assembler');
+const fs = require('fs');
 const path = require('path');
-const { bank, utils: { modSubroutine } } = require('../../../lib');
+const { bank, memory, utils: { modSubroutine } } = require('../../../lib');
+// town is 10 bytes
+// mansion is 11 bytes
 
 module.exports = {
 	pre: true,
@@ -7,16 +12,18 @@ module.exports = {
 	name: 'Door Rando',
 	description: 'All town and mansion doors are randomized',
 	patch: function(pm) {
+		memory.doorEntryPos = modSubroutine(pm.name, path.join(__dirname, 'door-entry-pos.asm'), bank[3]);
+
+		// override town and and mansion door positioning code to use mine on bank 3 
+		const codeRaw = fs.readFileSync(path.join(__dirname, 'bank-switch.asm'));
+		const code = _.template(codeRaw)({ doorEntryPos: memory.doorEntryPos.ram.toString(16) });
+		const bytes = assemble(code);
+		pm.add(bytes, 0x1E77B); // + 1
+		pm.add(bytes, 0x1E7DF); // + 2
+
 		modSubroutine(pm.name, path.join(__dirname, 'town-door-enter.asm'), bank[3], {
 			invoke: {
 				romLoc: 0xC81F
-			}
-		});
-
-		modSubroutine(pm.name, path.join(__dirname, 'town-door-enter-pos.asm'), bank[8], {
-			invoke: {
-				romLoc: 0x1E77B,
-				padding: 1
 			}
 		});
 
@@ -24,12 +31,6 @@ module.exports = {
 			invoke: {
 				romLoc: 0xC7FC,
 				padding: 2
-			}
-		});
-
-		modSubroutine(pm.name, path.join(__dirname, 'mansion-door-enter-pos.asm'), bank[9], {
-			invoke: {
-				romLoc: 0x1E7DF
 			}
 		});
 
