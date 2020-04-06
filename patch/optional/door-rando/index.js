@@ -55,5 +55,12 @@ module.exports = {
 			}
 		});
 
+		modSubroutine(pm.name, path.join(__dirname, 'town-exit.asm'), bank[9], {
+			invoke: {
+				romLoc: 0x1D069,
+				padding: 1
+			}
+		});
+
 	}
 };
