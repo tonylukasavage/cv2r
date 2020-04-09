@@ -300,3 +300,17 @@ D772
 
  town 0->1
  mansion 80->81
+
+## code for determining area to enter from door
+
+ 03:87FE:A5 50     LDA area = #$00
+ 03:8800:0A        ASL
+ 03:8801:0A        ASL
+ 03:8802:85 00     STA $0000 = #$00
+ 03:8804:A5 53     LDA simon_map_x_low = #$EE
+ 03:8806:18        CLC
+ 03:8807:6D 48 03  ADC simon_x_screen = #$80
+ 03:880A:A5 54     LDA simon_map_x_high = #$01
+ 03:880C:65 00     ADC $0000 = #$00
+ 03:880E:A8        TAY
+ 03:880F:B9 1F 88  LDA $881F,Y @ $8821 = #$07

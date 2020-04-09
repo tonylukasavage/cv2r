@@ -2,12 +2,12 @@ LDA $6100
 CMP #$FF
 BEQ NORMAL
 
-; door rando code
+; store the original objset
 STA *$30
 LDA #$FF
 STA $6100
 
-; normal mansion exit code
+; normal exit code
 NORMAL
 LDA *$4E
 STA *$50

@@ -1,6 +1,6 @@
 LDA #$03
 JSR $C183
-JSR $<%= doorEntryPos %>
+JSR $<%= enterPosition %>
 LDA #$02
 JSR $C183
 RTS
