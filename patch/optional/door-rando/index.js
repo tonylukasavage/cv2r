@@ -12,17 +12,31 @@ function pad(bytes, len) {
 	return ret;
 }
 
+function getLocation({ objset, area, submap = 0 }) {
+	return core.find(c => c.objset === objset && c.area === area && c.submap === submap);
+}
+
 module.exports = {
 	pre: true,
 	id: 'door-rando',
 	name: 'Door Rando',
 	description: 'All town and mansion doors are randomized',
 	patch: function(pm) {
-		// get a list of all doors
+		const spoiler = [ [ 'door', 'location' ] ];
+
+		// get a list of all doors annd targets
 		const doors = core
 			.filter(loc => loc.doors)
 			.reduce((a,c) => a.concat(c.doors.data), [])
 			.sort((a, b) => a.pointerIndex < b.pointerIndex ? -1 : 1);
+		const targets = doors.map(d => d.target);
+
+		// TODO: randomize doors
+		doors.forEach(door => {
+			const roomLoc = getLocation(door.target);
+			spoiler.push([ door.name, roomLoc.name ]);
+		});
+		console.log(JSON.stringify(spoiler, null, 2));
 
 		// create array for a location pointer table
 		let maxPointer = 0;
