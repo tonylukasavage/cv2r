@@ -113,6 +113,7 @@ module.exports = {
 		}
 
 		shuffleArray(clues, rng);
+		log('', true);
 		log('Book Clues', true);
 		log('----------', true);
 		core.forEach(loc => {

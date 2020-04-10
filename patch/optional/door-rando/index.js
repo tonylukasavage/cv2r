@@ -1,5 +1,5 @@
 const path = require('path');
-const { assemble, bank, core, utils: { modBytes, modSubroutine, randomInt } } = require('../../../lib');
+const { assemble, bank, core, utils: { log, modBytes, modSubroutine, randomInt } } = require('../../../lib');
 
 const NOP = 0xEA;
 const MANSION_COUNT = 5;
@@ -22,7 +22,7 @@ module.exports = {
 	name: 'Door Rando',
 	description: 'All town and mansion doors are randomized',
 	patch: function(pm, opts) {
-		const { rng } = opts;
+		const { logic, rng } = opts;
 		const spoiler = [ [ 'door', 'location' ] ];
 
 		// get a list of all doors annd targets
@@ -32,17 +32,43 @@ module.exports = {
 			.sort((a, b) => a.pointerIndex < b.pointerIndex ? -1 : 1);
 		const targets = doors.map(d => d.target);
 
-		// TODO: randomize doors
+		// randomize door targets
+		log('', true);
+		log('Door Rando', true);
+		log('----------', true);
 		doors.forEach(door => {
 			const index = randomInt(rng, 0, targets.length - 1);
 			const target = targets[index];
 			targets.splice(index, 1);
-			Object.assign(door.target, target);
+			door.newTarget = {};
+			Object.assign(door.newTarget, target);
 
-			const roomLoc = getLocation(door.target);
+			const roomLoc = getLocation(door.newTarget);
 			spoiler.push([ door.name, roomLoc.name ]);
+			log(`${door.name.padEnd(30, ' ')} --> ${roomLoc.name}`);
+
+			const doorReqs = getLocation(door).doors.requirements[logic];
+			const actors = core
+				.filter(loc => loc.objset === door.newTarget.objset && loc.area === door.newTarget.area)
+				.reduce((a, c) => {
+					return a.concat(c.actors || []);
+				}, []);
+			actors.filter(a => a.holdsItem).forEach(actor => {
+				const actorReqs = actor.actorRequirements[logic];
+				let newReqs;
+				if (doorReqs && actorReqs) {
+					newReqs = `(${doorReqs}) && (${actorReqs})`;
+				} else if (doorReqs) {
+					newReqs = doorReqs;
+				} else if (actorReqs) {
+					newReqs = actorReqs;
+				} else {
+					newReqs = '';
+				}
+				actor.requirements[logic] = newReqs;
+			});
 		});
-		console.log(JSON.stringify(spoiler, null, 2));
+		global.doorSpoiler = spoiler;
 
 		// create array for a location pointer table
 		let maxPointer = 0;
