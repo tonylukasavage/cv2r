@@ -1,5 +1,5 @@
 const path = require('path');
-const { assemble, bank, core, utils: { modBytes, modSubroutine } } = require('../../../lib');
+const { assemble, bank, core, utils: { modBytes, modSubroutine, randomInt } } = require('../../../lib');
 
 const NOP = 0xEA;
 const MANSION_COUNT = 5;
@@ -21,7 +21,8 @@ module.exports = {
 	id: 'door-rando',
 	name: 'Door Rando',
 	description: 'All town and mansion doors are randomized',
-	patch: function(pm) {
+	patch: function(pm, opts) {
+		const { rng } = opts;
 		const spoiler = [ [ 'door', 'location' ] ];
 
 		// get a list of all doors annd targets
@@ -33,6 +34,11 @@ module.exports = {
 
 		// TODO: randomize doors
 		doors.forEach(door => {
+			const index = randomInt(rng, 0, targets.length - 1);
+			const target = targets[index];
+			targets.splice(index, 1);
+			Object.assign(door.target, target);
+
 			const roomLoc = getLocation(door.target);
 			spoiler.push([ door.name, roomLoc.name ]);
 		});
