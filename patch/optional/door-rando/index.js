@@ -67,6 +67,8 @@ module.exports = {
 				}
 				actor.requirements[logic] = newReqs;
 			});
+
+			doors.forEach(door => door.target = door.newTarget);
 		});
 		global.doorSpoiler = spoiler;
 
