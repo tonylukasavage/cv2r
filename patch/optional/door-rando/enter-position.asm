@@ -6,7 +6,11 @@ PLA
 LDA *$30
 BEQ TOWN
 
-; mansion entry
+; mansion music
+LDA #$45
+JSR $C118
+
+; mansion positioning
 LDA *$50
 SEC
 SBC #$06
@@ -18,7 +22,7 @@ STA *$54
 STA *$56
 JMP $E7DA
 
-; town entry
+; town positioning
 TOWN
 LDA #$00
 STA *$53
