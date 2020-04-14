@@ -86,7 +86,7 @@ module.exports = {
 			if (objset === 0) {
 				offset = pointerIndex * 2;
 			} else {
-				offset = (maxPointer + area) * 2;
+				offset = (maxPointer + 1 + area) * 2;
 			}
 			tableBytes[offset] = target.objset;
 			tableBytes[offset + 1] = target.area;
@@ -94,6 +94,7 @@ module.exports = {
 
 		// write pointer table to rom
 		const tableMod = modBytes(pm.name, tableBytes, bank[3]);
+		global.doorSpoiler.push([ 'door table', tableMod.rom ]);
 
 		// rom patch functions
 		const enter = modSubroutine(pm.name, path.join(__dirname, 'enter.asm'), bank[3], {

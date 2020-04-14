@@ -4,7 +4,7 @@ BEQ TOWN
 
 LDA *$50
 CLC
-ADC #$1B
+ADC #$1C
 BNE AREA
 
 TOWN
