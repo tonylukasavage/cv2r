@@ -308,7 +308,7 @@ module.exports = {
 			.reduce((a,c) => a.concat(c), [])
 			.filter(a => a.itemName);
 
-		let spoiler = [ [ 'item', 'actor', 'location' ] ];
+		let spoiler = [ [ 'item', 'actor', 'location', 'entry room' ] ];
 		log('', true);
 		itemActors.forEach(actor => {
 			let jsrBuf;
@@ -427,8 +427,10 @@ STA *$01
 			}
 			pm.add(textToBytes(actor.text), actor.textPointer);
 
+			const entryRoom = core.find(loc => loc.name === actor.locationName).entryRoom || '';
+
 			log(`${pad(item.name, 15)} | ${pad(actor.name + (actor.name === 'merchant' ? ' (' + item.price + ')' : ''), 15)} | ${actor.locationName}`, true);
-			spoiler.push([ item.name, actor.name, actor.locationName ]);
+			spoiler.push([ item.name, actor.name, actor.locationName, entryRoom ]);
 		});
 
 		// TODO: resolve this laziness
