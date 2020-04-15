@@ -114,3 +114,18 @@ node --no-warnings .\bin\cv2r --seed BSAC cv2.nes
 ```
 
 You can now find your new cv2 rando rom in the `/path/to/cv2r/output` folder
+
+
+## new text
+
+bank 3 for npcs
+
+source of text
+
+ 07:EEA4:A5 7F     LDA $007F = #$38
+ 07:EEA6:0A        ASL
+ 07:EEA7:AA        TAX
+ 07:EEA8:BD 82 8B  LDA $8B82,X @ $8BF2 = #$BF
+ 07:EEAB:85 00     STA $0000 = #$BF
+ 07:EEAD:BD 83 8B  LDA $8B83,X @ $8BF3 = #$92
+ 07:EEB0:85 01     STA $0001 = #$92
