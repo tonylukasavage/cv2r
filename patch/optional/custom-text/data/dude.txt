@@ -1,0 +1,13 @@
+Shut up and take my <%= item %>!
+I beg of you to take my <%= item %>
+It’s dangerous to go alone! Take this <%= item %>
+Was listing this <%= item %> on Craigslist anyway
+You believe I found this <%= item %> in the trash?
+Take this <%= item %> and kill that damn vampire!
+Belmonts, always mooching. Have this <%= item %>
+I'm better than Amazon Prime. Have <%= item %>
+<%= item %>, the worst. Get it out of my sight!
+Chain letter said to give <%= item %> to 5 friends
+I expect this <%= item %> back soon
+Cursed huh? Maybe this <%= item %> will help.
+Down with the sickness? Try this <%= item %>

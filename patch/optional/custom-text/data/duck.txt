@@ -1,0 +1,4 @@
+Quack! <%= item %>! Quack!
+Not all birds are jerks. Take this <%= item %>.
+<%= item %> brought to you by a poor translation
+Grom said this <%= item %> is for you
