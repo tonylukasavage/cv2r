@@ -1,6 +1,6 @@
 Shut up and take my <%= item %>!
 I beg of you to take my <%= item %>
-It’s dangerous to go alone! Take this <%= item %>
+It's dangerous to go alone! Take this <%= item %>
 Was listing this <%= item %> on Craigslist anyway
 You believe I found this <%= item %> in the trash?
 Take this <%= item %> and kill that damn vampire!

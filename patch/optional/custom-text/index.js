@@ -1,7 +1,8 @@
+const _ = require('lodash');
 const fs = require('fs').promises;
 const path = require('path');
 const { prepText, romToRam } = require('./helpers');
-const { bank, core, utils: { modText, randomInt } } = require('../../../lib');
+const { bank, core, utils: { modText, randomInt, textToBytes } } = require('../../../lib');
 
 const BASE_ADDR_ROM = 0xCB92; // 0x8B82 RAM
 
@@ -33,17 +34,6 @@ module.exports = {
 
 		console.log(newText);
 
-		// write new text table
-		// Object.keys(newText).forEach(key => {
-		// 	const textArray = newText[key];
-		// 	textArray.forEach(textObj => {
-		// 		textObj.mod = modText(pm.name, prepText(textObj.text), bank[3]);
-		// 	});
-		// });
-		// console.log(JSON.stringify(newText, null, 2));
-
-		// const pointerMod = modText(pm.name, prepText('Remember when JC had the world record?'), bank[3]);
-
 		// update text pointers for all actors
 		const actorMap = {
 			'Camilla': 'camilla',
@@ -66,12 +56,21 @@ module.exports = {
 
 				const textKey = actorMap[actor.name];
 				if (!textKey) {
-					console.error('skipping ' + actor.name);
+					// console.error('skipping ' + actor.name);
 					return;
 				}
 				const index = randomInt(rng, 0, newText[textKey].length - 1);
-				const text = newText[textKey][index].text;
+				const text = newText[textKey][index];
 				const mod = modText(pm.name, prepText(text), bank[3]);
+				newText[textKey].splice(index, 1);
+
+				// if (text.indexOf('\'') !== -1) {
+				// 	console.log(text);
+				// 	console.log(prepText(text));
+				// 	console.log(textToBytes(prepText(text)));
+				// 	console.log('----');
+				// }
+				// console.log(actor.itemName, _.template(text)({ item: actor.itemName }));
 
 				const pointerIndex = textPointers.findIndex(p => p === romToRam(actor.textPointer));
 				pm.add([mod.ram & 0xFF], BASE_ADDR_ROM + (pointerIndex * 2));
