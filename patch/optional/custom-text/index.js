@@ -32,8 +32,6 @@ module.exports = {
 			newText[name] = data.split('\n').map(l => l.trim()).filter(l => l);
 		}
 
-		console.log(newText);
-
 		// update text pointers for all actors
 		const actorMap = {
 			'Camilla': 'camilla',
@@ -47,6 +45,9 @@ module.exports = {
 			'shepherd': 'npc',
 			'merchant': 'merchant',
 			'secret merchant': 'garlic'
+			// 'book': 'book', // books are handled by book patch (clues)
+			// 'sign': 'sign',
+			// 'priest': 'priest' // all priests share same single text
 		};
 
 		core.forEach(loc => {
@@ -54,24 +55,19 @@ module.exports = {
 			loc.actors.forEach(actor => {
 				if (!actor.textPointer) { return; }
 
-				const textKey = actorMap[actor.name];
-				if (!textKey) {
-					// console.error('skipping ' + actor.name);
-					return;
+				if (actor.salePointer && actor.locationName.indexOf('Thorn') !== -1) {
+					console.log(actor, actor.salePointer.toString(16));
 				}
+
+				// grab random text from new text listing, write it to the rom, then remove it from the pool
+				const textKey = actorMap[actor.name];
+				if (!textKey) { return; }
 				const index = randomInt(rng, 0, newText[textKey].length - 1);
 				const text = newText[textKey][index];
 				const mod = modText(pm.name, prepText(text), bank[3]);
 				newText[textKey].splice(index, 1);
 
-				// if (text.indexOf('\'') !== -1) {
-				// 	console.log(text);
-				// 	console.log(prepText(text));
-				// 	console.log(textToBytes(prepText(text)));
-				// 	console.log('----');
-				// }
-				// console.log(actor.itemName, _.template(text)({ item: actor.itemName }));
-
+				// update actor's text pointer to reference our new text
 				const pointerIndex = textPointers.findIndex(p => p === romToRam(actor.textPointer));
 				pm.add([mod.ram & 0xFF], BASE_ADDR_ROM + (pointerIndex * 2));
 				pm.add([mod.ram >>> 8], BASE_ADDR_ROM + (pointerIndex * 2) + 1);
