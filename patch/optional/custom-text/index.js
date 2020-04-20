@@ -59,7 +59,8 @@ module.exports = {
 				const textKey = actorMap[actor.name];
 				if (!textKey) { return; }
 				const index = randomInt(rng, 0, newText[textKey].length - 1);
-				const text = newText[textKey][index];
+				const rawText = newText[textKey][index];
+				const text = _.template(rawText)({ item: actor.itemName });
 				const mod = modText(pm.name, prepText(text), bank[3]);
 				newText[textKey].splice(index, 1);
 
