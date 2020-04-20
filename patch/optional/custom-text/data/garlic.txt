@@ -1,8 +1,8 @@
-Is that garlic? I love garlic! Take this <%= item %>
-Now I can make shrimp scampi! Take this <%= item %>
+Is that garlic? I love garlic! Take <%= item %>
+Now I can make shrimp scampi! Take <%= item %>
 SPOILER, I was dead the whole time. Have <%= item %>
-Take this <%= item %> and get off my grave!
+Take <%= item %> and get off my grave!
 Drac forbids garlic in his house. Try <%= item %>
 How did you find me?! Here's <%= item %>
 <%= item %> for garlic. Fair trade!
-Take this <%= item %>. Now stop planting garlic.
+<%= item %> if you stop planting garlic.

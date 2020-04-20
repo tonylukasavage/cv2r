@@ -7,6 +7,6 @@ You got <%= item %> by heaving a chunk of wood
 Here's <%= item %>, now get out of here
 <%= item %> might be moldy, been here a while
 <%= item %> but you're paying for that orb!
-Who even put this <%= item %> in here?
+Who even put <%= item %> in here?
 Thou hast acquired the <%= item %>
 Damn son, there's <%= item %> in here!

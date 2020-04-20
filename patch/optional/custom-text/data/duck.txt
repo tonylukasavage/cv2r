@@ -1,5 +1,5 @@
 Quack! <%= item %>! Quack!
-Not all birds are jerks. Take this <%= item %>.
+Not all birds are jerks. Take <%= item %>.
 <%= item %> brought to you by a poor translation
 Grom said this <%= item %> is for you
 Take <%= item %>. Good luck getting over that wall.
