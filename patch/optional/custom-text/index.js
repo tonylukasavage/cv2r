@@ -55,10 +55,6 @@ module.exports = {
 			loc.actors.forEach(actor => {
 				if (!actor.textPointer) { return; }
 
-				if (actor.salePointer && actor.locationName.indexOf('Thorn') !== -1) {
-					console.log(actor, actor.salePointer.toString(16));
-				}
-
 				// grab random text from new text listing, write it to the rom, then remove it from the pool
 				const textKey = actorMap[actor.name];
 				if (!textKey) { return; }
