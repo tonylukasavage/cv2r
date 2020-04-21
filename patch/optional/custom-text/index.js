@@ -55,6 +55,10 @@ module.exports = {
 			loc.actors.forEach(actor => {
 				if (!actor.textPointer) { return; }
 
+				if (actor.locationName.indexOf('Mansion') !== -1 && actor.name === 'merchant') {
+					console.log(actor);
+				}
+
 				// grab random text from new text listing, write it to the rom, then remove it from the pool
 				const textKey = actorMap[actor.name];
 				if (!textKey) { return; }
@@ -63,9 +67,12 @@ module.exports = {
 				const text = _.template(rawText)({ item: actor.itemName });
 				const mod = modText(pm.name, prepText(text), bank[3]);
 				newText[textKey].splice(index, 1);
+				console.log(mod);
+
 
 				// update actor's text pointer to reference our new text
 				const pointerIndex = textPointers.findIndex(p => p === romToRam(actor.textPointer));
+				console.log(BASE_ADDR_ROM + (pointerIndex * 2) + 1, BASE_ADDR_ROM + (pointerIndex * 2));
 				pm.add([mod.ram & 0xFF], BASE_ADDR_ROM + (pointerIndex * 2));
 				pm.add([mod.ram >>> 8], BASE_ADDR_ROM + (pointerIndex * 2) + 1);
 			});
