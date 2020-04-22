@@ -1,12 +1,12 @@
-You now prossess the <%= item %>
-Stakes can't hurt Drac, but this one got <%= item %>
-Was that an earthquake?! Take <%= item %> and run!
+You now prossess <%= def %><%= item %>
+Stakes can't hurt Drac, but this one got <%= indef %><%= item %>
+Was that an earthquake?! Take <%= dem %><%= item %> and run!
 Oak stake in, <%= item %> out
-I beat a mansion and all I got was stupid <%= item %>
-You got <%= item %> by heaving a chunk of wood
-Here's <%= item %>, now get out of here
-<%= item %> might be moldy, been here a while
-<%= item %> but you're paying for that orb!
-Who even put <%= item %> in here?
-Thou hast acquired the <%= item %>
-Damn son, there's <%= item %> in here!
+I beat a mansion and all I got was <%= dem %>stupid <%= item %>
+You got <%= indef %><%= item %> by heaving a chunk of wood
+Here's <%= def %><%= item %>, now get out of here
+<%= dem %><%= item %> might be moldy, been here a while
+Take <%= def %><%= item %> but you're paying for that orb!
+Who even put <%= dem %><%= item %> in here?
+Thou hast acquired <%= def %><%= item %>
+Damn son, there's <%= indef %><%= item %> in here!

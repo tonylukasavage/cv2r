@@ -2,6 +2,7 @@ const _ = require('lodash');
 const assert = require('assert');
 const fs = require('fs');
 const path = require('path');
+const { itemArticles } = require('../../../../lib/utils');
 
 const PATCH_DIR = path.join(__dirname, '..', '..', '..', '..', 'patch', 'optional', 'custom-text');
 const ITEMS_MODULE = path.join(__dirname, '..', '..', '..', '..', 'patch', 'core', 'itemizer', 'items');
@@ -78,7 +79,7 @@ describe.only('[patch] custom-text', function() {
 
 		text.forEach(t => {
 			items.forEach(item => {
-				const newText = _.template(t)({item});
+				const newText = _.template(t)(Object.assign({item}, itemArticles(item)));
 				it(newText, function() {
 					try {
 						helpers.prepText(newText);

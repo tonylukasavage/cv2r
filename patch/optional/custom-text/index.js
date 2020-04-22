@@ -2,7 +2,7 @@ const _ = require('lodash');
 const fs = require('fs').promises;
 const path = require('path');
 const { prepText, romToRam } = require('./helpers');
-const { bank, core, utils: { modText, randomInt } } = require('../../../lib');
+const { bank, core, utils: { itemArticles, modText, randomInt } } = require('../../../lib');
 
 const BASE_ADDR_ROM = 0xCB92; // 0x8B82 RAM
 
@@ -60,7 +60,8 @@ module.exports = {
 				if (!textKey) { return; }
 				const index = randomInt(rng, 0, newText[textKey].length - 1);
 				const rawText = newText[textKey][index];
-				const text = _.template(rawText)({ item: actor.itemName });
+				const item = actor.itemName;
+				const text = _.template(rawText)(itemArticles(item));
 				const mod = modText(pm.name, prepText(text), bank[3]);
 				newText[textKey].splice(index, 1);
 
