@@ -73,16 +73,18 @@ describe.only('[patch] custom-text', function() {
 		let text = [];
 		for (let f of textFiles) {
 			const file = path.join(PATCH_DIR, 'data', f);
-			const lines = fs.readFileSync(file, 'utf8').split('\n').filter(l => l);
+			const lines = fs.readFileSync(file, 'utf8').split('\n').filter(l => l).map(l => {
+				return { line: l, type: f.replace('.txt', '') };
+			});
 			text = text.concat(lines);
 		}
 
 		text.forEach(t => {
 			items.forEach(item => {
-				const newText = _.template(t)(Object.assign({item}, itemArticles(item)));
+				const newText = _.template(t.line)(Object.assign({item}, itemArticles(item)));
 				it(newText, function() {
 					try {
-						helpers.prepText(newText);
+						helpers.prepText(newText, t.type);
 					} catch (err) {
 						assert.equal(0, 'should never get here');
 					}

@@ -1,6 +1,7 @@
 const RAM_ROM_DIFF = exports.RAM_ROM_DIFF = 0x4010;
 const MAX_CHARS_PER_LINE = exports.MAX_CHARS_PER_LINE = 12;
 const MAX_LINES = exports.MAX_LINES = 5;
+const MAX_MERCHANT_LINES = exports.MAX_MERCHANT_LINES = 2;
 
 exports.ramToRom = function(val) {
 	return val + RAM_ROM_DIFF;
@@ -10,9 +11,9 @@ exports.romToRam = function(val) {
 	return val - RAM_ROM_DIFF;
 };
 
-exports.prepText = function(text) {
+exports.prepText = function(text, actorName) {
 	const words = text.split(/[\s\r\n\t]+/);
-	const lines = [[]];
+	let lines = [[]];
 
 	while (words.length > 0) {
 		const line = lines[lines.length - 1];
@@ -31,7 +32,8 @@ exports.prepText = function(text) {
 		}
 	}
 
-	if (lines.length > MAX_LINES) {
+	lines = lines.filter(l => l[0] !== '');
+	if (lines.length > MAX_LINES || (actorName === 'merchant' && lines.length > MAX_MERCHANT_LINES)) {
 		throw new Error(`text is too long: "${text}"`);
 	}
 

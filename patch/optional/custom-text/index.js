@@ -74,7 +74,7 @@ module.exports = {
 				const rawText = newText[textKey][index];
 				const item = actor.itemName;
 				const text = _.template(rawText)(itemArticles(item));
-				const mod = modText(pm.name, prepText(text), bank[3]);
+				const mod = modText(pm.name, prepText(text, actor.name), bank[3]);
 				newText[textKey].splice(index, 1);
 
 				if (sharedItemTypes.includes(actor.itemType)) {
