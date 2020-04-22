@@ -27,7 +27,7 @@ describe.only('[patch] custom-text', function() {
 			],
 			[
 				'BSAC is a mad scientist who needs a real hobby',
-				'BSAC is a mad\nscientist\nwho needs a\nreal hobby'
+				'BSAC is a\nmad\nscientist\nwho needs a\nreal hobby'
 			],
 			[
 				'Freeland has played an unreasonable amount of seeds',
@@ -35,24 +35,24 @@ describe.only('[patch] custom-text', function() {
 			],
 			[
 				'Burb has gone AWOL and we miss him deeply',
-				'Burb has gone\nAWOL and we\nmiss him\ndeeply'
+				'Burb has\ngone AWOL\nand we miss\nhim deeply'
 			],
 			[
 				'Kaelari did the trackers for CV2R so I don\'t have to.',
-				'Kaelari did\nthe trackers\nfor CV2R so I\ndon\'t have\nto.'
+				'Kaelari did\nthe trackers\nfor CV2R so\nI don\'t have\nto.'
 			],
 			[
 				'2snek is my spirit animal. HISSSSSSSSSSSSSSSS!',
-				'2snek is my\nspirit\nanimal. HISS\nSSSSSSSSSSSS\nSS!',
+				'2snek is my\nspirit\nanimal. HIS\nSSSSSSSSSSSS\nSSS!',
 			],
 			[
 				'Sathdresh is the god king of the brutal CV2R patches',
-				'Sathdresh is\nthe god king\nof the brutal\nCV2R patches',
+				'Sathdresh is\nthe god king\nof the\nbrutal CV2R\npatches',
 			],
 		];
 
 		tests.forEach(test => {
-			it (`correctly preps "${test[0]}"`, function() {
+			it(`correctly preps "${test[0]}"`, function() {
 				assert.equal(helpers.prepText(test[0]), test[1]);
 			});
 		});

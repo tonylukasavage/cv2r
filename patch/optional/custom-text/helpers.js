@@ -17,8 +17,8 @@ exports.prepText = function(text, actorName) {
 
 	while (words.length > 0) {
 		const line = lines[lines.length - 1];
-		const lineLength = line.reduce((a,c) => a + c.length, 0);
-		if (lineLength + 1 + words[0].length > MAX_CHARS_PER_LINE) {
+		const lineLength = line.reduce((a,c) => a + c.length + 1, 0);
+		if (lineLength + words[0].length > MAX_CHARS_PER_LINE) {
 			if (lineLength === 0 || words[0].length > 12) {
 				const word = words.shift();
 				line.push(word.slice(0, 12 - lineLength - (lineLength > 0 ? 1 : 0)));
