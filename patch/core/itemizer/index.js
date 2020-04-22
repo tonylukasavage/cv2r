@@ -414,7 +414,7 @@ STA *$01
 
 				// handle price and sales icon
 				// first byte is the icon, next 2 are the price (0x01 0x72 == 172)
-				actor.sale = [ item.icon, Math.floor(item.price / 100), item.price % 100 ];
+				actor.sale = [ item.icon, Math.floor(item.price / 100), parseInt(item.price % 100, 16) ];
 				if (!actor.salePointer) {
 					throw new Error(`merchant has no sale pointer\n${JSON.stringify(actor, null, 2)}`);
 				}

@@ -1,0 +1,28 @@
+<%= item %> for sale!
+Deal of the century!
+Fell off a Costco truck
+Black market <%= item %>
+A freaking steal!
+We have a clearance on
+Fresh off the line!
+One month only sale!
+I truly need the money
+No cash, just hearts
+Limited time only
+No refunds!
+<%= item %> <%= verb %> in demand
+All items must go!
+Horrible night sale!
+BSAC's house of deals!
+Freeland's garage sale!
+2snek's bargain shop
+Sathdresh's warehouse!
+Best deal in Transylvania
+Show me the hearts!
+You know you want it
+Irresistable bargain!
+I've got kids to feed
+Support local shops!
+Discount <%= item %>
+Artisan <%- item %>
+Cheaper than Whole Foods
