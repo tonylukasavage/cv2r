@@ -82,7 +82,7 @@ describe('bin/cv2r', async function() {
 	});
 
 	logic.forEach(lt => {
-		for (let i = 0; i < 200; i++) {
+		for (let i = 0; i < 100; i++) {
 			const logic = lt;
 			const seed = randomString();
 			const filename = path.join(__dirname, 'tmp', `cv2-test-${seed}`);
@@ -116,8 +116,8 @@ describe('bin/cv2r', async function() {
 						MAGIC_CROSS: setVal('magic cross')
 					};
 					for (let i = 1; i < spoiler.length; i++) {
-						const script = new vm.Script(spoiler[i][3]);
-						if (!spoiler[i][3] || script.runInNewContext(sandbox)) {
+						const script = new vm.Script(spoiler[i][4]);
+						if (!spoiler[i][4] || script.runInNewContext(sandbox)) {
 							const item = spoiler[i][0];
 							found = true;
 							if (item.includes('crystal')) {
