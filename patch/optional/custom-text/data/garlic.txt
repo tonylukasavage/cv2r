@@ -1,8 +1,8 @@
-Is that garlic? I love garlic! Take <%= item %>
-Now I can make shrimp scampi! Take <%= item %>
-SPOILER, I was dead the whole time. Have <%= item %>
-Take <%= item %> and get off my grave!
-Drac forbids garlic in his house. Try <%= item %>
-How did you find me?! Here's <%= item %>
+Is that garlic? I love garlic! Take <%= dem %><%= item %>
+Now I can make shrimp scampi! Take <%= dem %><%= item %>
+SPOILER, I was dead the whole time. Have <%= indef %><%= item %>
+Take <%= dem %><%= item %> and get off my grave!
+Drac forbids garlic in his house. Try <%= indef %><%= item %>
+How did you find me?! Here's <%= indef %><%= item %>
 <%= item %> for garlic. Fair trade!
-<%= item %> if you stop planting garlic.
+<%= item %> for you, now stop planting garlic.

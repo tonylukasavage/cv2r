@@ -1,6 +1,6 @@
 Quack! <%= item %>! Quack!
-Not all birds are jerks. Take <%= item %>.
-<%= item %> brought to you by a poor translation
-Grom said this <%= item %> is for you
-Take <%= item %>. Good luck getting over that wall.
-Laruba is so close yet so far away. Take <%= item %>
+Not all birds are jerks. Take <%= dem %><%= item %>.
+<%= dem %><%= item %> brought to you by a poor translation
+Grom said <%= dem %><%= item %> is for you
+Take <%= indef %><%= item %>. Good luck getting over that wall.
+Laruba is so close yet so far away. Take <%= dem %><%= item %>

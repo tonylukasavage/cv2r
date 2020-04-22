@@ -1,13 +1,13 @@
 Shut up and take my <%= item %>!
 I beg of you to take my <%= item %>
-It's dangerous to go alone! Take <%= item %>
-Was listing this <%= item %> on Craigslist anyway
-You believe I found <%= item %> in the trash?
-Take <%= item %> and kill that damn vampire!
-Belmonts, always mooching. Have <%= item %>
-I'm better than Amazon Prime. Have <%= item %>
+It's dangerous to go alone! Take <%= indef %><%= item %>
+Was listing <%= dem %><%= item %> on Craigslist anyway
+You believe I found <%= indef %><%= item %> in the trash?
+Take <%= dem %><%= item %> and kill that damn vampire!
+Belmonts, always mooching. Have <%= indef %><%= item %>
+I'm better than Amazon Prime. Have <%= indef %><%= item %>
 <%= item %>, the worst. Get it out of my sight!
-Chain letter said to give <%= item %> to 5 friends
-I expect this <%= item %> back soon
-Cursed huh? Maybe this <%= item %> will help.
-Down with the sickness? Try this <%= item %>
+Chain letter said to give <%= indef %><%= item %> to 5 friends
+I expect <%= dem %><%= item %> back soon
+Cursed huh? Maybe <%= dem %><%= item %> will help.
+Down with the sickness? Try <%= dem %><%= item %>

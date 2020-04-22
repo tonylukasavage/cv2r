@@ -10,7 +10,7 @@ I truly need the money
 No cash, just hearts
 Limited time only
 No refunds!
-<%= item %> is in demand
+<%= item %> <%= verb %> in demand
 All items must go!
 Horrible night sale!
 BSAC's house of deals!
