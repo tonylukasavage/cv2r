@@ -1,9 +1,16 @@
+const _ = require('lodash');
 const assert = require('assert');
-const helpers = require('../../../../patch/optional/custom-text/helpers');
+const fs = require('fs');
+const path = require('path');
+
+const PATCH_DIR = path.join(__dirname, '..', '..', '..', '..', 'patch', 'optional', 'custom-text');
+const ITEMS_MODULE = path.join(__dirname, '..', '..', '..', '..', 'patch', 'core', 'itemizer', 'items');
+const helpers = require(path.join(PATCH_DIR, 'helpers'));
+const itemsModule = require(ITEMS_MODULE);
 
 describe.only('[patch] custom-text', function() {
 
-	it('#prepText properly prepares text', function() {
+	describe('#prepText', function() {
 		const tests = [
 			[
 				'',
@@ -44,15 +51,43 @@ describe.only('[patch] custom-text', function() {
 		];
 
 		tests.forEach(test => {
-			assert.equal(helpers.prepText(test[0]), test[1]);
+			it (`correctly preps "${test[0]}"`, function() {
+				assert.equal(helpers.prepText(test[0]), test[1]);
+			});
 		});
 
-		try {
-			helpers.prepText('This is just way too much text. This is just way too much text. This is just way too much text. This is just way too much text. ')
-			assert.equals(0, 'should never get here');
-		} catch (err) {
-			assert.equal(err.message.indexOf('too long') !== -1, true);
+		it('throws error on text that is too long', function() {
+			try {
+				helpers.prepText('This is just way too much text. This is just way too much text. This is just way too much text. This is just way too much text. ');
+				assert.equals(0, 'should never get here');
+			} catch (err) {
+				assert.equal(err.message.indexOf('too long') !== -1, true);
+			}
+		});
+
+		// test every item and text combination
+		const items = itemsModule.allItems().map(i => i.name);
+		const textFilePath = path.join(PATCH_DIR, 'data');
+		const textFiles = fs.readdirSync(textFilePath).filter(f => path.extname(f) === '.txt');
+		let text = [];
+		for (let f of textFiles) {
+			const file = path.join(PATCH_DIR, 'data', f);
+			const lines = fs.readFileSync(file, 'utf8').split('\n').filter(l => l);
+			text = text.concat(lines);
 		}
+
+		text.forEach(t => {
+			items.forEach(item => {
+				const newText = _.template(t)({item});
+				it(newText, function() {
+					try {
+						helpers.prepText(newText);
+					} catch (err) {
+						assert.equal(0, 'should never get here');
+					}
+				});
+			});
+		});
 	});
 
 });

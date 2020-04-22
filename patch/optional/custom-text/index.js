@@ -2,7 +2,7 @@ const _ = require('lodash');
 const fs = require('fs').promises;
 const path = require('path');
 const { prepText, romToRam } = require('./helpers');
-const { bank, core, utils: { modText, randomInt, textToBytes } } = require('../../../lib');
+const { bank, core, utils: { modText, randomInt } } = require('../../../lib');
 
 const BASE_ADDR_ROM = 0xCB92; // 0x8B82 RAM
 

@@ -4,11 +4,11 @@ const MAX_LINES = exports.MAX_LINES = 5;
 
 exports.ramToRom = function(val) {
 	return val + RAM_ROM_DIFF;
-}
+};
 
 exports.romToRam = function(val) {
 	return val - RAM_ROM_DIFF;
-}
+};
 
 exports.prepText = function(text) {
 	const words = text.split(/[\s\r\n\t]+/);

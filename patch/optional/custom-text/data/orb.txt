@@ -1,5 +1,5 @@
 You now prossess the <%= item %>
-Stakes are useless on Drac, but this one got <%= item %>
+Stakes can't hurt Drac, but this one got <%= item %>
 Was that an earthquake?! Take <%= item %> and run!
 Oak stake in, <%= item %> out
 I beat a mansion and all I got was stupid <%= item %>
