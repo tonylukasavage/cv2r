@@ -56,9 +56,10 @@ module.exports = {
 	patch: function(pm, opts) {
 		const { rng } = opts;
 		const clues = [];
+		const isDoorRando = !!global.doorSpoiler;
 
 		global.spoiler.forEach(spoil =>{
-			let [ item, actor, location ] = spoil;
+			let [ item, actor, location, entryRoom ] = spoil;
 
 			// don't leave clues for jova
 			if (location.includes('Jova')) { return; }
@@ -85,8 +86,19 @@ module.exports = {
 				clues.push(`Death guards ${preWrap(item)}`);
 			} else if (actor === 'Camilla') {
 				clues.push(`Camilla defends ${preWrap(item)}`);
+
 			} else if (actor === 'merchant') {
-				clues.push(`${fullWrap(item)} for sale in ${location}`);
+				if (isDoorRando) {
+					const sp = global.doorSpoiler.find(s => s[1] === entryRoom);
+					if (!sp) {
+						clues.push(`${fullWrap(item)} for sale in ${location} door`);
+					} else {
+						const door = sp[0].substring(0, sp[0].indexOf(' '));
+						clues.push(`Enter a door at ${door} to buy ${item}`);
+					}
+				} else {
+					clues.push(`${fullWrap(item)} for sale in ${location} door`);
+				}
 			} else if (actor === 'sacred flame') {
 				clues.push(`${fullWrap(item)} hidden on Dabi's Path`);
 			} else if (actor === 'orb') {
@@ -113,6 +125,7 @@ module.exports = {
 		}
 
 		shuffleArray(clues, rng);
+		log('', true);
 		log('Book Clues', true);
 		log('----------', true);
 		core.forEach(loc => {

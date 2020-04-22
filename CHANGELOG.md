@@ -4,6 +4,7 @@
 
 * New Simon Sprites
   * Samus with Power Suit
+* New optional `door-rando` patch! This shuffles all doors and entry locations in the game. This includes both town and mansion doors, so yes, Thorn Whip door could take you straight to Laruba! All expected logic is preserved.
 * New optional `custom-text` patch to add funny new text and a little personality to every actor in the game, including NPCs. This will likely become a core patch, but I want to rrun it through some seeds before making it official.
 
 ## 1.4.0 - 2020-03-23

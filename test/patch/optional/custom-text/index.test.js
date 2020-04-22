@@ -9,7 +9,7 @@ const ITEMS_MODULE = path.join(__dirname, '..', '..', '..', '..', 'patch', 'core
 const helpers = require(path.join(PATCH_DIR, 'helpers'));
 const itemsModule = require(ITEMS_MODULE);
 
-describe.only('[patch] custom-text', function() {
+describe('[patch] custom-text', function() {
 
 	describe('#prepText', function() {
 		const tests = [
