@@ -1,9 +1,10 @@
 # CHANGELOG
 
-## 1.4.1 - ?????
+## 1.5.0
 
 * New Simon Sprites
   * Samus with Power Suit
+* New optional `custom-text` patch to add funny new text and a little personality to every actor in the game, including NPCs. This will likely become a core patch, but I want to rrun it through some seeds before making it official.
 
 ## 1.4.0 - 2020-03-23
 
