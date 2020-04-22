@@ -2,9 +2,22 @@ const _ = require('lodash');
 const fs = require('fs').promises;
 const path = require('path');
 const { prepText, romToRam } = require('./helpers');
-const { bank, core, utils: { itemArticles, modText, randomInt } } = require('../../../lib');
+const { bank, core, memory, utils: { itemArticles, modSubroutine, modText, randomInt } } = require('../../../lib');
 
 const BASE_ADDR_ROM = 0xCB92; // 0x8B82 RAM
+const sharedItemTypes = [
+	'garlicAljiba',
+	'laurelsAljiba',
+	'garlicAlba',
+	'laurelsAlba',
+	'laurelsOndol',
+	'laurelsDoina',
+	'oakRing',
+	'oakRib',
+	'oakHeart',
+	'oakEye',
+	'oakNail'
+];
 
 module.exports = {
 	id: 'custom-text',
@@ -50,12 +63,11 @@ module.exports = {
 			// 'priest': 'priest' // all priests share same single text
 		};
 
+		const textValues = {};
 		core.forEach(loc => {
 			if (!loc.actors) { return; }
 			loc.actors.forEach(actor => {
 				if (!actor.textPointer) { return; }
-
-				// grab random text from new text listing, write it to the rom, then remove it from the pool
 				const textKey = actorMap[actor.name];
 				if (!textKey) { return; }
 				const index = randomInt(rng, 0, newText[textKey].length - 1);
@@ -65,11 +77,33 @@ module.exports = {
 				const mod = modText(pm.name, prepText(text), bank[3]);
 				newText[textKey].splice(index, 1);
 
-				// update actor's text pointer to reference our new text
-				const pointerIndex = textPointers.findIndex(p => p === romToRam(actor.textPointer));
-				pm.add([mod.ram & 0xFF], BASE_ADDR_ROM + (pointerIndex * 2));
-				pm.add([mod.ram >>> 8], BASE_ADDR_ROM + (pointerIndex * 2) + 1);
+				if (sharedItemTypes.includes(actor.itemType)) {
+					textValues[actor.itemType] = `
+LDA #$${(mod.ram & 0xFF).toString(16)}
+STA *$00
+LDA #$${(mod.ram >>> 8).toString(16)}
+STA *$01
+`;
+				} else {
+					const pointerIndex = textPointers.findIndex(p => p === romToRam(actor.textPointer));
+					pm.add([mod.ram & 0xFF], BASE_ADDR_ROM + (pointerIndex * 2));
+					pm.add([mod.ram >>> 8], BASE_ADDR_ROM + (pointerIndex * 2) + 1);
+				}
 			});
+		});
+
+		const refuseText = modText(pm.name, 'nice try\nsimon', bank[3]);
+		modSubroutine(pm.name, path.join(__dirname, '..', '..', 'core', 'itemizer', 'asm', 'textUnshare.asm'), bank[3], {
+			exitOffset: 17,
+			values: Object.assign({
+				isChecked: memory.isChecked.ram.toString(16),
+				refuseLowByte: (refuseText.ram & 0xFF).toString(16),
+				refuseHighByte: (refuseText.ram >>> 8).toString(16),
+			}, textValues),
+			invoke: {
+				romLoc: 0x1EEC6,
+				padding: 1
+			}
 		});
 
 	}
