@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## 1.5.1 - 2020-05-14
+
+* New Simon Sprites
+  * Simon from Castlevania 1 (`simon-cv1`)
+  * Trevor from Castlevania 3 (`trevor`)
+
+Thanks aktraizer for the new sprites!
+
 ## 1.5.0
 
 * New Simon Sprites
