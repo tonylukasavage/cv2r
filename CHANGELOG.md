@@ -1,5 +1,19 @@
 # CHANGELOG
 
+## 1.5.2 - 2020-06-04
+
+* New Simon Sprites
+  * Donatello from TMNT (`tmnt-donatello`)
+  * Leonardo from TMNT (`tmnt-leonardo`)
+  * Michaelangelo from TMNT (`tmnt-mickaelangelo`)
+  * Raphael from TMNT (`tmnt-raphael`)
+  * Skeleton Simon (`skeleton-simon`)
+  * Steve from Shatterhand (`shatterhand`)
+  * Caiman Dorohedoro (`caiman-dorohedoro`)
+  * Caiman Lizard Dorohedoro (`caiman-lizard-dorohedoro`)
+
+Thanks (again) aktraizer for the big list of new sprites!
+
 ## 1.5.1 - 2020-05-14
 
 * New Simon Sprites
