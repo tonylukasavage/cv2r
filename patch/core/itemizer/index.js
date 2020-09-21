@@ -73,7 +73,7 @@ function randomize(rng, { logic }) {
 
 	// attach an item randomly to an actor
 	const itemKeys = [ 'HOLY_WATER', 'WHITE_CRYSTAL', 'BLUE_CRYSTAL', 'RED_CRYSTAL', 'OAK_STAKE', 'HEART',
-		'LAURELS', 'GARLIC', 'NAIL', 'DIAMOND', 'MAGIC_CROSS' ];
+		'LAURELS', 'GARLIC', 'NAIL', 'DIAMOND', 'MAGIC_CROSS', 'THORN_WHIP', 'CHAIN_WHIP', 'MORNING_STAR' ];
 	const baseFuncs = {};
 	itemKeys.forEach(ik => {
 		baseFuncs[ik] = `base.${ik} = function ${ik}() { return true; };`;
@@ -94,7 +94,7 @@ function randomize(rng, { logic }) {
 		let funcCode = `
 // generate logic functions with "visited" checks to prevent infinite loop
 const base = {};
-const items = [ 'HOLY_WATER', 'WHITE_CRYSTAL', 'BLUE_CRYSTAL', 'RED_CRYSTAL', 'OAK_STAKE', 'LAURELS', 'NAIL', 'HEART', 'GARLIC', 'DIAMOND', 'MAGIC_CROSS' ];
+const items = [ 'HOLY_WATER', 'WHITE_CRYSTAL', 'BLUE_CRYSTAL', 'RED_CRYSTAL', 'OAK_STAKE', 'LAURELS', 'NAIL', 'HEART', 'GARLIC', 'DIAMOND', 'MAGIC_CROSS', 'THORN_WHIP', 'CHAIN_WHIP', 'MORNING_STAR' ];
 const funcs = {};
 items.forEach(item => {
 	funcs[item] = function(v) {
@@ -414,7 +414,7 @@ STA *$01
 
 				// handle price and sales icon
 				// first byte is the icon, next 2 are the price (0x01 0x72 == 172)
-				actor.sale = [ item.icon, Math.floor(item.price / 100), parseInt(item.price % 100, 16) ];
+				actor.sale = [ item.icon, Math.floor(item.price / 100), parseInt(item.price % 100) ];
 				if (!actor.salePointer) {
 					throw new Error(`merchant has no sale pointer\n${JSON.stringify(actor, null, 2)}`);
 				}
