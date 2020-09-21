@@ -116,7 +116,7 @@ describe('bin/cv2r', async function() {
 						MAGIC_CROSS: setVal('magic cross'),
 						THORN_WHIP: setVal('thorn whip'),
 						CHAIN_WHIP: setVal('chain whip'),
-						MORNING_STAR: setVal('morning star whip')
+						MORNING_STAR: setVal('morning star')
 					};
 					for (let i = 1; i < spoiler.length; i++) {
 						const script = new vm.Script(spoiler[i][4]);
