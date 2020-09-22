@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 1.5.3 - 2020-09-21
+
+* Fixed bug with prices being too damn high!
+
 ## 1.5.2 - 2020-06-04
 
 * New Simon Sprites
