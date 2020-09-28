@@ -75,8 +75,8 @@ module.exports = {
 		{ offset: 0x011FF8, bytes: '0F 11 2C 11 0F 15 18 05 0F 14 0B 04 0F 16 20 06' },
 		// Mummy graveyard
 		{ offset: 0x012123, bytes: '0F 04 14 04 0F 15 20 05 0F 15 20 0C 0F 11 20 15' },
-		// Dead end (completely black palette, cruel joke in case anyone ever goes there)
-		{ offset: 0x01202B, bytes: '0F 0F 0F 0F 0F 0F 0F 0F 0F 0F 0F 0F 0F 0F 0F 0F' },
+		// Dead end (Unused, just listing the offset for future reference)
+		// { offset: 0x01202B, bytes: '0F 0F 0F 0F 0F 0F 0F 0F 0F 0F 0F 0F 0F 0F 0F 0F' },
 
 		// Endings
 
