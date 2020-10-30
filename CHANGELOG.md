@@ -1,5 +1,14 @@
 # CHANGELOG
 
+## 1.6.0 - 2020-10-30
+
+* New Simon Sprites
+  * Jason Voorhees just in time for Halloween! (`jason`)
+* Logic Changes
+  * Fixed a number of diamond warp logic requirements in the late game (thanks freeland1787!)
+  * Fixed Laruba door requirements for door rando logic, added `&& (HOLY_WATER || NAIL)`
+* rondo-of-burb palette no longer turns the dead end swamp into essentially "paint it black" mode (thanks burb!)_
+
 ## 1.5.3 - 2020-09-21
 
 * Fixed bug with prices being too damn high!
