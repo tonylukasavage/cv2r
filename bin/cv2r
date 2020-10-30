@@ -121,11 +121,8 @@ program.outputHelp = function () {
 	console.log(cyan('Logic'));
 	console.log('');
 	logic.forEach(key => {
-		// const { description, patches } = difficulty[key];
 		process.stdout.write(`  * ${p(key)}`);
 		desc(logicDesc[key]);
-		// process.stdout.write(' '.repeat(longest + 4) + 'PATCHES: ');
-		// desc(green(patches.join(', ')));
 		console.log('');
 	});
 
