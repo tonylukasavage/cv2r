@@ -12,7 +12,8 @@
     "eslint": "eslint --ignore-pattern 6502assembler.js \"**/*.js\"",
     "pretest": "rm -rf ./tmp && mkdir tmp",
     "test": "npm run eslint && npm run mocha",
-    "posttest": "rm -rf tmp"
+    "posttest": "rm -rf tmp",
+    "disassemble-win": ".\\bin\\disasm6.exe cv2.nes -t cv2.asm || mv cv2.asm disassembly\\cv2.asm"
   },
   "author": "BloodSweatAndCode",
   "license": "ISC",
