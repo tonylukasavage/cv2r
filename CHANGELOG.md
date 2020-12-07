@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## 1.6.1 - 20202-12-07
+
+* New Simon Sprites
+  * Santa Claus! (`santa-claus`)
+
 ## 1.6.0 - 2020-10-30
 
 * New Simon Sprites
