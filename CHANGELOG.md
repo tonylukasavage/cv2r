@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 1.6.2 - 2021-03-19
+
+* Transfered ownership of repos from BloodSweatAndCode to my main github profile tonylukasavage. No game changes in this update.
+
 ## 1.6.1 - 20202-12-07
 
 * New Simon Sprites
