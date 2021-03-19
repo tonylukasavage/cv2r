@@ -15,7 +15,7 @@
     "posttest": "rm -rf tmp",
     "disassemble-win": ".\\bin\\disasm6.exe cv2.nes -t cv2.asm || mv cv2.asm disassembly\\cv2.asm"
   },
-  "author": "BloodSweatAndCode",
+  "author": "BloodSweatAndCode (tonylukasavage)",
   "license": "ISC",
   "dependencies": {
     "camelcase": "^5.3.1",

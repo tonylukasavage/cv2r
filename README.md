@@ -1,4 +1,4 @@
-# cv2r - Castlevania II: Simon's Quest Randomizer [![Build Status](https://travis-ci.org/BloodSweatAndCode/cv2r.svg?branch=master)](https://travis-ci.org/BloodSweatAndCode/cv2r)
+# cv2r - Castlevania II: Simon's Quest Randomizer [![Build Status](https://travis-ci.org/tonylukasavage/cv2r.svg?branch=master)](https://travis-ci.org/tonylukasavage/cv2r)
 
 cv2r - Castlevania II: Simon's Quest Randomizer by **BloodSweatAndCode**. Come find me and the CV2R crew for chat on gameplay, racing, and development in the [Discord](https://discord.gg/wFhkKCK)!
 
@@ -13,13 +13,13 @@ Also, you can skip this repository entirely if you just want to generate a seed 
 
 ### platforms with known issues
 
-* [bizhawk](https://github.com/BloodSweatAndCode/cv2r/issues/108)
-  * There is [bizhawk bug](https://github.com/BloodSweatAndCode/cv2r/issues/108) that causes a crash on the "game start" screen after a few seconds when using the `QuickNes` core. If you press start before the crash, gameplay will continue normally. You can avoid the crash entirely by using the `NesHawk` core, but your seed icons will still be glitched.
+* [bizhawk](https://github.com/tonylukasavage/cv2r/issues/108)
+  * There is [bizhawk bug](https://github.com/tonylukasavage/cv2r/issues/108) that causes a crash on the "game start" screen after a few seconds when using the `QuickNes` core. If you press start before the crash, gameplay will continue normally. You can avoid the crash entirely by using the `NesHawk` core, but your seed icons will still be glitched.
 
 ## usage
 
 ```
-Castlevania II: Simon's Quest Randomizer by BloodSweatAndCode
+Castlevania II: Simon's Quest Randomizer by BloodSweatAndCode (tonylukasavage)
 
 Usage
   cv2r [options] [vanilla_rom_file]
@@ -98,7 +98,7 @@ Developer Flags
 I plan to make executables so this installation isn't necessary, but until then, follow these steps:
 
 1. Install [node.js](https://nodejs.org/en/)
-2. Download the latest build of [cv2r](https://github.com/BloodSweatAndCode/cv2r/archive/master.zip)
+2. Download the latest build of [cv2r](https://github.com/tonylukasavage/cv2r/archive/master.zip)
 3. Extract cv2r to a folder
 4. Copy a vanilla cv2 rom into the cv2r folder as "cv2.nes"
 5. In a command prompt:
