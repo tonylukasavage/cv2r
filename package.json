@@ -1,35 +1,35 @@
 {
-  "name": "cv2r",
-  "version": "1.6.2",
-  "description": "Castlevania II: Simon's Quest Randomizer",
-  "main": "lib/index.js",
-  "bin": {
-    "cv2rando": "bin/cv2r",
-    "cv2r": "bin/cv2r"
-  },
-  "scripts": {
-    "mocha": "mocha test/**/*.test.js",
-    "eslint": "eslint --ignore-pattern 6502assembler.js \"**/*.js\"",
-    "pretest": "rm -rf ./tmp && mkdir tmp",
-    "test": "npm run eslint && npm run mocha",
-    "posttest": "rm -rf tmp",
-    "disassemble-win": ".\\bin\\disasm6.exe cv2.nes -t cv2.asm || mv cv2.asm disassembly\\cv2.asm"
-  },
-  "author": "BloodSweatAndCode (tonylukasavage)",
-  "license": "ISC",
-  "dependencies": {
-    "camelcase": "^5.3.1",
-    "chalk": "^2.4.2",
-    "commander": "^2.20.0",
-    "lodash": "^4.17.21",
-    "mkdirp": "^0.5.1",
-    "seedrandom": "^3.0.1",
-    "shallow-equal": "^1.2.0",
-    "word-wrap": "^1.2.3"
-  },
-  "devDependencies": {
-    "eslint": "^6.1.0",
-    "mocha": "^6.2.2",
-    "should": "^13.2.3"
-  }
+    "name": "cv2r",
+    "version": "1.7.0",
+    "description": "Castlevania II: Simon's Quest Randomizer",
+    "main": "lib/index.js",
+    "bin": {
+        "cv2rando": "bin/cv2r",
+        "cv2r": "bin/cv2r"
+    },
+    "scripts": {
+        "mocha": "mocha test/**/*.test.js",
+        "eslint": "eslint --ignore-pattern 6502assembler.js \"**/*.js\"",
+        "pretest": "rm -rf ./tmp && mkdir tmp",
+        "test": "npm run eslint && npm run mocha",
+        "posttest": "rm -rf tmp",
+        "disassemble-win": ".\\bin\\disasm6.exe cv2.nes -t cv2.asm || mv cv2.asm disassembly\\cv2.asm"
+    },
+    "author": "BloodSweatAndCode (tonylukasavage)",
+    "license": "ISC",
+    "dependencies": {
+        "camelcase": "^5.3.1",
+        "chalk": "^2.4.2",
+        "commander": "^2.20.0",
+        "lodash": "^4.17.21",
+        "mkdirp": "^0.5.1",
+        "seedrandom": "^3.0.1",
+        "shallow-equal": "^1.2.0",
+        "word-wrap": "^1.2.3"
+    },
+    "devDependencies": {
+        "eslint": "^6.1.0",
+        "mocha": "^6.2.2",
+        "should": "^13.2.3"
+    }
 }

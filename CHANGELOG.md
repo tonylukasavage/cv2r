@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## 1.7.0 - 2021-10-08
+
+* Fixed major bug where collecting the flame whip could screw up the crystal progression, leaving you soft-locked. Thanks kaelari for this one!
+* Minor touchups to the Paint It Black patch (Now even blacker!)
+* New Patches
+    * `gameboy` - Modifies the game's color scale and tint to give a gameboy-like feel (Thanks burb!). Warning, probably won't play well with anything but the default color palette.
+
 ## 1.6.2 - 2021-03-19
 
 * Transfered ownership of repos from BloodSweatAndCode to my main github profile tonylukasavage. No game changes in this update.
