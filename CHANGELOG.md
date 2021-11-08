@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 1.6.2 - 2021-03-19
+
+* Transfered ownership of repos from BloodSweatAndCode to my main github profile tonylukasavage. No game changes in this update.
+
 ## 1.6.1 - 20202-12-07
 
 * New Simon Sprites
@@ -199,7 +203,6 @@ Thanks to Burb for this update, it was all him!
 
 * OHKO! Everything that does damage kills you in one hit. The lone exception is marshes, which still do the same amount of damage they always did. I may introduce a "OHKO Extreme" mode later where marshes also kill in one touch, but that would require logic changes to make everything left of Belasco Marsh require laurels, and that's a bigger change than I wanna make now.
 * Added sound to jovah warp (up+a)
-* Not strictly tied to CV2R, but I created the [cv2-crowd-control](https://github.com/BloodSweatAndCode/cv2-crowd-control) project to eventually support [Crowd Control](https://crowdcontrol.live/) with both CV2 and CV2R.
 
 ## 0.1.11 - 2019-09-12
 
@@ -271,8 +274,8 @@ We are officially **alpha** boys!
 ### [Youtube video explaining 0.0.21 update](https://www.youtube.com/watch?v=FI9WD07OFjM)
 
 * Crystal sale icons update progressively, so you see white crystal as a sales icon from a merchant if you have no crystal, blue if you have white, and red if you have blue.
-* With some ROM hacking, `$7F` in RAM can now be used as a unique identifier for any actor Simon is interacting with. The relevant values have been catalogued in the [README](https://github.com/BloodSweatAndCode/cv2r#code-locations-for-all-actors-that-can-hold-items).
-* SRAM usage has been documented in the [README](https://github.com/BloodSweatAndCode/cv2r#sram-usage).
+* With some ROM hacking, `$7F` in RAM can now be used as a unique identifier for any actor Simon is interacting with. The relevant values have been catalogued in the [README](https://github.com/tonylukasavage/cv2r#code-locations-for-all-actors-that-can-hold-items).
+* SRAM usage has been documented in the [README](https://github.com/tonylukasavage/cv2r#sram-usage).
 * Actors will present "refuse text" if you've already acquired an item from them. It will currently say "NICE TRY SIMON". Additionally, merchants will have their sale icon replaced with an "X" and the sale price will become "9999" to prevent any confusion on attempting to repurchase an already acquired whip/crystal.
 
 ## 0.0.20 - 2019-08-17

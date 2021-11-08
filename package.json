@@ -1,6 +1,6 @@
 {
   "name": "cv2r",
-  "version": "1.6.1",
+  "version": "1.6.2",
   "description": "Castlevania II: Simon's Quest Randomizer",
   "main": "lib/index.js",
   "bin": {
@@ -15,13 +15,13 @@
     "posttest": "rm -rf tmp",
     "disassemble-win": ".\\bin\\disasm6.exe cv2.nes -t cv2.asm || mv cv2.asm disassembly\\cv2.asm"
   },
-  "author": "BloodSweatAndCode",
+  "author": "BloodSweatAndCode (tonylukasavage)",
   "license": "ISC",
   "dependencies": {
     "camelcase": "^5.3.1",
     "chalk": "^2.4.2",
     "commander": "^2.20.0",
-    "lodash": "^4.17.19",
+    "lodash": "^4.17.21",
     "mkdirp": "^0.5.1",
     "seedrandom": "^3.0.1",
     "shallow-equal": "^1.2.0",
