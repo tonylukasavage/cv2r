@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## 1.7.1 - 2021-11-18
+
+* Fixed red crystal merchant bug (ccompletely this time, thanks kaelari!)
+* Burb's new palettes:
+    * gameboy-dmg.js - Improved version of the previous gameboy.js, but made the entire game look good in monochrome.
+    * gameboy-mono.js - b/w version instead of green.
+    * ghost-town.js - Based on glitch town in FDS any% speedrun. Everything's white during the day!
+
 ## 1.7.0 - 2021-10-08
 
 * Fixed major bug where collecting the flame whip could screw up the crystal progression, leaving you soft-locked. Thanks kaelari for this one!
