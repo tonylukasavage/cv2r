@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 1.7.2 - 2021-11-18
+
+* Quick bug fix, needed to add a preview png for the random simon sprite
+
 ## 1.7.1 - 2021-11-18
 
 * Fixed red crystal merchant bug (ccompletely this time, thanks kaelari!)
