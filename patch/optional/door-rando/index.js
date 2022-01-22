@@ -102,7 +102,24 @@ module.exports = {
 				table: tableMod.ram.toString(16)
 			}
 		});
-		const enterPosition = modSubroutine(pm.name, path.join(__dirname, 'enter-position.asm'), bank[3]);
+		var music = "LDA #$45\r\nJSR $C118";
+		pm.patches.forEach ( patch => {
+			if (patch == "nomusic" ) {
+				music = "";
+				console.log("NO MUSIC!");
+			}
+		} );
+		
+			
+		
+		const enterPosition = modSubroutine(pm.name, path.join(__dirname, 'enter-position.asm'), bank[3], {values: {
+				music: music
+				
+			}
+		});
+		
+		
+		
 		const exit = modSubroutine(pm.name, path.join(__dirname, 'exit.asm'), bank[7]);
 		const bankSwitch232 = modSubroutine(pm.name, path.join(__dirname, 'bank-switch.asm'), bank[8], {
 			values: {

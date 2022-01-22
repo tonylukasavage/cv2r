@@ -7,8 +7,8 @@ LDA *$30
 BEQ TOWN
 
 ; mansion music
-LDA #$45
-JSR $C118
+<%= music %>
+
 
 ; mansion positioning
 LDA *$50
