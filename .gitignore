@@ -10,3 +10,4 @@ cv2.ips
 *.exe
 *.nl
 .vs
+*.bak
