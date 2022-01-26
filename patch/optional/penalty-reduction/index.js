@@ -7,10 +7,15 @@ module.exports = {
 	name: 'Penalty Reduction',
 	description: 'Keep half your hearts after game over',
 	patch: function (pm) {
-		modSubroutine(pm.name, path.join(__dirname, 'pr.asm'), bank[8], {
+		const result = modSubroutine(pm.name, path.join(__dirname, 'pr.asm'), bank[3]);
+
+		modSubroutine(pm.name, path.join(__dirname, 'pr-bank-switch.asm'), bank[9], {
 			invoke: {
 				romLoc: 0x01C42B,
 				padding: 1
+			},
+			values: {
+				pr: result.ram.toString(16)
 			}
 		});
 	}
