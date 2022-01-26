@@ -47,12 +47,12 @@ function getCarry() {
 	];
 }
 
-items.allItems = function() {
-	return [ ...getWhips(), ...getWeapons(), ...getInventory(), ...getCarry() ];
+items.allItems = function () {
+	return [...getWhips(), ...getWeapons(), ...getInventory(), ...getCarry()];
 };
 
 items.initItems = function initItems(pm, rng) {
-	const bankIndexes = [ 1, 3 ];
+	const bankIndexes = [1, 3];
 
 	// "value" property refers to the value set at 0x0434 (RAM) when you own a whip
 	const whips = getWhips();
@@ -81,9 +81,9 @@ JSR $${loc.ram.toString(16)}
 LDA *$${w.memory.toString(16)}
 ORA #$${w.value.toString(16)}
 STA *$${w.memory.toString(16)}
-	`,
-		w.codeBytes = assemble(w.code);
+`,
 
+			w.codeBytes = assemble(w.code);
 		w.text = w.name;
 	});
 
