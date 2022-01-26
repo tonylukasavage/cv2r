@@ -1,5 +1,5 @@
 const wrap = require('word-wrap');
-const { core, utils: { log, shuffleArray, textToBytes }} = require('../../lib');
+const { core, utils: { log, shuffleArray, textToBytes } } = require('../../lib');
 const ITEM_WRAP = {};
 
 [
@@ -44,6 +44,11 @@ ITEM_WRAP.garlic = {
 	suffix: 'is'
 };
 
+ITEM_WRAP.fangs = {
+	prefix: 'the',
+	suffix: 'are'
+};
+
 function preWrap(item) {
 	return `${ITEM_WRAP[item].prefix} ${item}`;
 }
@@ -53,13 +58,13 @@ function fullWrap(item) {
 }
 
 module.exports = {
-	patch: function(pm, opts) {
+	patch: function (pm, opts) {
 		const { rng } = opts;
 		const clues = [];
 		const isDoorRando = !!global.doorSpoiler;
 
-		global.spoiler.forEach(spoil =>{
-			let [ item, actor, location, entryRoom ] = spoil;
+		global.spoiler.forEach(spoil => {
+			let [item, actor, location, entryRoom] = spoil;
 
 			// don't leave clues for jova
 			if (location.includes('Jova')) { return; }
