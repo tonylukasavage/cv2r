@@ -230,7 +230,8 @@ module.exports = {
 		const textValues = {};
 
 		// initialize items
-		items.initItems(pm, rng);
+		opts.hasFangs = opts.patch && /(^|,)fangs($|,)/.test(opts.patch);
+		items.initItems(pm, rng, opts);
 
 		// randomize game items amongst all available actors. Retry if necessary.
 		function wrapper() {

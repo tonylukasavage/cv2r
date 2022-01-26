@@ -44,6 +44,11 @@ ITEM_WRAP.garlic = {
 	suffix: 'is'
 };
 
+ITEM_WRAP.fangs = {
+	prefix: 'the',
+	suffix: 'are'
+};
+
 function preWrap(item) {
 	return `${ITEM_WRAP[item].prefix} ${item}`;
 }

@@ -38,20 +38,31 @@ function getInventory() {
 	];
 }
 
-function getCarry() {
-	return [
+function getCarry(hasFangs) {
+	let carryItems = [
 		{ name: 'silk bag', type: 'carry', value: 0x01, icon: 0x5C, price: 100 },
 		{ name: 'magic cross', type: 'carry', value: 0x02, icon: 0x5A, price: 100 },
-		{ name: 'laurels', type: 'carry', value: 0x04, icon: 0x58, price: 50, count: 5, bankCode: [] },
 		{ name: 'garlic', type: 'carry', value: 0x08, icon: 0x6D, price: 50, count: 2, bankCode: [] }
 	];
+	if (hasFangs) {
+		carryItems.push(
+			{ name: 'laurels', type: 'carry', value: 0x04, icon: 0x58, price: 50, count: 4, bankCode: [] },
+			{ name: 'fangs', type: 'carry', value: 0x10, icon: 0x4D, price: 100 }
+		);
+	} else {
+		carryItems.push(
+			{ name: 'laurels', type: 'carry', value: 0x04, icon: 0x58, price: 50, count: 5, bankCode: [] }
+		);
+	}
+	return carryItems;
 }
 
 items.allItems = function () {
 	return [...getWhips(), ...getWeapons(), ...getInventory(), ...getCarry()];
 };
 
-items.initItems = function initItems(pm, rng) {
+items.initItems = function initItems(pm, rng, opts) {
+	const { hasFangs = false } = opts;
 	const bankIndexes = [1, 3];
 
 	// "value" property refers to the value set at 0x0434 (RAM) when you own a whip
@@ -115,7 +126,7 @@ STA *$${i.memory.toString(16)}
 	});
 
 	// "value" property refers to the value added to 0x0092 (RAM) when you own an item
-	const carry = getCarry();
+	const carry = getCarry(hasFangs);
 
 	// TODO: can this be optimized for garlic and laurels to share?
 	// write subroutines to handle garlic and laurels since they require more logic
@@ -138,12 +149,18 @@ JSR $${loc.ram.toString(16)}
 	// back to normal item handling, but only generating code for silk bag and cross
 	carry.forEach(c => {
 		c.memory = 0x92;
-		if (c.value < 0x04) {
+		if (c.value < 0x04 || c.value === 0x10) {
 			c.code = `
 LDA *$${c.memory.toString(16)}
-ORA #${c.value.toString(16)}
+ORA #$${c.value.toString(16)}
 STA *$${c.memory.toString(16)}
 	`;
+			if (c.name === 'fangs') {
+				c.code += `
+LDA #$05
+STA *$31
+				`;
+			}
 			c.codeBytes = assemble(c.code);
 		}
 		c.text = c.name;
