@@ -30,7 +30,7 @@ function itemActors() {
 		.filter(c => c.actors)
 		.map(c => c.actors.filter(a => a.holdsItem))
 		.filter(c => c.length > 0)
-		.reduce((a,c) => a.concat(c), []);
+		.reduce((a, c) => a.concat(c), []);
 }
 
 // distribute all items in the game to actors that can hold them, based on progression logic
@@ -57,7 +57,7 @@ function randomize(rng, { logic }) {
 		});
 	});
 	Object.keys(counts).forEach(key => countsSorted.push({ name: key, value: counts[key] }));
-	const itemDeps = countsSorted.sort((a,b) => a.value < b.value).map(c => c.name);
+	const itemDeps = countsSorted.sort((a, b) => a.value < b.value).map(c => c.name);
 
 	// Make a list of all items to be randomized. Whips are not specified by name
 	// as they are updated progressively. Same goes for crystals, though they have
@@ -72,8 +72,8 @@ function randomize(rng, { logic }) {
 	});
 
 	// attach an item randomly to an actor
-	const itemKeys = [ 'HOLY_WATER', 'WHITE_CRYSTAL', 'BLUE_CRYSTAL', 'RED_CRYSTAL', 'OAK_STAKE', 'HEART',
-		'LAURELS', 'GARLIC', 'NAIL', 'DIAMOND', 'MAGIC_CROSS' ];
+	const itemKeys = ['HOLY_WATER', 'WHITE_CRYSTAL', 'BLUE_CRYSTAL', 'RED_CRYSTAL', 'OAK_STAKE', 'HEART',
+		'LAURELS', 'GARLIC', 'NAIL', 'DIAMOND', 'MAGIC_CROSS'];
 	const baseFuncs = {};
 	itemKeys.forEach(ik => {
 		baseFuncs[ik] = `base.${ik} = function ${ik}() { return true; };`;
@@ -110,7 +110,7 @@ const clone = () => Object.assign({}, visited);
 
 // base logic functions
 `;
-		funcCode += Object.keys(funcs).reduce((a,c) => {
+		funcCode += Object.keys(funcs).reduce((a, c) => {
 			return a + funcs[c] + '\n';
 		}, '');
 
@@ -185,7 +185,7 @@ function modSaleData(pm) {
 	});
 
 	// change the original sales data pointers to our new ones
-	const bytes = [ mod.ram & 0xFF, mod.ram >>> 8 ];
+	const bytes = [mod.ram & 0xFF, mod.ram >>> 8];
 	pm.add(bytes, 0x1ECF5);
 	pm.add(bytes, 0x1ED05);
 	pm.add(bytes, 0x1ED17);
@@ -196,7 +196,7 @@ function modSaleData(pm) {
 	function addSaleData(itemType) {
 		saleValues[itemType] = saleOffset.toString(16);
 		const romLoc = saleBank.rom.start + saleBank.offset;
-		pm.add([ 0, 0, 0 ], romLoc);
+		pm.add([0, 0, 0], romLoc);
 		core.getActor({ itemType }).salePointer = romLoc;
 		saleBank.offset += 3;
 		saleOffset += 3;
@@ -220,7 +220,7 @@ function modSaleData(pm) {
 
 module.exports = {
 	items,
-	patch: async function(pm, opts) {
+	patch: async function (pm, opts) {
 		const { rng } = opts;
 		const orbValues = {};
 		const whipMerchantValues = {};
@@ -298,24 +298,24 @@ module.exports = {
 
 		// Skip all the crystal, laurel, and garlic merchant checks. We re-route
 		// all of those anyway.
-		pm.add([ 0x90, 0x3C ], 0x1EDB4);
+		pm.add([0x90, 0x3C], 0x1EDB4);
 
 		// process all actors with an item
 		const itemActors = core
 			.filter(c => c.actors)
 			.map(c => c.actors.filter(a => a.holdsItem))
 			.filter(c => c.length > 0)
-			.reduce((a,c) => a.concat(c), [])
+			.reduce((a, c) => a.concat(c), [])
 			.filter(a => a.itemName);
 
-		let spoiler = [ [ 'item', 'actor', 'location', 'entry room' ] ];
+		let spoiler = [['item', 'actor', 'location', 'entry room']];
 		log('', true);
 		itemActors.forEach(actor => {
 			let jsrBuf;
 			const item = items.find(i => i.name === actor.itemName);
 
 			// garlic and laurels subroutine needs to access the appropriate bank
-			if ([ 'garlic', 'laurels' ].includes(item.name) || item.whip || item.crystal) {
+			if (['garlic', 'laurels'].includes(item.name) || item.whip || item.crystal) {
 				item.code = item.bankCode[actor.bank];
 				item.codeBytes = assemble(item.code);
 			}
@@ -379,13 +379,13 @@ STA *$01
 					// Write a JSR operation to jump to an item processing subroutine. This is
 					// only 3 bytes and should fit anywhere. Pad with NOPs if necessary to fill
 					// any additional space.
-					buf = Buffer.from([ 0x20, lowByteRam, highByteRam ]);
+					buf = Buffer.from([0x20, lowByteRam, highByteRam]);
 					diff = actor.code.length - buf.length;
 
 					// pad with NOPs
 					if (diff > 0) {
 						buf = Buffer.concat([buf, Buffer.alloc(diff, 0xEA)]);
-					// still can't fit the code? We got a problem...
+						// still can't fit the code? We got a problem...
 					} else if (diff < 0) {
 						throw new Error(JSON.stringify({
 							message: 'still failed to write item code', item, actor
@@ -393,7 +393,7 @@ STA *$01
 					}
 
 					// Now we need to write the code actually contained in the new subroutine.
-					const jsrCode = item.codeBytes.concat([ 0x60 ]);
+					const jsrCode = item.codeBytes.concat([0x60]);
 					jsrBuf = Buffer.from(jsrCode);
 					pm.add([...jsrBuf], jsrRomLoc);
 					bank[actor.bank].offset += jsrCode.length;
@@ -414,7 +414,7 @@ STA *$01
 
 				// handle price and sales icon
 				// first byte is the icon, next 2 are the price (0x01 0x72 == 172)
-				actor.sale = [ item.icon, Math.floor(item.price / 100), parseInt(item.price % 100) ];
+				actor.sale = [item.icon, Math.floor(item.price / 100), parseInt(item.price % 100)];
 				if (!actor.salePointer) {
 					throw new Error(`merchant has no sale pointer\n${JSON.stringify(actor, null, 2)}`);
 				}
@@ -430,7 +430,7 @@ STA *$01
 			const entryRoom = core.find(loc => loc.name === actor.locationName).entryRoom || '';
 
 			log(`${pad(item.name, 15)} | ${pad(actor.name + (actor.name === 'merchant' ? ' (' + item.price + ')' : ''), 15)} | ${actor.locationName}`, true);
-			spoiler.push([ item.name, actor.name, actor.locationName, entryRoom ]);
+			spoiler.push([item.name, actor.name, actor.locationName, entryRoom]);
 		});
 
 		// TODO: resolve this laziness
@@ -457,7 +457,7 @@ STA *$01
 			values: deathValues,
 			invoke: {
 				romLoc: 0x47D7,
-				bytes: [ 0xEA, 0xD0, 0x06 ]
+				bytes: [0xEA, 0xD0, 0x06]
 			}
 		});
 
