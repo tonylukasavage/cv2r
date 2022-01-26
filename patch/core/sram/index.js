@@ -2,7 +2,7 @@ const path = require('path');
 const { bank, patchManager, utils: { modSubroutine } } = require('../../../lib');
 
 module.exports = {
-	patch: function(pm) {
+	patch: function (pm) {
 		const hasDiamondWarp = patchManager.optional.patches.includes('diamond-warp');
 		const hasDoorRando = patchManager.optional.patches.includes('door-rando');
 		let code = '';

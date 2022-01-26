@@ -21,14 +21,14 @@ module.exports = {
 	id: 'door-rando',
 	name: 'Door Rando',
 	description: 'All town and mansion doors are randomized',
-	patch: function(pm, opts) {
+	patch: function (pm, opts) {
 		const { logic, rng } = opts;
-		const spoiler = [ [ 'door', 'location' ] ];
+		const spoiler = [['door', 'location']];
 
 		// get a list of all doors annd targets
 		const doors = core
 			.filter(loc => loc.doors)
-			.reduce((a,c) => a.concat(c.doors.data), [])
+			.reduce((a, c) => a.concat(c.doors.data), [])
 			.sort((a, b) => a.pointerIndex < b.pointerIndex ? -1 : 1);
 		const targets = doors.map(d => d.target);
 
@@ -44,7 +44,7 @@ module.exports = {
 			Object.assign(door.newTarget, target);
 
 			const roomLoc = getLocation(door.newTarget);
-			spoiler.push([ door.name, roomLoc.name ]);
+			spoiler.push([door.name, roomLoc.name]);
 			log(`${door.name.padEnd(30, ' ')} --> ${roomLoc.name}`);
 
 			const doorReqs = getLocation(door).doors.requirements[logic];
@@ -94,7 +94,7 @@ module.exports = {
 
 		// write pointer table to rom
 		const tableMod = modBytes(pm.name, tableBytes, bank[3]);
-		global.doorSpoiler.push([ 'door table', tableMod.rom ]);
+		global.doorSpoiler.push(['door table', tableMod.rom]);
 
 		// rom patch functions
 		const enter = modSubroutine(pm.name, path.join(__dirname, 'enter.asm'), bank[3], {
@@ -103,25 +103,26 @@ module.exports = {
 			}
 		});
 		var music = "LDA #$45\r\nJSR $C118";
-		pm.patches.forEach ( patch => {
-			if (patch == "nomusic" ) {
+		pm.patches.forEach(patch => {
+			if (patch == "nomusic") {
 				music = "";
 				console.log("NO MUSIC!");
 			}
-		} );
-		
-			
-		
-		const enterPosition = modSubroutine(pm.name, path.join(__dirname, 'enter-position.asm'), bank[3], {values: {
+		});
+
+
+
+		const enterPosition = modSubroutine(pm.name, path.join(__dirname, 'enter-position.asm'), bank[3], {
+			values: {
 				music: music
-				
+
 			}
 		});
-		
-		
-		
+
+
+
 		const exit = modSubroutine(pm.name, path.join(__dirname, 'exit.asm'), bank[7]);
-		const bankSwitch232 = modSubroutine(pm.name, path.join(__dirname, 'bank-switch.asm'), bank[8], {
+		const bankSwitch232 = modSubroutine(pm.name, path.join(__dirname, 'bank-switch.asm'), bank[7], {
 			values: {
 				enterPosition: enterPosition.ram.toString(16)
 			}
@@ -144,7 +145,7 @@ module.exports = {
 		bytes = assemble(code);
 		pm.add(pad(bytes, 4), 0x1D069);  // town
 		pm.add(bytes, 0x1D0F9);          // mansion
-		pm.add([ 0xA9, 0x00 ], 0x1D0FF); // mansion
+		pm.add([0xA9, 0x00], 0x1D0FF); // mansion
 
 	}
 };

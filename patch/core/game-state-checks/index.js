@@ -2,7 +2,7 @@ const path = require('path');
 const { bank, memory, utils: { modSubroutine } } = require('../../../lib');
 
 module.exports = {
-	patch: function(pm) {
+	patch: function (pm) {
 		// subroutine to handle jovah warp and inventory quest item deselect code
 		memory.gameStateChecks = modSubroutine(pm.name, path.join(__dirname, 'gameStateChecks.asm'), bank[2]);
 		memory.warpPositioning = modSubroutine(pm.name, path.join(__dirname, 'warpPositioning.asm'), bank[3]);
@@ -19,7 +19,7 @@ module.exports = {
 		});
 
 		// update simon positioning+flags and camera positioning on jovah warp
-		modSubroutine(pm.name, path.join(__dirname, 'jovahWarpPositioning.asm'), bank[8], {
+		modSubroutine(pm.name, path.join(__dirname, 'jovahWarpPositioning.asm'), bank[7], {
 			invoke: {
 				romLoc: 0x1CFF8,
 				padding: 1
@@ -30,7 +30,7 @@ module.exports = {
 		});
 
 		// special handling for jovah warp on ferry
-		modSubroutine(pm.name, path.join(__dirname, 'jovahWarpFerryCheck.asm'), bank[8], {
+		modSubroutine(pm.name, path.join(__dirname, 'jovahWarpFerryCheck.asm'), bank[7], {
 			invoke: {
 				romLoc: 0x1CF4C,
 				padding: 1

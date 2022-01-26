@@ -12,7 +12,7 @@ module.exports = {
 				padding: 2
 			}
 		});
-		modSubroutine(pm.name, path.join(__dirname, 'continue.asm'), bank[8], {
+		modSubroutine(pm.name, path.join(__dirname, 'continue.asm'), bank[7], {
 			invoke: {
 				romLoc: 0x1C320,
 				padding: 1
