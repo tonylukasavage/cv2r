@@ -35,6 +35,7 @@ program
 	.option('-x, --patch <patches>', 'comma separated list of patches to apply, see list below')
 	.option('-y, --show-spoilers', 'show spoilers in debug logging (must use with --debug)')
 	.option('-z, --debug', 'enable debug output')
+	.option('-c, --customjson <path>', 'Use a custom jsonfile')
 	.option('--dev-force-enemy <devForceEnemy>', 'Spawn only one type of enemy, specified as "enemyId:tableId". For example, spawning only harpies would be "--dev-force-enemy 0x3B:0x7". Values for enemy and table id can be found in lib/object.js.');
 
 program
@@ -184,7 +185,9 @@ async function main() {
 		if (program.debug && !program.json) {
 			global.debug = program.showSpoilers ? 'spoiler' : true;
 		}
-
+		if (program.customjson){
+			program.customlogic = require(program.customjson);
+		}
 		// validate logic flag
 		if (!program.logic) {
 			program.logic = 'standard';

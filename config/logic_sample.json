@@ -1,0 +1,36 @@
+[
+	{
+		"name": "Jova",
+		"actors": [
+			{"mustHave": "oak stake"} 
+		]
+	},
+	{
+		"name": "Jova - Thorn Whip Room",
+		"actors": [
+			{"mustHave": "thorn whip"}
+		]
+	},
+	{
+		"name": "Jova - Holy Water Room",
+		"actors": [
+			{"mustHave": "holy water"}
+		]
+	},
+	{
+		"name": "Laruba Mansion - Part 2",
+		"actors": [
+			{"mustHave": "chain whip"},
+			{"mustHave": "morning star"}
+		]
+	},
+	{ "name": "Laruba Mansion - Camilla Fight",
+		"actors": [
+			{"mustHave": "nail",
+			"logic": "LAURELS"
+			}
+		]
+	}
+	
+	
+]
