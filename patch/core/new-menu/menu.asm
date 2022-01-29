@@ -1,0 +1,21 @@
+; print lives in menu
+LDA #$04
+JSR $F1BD
+LDA *$31
+PHA
+JSR $E394
+PLA
+STA *$93
+JSR $E373
+JSR $F1F0
+DEX
+STX *$22
+LDA *$93
+AND #$0F
+JSR $F1F0
+JSR $C886
+
+; original code
+LDA #$02
+JSR $F1BD
+RTS
