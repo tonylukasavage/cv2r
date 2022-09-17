@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## 1.8.0 - 2022-01-29
+
+* Added Simon's life count to the start menu
+* Added the `fangs` optional patch. Using this patch adds Dracula's fangs as a carry item, like silk bag or magic cross. When Simon buys or finds the fangs, he instantly is boosted to having 5 lives. After every continue, Simon will again start with 5 lives. It is currently **NOT** a required item to break the wall at Dracula's bridge, but this may change in the future.
+* Added the `nomusic` patch which disables all in-game music. Thanks kaelari!
+* Fixed the `penalty-reduction` bug that gives you 100 XP if you game over with more than 200 hearts. Sorry cheaters.
+* Fixed a small bug with the random Simon sprite selection. Thanks kaelari!
+
 ## 1.7.2 - 2021-11-18
 
 * Quick bug fix, needed to add a preview png for the random simon sprite
