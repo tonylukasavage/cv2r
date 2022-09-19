@@ -1,8 +1,8 @@
-const { utils: { shuffleArray} } = require('../../../lib');
+const { core, utils: { shuffleArray} } = require('../../../lib');
 
 
 const towns= {
-    jova: {
+    Jova: {
             leftoffset: 0x1FA12, 
             rightoffset: 0x01FA15, 
             leftvalue:[0xff,0x02,0x07], 
@@ -13,8 +13,9 @@ const towns= {
             fromrightvalue: [0xFF, 0x00, 0x00],
             height:2,  
             leftheightoffset: 0xA1C5,
+            
     },
-    aljiba: {
+    Aljiba: {
         height: 2,
         leftoffset: 0x1FAD5,
         rightoffset: 0x1FAD8,
@@ -26,7 +27,7 @@ const towns= {
         fromrightvalue: [0xFF,0x00,0x02],     
         leftheightoffset: 0xA6F1,
     },
-    alba: {
+    Alba: {
         height: 3,
         leftoffset: 0x1FA1D,
         rightoffset: 0x1FA20,
@@ -39,7 +40,7 @@ const towns= {
         leftheightoffset: 0xB3C0,
         
     },
-    ondol: {
+    Ondol: {
         height: 3,
         leftoffset: 0x8675,
         rightoffset: 0x8678,
@@ -52,7 +53,7 @@ const towns= {
         leftheightoffset: 0xAEB9,
         
     },
-    veros: {
+    Veros: {
         height: 1,
         leftoffset: 0x866A,
         rightoffset: 0x866D,
@@ -65,7 +66,7 @@ const towns= {
         torightheightchange: 0x1FB34,
         onlyheight1: true,
     },
-    doina: {
+    Doina: {
         height: 1,
         leftoffset: 0x1FAE0,
         rightoffset: 0x1FAE3,
@@ -80,7 +81,7 @@ const towns= {
         leftheightoffset: 0xAEBA,
         nojova: true,
     },
-    yomi: {
+    Yomi: {
         height: 1,
         leftoffset: 0x1FAEB,
         rightoffset: 0x1FAEE,
@@ -92,18 +93,30 @@ const towns= {
         fromrightvalue: [0xFF,0x00,0x06],        
         onlyheight1: true,
         nojova: true,
+    },
+    "Berkeley Mansion - Door": {
+        height: 1,
+        leftoffset: 0x8D4D,
+        rightoffset: 0x8D50,
+        leftvalue: [0xFF, 0x02,0x01],
+        rightvalue: [0xFF, 0x02,0x04],
+        fromleftoffset: 0xA170,
+        fromrightoffset: 0xA6C9,
+        fromleftvalue: [0xFF,0x01,0x01],
+        fromrightvalue: [0xFF,0x01,0x01],  
+        
     }
 }
 
 
 
-function copytown (town1, town2, pm){
+function copytown (town1, town2, pm, logic){
         if (town1 == town2) {
-            //console.log(town1+" is staying put");
+            console.log(town1+" is staying put");
             return;
             
         }
-        //console.log(town2+" is being put where "+town1+" was");
+        console.log(town2+" is being put where "+town1+" was");
         var leftvalue =towns[town1].leftvalue;
         var rightvalue =towns[town1].rightvalue;
         var fromrightvalue = towns[town2].fromrightvalue;
@@ -122,20 +135,25 @@ function copytown (town1, town2, pm){
         pm.add(fromleftvalue, towns[town1].fromleftoffset);
         pm.add(fromrightvalue, towns[town1].fromrightoffset);
         
-    
+        
+        //adjust logic
+        towns[town2].reqs = core.find(c => c.name == town1).doors.requirements[logic];
+        console.log("new town reqs:" +towns[town2].reqs);
+        
+        
 }
 
 module.exports = {
-	
+	pre: true,
 	id: 'town-rando',
 	name: 'Town Randomizer',
 	description: 'Towns in random places',
 	patch: function (pm, opts) {
     
-        const { rng } = opts;
+        const { logic, rng } = opts;
         
-        const townnames = ["jova","doina", "yomi","veros", "alba", "ondol", "aljiba"];
-        const townnames2 =  ["jova", "alba", "ondol", "aljiba", "doina", "yomi", "veros"];
+        const townnames = ["Jova","Yomi","Veros", "Doina", "Alba", "Ondol", "Aljiba"];
+        const townnames2 =  ["Jova", "Alba", "Ondol", "Aljiba", "Doina", "Yomi", "Veros"];
 
         shuffleArray(townnames2, rng);
         
@@ -144,24 +162,94 @@ module.exports = {
             for (j=0; j<townnames2.length; j++){
                 if (towns[townnames[0]].onlyheight1){
                     if (towns[townnames2[j]].height > 1){
-                        //console.log(townnames2[j]+" not height 1");
+                        console.log(townnames2[j]+" not height 1");
                         continue;
                     }
                 }
-                if (townnames[0] == "jova"){
+                if (townnames[0] === townnames2[j] && (j+1) < townnames2.length){
+                        console.log("skipping ourself");
+                        continue;
+                    
+                }
+                if (townnames[0] == "Jova"){
                     if (towns[townnames2[j]].nojova){
+                        console.log("skipping this because no jova.");
                         continue;
                         
                     }
                     
                 }
-                copytown(townnames2[j], townnames[0], pm);
+                copytown(townnames2[j], townnames[0], pm, logic);
                 townnames.shift();
                 townnames2.splice(j, 1);
                 break;
             }
+            console.log( ".");
         }
+        for (let town in towns){
+            
+            let townReqs = towns[town].reqs;
+            let location = core.find(c=> c.name ===town );
+            location.doors.requirements[logic] = townReqs;
+                
+                
+            
+            const actors = core
+				.filter(loc => loc.name === town)
+				.reduce((a, c) => {
+					return a.concat(c.actors || []);
+				}, []);
+        actors.filter(a => a.holdsItem).forEach(actor => {
+				const actorReqs = actor.actorRequirements[logic];
+                
+				let newReqs;
+				if (townReqs && actorReqs) {
+					newReqs = `(${townReqs}) && (${actorReqs})`;
+				} else if (townReqs) {
+					newReqs = townReqs;
+				} else if (actorReqs) {
+					newReqs = actorReqs;
+				} else {
+					newReqs = '';
+				}
+				actor.requirements[logic] = newReqs;
+                console.log(actor.name + "now logic: " +newReqs);
+			});
+            //now do the same with each door which now has a new requirement 
+            let doors = core.find(c => c.name == town).doors;
+            if (doors === undefined) {
+                continue;
+            }
+            doors.requirements = towns[town].reqs;
+            doors.data.forEach(door => {
+                const actors = core
+				.filter(loc => loc.objset === door.target.objset && loc.area === door.target.area)
+				.reduce((a, c) => {
+					return a.concat(c.actors || []);
+				}, []);
+			actors.filter(a => a.holdsItem).forEach(actor => {
+				const actorReqs = actor.actorRequirements[logic];
+				let newReqs;
+				if (townReqs && actorReqs) {
+					newReqs = `(${townReqs}) && (${actorReqs})`;
+				} else if (townReqs) {
+					newReqs = townReqs;
+				} else if (actorReqs) {
+					newReqs = actorReqs;
+				} else {
+					newReqs = '';
+				}
+				actor.requirements[logic] = newReqs;
+                if (newReqs){
+                console.log(door.name + " "+ actor.name + "now logic: " +newReqs);
+                }
+			});
+                
+                
+                
+            });
         
+        };
         
     }
 };
