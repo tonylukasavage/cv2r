@@ -152,7 +152,7 @@ function copytown (town1, town2, pm, logic){
 			
 			var value=towns[town2].height-1;
 			pm.add([value] , towns[town1].leftheightoffset);
-			console.log(town2+" "+value + " at " +towns[town1].leftheightoffset);
+			
 		}
 		
 		if (town2.torightheightchange>0){ 
