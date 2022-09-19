@@ -4,17 +4,16 @@ const { log } = require('../../../lib/utils');
 
 const towns = {
 	Jova: {
-			leftoffset: 0x1FA12, 
-			rightoffset: 0x01FA15, 
-			leftvalue:[0xff,0x02,0x07], 
-			rightvalue: [0xff,0x02,0x00], 
-			fromleftoffset: 0xA15C, 
-			fromrightoffset: 0xA186, 
-			fromleftvalue: [0xFF, 0x00, 0x00], 
-			fromrightvalue: [0xFF, 0x00, 0x00],
-			height:2,  
-			leftheightoffset: 0xA1C5,
-			
+		leftoffset: 0x1FA12, 
+		rightoffset: 0x01FA15, 
+		leftvalue:[0xff,0x02,0x07], 
+		rightvalue: [0xff,0x02,0x00], 
+		fromleftoffset: 0xA15C, 
+		fromrightoffset: 0xA186, 
+		fromleftvalue: [0xFF, 0x00, 0x00], 
+		fromrightvalue: [0xFF, 0x00, 0x00],
+		height:2,  
+		leftheightoffset: 0xA1C5,
 	},
 	Aljiba: {
 		height: 2,
@@ -105,7 +104,7 @@ const towns = {
 		fromrightoffset: 0xA6C9,
 		fromleftvalue: [0xFF,0x01,0x01],
 		fromrightvalue: [0xFF,0x01,0x01],  
-		
+		leftheightoffset: 0xA1C6,
 	},
 	'Brahm Mansion - Door' : {
 		height: 1,
@@ -149,13 +148,15 @@ function copytown (town1, town2, pm, logic){
 		var rightvalue =towns[town1].rightvalue;
 		var fromrightvalue = towns[town2].fromrightvalue;
 		var fromleftvalue = towns[town2].fromleftvalue;
-		if (towns[town2].leftheightoffset > 0) {
+		if (towns[town1].leftheightoffset > 0) {
 			
-			var value=towns[town1].height-1
-			pm.add([value] , towns[town2].leftheightoffset);
+			var value=towns[town2].height-1;
+			pm.add([value] , towns[town1].leftheightoffset);
+			console.log(town2+" "+value + " at " +towns[town1].leftheightoffset);
 		}
+		
 		if (town2.torightheightchange>0){ 
-			pm.add([towns[town1].height-1] , towns[town2].torightheightchange);
+			//pm.add([towns[town1].height-1] , towns[town2].torightheightchange);
 		}
 		
 		pm.add(leftvalue, towns[town2].leftoffset);
