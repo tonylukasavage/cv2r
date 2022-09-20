@@ -140,7 +140,8 @@ const towns = {
 function copytown (town1, town2, pm, logic){
 		if (town1 == town2) {
 			log(town1+" is staying put");
-			return;
+			//we can't just return here in case we looped.
+			//return;
 			
 		}
 		log(town2+" is being put where "+town1+" was");
@@ -181,41 +182,51 @@ module.exports = {
 	patch: function (pm, opts) {
 	
 		const { logic, rng } = opts;
-		
-		const townnames = ["Jova","Yomi","Veros", "Doina", 'Brahm Mansion - Door', 'Laruba Mansion - Door',"Berkeley Mansion - Door", "Alba", "Ondol", "Aljiba", ];
-		const townnames2 =  ["Jova", "Alba", "Ondol", "Aljiba", "Doina", 'Brahm Mansion - Door', "Yomi", "Veros", "Berkeley Mansion - Door", 'Laruba Mansion - Door'];
-
-		shuffleArray(townnames2, rng);
-		
-		while (townnames.length > 0){
-			
-			for (j=0; j<townnames2.length; j++){
-				if (towns[townnames[0]].onlyheight1){
-					if (towns[townnames2[j]].height > 1){
-						
-						continue;
+		var attempts = 0;
+		while (1){
+			const townnames = ["Jova","Yomi","Veros", "Doina", 'Brahm Mansion - Door', 'Laruba Mansion - Door',"Berkeley Mansion - Door", "Alba", "Ondol", "Aljiba", ];
+			const townnames2 =  ["Jova", "Alba", "Ondol", "Aljiba", "Doina", 'Brahm Mansion - Door', "Yomi", "Veros", "Berkeley Mansion - Door", 'Laruba Mansion - Door'];
+			attempts = 0;
+			shuffleArray(townnames2, rng);
+			while (townnames.length > 0 && attempts <20){
+				
+				for (j=0; j<townnames2.length; j++){
+				
+					if (towns[townnames2[j]].onlyheight1){
+						if (towns[townnames[0]].height > 1){
+							console.log( townnames[0]+" "+townnames2[j]+" hieght 1");
+							continue;
+						}
 					}
-				}
-				if (townnames[0] === townnames2[j] && (j+1) < townnames2.length){
+					if (townnames[0] === townnames2[j] && (j+1) < townnames2.length){
 						
-						continue;
-					
-				}
-				if (townnames[0] == "Jova"){
-					if (towns[townnames2[j]].nojova){
-						
-						continue;
+							continue;
 						
 					}
+					if (townnames[0] == "Jova"){
+						if (towns[townnames2[j]].nojova){
+						
+							continue;
+						
+						}
 					
+					}
+					copytown(townnames2[j], townnames[0], pm, logic);
+					townnames.shift();
+					townnames2.splice(j, 1);
+					break;
 				}
-				copytown(townnames2[j], townnames[0], pm, logic);
-				townnames.shift();
-				townnames2.splice(j, 1);
-				break;
+				attempts +=1;
 			}
-			
+			if (attempts <30 ){
+				break;
+				
+			}
+			console.log("looping");
 		}
+		
+		
+		
 		for (let town in towns){
 			
 			let townReqs = towns[town].reqs;
