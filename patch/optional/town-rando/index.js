@@ -14,6 +14,7 @@ const towns = {
 		fromrightvalue: [0xFF, 0x00, 0x00],
 		height:2,  
 		leftheightoffset: 0xA1C5,
+		town: true,
 	},
 	Aljiba: {
 		height: 2,
@@ -26,6 +27,7 @@ const towns = {
 		fromleftvalue: [0xFF,0x00,0x02],
 		fromrightvalue: [0xFF,0x00,0x02],	 
 		leftheightoffset: 0xA6F1,
+		town: true,
 	},
 	Alba: {
 		height: 3,
@@ -38,7 +40,7 @@ const towns = {
 		fromleftvalue: [0xFF,0x00,0x03],
 		fromrightvalue: [0xFF,0x00,0x03],  
 		leftheightoffset: 0xB3C0,
-		
+		town: true,
 	},
 	Ondol: {
 		height: 3,
@@ -51,7 +53,7 @@ const towns = {
 		fromleftvalue: [0xFF,0x00,0x04],
 		fromrightvalue: [0xFF,0x00,0x04],		
 		leftheightoffset: 0xAEB9,
-		
+		town: true,
 	},
 	Veros: {
 		height: 1,
@@ -65,6 +67,7 @@ const towns = {
 		fromrightvalue: [0xFF,0x00,0x01], 
 		torightheightchange: 0x1FB34,
 		onlyheight1: true,
+		town: true,
 	},
 	Doina: {
 		height: 1,
@@ -80,6 +83,7 @@ const towns = {
 		
 		leftheightoffset: 0xAEBA,
 		nojova: true,
+		town: true,
 	},
 	Yomi: {
 		height: 1,
@@ -93,6 +97,7 @@ const towns = {
 		fromrightvalue: [0xFF,0x00,0x06],		
 		onlyheight1: true,
 		nojova: true,
+		town: true,
 	},
 	"Berkeley Mansion - Door": {
 		height: 1,
@@ -132,6 +137,23 @@ const towns = {
 		leftheightoffset: 0xB3BD,
 		nojova: true,
 		
+	},
+	'Bodley Mansion - Door': {
+		height: 1,
+		leftoffset: 0x9A64,
+		rightoffset: 0x9A67,
+		leftvalue: [0xFF, 0x03,0x03],
+		rightvalue: [0xFF, 0x04,0x02],
+		fromleftoffset: 0xB7DD,
+		fromrightoffset: 0xAE99,
+		fromleftvalue: [0xFF,0x01,0x04],
+		fromrightvalue: [0xFF,0x01,0x04],  
+		leftheightoffset: 0xB7f3,
+		nojova: true,
+		tornadovalue: [0xFF, 01, 04],
+		tornadooffset: 0xAE8C,
+		tornadodestobjset: [0x1],
+		tornadodestobjsetoffset: 0x1d092,
 	}
 }
 
@@ -155,7 +177,19 @@ function copytown (town1, town2, pm, logic){
 			pm.add([value] , towns[town1].leftheightoffset);
 			
 		}
-		
+		if (towns[town1].tornadooffset > 0){
+			//need to adjust tornado dest
+			pm.add(towns[town2].fromrightvalue, towns[town1].tornadooffset);
+			if (towns[town2].town){
+				pm.add([0x00], towns[town1].tornadodestobjsetoffset);
+				//console.log("tornado to town! "+town2 + " "+ towns[town1].tornadodestobjsetoffset);
+			}else {
+				//console.log("tornado to mansion! "+town2 + " "+ towns[town1].tornadodestobjsetoffset);
+				pm.add([0x01], towns[town1].tornadodestobjsetoffset);
+			}
+			
+			
+		}
 		if (town2.torightheightchange>0){ 
 			//pm.add([towns[town1].height-1] , towns[town2].torightheightchange);
 		}
@@ -168,7 +202,7 @@ function copytown (town1, town2, pm, logic){
 		
 		//adjust logic
 		towns[town2].reqs = core.find(c => c.name == town1).doors.requirements[logic];
-		//console.log("new town reqs:" +towns[town2].reqs);
+		log(town2+" new town reqs:" +towns[town2].reqs);
 		
 		
 }
@@ -184,8 +218,8 @@ module.exports = {
 		const { logic, rng } = opts;
 		var attempts = 0;
 		while (1){
-			const townnames = ["Jova","Yomi","Veros", "Doina", 'Brahm Mansion - Door', 'Laruba Mansion - Door',"Berkeley Mansion - Door", "Alba", "Ondol", "Aljiba", ];
-			const townnames2 =  ["Jova", "Alba", "Ondol", "Aljiba", "Doina", 'Brahm Mansion - Door', "Yomi", "Veros", "Berkeley Mansion - Door", 'Laruba Mansion - Door'];
+			const townnames = ["Jova","Yomi","Veros", "Doina", 'Brahm Mansion - Door', 'Laruba Mansion - Door',"Berkeley Mansion - Door", "Alba", "Ondol", "Aljiba", 'Bodley Mansion - Door'];
+			const townnames2 =  ["Jova", "Alba", "Ondol", "Aljiba", "Doina", 'Brahm Mansion - Door', "Yomi", "Veros", "Berkeley Mansion - Door", 'Laruba Mansion - Door','Bodley Mansion - Door'];
 			attempts = 0;
 			shuffleArray(townnames2, rng);
 			while (townnames.length > 0 && attempts <20){
@@ -194,7 +228,7 @@ module.exports = {
 				
 					if (towns[townnames2[j]].onlyheight1){
 						if (towns[townnames[0]].height > 1){
-							console.log( townnames[0]+" "+townnames2[j]+" hieght 1");
+							//console.log( townnames[0]+" "+townnames2[j]+" hieght 1");
 							continue;
 						}
 					}
@@ -218,11 +252,11 @@ module.exports = {
 				}
 				attempts +=1;
 			}
-			if (attempts <30 ){
+			if (attempts <20 ){
 				break;
 				
 			}
-			console.log("looping");
+			//console.log("looping");
 		}
 		
 		
