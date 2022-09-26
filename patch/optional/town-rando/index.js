@@ -25,7 +25,7 @@ const towns = {
 		mapoffset: 0x1FAA6,
 		mapvalue: 0x1f88,
 		towntype: "A",
-		
+		leftheight: 1,
 		town: true,
 	},
 	Aljiba: {
@@ -39,7 +39,7 @@ const towns = {
 		fromleftvalue: [0xFF,0x00,0x02],
 		fromrightvalue: [0xFF,0x00,0x02],	 
 		leftheightoffset: 0xA6F1,
-				
+		leftheight: 1,		
 		mapoffset: 0x1FB98,
 		mapvalue: 0x5f84,
 		towntype: "A",
@@ -61,7 +61,7 @@ const towns = {
 		mapoffset: 0x1FAC8,
 		mapvalue: 0x5f84,
 		towntype: "A",
-		
+		leftheight: 1,
 		town: true,
 	},
 	Ondol: {
@@ -75,7 +75,7 @@ const towns = {
 		fromleftvalue: [0xFF,0x00,0x04],
 		fromrightvalue: [0xFF,0x00,0x04],		
 		leftheightoffset: 0xAEB9,
-		
+		leftheight: 1,
 		mapoffset: 0x8732,
 		mapvalue: 0x5f84,
 		towntype: "A",
@@ -99,6 +99,9 @@ const towns = {
 		mapvalue: 0x7f83,
 		towntype: "B",
 		
+		
+		leftheight: 2,
+		isveros: true,
 		onlyheight1: true,
 		town: true,
 	},
@@ -118,7 +121,7 @@ const towns = {
 		mapvalue: 0x7f83,
 		towntype: "B",
 		
-		
+		leftheight: 1,
 		leftheightoffset: 0xAEBA,
 		nojova: true,
 		town: true,
@@ -139,7 +142,7 @@ const towns = {
 		towntype: "B",
 		
 		
-		
+		leftheight: 2,
 		onlyheight1: true,
 		nojova: true,
 		town: true,
@@ -160,7 +163,7 @@ const towns = {
 		mapvalue: 0x3787,
 		towntype: "Mansion",
 		beroveroffset: 0x8D71,
-		
+		leftheight: 1,
 		
 	},
 	'Brahm Mansion - Door' : {
@@ -180,6 +183,7 @@ const towns = {
 		towntype: "Mansion",
 		beroveroffset: 0x96A7,
 		nojova: true,
+		leftheight: 1,
 	},
 	'Laruba Mansion - Door': {
 		height: 1,
@@ -195,7 +199,7 @@ const towns = {
 		beroveroffset: 0x88F3,
 		towntype: "Mansion",
 		nojova: true,
-		
+		leftheight: 1,
 	},
 	'Bodley Mansion - Door': {
 		height: 1,
@@ -215,6 +219,7 @@ const towns = {
 		tornadodestobjsetoffset: 0x1d092,
 		beroveroffset: 0x9A79,
 		towntype: "Mansion",
+		leftheight: 1,
 	},
 	'Rover Mansion - Door': {
 	
@@ -228,11 +233,13 @@ const towns = {
 		fromleftvalue: [0xFF,0x01,0x02],
 		fromrightvalue: [0xFF,0x01,0x02],  
 		//leftheightoffset: 0xA6F8,
-		onlyheight1: true,
+		onlyheight1: false,
 		nojova: true,
 		rightsidewall: true,  
 		beroveroffset: 0x9267,
 		towntype: "Mansion",
+		leftheight: 2,
+		leftheightoffset: 0xa6F8,
 	}
 	
 	
@@ -248,15 +255,16 @@ function copytown (town1, town2, pm, logic){
 			//return;
 			
 		}
-		log(town2+" is being put where "+town1+" was");
+		
 		var leftvalue =towns[town1].leftvalue;
 		var rightvalue =towns[town1].rightvalue;
 		var fromrightvalue = towns[town2].fromrightvalue;
 		var fromleftvalue = towns[town2].fromleftvalue;
 		if (towns[town1].leftheightoffset > 0) {
 			
-			var value=towns[town2].height-1;
+			var value=towns[town2].height-towns[town1].leftheight;
 			pm.add([value] , towns[town1].leftheightoffset);
+			leftvalue[0]=0xff;
 			
 		}
 		if (towns[town1].tornadooffset > 0){
@@ -264,21 +272,20 @@ function copytown (town1, town2, pm, logic){
 			pm.add(towns[town2].fromrightvalue, towns[town1].tornadooffset);
 			if (towns[town2].town){
 				pm.add([0x00], towns[town1].tornadodestobjsetoffset);
-				//console.log("tornado to town! "+town2 + " "+ towns[town1].tornadodestobjsetoffset);
+				 towns[town1].tornadodestobjsetoffset);
 			}else {
-				//console.log("tornado to mansion! "+town2 + " "+ towns[town1].tornadodestobjsetoffset);
+				 towns[town1].tornadodestobjsetoffset);
 				pm.add([0x01], towns[town1].tornadodestobjsetoffset);
 			}
 			
 			
 		}
-		if (town2.torightheightchange>0){ 
-			//pm.add([towns[town1].height-1] , towns[town2].torightheightchange);
-		}
+		
 		if (towns[town1].rightsidewall ) {
 			towns[town1].replacedby = town2;
 			
 		}
+		
 		pm.add(leftvalue, towns[town2].leftoffset);
 		pm.add(rightvalue, towns[town2].rightoffset);
 		pm.add(fromleftvalue, towns[town1].fromleftoffset);
@@ -308,6 +315,7 @@ module.exports = {
 			const townnames = ["Jova",'Rover Mansion - Door',"Yomi","Veros", "Doina", 'Brahm Mansion - Door', 'Laruba Mansion - Door',"Berkeley Mansion - Door", "Alba", "Ondol", "Aljiba", 'Bodley Mansion - Door'];
 			const townnames2 =  ["Jova", "Alba", "Ondol", "Aljiba", "Doina", 'Brahm Mansion - Door', "Yomi", "Veros", "Berkeley Mansion - Door", 'Laruba Mansion - Door','Bodley Mansion - Door','Rover Mansion - Door'];
 			attempts = 0;
+			shuffleArray(townnames, rng);
 			shuffleArray(townnames2, rng);
 			while (townnames.length > 0 && attempts <20){
 				
@@ -315,7 +323,7 @@ module.exports = {
 				
 					if (towns[townnames2[j]].onlyheight1){
 						if (towns[townnames[0]].height > 1){
-							//console.log( townnames[0]+" "+townnames2[j]+" hieght 1");
+							
 							continue;
 						}
 					}
@@ -343,7 +351,7 @@ module.exports = {
 				break;
 				
 			}
-			//console.log("looping");
+			log("looping");
 		}
 		newrover = towns['Rover Mansion - Door'].replacedby;
 		//build wall in new rover
@@ -393,7 +401,7 @@ module.exports = {
 					newReqs = '';
 				}
 				actor.requirements[logic] = newReqs;
-//				console.log(actor.name + "now logic: " +newReqs);
+
 			});
 			//now do the same with each door which now has a new requirement 
 			let doors = core.find(c => c.name == town).doors;
