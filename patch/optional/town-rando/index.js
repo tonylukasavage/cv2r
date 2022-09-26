@@ -1,7 +1,14 @@
 const { core, utils: { shuffleArray} } = require('../../../lib');
 
 const { log } = require('../../../lib/utils');
-
+const townamap =[	
+0x00, 0x00, 0x04, 0x26, 0x38, 0x14, 0x13, 0x42, 0x10, 0x25, 0x1B, 0x04, 0x3A, 0x28, 0x11, 0x42, 0x01, 0x02, 0x0A, 0x01, 0x01, 0x01, 0x01, 0x42, 0x12, 0x29, 0x04, 0x26, 0x1F, 0x37, 0x13, 0x42, 0x12, 0x37, 0x29, 0x04, 0x26, 0x15, 0x13, 0x42, 0x10, 0x25, 0x25, 0x1B, 0x04, 0x3A, 0x11, 0x42, 0x24, 0x01, 0x24, 0x01, 0x01, 0x01, 0x01, 0x01
+];
+const townbmap = [
+0x3C,0x3D,0x3D,0x3D,0x3D, 0x3D, 0x3E, 0x42, 0x12, 0x33, 0x1F, 0x15, 0x1F, 0x33, 0x13, 0x42, 0x12, 0x2D, 0x37, 0x14, 0x38, 0x2D, 0x13, 0x42, 0x12, 0x2E, 0x1F, 0x28, 0x1F, 0x2E, 0x13, 0x42, 0x12, 0x01, 0x02, 0x0A, 0x01, 0x1F, 0x13, 0x42, 0x10, 0x25, 0x1B, 0x04, 0x3A, 0x25, 0x11, 0x42, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01
+];
+const mapdataoffset= 0x882f;
+var replacingrover = 'Rover Mansion - Door';
 const towns = {
 	Jova: {
 		leftoffset: 0x1FA12, 
@@ -14,6 +21,11 @@ const towns = {
 		fromrightvalue: [0xFF, 0x00, 0x00],
 		height:2,  
 		leftheightoffset: 0xA1C5,
+		
+		mapoffset: 0x1FAA6,
+		mapvalue: 0x1f88,
+		towntype: "A",
+		
 		town: true,
 	},
 	Aljiba: {
@@ -27,6 +39,11 @@ const towns = {
 		fromleftvalue: [0xFF,0x00,0x02],
 		fromrightvalue: [0xFF,0x00,0x02],	 
 		leftheightoffset: 0xA6F1,
+				
+		mapoffset: 0x1FB98,
+		mapvalue: 0x5f84,
+		towntype: "A",
+		
 		town: true,
 	},
 	Alba: {
@@ -40,6 +57,11 @@ const towns = {
 		fromleftvalue: [0xFF,0x00,0x03],
 		fromrightvalue: [0xFF,0x00,0x03],  
 		leftheightoffset: 0xB3C0,
+		
+		mapoffset: 0x1FAC8,
+		mapvalue: 0x5f84,
+		towntype: "A",
+		
 		town: true,
 	},
 	Ondol: {
@@ -53,6 +75,12 @@ const towns = {
 		fromleftvalue: [0xFF,0x00,0x04],
 		fromrightvalue: [0xFF,0x00,0x04],		
 		leftheightoffset: 0xAEB9,
+		
+		mapoffset: 0x8732,
+		mapvalue: 0x5f84,
+		towntype: "A",
+		
+		
 		town: true,
 	},
 	Veros: {
@@ -66,6 +94,11 @@ const towns = {
 		fromleftvalue: [0xFF,0x00,0x01],
 		fromrightvalue: [0xFF,0x00,0x01], 
 		torightheightchange: 0x1FB34,
+		
+		mapoffset: 0x8710,
+		mapvalue: 0x7f83,
+		towntype: "B",
+		
 		onlyheight1: true,
 		town: true,
 	},
@@ -81,6 +114,11 @@ const towns = {
 		fromleftvalue: [0xFF,0x00,0x05],
 		fromrightvalue: [0xFF,0x00,0x05],		
 		
+		mapoffset: 0x1FB7E,
+		mapvalue: 0x7f83,
+		towntype: "B",
+		
+		
 		leftheightoffset: 0xAEBA,
 		nojova: true,
 		town: true,
@@ -95,6 +133,13 @@ const towns = {
 		fromrightoffset: 0xAEA4,
 		fromleftvalue: [0xFF,0x00,0x06],
 		fromrightvalue: [0xFF,0x00,0x06],		
+		
+		mapoffset: 0x1FBAA,
+		mapvalue: 0x7f83,
+		towntype: "B",
+		
+		
+		
 		onlyheight1: true,
 		nojova: true,
 		town: true,
@@ -110,6 +155,13 @@ const towns = {
 		fromleftvalue: [0xFF,0x01,0x01],
 		fromrightvalue: [0xFF,0x01,0x01],  
 		leftheightoffset: 0xA1C6,
+		
+		mapoffset: 0x87E1,
+		mapvalue: 0x3787,
+		towntype: "Mansion",
+		beroveroffset: 0x8D71,
+		
+		
 	},
 	'Brahm Mansion - Door' : {
 		height: 1,
@@ -122,6 +174,11 @@ const towns = {
 		fromleftvalue: [0xFF,0x01,0x03],
 		fromrightvalue: [0xFF,0x01,0x03],  
 		leftheightoffset: 0xAEB6,
+		
+		mapoffset: 0x87E1,
+		mapvalue: 0x3787,
+		towntype: "Mansion",
+		beroveroffset: 0x96A7,
 		nojova: true,
 	},
 	'Laruba Mansion - Door': {
@@ -135,6 +192,8 @@ const towns = {
 		fromleftvalue: [0xFF,0x01,0x00],
 		fromrightvalue: [0xFF,0x01,0x00],  
 		leftheightoffset: 0xB3BD,
+		beroveroffset: 0x88F3,
+		towntype: "Mansion",
 		nojova: true,
 		
 	},
@@ -154,7 +213,30 @@ const towns = {
 		tornadooffset: 0xAE8C,
 		tornadodestobjset: [0x1],
 		tornadodestobjsetoffset: 0x1d092,
+		beroveroffset: 0x9A79,
+		towntype: "Mansion",
+	},
+	'Rover Mansion - Door': {
+	
+		height: 1,
+		leftoffset: 0x925D,
+		rightoffset: 0x9260,
+		leftvalue: [0xFC, 0x02,0x05],
+		rightvalue: [0xFF, 0x00,0x01],
+		fromleftoffset: 0xA6D9,
+		fromrightoffset: 0,  //rover has no from right
+		fromleftvalue: [0xFF,0x01,0x02],
+		fromrightvalue: [0xFF,0x01,0x02],  
+		//leftheightoffset: 0xA6F8,
+		onlyheight1: true,
+		nojova: true,
+		rightsidewall: true,  
+		beroveroffset: 0x9267,
+		towntype: "Mansion",
 	}
+	
+	
+	
 }
 
 
@@ -193,11 +275,16 @@ function copytown (town1, town2, pm, logic){
 		if (town2.torightheightchange>0){ 
 			//pm.add([towns[town1].height-1] , towns[town2].torightheightchange);
 		}
-		
+		if (towns[town1].rightsidewall ) {
+			towns[town1].replacedby = town2;
+			
+		}
 		pm.add(leftvalue, towns[town2].leftoffset);
 		pm.add(rightvalue, towns[town2].rightoffset);
 		pm.add(fromleftvalue, towns[town1].fromleftoffset);
-		pm.add(fromrightvalue, towns[town1].fromrightoffset);
+		if (towns[town1].fromrightoffset > 0) {
+			pm.add(fromrightvalue, towns[town1].fromrightoffset);	
+		}
 		
 		
 		//adjust logic
@@ -218,8 +305,8 @@ module.exports = {
 		const { logic, rng } = opts;
 		var attempts = 0;
 		while (1){
-			const townnames = ["Jova","Yomi","Veros", "Doina", 'Brahm Mansion - Door', 'Laruba Mansion - Door',"Berkeley Mansion - Door", "Alba", "Ondol", "Aljiba", 'Bodley Mansion - Door'];
-			const townnames2 =  ["Jova", "Alba", "Ondol", "Aljiba", "Doina", 'Brahm Mansion - Door', "Yomi", "Veros", "Berkeley Mansion - Door", 'Laruba Mansion - Door','Bodley Mansion - Door'];
+			const townnames = ["Jova",'Rover Mansion - Door',"Yomi","Veros", "Doina", 'Brahm Mansion - Door', 'Laruba Mansion - Door',"Berkeley Mansion - Door", "Alba", "Ondol", "Aljiba", 'Bodley Mansion - Door'];
+			const townnames2 =  ["Jova", "Alba", "Ondol", "Aljiba", "Doina", 'Brahm Mansion - Door', "Yomi", "Veros", "Berkeley Mansion - Door", 'Laruba Mansion - Door','Bodley Mansion - Door','Rover Mansion - Door'];
 			attempts = 0;
 			shuffleArray(townnames2, rng);
 			while (townnames.length > 0 && attempts <20){
@@ -258,7 +345,25 @@ module.exports = {
 			}
 			//console.log("looping");
 		}
-		
+		newrover = towns['Rover Mansion - Door'].replacedby;
+		//build wall in new rover
+		if (newrover === 'Rover Mansion - Door'){ 
+		}else {
+			pm.add([0x02], towns['Rover Mansion - Door'].beroveroffset);
+			
+			if (towns[newrover].towntype === "Mansion") {
+				pm.add([0x03], towns[newrover].beroveroffset);
+			} else if (towns[newrover].towntype === "B") {
+				pm.add([0x1f,0x88], towns[newrover].mapoffset);
+				pm.add(townbmap, 0x882f);
+			}
+			else if (towns[newrover].towntype === "A"){
+				pm.add([0x1f,0x88], towns[newrover].mapoffset);
+				pm.add(townamap, 0x882f);
+			}
+		}
+			
+
 		
 		
 		for (let town in towns){
