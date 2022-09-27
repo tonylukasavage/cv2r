@@ -272,9 +272,9 @@ function copytown (town1, town2, pm, logic){
 			pm.add(towns[town2].fromrightvalue, towns[town1].tornadooffset);
 			if (towns[town2].town){
 				pm.add([0x00], towns[town1].tornadodestobjsetoffset);
-				 towns[town1].tornadodestobjsetoffset);
+				
 			}else {
-				 towns[town1].tornadodestobjsetoffset);
+				
 				pm.add([0x01], towns[town1].tornadodestobjsetoffset);
 			}
 			
