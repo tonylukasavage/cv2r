@@ -113,18 +113,29 @@ const clone = () => Object.assign({}, visited);
 		funcCode += Object.keys(funcs).reduce((a, c) => {
 			return a + funcs[c] + '\n';
 		}, '');
-
-		// evaluate the logic of all available actors
-		const choices = actors.filter(actor => {
+		
+		
+		//if an actor must have a given item.
+		let choices = actors.filter(actor => {
 			if (actor.newItem) { return false; }
-			if (!isDep) { return true; }
-			if (actor.requirements[logic] === '') { return true; }
-			const script = new vm.Script(funcCode + evalLogic(actor.requirements[logic]));
-			return script.runInNewContext();
+			if (actor.mustHave === null){ return false;}
+			if (actor.mustHave === item){return true;}
+			return false;
 		});
-
+		if (!choices.length){
+			// evaluate the logic of all available actors
+			choices = actors.filter(actor => {
+				if (actor.newItem) { return false; }
+				if (actor.mustHave != null && actor.mustHave != item) {return false;}
+				if (!isDep) { return true; }
+				if (actor.requirements[logic] === '') { return true; }
+				const script = new vm.Script(funcCode + evalLogic(actor.requirements[logic]));
+				return script.runInNewContext();
+			});
+		}
 		// bail if we can't find an available actor
 		if (!choices.length) {
+			console.log("bailing! "+item);
 			throw new Error(`cannot find free actor for ${item}`);
 		}
 

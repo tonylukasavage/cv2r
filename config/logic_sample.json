@@ -1,0 +1,187 @@
+[
+	{
+		"name": "Jova",
+		"actors": [
+			{"mustHave": "white crystal"} 
+		]
+	},
+	{
+		"name": "Jova - Thorn Whip Room",
+		"actors": [
+			{"mustHave": "blue crystal"}
+		]
+	},
+	{
+		"name": "Jova - Holy Water Room",
+		"actors": [
+			{"mustHave": "red crystal"}
+		]
+	},
+	{
+		"name": "Veros - Dagger Room",
+		"actors": [
+			{"mustHave": "thorn whip"}
+		]
+	},
+	{
+		"name": "Veros - Chain Whip Room",
+		"actors": [
+			{"mustHave": "garlic"}
+		]
+	},
+	{
+		"name": "Aljiba - Garlic Room",
+		"actors": [
+			{"mustHave": "oak stake"}
+		]
+	},
+	{
+		"name": "Aljiba - Laurels Room",
+		"actors": [
+			{"mustHave": "heart"}
+		]
+	},
+	{
+		"name": "Aljiba",
+		"actors": [
+			{"mustHave": "dagger"}
+		]
+	},
+	{
+		"name": "Camilla Cemetery",
+		"actors": [
+			{"mustHave": "oak stake"}
+		]
+	},
+	{
+		"name": "Alba",
+		"actors": [
+			{"mustHave": "silk bag"}
+		]
+	},
+	{
+		"name": "Alba - Garlic Room",
+		"actors": [
+			{"mustHave": "oak stake"}
+		]
+	},
+	{
+		"name": "Alba - Laurels Room",
+		"actors": [
+			{"mustHave": "chain whip"}
+		]
+	},
+	{
+		"name": "Ondol - Morning Star Room",
+		"actors": [
+			{"mustHave": "laurels"}
+		]
+	},
+	{
+		"name": "Ondol - Laurels Room",
+		"actors": [
+			{"mustHave": "morning star"}
+		]
+	},
+	{
+		"name": "Storigoi Graveyard (Blob Boost)",
+		"actors": [
+			{"mustHave": "oak stake"}
+		]
+	},
+	
+	{
+		"name": "Dabi's Path - Part 2",
+		"actors": [
+			{"mustHave": "holy water"}
+		]
+	},
+	{
+		"name": "Doina - Laurels Room",
+		"actors": [
+			{"mustHave": "garlic"}
+		]
+	},
+	
+	{
+		"name": "Berkeley Mansion - Part 2",
+		"actors": [
+			{"mustHave": "eyeball"},
+			{"mustHave": "nail"}
+		]
+	},
+	{
+		"name": "Berkeley Mansion - Part 2",
+		"actors": [
+			{"mustHave": "eyeball"},
+			{"mustHave": "nail"}
+		]
+	},
+	{
+		"name": "Rover Mansion - Part 2",
+		"actors": [
+			{"mustHave": "ring"},
+			{"mustHave": "oak stake"}
+		]
+	},
+	{
+		"name": "Brahm Mansion - Part 1",
+		"actors": [
+			{"mustHave": "diamond"}
+		]
+	},
+	
+	{
+		"name": "Brahm Mansion - Death Fight",
+		"actors": [
+			{"mustHave": "sacred flame"}
+		]
+	},
+	{
+		"name": "Brahm Mansion - Orb Room",
+		"actors": [
+			{"mustHave": "rib"}
+		]
+	},
+	{
+		"name": "Vrad Mountain - Part 2 (Diamond Dude)",
+		"actors": [
+			{"mustHave": "laurels"}
+		]
+	},
+	{
+		"name": "Bodley Mansion - Part 2",
+		"actors": [
+			{"mustHave": "silver knife"},
+			{"mustHave": "flame whip"}
+		]
+	},
+	
+	
+	{
+		"name": "Laruba Mansion - Part 2",
+		"actors": [
+			{"mustHave": "laurels"},
+			{"mustHave": "laurels"}
+		]
+	},
+	{ "name": "Laruba Mansion - Camilla Fight",
+		"actors": [
+			{"mustHave": "laurels"}
+		]
+	},
+	{ "name": "Laruba Mansion - Orb Room",
+		"actors": [
+			{"mustHave": "golden knife"}
+		]
+	},
+	{ "name": "Debious Woods - Part 3",
+		"actors": [
+			{"mustHave": "magic cross"}
+		]
+	}
+	
+	
+]
+
+
