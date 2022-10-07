@@ -107,7 +107,6 @@ module.exports = {
 		pm.patches.forEach(patch => {
 			if (patch == "nomusic") {
 				music = "";
-				console.log("NO MUSIC!");
 			}
 		});
 
